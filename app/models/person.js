@@ -9,7 +9,7 @@ export default DS.Model.extend({
 	names: Ember.computed.collect("firstName", "lastName", "middleName"),
 	hasName: Ember.computed.empty("names"),
 	fullName: Ember.computed("names", function() {
-		return Ember.makeArray(this.get("names")).join(" ")
+		return Ember.makeArray(this.get("names")).slice().concat().join(" ")
 	}),
 	/*type: DS.attr("string"),*/
 	birthDate: DS.attr("date"),

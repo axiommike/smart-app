@@ -1,0 +1,16 @@
+{{#if title}}
+	<h1 class="wizard-step-title">
+		{{title}}
+		{{#if stepName}}
+			<span class="wizard-step-name">{{stepName}}</span>
+		{{/if}}
+	</h1>
+{{/if}}
+
+{{#if totalSteps}}
+	<span class="total-steps">
+		of {{totalSteps}}
+	</span>
+{{/if}}
+
+{{yield}}
