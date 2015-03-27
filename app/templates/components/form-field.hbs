@@ -1,0 +1,7 @@
+<label {{bind-attr for=labelID class=labelClassName}}>{{title}}{{#if labelText}}
+	{{labelText}}
+{{/if}}
+</label>
+<div {{bind-attr class=controlsClassName}}>
+	{{yield}}
+</div>
