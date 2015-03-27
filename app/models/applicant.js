@@ -1,5 +1,4 @@
 import DS from "ember-data";
-import Ember from "ember";
 
 export default DS.Model.extend({
 	title: DS.attr("string"),
@@ -17,13 +16,9 @@ export default DS.Model.extend({
 	employment: DS.hasMany("employment"),
 	currentEmployment: Ember.computed.filterBy("employment", "isCurrent", true),
 	email: DS.attr("string"),
-	slogan: DS.attr("string"),
-	biography: DS.attr("string"),
-	facebookURL: DS.attr("string"),
-	twitterURL: DS.attr("string"),
-	linkedInURL: DS.attr("string"),
-	blogURL: DS.attr("string"),
-	ceridianID: DS.attr("number"),
 	phone: DS.attr("number"),
-	workPhone: Ember.computed.alias("currentEmployment.@each.company.phone")
+	workPhone: Ember.computed.alias("currentEmployment.@each.company.phone"),
+	liabilities: DS.hasMany("liability"),
+	assets: DS.hasMany("assets"),
+	properties: Ember.computed.alias("mortgages.@each.property")
 });

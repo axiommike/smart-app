@@ -3,17 +3,17 @@
 		{{#validatable-form action="nextStep"}}
 			<div class="row">
 				{{#form-field title="First Name" class="one-half"}}
-					{{input value=applicant.person.firstName placeholder="First Name" required="required" autofocus="autofocus" id="first-name"}}
+					{{input value=firstName placeholder="First Name" required="required" autofocus="autofocus" id="first-name"}}
 				{{/form-field}}
 				{{#form-field title="Last Name" class="one-half"}}
-					{{input value=applicant.person.lastName placeholder="Last Name" required="required" autofocus="autofocus" id="last-name"}}
+					{{input value=lastName placeholder="Last Name" required="required" id="last-name"}}
 				{{/form-field}}
 			</div>
 			{{#form-field title="Email"}}
-				{{input value=applicant.person.email required="required" type="email" placeholder="Email" id="email"}}
+				{{input value=email required="required" type="email" placeholder="Email" id="email"}}
 			{{/form-field}}
 			{{#form-field title="Phone"}}
-				{{input value=applicant.person.phone type="tel" required="required" type="username" placeholder="Phone" id="phone"}}
+				{{input value=phone type="tel" required="required" type="username" placeholder="Phone" id="phone"}}
 			{{/form-field}}
 			<footer class="form-actions">
 				<button type="submit" title="Continue to Full Application">Continue Application</button>
