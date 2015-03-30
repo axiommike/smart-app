@@ -19,7 +19,8 @@ export default DS.Model.extend({
 	phone: DS.attr("number"),
 	workPhone: Ember.computed.alias("currentEmployment.firstObject.company.phone"),
 	liabilities: DS.hasMany("liability"),
-	assets: DS.hasMany("assets"),
+	assets: DS.hasMany("asset"),
+	debt: DS.attr("number", {defaultValue: 0}),
 	properties: DS.hasMany("property"),
 	currentProperty: Ember.computed.filterBy("properties", "isCurrent", true)
 });

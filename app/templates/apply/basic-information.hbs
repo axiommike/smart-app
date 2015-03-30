@@ -19,12 +19,17 @@
 	<ol class="form-steps">
 		<li class="form-step">
 			{{#form-field title="How'd you hear about me?"}}
-				{{view Ember.Select content=sourceTypes optionValuePath="content.value" optionLabelPath="content.label" value=source id="how'd-you-hear-about-me?"}}
+				{{view Ember.Select content=sourceTypes optionValuePath="content.value" optionLabelPath="content.label" value=source id="how'd-you-hear-about-me?" required="required"}}
 			{{/form-field}}
 		</li>
 		<li class="form-step">
 			{{#form-field title="What Can I do for you?"}}
-				{{view Ember.Select content=goals optionValuePath="content.value" optionLabelPath="content.label" value=type id="what-can-i-do-for-you?"}}
+				{{view Ember.Select content=goals optionValuePath="content.value" optionLabelPath="content.label" value=type id="what-can-i-do-for-you?" required="required"}}
+			{{/form-field}}
+		</li>
+		<li class="form-step">
+			{{#form-field title="How many co-applicants?"}}
+				{{input type="number" value=coApplicantCount step="any" placeholder="Number of Co-Applicants" required="required" id="how-many-co-applicants?"}}
 			{{/form-field}}
 		</li>
 	</ol>

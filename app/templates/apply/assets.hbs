@@ -18,6 +18,19 @@
 				{{/if}}
 			{{/form-field}}
 		</li>
+		<li class="form-step">
+			{{#form-field title="Do you own any other assets?"}}
+				{{input type="checkbox" checked=ownsOtherAssets id="do-you-own-any-other-assets?"}}
+				{{#if ownsOtherAssets}}
+					{{asset-table assets=applicant.assets onAdd="addAsset"}}
+				{{/if}}
+			{{/form-field}}
+		</li>
+		<li class="form-step">
+			{{#form-field title="What do you owe?"}}
+				{{input value=applicant.debt type="number" step="any" min="0" placeholder="Debts" id="what-do-you-owe?"}}
+			{{/form-field}}
+		</li>
 	</ol>
 	<footer class="form-actions">
 		<button type="submit">Continue to Co-Applicants</button>

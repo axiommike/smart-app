@@ -1,0 +1,34 @@
+<header class="asset-table-header">
+	<button {{action "addAsset"}}>Add Asset</button>
+</header>
+<table {{bind-attr summary=summary}}>
+	{{#if caption}}
+		{{caption}}, ${{totalValue}} total
+	{{/if}}
+	<thead>
+		<tr>
+			<th>Asset Type</th>
+			<th>Asset Value ($)</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each asset in assets}}
+			<tr>
+				<td>{{view Ember.Select content=assetTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.valueType}}
+				</td>
+				<td>{{input type="number" value=asset.value placeholder="Asset Value" min="0" step="any"}}</td>
+				<td><button {{action "removeAsset" asset}}>Remove Asset</button></td>
+			</tr>
+		{{else}}
+			<tr>
+				<td colspan = "3">
+					No assets found.
+					<button {{action "addAsset"}}>Add One?</button>
+				</td>
+			</tr>
+		{{/each}}
+	</tbody>
+</table>
+
+{{yield}}

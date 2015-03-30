@@ -4,13 +4,21 @@ export default Ember.ObjectController.extend({
 	currentProperty: null, /* a fake property */
 	ownsCurrentResidence: false,
 	ownsOtherRealEstate: false,
+	ownsOtherAssets: false,
 	actions: {
 		addProperty: function() {
 			let addedProperty = this.store.createRecord("property");
 			let properties = this.get("model.applicant.properties");
 			this.get("model.applicant.properties").pushObject(addedProperty);
 		},
+		addAsset: function() {
+			let addedAsset = this.store.createRecord("asset");
+			this.get("model.applicant.assets").pushObject(addedAsset);
+		},
 		nextStep: function() {
+			if (this.get("ownsOtherAssets")) {
+				this.get("model.applicant.assets").save();
+			}
 			if (this.get("ownsOtherRealEstate")) {
 				var applicantProperties = this.get("model.applicant.properties");
 				if (this.get("ownsCurrentResidence")) {

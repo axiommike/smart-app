@@ -1,0 +1,8 @@
+{{#form-field title="Type"}}
+	{{view Ember.Select content=employmentTypes optionValuePath="content.value" optionLabelPath="content.label" value=type id="type"}}
+{{/form-field}}
+{{#form-field title="Employer"}}
+	{{input type="text" id="employer" value=employer.name placeholder="Employer" required="required"}}
+{{/form-field}}
+
+{{yield}}
