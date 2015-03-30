@@ -19,7 +19,7 @@ export default DS.Model.extend({
 			this.set("tenure", null)
 		}
 	}.observes("startDate", "endDate"),
-	isCurrent: DS.attr("bool"),
+	isCurrent: DS.attr("boolean", {defaultValue: false}),
 	tenureMonths: Ember.computed("tenure", function() {
 		return Math.round(this.get("tenure") / 30);
 	}),

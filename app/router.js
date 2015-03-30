@@ -11,6 +11,7 @@ Router.map(function () {
 		this.route("applicants");
 		this.route("employment");
 		this.route("summary");
+		this.route("assets");
 	});
 });
 

@@ -1,0 +1,26 @@
+{{wizard-step stepName="Assets" totalSteps=4 step=2}}
+
+{{#validatable-form action="nextStep"}}
+	<ol class="form-steps">
+		<li class="form-step">
+			{{#form-field title="Do you own your current residence?"}}
+				{{input type="checkbox" checked=ownsCurrentResidence id="do-you-own-your-current-residence?"}}
+			{{/form-field}}
+			{{#if ownsCurrentResidence}}
+				{{property-table property=currentProperty}}
+			{{/if}}
+		</li>
+		<li class="form-step">
+			{{#form-field title="Do you own any other real estate?"}}
+				{{input type="checkbox" checked=ownsOtherRealEstate id="do-you-own-any-other-real-estate?"}}
+				{{#if ownsOtherRealEstate}}
+					{{property-table properties=applicant.properties onAdd="addProperty" summary="List of all Properties"}}
+				{{/if}}
+			{{/form-field}}
+		</li>
+	</ol>
+	<footer class="form-actions">
+		<button type="submit">Continue to Co-Applicants</button>
+	</footer>
+{{/validatable-form}}
+{{outlet}}

@@ -17,8 +17,9 @@ export default DS.Model.extend({
 	currentEmployment: Ember.computed.filterBy("employment", "isCurrent", true),
 	email: DS.attr("string"),
 	phone: DS.attr("number"),
-	workPhone: Ember.computed.alias("currentEmployment.@each.company.phone"),
+	workPhone: Ember.computed.alias("currentEmployment.firstObject.company.phone"),
 	liabilities: DS.hasMany("liability"),
 	assets: DS.hasMany("assets"),
-	properties: Ember.computed.alias("mortgages.@each.property")
+	properties: DS.hasMany("property"),
+	currentProperty: Ember.computed.filterBy("properties", "isCurrent", true)
 });

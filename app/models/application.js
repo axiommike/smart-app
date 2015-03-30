@@ -6,5 +6,7 @@ export default DS.Model.extend({
 	applicants: Ember.computed("applicant", "coApplicants", function() {
 		return Ember.makeArray(this.get("coApplicants").slice().concat(this.get("applicant")));
 	}),
-	applicantNames: Ember.computed.alias("applicants.@each.fullName")
+	applicantNames: Ember.computed.alias("applicants.@each.fullName"),
+	type: DS.attr("string"),
+	source: DS.attr("string")
 });

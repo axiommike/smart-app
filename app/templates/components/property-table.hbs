@@ -1,0 +1,40 @@
+{{#if property}}
+	{{#form-field title="Value Type" labelID=property.id}}
+		{{view Ember.Select content=valueTypes optionValuePath="content.value" optionLabelPath="content.label" value=property.valueType id=property.id}}
+	{{/form-field}}
+	{{#form-field title="Value ($)"}}
+		{{input type="number" value=property.value placeholder="Property Value" min="0" step="any"}}
+	{{/form-field}}
+{{else}}
+	<button {{action "addProperty"}} title="Add a Property">Add Property</button>
+	<table {{bind-attr summary=summary}}>
+		{{#if caption}}
+			{{caption}}
+		{{/if}}
+		<thead>
+			<tr>
+				<th>Value Type</th>
+				<th>Value ($)</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each property in applicant.properties}}
+				<tr>
+					<td>{{view Ember.Select content=valueTypes optionValuePath="content.value" optionLabelPath="content.label" value=property.valueType}}
+					</td>
+					<td>{{input type="number" value=property.value placeholder="Property Value" min="0" step="any"}}</td>
+					<td><button {{action "removeProperty" property}}>Remove Property</button></td>
+				</tr>
+			{{else}}
+				<tr>
+					<td colspan = "3">
+						No properties found.
+						<button {{action "addProperty"}}>Add One?</button>
+					</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+{{/if}}
+{{yield}}

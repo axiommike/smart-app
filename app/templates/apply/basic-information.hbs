@@ -1,1 +1,34 @@
 {{wizard-step stepName="Basic Information" totalSteps=4 step=1}}
+
+<aside class="tips">
+	<dl class="application-overview">
+		<dt>Name</dt>
+		<dd>{{applicant.fullName}}</dd>
+		{{#if applicant.email}}
+			<dt>Email</dt>
+			<dd>{{applicant.email}}</dd>
+		{{/if}}
+		{{#if applicant.phone}}
+			<dt>Phone</dt>
+			<dd>{{applicant.phone}}</dd>
+		{{/if}}
+	</dl>
+</aside>
+
+{{#validatable-form action="nextStep"}}
+	<ol class="form-steps">
+		<li class="form-step">
+			{{#form-field title="How'd you hear about me?"}}
+				{{view Ember.Select content=sourceTypes optionValuePath="content.value" optionLabelPath="content.label" value=source id="how'd-you-hear-about-me?"}}
+			{{/form-field}}
+		</li>
+		<li class="form-step">
+			{{#form-field title="What Can I do for you?"}}
+				{{view Ember.Select content=goals optionValuePath="content.value" optionLabelPath="content.label" value=type id="what-can-i-do-for-you?"}}
+			{{/form-field}}
+		</li>
+	</ol>
+	<footer class="form-actions">
+		<button type="submit">Continue to Co-Applicants</button>
+	</footer>
+{{/validatable-form}}
