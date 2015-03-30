@@ -10,7 +10,7 @@ export default Ember.Component.extend({
 	valueTypes: [
 		{value: "estimated", "label": "Estimated"},
 		{value: "purchased", "label": "Purchased"},
-		{value: "estimated", "label": "Appraised"}
+		{value: "appraised", "label": "Appraised"}
 	],
 	summary: null,
 	caption: null,
@@ -26,6 +26,7 @@ export default Ember.Component.extend({
 			this.sendAction("onAdd");
 		},
 		removeProperty: function(property) {
+			this.get("properties").removeObject(property);
 			this.sendAction("onRemove", property);
 		}
 	}

@@ -19,7 +19,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{{#each property in applicant.properties}}
+			{{#each property in properties}}
 				<tr>
 					<td>{{view Ember.Select content=valueTypes optionValuePath="content.value" optionLabelPath="content.label" value=property.valueType}}
 					</td>
