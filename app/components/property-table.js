@@ -18,7 +18,8 @@ export default Ember.Component.extend({
 	property: null, /* A single property, meaning an array wasn't passed in */
 	hasProperties: Ember.computed.notEmpty("properties"),
 	propertyCount: Ember.computed.alias("properties.length"),
-	totalValue: Ember.computed.sum("properties.@each.value"),
+	values: Ember.computed.mapBy("properties", "value"),
+	totalValue: Ember.computed.sum("values"),
 	onAdd: null,
 	onRemove: null,
 	actions: {

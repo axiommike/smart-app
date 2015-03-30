@@ -14,7 +14,7 @@
 			{{#form-field title="Do you own any other real estate?"}}
 				{{input type="checkbox" checked=ownsOtherRealEstate id="do-you-own-any-other-real-estate?"}}
 				{{#if ownsOtherRealEstate}}
-					{{property-table properties=applicant.properties onAdd="addProperty" summary="List of all Properties"}}
+					{{property-table properties=applicant.properties onAdd="addProperty" summary="List of all Properties" caption="Other Properties"}}
 				{{/if}}
 			{{/form-field}}
 		</li>

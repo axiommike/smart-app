@@ -9,7 +9,7 @@
 	<button {{action "addProperty"}} title="Add a Property">Add Property</button>
 	<table {{bind-attr summary=summary}}>
 		{{#if caption}}
-			{{caption}}
+			{{caption}}, ${{totalValue}} total
 		{{/if}}
 		<thead>
 			<tr>

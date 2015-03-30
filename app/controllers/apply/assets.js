@@ -11,18 +11,21 @@ export default Ember.ObjectController.extend({
 			this.get("model.applicant.properties").pushObject(addedProperty);
 		},
 		nextStep: function() {
-			if (this.get("ownsCurrentResidence")) {
+			if (this.get("ownsOtherRealEstate")) {
 				var applicantProperties = this.get("model.applicant.properties");
-				applicantProperties.pushObject(this.get("currentProperty")); // include the current property in all of the properties
+				if (this.get("ownsCurrentResidence")) {
+					applicantProperties.pushObject(this.get("currentProperty")); // include the current property in all of the properties
+				}
 				applicantProperties.save().then((properties) => {
-					this.get("model.applicant").set("applicant.properties", properties);
 					this.get("model.applicant").save().then((applicant) => {
-						this.get("model").set("model.applicant", applicant);
 						this.get("model").save().then((application) => {
 							this.transitionToRoute("apply.applicants", application);
-						})
-					})
-				})
+						});
+					});
+				});
+			}
+			else {
+				this.transitionToRoute("apply.applicants");
 			}
 		}
 	}
