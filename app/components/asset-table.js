@@ -26,7 +26,7 @@ export default Ember.Component.extend({
 	onRemove: null,
 	actions: {
 		addAsset: function() {
-			this.sendAction("onAdd");
+			this.sendAction("onAdd", this.get("assets"));
 		},
 		removeAsset: function(property) {
 			this.get("assets").removeObject(property);

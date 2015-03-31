@@ -7,8 +7,15 @@ export default Ember.ObjectController.extend({
 			addedEmployment.set("company", addedEmploymentCompany);
 			applicant.get("employment").pushObject(addedEmployment);
 		},
+		removeApplicant: function(applicant) {
+			this.get("model.coApplicants").removeObject(applicant);
+		},
 		nextStep: function() {
 
+		},
+		addAsset: function(coApplicantAssets) {
+			let addedAsset = this.store.createRecord("asset");
+			coApplicantAssets.pushObject(addedAsset);
 		}
 	}
 });

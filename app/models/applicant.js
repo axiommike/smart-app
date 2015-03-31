@@ -6,7 +6,7 @@ export default DS.Model.extend({
 	middleName: DS.attr("string"),
 	lastName: DS.attr("string"),
 	names: Ember.computed.collect("firstName", "lastName", "middleName"),
-	hasName: Ember.computed.empty("names"),
+	hasName: Ember.computed.notEmpty("names"),
 	fullName: Ember.computed("names", function() {
 		return Ember.makeArray(this.get("names")).slice().concat().join(" ")
 	}),
