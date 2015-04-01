@@ -2,7 +2,27 @@
 	{{view Ember.Select content=employmentTypes optionValuePath="content.value" optionLabelPath="content.label" value=type id="type"}}
 {{/form-field}}
 {{#form-field title="Employer"}}
-	{{input type="text" id="employer" value=employer.name placeholder="Employer" required="required"}}
+	{{input type="text" value=employer.name placeholder="Employer" required="required"}}
+{{/form-field}}
+{{#form-field title="Position Duration"}}
+	{{input type="date" value=employment.startDate required="required"}}
+	<span>to</span>
+	{{input type="date" value=employment.endDate required="required"}}
+	{{#if employment.tenure}}
+		position was held for {{employment.tenure}} years
+	{{/if}}
+{{/form-field}}
+{{#form-field title="Hours Per Week"}}
+	{{input type="range" min="0" max="60" value=employment.weeklyHours required="required"}}
+	{{#if employment.weeklyHours}}
+		<span>worked {{employment.weeklyHours}} hours per week</span>
+	{{/if}}
+{{/form-field}}
+{{#form-field title="Hourly Rate"}}
+	{{input type="number" min="0" value=employment.hourlyRate required="required"}}
+	{{#if employment.hourlyRate}}
+		<span>dollars per hour</span>
+	{{/if}}
 {{/form-field}}
 
 {{yield}}

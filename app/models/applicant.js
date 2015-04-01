@@ -22,5 +22,6 @@ export default DS.Model.extend({
 	assets: DS.hasMany("asset"),
 	debt: DS.attr("number", {defaultValue: 0}),
 	properties: DS.hasMany("property"),
+	isPrimary: DS.attr("boolean"),
 	currentProperty: Ember.computed.filterBy("properties", "isCurrent", true)
 });

@@ -29,7 +29,10 @@
 		</li>
 		<li class="form-step">
 			{{#form-field title="How many co-applicants?"}}
-				{{input type="number" value=coApplicantCount step="any" placeholder="Number of Co-Applicants" required="required" id="how-many-co-applicants?"}}
+				{{input type="range" value=coApplicantCount step="1" required="required" min="0" max="3" id="how-many-co-applicants?"}}
+				{{#if coApplicantCount}}
+					<span class="info">This application will include <strong>{{coApplicantCount}}</strong> co-applicants</span>
+				{{/if}}
 			{{/form-field}}
 		</li>
 	</ol>

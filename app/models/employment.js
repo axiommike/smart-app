@@ -8,6 +8,9 @@ export default DS.Model.extend({
 	income: DS.attr("number", {defaultValue: 0}),
 	startDate: DS.attr("date", {defaultValue: new Date()}),
 	tenure: DS.attr("number", {defaultValue: 0}), // in days
+	tenureYears: Ember.computed("tenure", function() {
+		return Math.round(this.get("tenure") / 365);
+	}),
 	tenureChanged: function() {
 		let startDate = this.get("startDate"), endDate = this.get("endDate");
 		if (startDate && endDate) {
@@ -16,7 +19,7 @@ export default DS.Model.extend({
 			this.set("tenure", updatedTenure);
 		}
 		else {
-			this.set("tenure", null)
+			this.set("tenure", null);
 		}
 	}.observes("startDate", "endDate"),
 	isCurrent: DS.attr("boolean", {defaultValue: false}),

@@ -1,0 +1,16 @@
+{{wizard-step stepName="Summary" totalSteps=4 step=4}}
+
+<header class="application-review">
+	<h1>Here's what we got so far:</h1>
+</header>
+{{#validatable-form action="nextStep"}}
+	{{#each applicant in applicants}}
+		{{applicant-card applicant=applicant}}
+		{{else}}
+			<p>No applicants found.</p>
+	{{/each}}
+	<footer class="form-actions">
+		<button type="submit">Review Application</button>
+	</footer>
+{{/validatable-form}}
+{{outlet}}

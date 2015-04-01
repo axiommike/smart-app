@@ -7,7 +7,7 @@ export default Ember.Route.extend({
 				return this.store.find("application", params.application_id);
 			}
 		}
-		let emptyApplicant = this.store.createRecord("applicant"), emptyApplication = this.store.createRecord("application");
+		let emptyApplicant = this.store.createRecord("applicant", {isPrimary: true}), emptyApplication = this.store.createRecord("application");
 		emptyApplication.set("applicant", emptyApplicant);
 		return emptyApplication;
 	}

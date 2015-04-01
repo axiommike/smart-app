@@ -1,1 +1,80 @@
+<header class="applicant-card-header">
+	{{#if applicant.hasName}}
+		<h1 class="applicant-name">
+			<span class="applicant-full-name">{{applicant.fullName}}</span>
+			{{#if applicant.isPrimary}}
+				 (primary applicant)
+			{{/if}}
+		</h1>
+	{{/if}}
+	<ul class="applicant-actions">
+		{{#unless applicant.isPrimary}}
+			<li class="applicant-action">
+				<button {{action "removeApplicant" applicant}}>Remove {{applicant.fullName}}</button>
+			</li>
+		{{/unless}}
+		{{#if isEditable}}
+			<li>
+				<button {{action "toggleEditing" applicant}}>
+					{{#if isEditing}}
+						Done
+					{{else}}
+						Edit
+					{{/if}}
+				</button>
+			</li>
+		{{/if}}
+	</ul>
+</header>
+{{#if isEditing}}
+	{{#form-section title="basic-information" icon="info-sign"}}
+		<div class = "row">
+			{{#form-field title="First Name" class="one-half"}}
+				{{input value=applicant.firstName placeholder="First Name" required="required" autofocus="autofocus"}}
+			{{/form-field}}
+			{{#form-field title="Last Name" class="one-half"}}
+				{{input value=applicant.lastName placeholder="Last Name" required="required"}}
+			{{/form-field}}
+		</div>
+		{{#form-field title="Email"}}
+			{{input value=applicant.email required="required" type="email" placeholder="Email"}}
+		{{/form-field}}
+		{{#form-field title="Phone"}}
+			{{input value=applicant.phone type="tel" required="required" placeholder="Phone"}}
+		{{/form-field}}
+		{{#form-field title="Birth Date"}}
+			{{input type="date" value=applicant.birthDate required="required"}}
+		{{/form-field}}
+	{{/form-section}}
+	{{#form-section title="Employment" icon="hat"}}
+		{{#each historicalEmployment in applicant.employment}}
+			<button {{action "addEmployment" applicant}}>Add Employment</button>
+			{{historical-employment employment=historicalEmployment}}
+		{{else}}
+			No employment history for {{applicant.fullName}}.  <button {{action "addEmployment" applicant}}>Add Employment</button>
+		{{/each}}
+	{{/form-section}}
+	{{#form-section title="Assets" icon="coin"}}
+		{{#form-field title="debts"}}
+			{{input value=applicant.debt type="number" step="any" min="0" placeholder="Debts"}}
+		{{/form-field}}
+		{{asset-table assets=applicant.assets onAdd="addAsset"}}
+	{{/form-section}}
+{{else}}
+	<dl class="applicant-card-details">
+		{{#if applicant.email}}
+			<dt>Email</dt>
+			<dd>{{applicant.email}}</dd>
+		{{/if}}
+		{{#if applicant.phone}}
+			<dt>Phone</dt>
+			<dd>{{applicant.phone}}</dd>
+		{{/if}}
+		{{#if applicant.birthDate}}
+			<dt>Birth Date</dt>
+			<dd>{{applicant.birthDate}}</dd>
+		{{/if}}
+	</dl>
+{{/if}}
+
 {{yield}}

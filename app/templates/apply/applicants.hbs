@@ -1,56 +1,16 @@
 {{wizard-step stepName="Co-Applicants" totalSteps=4 step=3}}
 {{#validatable-form action="nextStep"}}
+	<button {{action "addApplicant"}}>Add Co-Applicant</button>
 	<ul class="applicants">
-		{{#each applicant in coApplicants}}
-			<li class="applicant co-applicant">
-				<header class="applicant-card-header">
-					{{#if applicant.hasName}}
-						<div class="applicant-name">
-							<span class="applicant-full-name">{{applicant.fullName}}</span>
-						</div>
-					{{/if}}
-					<ul class="applicant-actions">
-						<li class="applicant-action">
-							<button {{action "removeApplicant" applicant}}>Remove {{applicant.fullName}}</button>
-						</li>
-					</ul>
-				</header>
-				{{#form-section title="basic-information" icon="info-sign"}}
-					<div class = "row">
-						{{#form-field title="First Name" class="one-half"}}
-							{{input value=applicant.firstName placeholder="First Name" required="required" autofocus="autofocus"}}
-						{{/form-field}}
-						{{#form-field title="Last Name" class="one-half"}}
-							{{input value=applicant.lastName placeholder="Last Name" required="required"}}
-						{{/form-field}}
-					</div>
-					{{#form-field title="Email"}}
-						{{input value=applicant.email required="required" type="email" placeholder="Email"}}
-					{{/form-field}}
-					{{#form-field title="Phone"}}
-						{{input value=applicant.phone type="tel" required="required" placeholder="Phone"}}
-					{{/form-field}}
-					{{#form-field title="Birth Date"}}
-						{{input type="date" value=applicant.birthDate}}
-					{{/form-field}}
-				{{/form-section}}
-				{{#form-section title="Employment" icon="hat"}}
-					{{#each historicalEmployment in applicant.employment}}
-						<button {{action "addEmployment" applicant}}>Add Employment</button>
-						{{historical-employment employment=historicalEmployment}}
-					{{else}}
-						No employment history for {{applicant.fullName}}.  <button {{action "addEmployment" applicant}}>Add Employment</button>
-					{{/each}}
-				{{/form-section}}
-				{{#form-section title="Assets" icon="coin"}}
-					{{#form-field title="debts"}}
-						{{input value=applicant.debt type="number" step="any" min="0" placeholder="Debts"}}
-					{{/form-field}}
-					{{asset-table assets=applicant.assets onAdd="addAsset"}}
-				{{/form-section}}
+		{{#each applicant in applicants}}
+			<li {{bind-attr class=":applicant applicant.isPrimary:primary:co-applicant"}}>
+				{{applicant-card applicant=applicant isEditing=true onRemoveApplicant="removeApplicant" isEditable=false}}
 			</li>
 		{{else}}
-			<li>No Co-Applicants selected</li>
+			<li>No Co-Applicants selected.  <button {{action "addApplicant"}}>Add one</button></li>
 		{{/each}}
 	</ul>
+	<footer class="form-actions">
+		<button type="submit">Review Application</button>
+	</footer>
 {{/validatable-form}}
