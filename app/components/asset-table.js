@@ -17,11 +17,16 @@ export default Ember.Component.extend({
 	],
 	summary: null,
 	caption: null,
-	properties: Ember.A(),
+	assets: Ember.A(),
 	hasAssets: Ember.computed.notEmpty("assets"),
-	assetCount: Ember.computed.alias("properties.length"),
+	assetCount: Ember.computed.alias("assets.length"),
 	values: Ember.computed.mapBy("assets", "value"),
-	totalValue: Ember.computed.sum("values"),
+	totalAssets: function() {
+		let assets = this.get("assets");
+		return assets.reduce(function(previousValue, asset) {
+			return previousValue + asset.get("value");
+		}, 0);
+	}.property("assets.@each.value"),
 	onAdd: null,
 	onRemove: null,
 	actions: {

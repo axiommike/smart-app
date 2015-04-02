@@ -8,7 +8,6 @@ export default Ember.ObjectController.extend({
 	actions: {
 		addProperty: function() {
 			let addedProperty = this.store.createRecord("property");
-			let properties = this.get("model.applicant.properties");
 			this.get("model.applicant.properties").pushObject(addedProperty);
 		},
 		addAsset: function() {
@@ -25,7 +24,9 @@ export default Ember.ObjectController.extend({
 					applicantProperties.pushObject(this.get("currentProperty")); // include the current property in all of the properties
 				}
 				applicantProperties.save().then((properties) => {
+					console.dir(properties);
 					this.get("model.applicant").save().then((applicant) => {
+						console.dir(applicant);
 						this.get("model").save().then((application) => {
 							this.transitionToRoute("apply.applicants", application);
 						});

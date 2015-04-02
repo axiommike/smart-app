@@ -25,7 +25,7 @@ export default Ember.ObjectController.extend({
 			this.get("model").save().then((application) => {
 					this.transitionToRoute("apply.assets", application);
 				}
-			)
+			);
 		}
 	}
 });

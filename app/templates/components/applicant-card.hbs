@@ -58,7 +58,7 @@
 		{{#form-field title="debts"}}
 			{{input value=applicant.debt type="number" step="any" min="0" placeholder="Debts"}}
 		{{/form-field}}
-		{{asset-table assets=applicant.assets onAdd="addAsset"}}
+		{{asset-table assets=applicant.assets onAdd="addAsset" caption="Assets for applicant"}}
 	{{/form-section}}
 {{else}}
 	<dl class="applicant-card-details">

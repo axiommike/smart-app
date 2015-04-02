@@ -7,6 +7,7 @@ export default DS.Model.extend({
 	occupation: DS.attr("string"),
 	income: DS.attr("number", {defaultValue: 0}),
 	startDate: DS.attr("date", {defaultValue: new Date()}),
+	endDate: DS.attr("date", {defaultValue: new Date()}),
 	tenure: DS.attr("number", {defaultValue: 0}), // in days
 	tenureYears: Ember.computed("tenure", function() {
 		return Math.round(this.get("tenure") / 365);

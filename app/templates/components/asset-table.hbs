@@ -3,7 +3,12 @@
 </header>
 <table {{bind-attr summary=summary}}>
 	{{#if caption}}
-		{{caption}}, ${{totalValue}} total
+		<caption>
+			{{caption}}
+		</caption>
+		{{#if totalAssets}}
+			, ${{totalAssets}} total
+		{{/if}}
 	{{/if}}
 	<thead>
 		<tr>
