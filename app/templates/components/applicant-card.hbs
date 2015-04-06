@@ -47,9 +47,9 @@
 		{{/form-field}}
 	{{/form-section}}
 	{{#form-section title="Employment" icon="hat"}}
+		<button {{action "addEmployment" applicant}}>Add Employment</button>
 		{{#each historicalEmployment in applicant.employment}}
-			<button {{action "addEmployment" applicant}}>Add Employment</button>
-			{{historical-employment employment=historicalEmployment}}
+			{{historical-employment employment=historicalEmployment onRemove="removeEmployment"}}
 		{{else}}
 			No employment history for {{applicant.fullName}}.  <button {{action "addEmployment" applicant}}>Add Employment</button>
 		{{/each}}

@@ -16,8 +16,9 @@ export default Ember.Component.extend({
 			this.sendAction("onRemoveApplicant", this.get("applicant"));
 		},
 		addEmployment: function() {
-			let store = this.get("targetObject.store"), addedEmployment = store.createRecord("employment"), addedEmploymentCompany = store.createRecord("company");
-			addedEmployment.set("company", addedEmploymentCompany);
+			let store = this.get("targetObject.store"), addedEmployment = store.createRecord("employment"), addedEmploymentCompany = store.createRecord("company"), addedEmploymentCompanyAddress = store.createRecord("address");
+			addedEmploymentCompany.set("address", addedEmploymentCompanyAddress);
+			addedEmployment.set("employer", addedEmploymentCompany);
 			this.get("applicant").get("employment").pushObject(addedEmployment);
 		},
 		removeEmployment: function(employment) {

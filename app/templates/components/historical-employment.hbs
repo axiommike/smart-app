@@ -1,9 +1,20 @@
+<button title="Remove this employment" {{action "remove"}}>Remove</button>
+{{#form-field title="Position"}}
+	{{input type="text" value=employment.occupation placeholder="Job Title" required="required"}}
+{{/form-field}}
+
+{{#form-field title="Is Current Employment?"}}
+	{{input type="checkbox" checked=employment.isCurrent title="Is the job current?"}}
+{{/form-field}}
 {{#form-field title="Type"}}
-	{{view Ember.Select content=employmentTypes optionValuePath="content.value" optionLabelPath="content.label" value=type id="type"}}
+	{{view Ember.Select content=employmentTypes optionValuePath="content.value" optionLabelPath="content.label" value=employment.type}}
 {{/form-field}}
 {{#unless employment.isSelfEmployed}}
 	{{#form-field title="Employer"}}
-		{{input type="text" value=employer.name placeholder="Employer" required="required"}}
+		{{input type="text" value=employment.employer.name placeholder="Employer" required="required"}}
+	{{/form-field}}
+	{{#form-field title="Employer Address"}}
+		{{input type="text" value=employment.employer.address.address placeholder="Employer's Address" required="required"}}
 	{{/form-field}}
 {{/unless}}
 {{#form-field title="Position Duration"}}
@@ -12,11 +23,13 @@
 		<span>to</span>
 		{{input type="date" value=employment.endDate required="required"}}
 	{{else}}
-		{{input type="number" value=tenure required="required" placeholder="Years"}}
-		<span class="label">years</span>
+		{{input type="number" value=employment.tenureYears required="required" placeholder="Years" min="0" step="1"}}
+		<label for = "tenure-years">years</label>
+		{{input type="number" value=employment.tenureMonths placeholder="mths" min="0" max="12" step="1"}}
+		<label for = "tenure-months">months</label>
 	{{/if}}
-	{{#if employment.tenure}}
-		<span class="help">position was held for {{employment.tenure}} years</span>
+	{{#if employment.tenureTotalYears}}
+		<span class="help">position was held for {{employment.tenureTotalYears}} years</span>
 	{{/if}}
 {{/form-field}}
 {{#form-field title="Hours Per Week"}}
@@ -26,7 +39,7 @@
 	{{/if}}
 {{/form-field}}
 {{#form-field title="Hourly Rate"}}
-	{{input type="number" min="0" value=employment.hourlyRate required="required"}}
+	{{input type="number" min="0" step="any" value=employment.hourlyRate required="required"}}
 	{{#if employment.hourlyRate}}
 		<span>dollars per hour</span>
 	{{/if}}

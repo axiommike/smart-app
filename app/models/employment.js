@@ -8,11 +8,28 @@ export default DS.Model.extend({
 	income: DS.attr("number", {defaultValue: 0}),
 	startDate: DS.attr("date", {defaultValue: new Date()}),
 	endDate: DS.attr("date", {defaultValue: new Date()}),
-	tenure: DS.attr("number", {defaultValue: 0}), // in years
+	tenure: DS.attr("number", {defaultValue: 0}), /* Total months in tenure */
+	tenureTotalYears: Ember.computed("tenure", function() {
+		return Math.floor(this.get("tenure") / 12);
+	}),
+	tenureYears: DS.attr("number", {defaultValue: 0}), // in years
 	tenureDays: Ember.computed("tenure", function() {
-		return Math.round(this.get("tenure") * 365);
+		return Math.floor(this.get("tenure") * 365);
 	}),
 	tenureChanged: function() {
+		console.log("Tenure changed");
+		let employmentYears = parseInt(this.get("tenureYears")), employmentMonths = parseInt(this.get("tenureMonths"));
+		if (employmentYears && employmentMonths) {
+			this.set("tenure", Math.round(employmentMonths + (employmentYears * 12)));
+		}
+		else if (employmentYears) {
+			this.set("tenure", employmentYears * 12);
+		}
+		else if (employmentMonths) {
+			this.set("tenure", employmentMonths);
+		}
+	}.observes("tenureMonths", "tenureYears"),
+	tenureDatesChanged: function() {
 		let startDate = this.get("startDate"), endDate = this.get("endDate");
 		if (startDate && endDate) {
 			let differenceMS = Math.abs(startDate.getTime() - endDate.getTime());
@@ -22,9 +39,7 @@ export default DS.Model.extend({
 	}.observes("startDate", "endDate"),
 	isSelfEmployed: Ember.computed.equal("type", "self-employed"),
 	isCurrent: DS.attr("boolean", {defaultValue: false}),
-	tenureMonths: Ember.computed("tenure", function() {
-		return Math.round(this.get("tenure") / 30);
-	}),
+	tenureMonths: DS.attr("number", {defaultValue: 0}),
 	hourlyRate: DS.attr("number", {defaultValue: 0}),
 	weeklyHours: DS.attr("number", {defaultValue: 0}),
 	commission: DS.attr("number", {defaultValue: 0}),
