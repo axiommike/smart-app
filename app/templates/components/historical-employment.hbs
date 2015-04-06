@@ -13,10 +13,15 @@
 	{{#form-field title="Employer"}}
 		{{input type="text" value=employment.employer.name placeholder="Employer" required="required"}}
 	{{/form-field}}
-	{{#form-field title="Employer Address"}}
-		{{input type="text" value=employment.employer.address.address placeholder="Employer's Address" required="required"}}
-	{{/form-field}}
 {{/unless}}
+
+{{#form-field title="Employer Address"}}
+	{{input type="text" value=employment.employer.address.address placeholder="Employer's Address" required="required"}}
+{{/form-field}}
+{{#form-field title="Employer Phone Number"}}
+	{{input type="tel" value=employment.employer.phone placeholder="Employer's Phone" required="required"}}
+{{/form-field}}
+
 {{#form-field title="Position Duration"}}
 	{{#if durationEnabled}}
 		{{input type="date" value=employment.startDate required="required"}}
