@@ -9,6 +9,11 @@
 {{#form-field title="Type"}}
 	{{view Ember.Select content=employmentTypes optionValuePath="content.value" optionLabelPath="content.label" value=employment.type}}
 {{/form-field}}
+
+{{#form-field title="Income Type"}}
+	{{view Ember.Select content=incomeTypes optionValuePath="content.value" optionLabelPath="content.label" value=employment.incomeType}}
+{{/form-field}}
+
 {{#unless employment.isSelfEmployed}}
 	{{#form-field title="Employer"}}
 		{{input type="text" value=employment.employer.name placeholder="Employer" required="required"}}
@@ -37,17 +42,26 @@
 		<span class="help">position was held for {{employment.tenureTotalYears}} years</span>
 	{{/if}}
 {{/form-field}}
-{{#form-field title="Hours Per Week"}}
-	{{input type="range" min="0" max="60" value=employment.weeklyHours required="required"}}
-	{{#if employment.weeklyHours}}
-		<span>worked {{employment.weeklyHours}} hours per week</span>
-	{{/if}}
-{{/form-field}}
-{{#form-field title="Hourly Rate"}}
-	{{input type="number" min="0" step="any" value=employment.hourlyRate required="required"}}
-	{{#if employment.hourlyRate}}
-		<span>dollars per hour</span>
-	{{/if}}
-{{/form-field}}
 
+{{#if employment.isSalaried}}
+	{{#form-field title="Hours Per Week"}}
+		{{input type="range" min="0" max="60" value=employment.weeklyHours required="required"}}
+		{{#if employment.weeklyHours}}
+			<span>worked {{employment.weeklyHours}} hours per week</span>
+		{{/if}}
+	{{/form-field}}
+	{{#form-field title="Hourly Rate"}}
+		{{input type="number" min="0" step="any" value=employment.hourlyRate required="required"}}
+		{{#if employment.hourlyRate}}
+			<span>dollars per hour</span>
+		{{/if}}
+	{{/form-field}}
+{{/if}}
+
+{{#form-field title="Annual Pay"}}
+	{{input type="number" min="0" step="any" value=employment.income required="required"}}
+	{{#if employment.income}}
+		<span>annually</span>
+	{{/if}}
+{{/form-field}}
 {{yield}}
