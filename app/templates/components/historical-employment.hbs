@@ -5,11 +5,16 @@
 	{{input type="text" value=employer.name placeholder="Employer" required="required"}}
 {{/form-field}}
 {{#form-field title="Position Duration"}}
-	{{input type="date" value=employment.startDate required="required"}}
-	<span>to</span>
-	{{input type="date" value=employment.endDate required="required"}}
+	{{#if durationEnabled}}
+		{{input type="date" value=employment.startDate required="required"}}
+		<span>to</span>
+		{{input type="date" value=employment.endDate required="required"}}
+	{{else}}
+		{{input type="number" value=tenure required="required" placeholder="Years"}}
+		<span class="label">years</span>
+	{{/if}}
 	{{#if employment.tenure}}
-		position was held for {{employment.tenure}} years
+		<span class="help">position was held for {{employment.tenure}} years</span>
 	{{/if}}
 {{/form-field}}
 {{#form-field title="Hours Per Week"}}
