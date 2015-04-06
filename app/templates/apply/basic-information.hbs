@@ -13,6 +13,7 @@
 			<dd>{{applicant.phone}}</dd>
 		{{/if}}
 	</dl>
+	{{tips-container tips=tips}}
 </aside>
 
 {{#validatable-form action="nextStep"}}
@@ -25,6 +26,11 @@
 		<li class="form-step">
 			{{#form-field title="What Can I do for you?"}}
 				{{view Ember.Select content=goals optionValuePath="content.value" optionLabelPath="content.label" value=type id="what-can-i-do-for-you?" required="required"}}
+			{{/form-field}}
+		</li>
+		<li class="form-step">
+			{{#form-field title="Martial Status"}}
+				{{view Ember.Select content=martialStatusOptions optionValuePath="content.value" optionLabelPath="content.label" value=martialStatus required="required"}}
 			{{/form-field}}
 		</li>
 		<li class="form-step">

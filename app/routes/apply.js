@@ -2,6 +2,7 @@ import Ember from "ember";
 
 export default Ember.Route.extend({
 	model: function(params) {
+		console.log("Apply route triggered");
 		if (params["application_id"]) {
 			if (params.application_id !== "apply") {
 				return this.store.find("application", params.application_id);

@@ -13,6 +13,18 @@ export default Ember.ObjectController.extend({
 		{value: "rental", label: "I want to purchase a rental"},
 		{value: "advice", label: "I need some advice"}
 	],
+	tips: [
+		{property: "applicant.phone", tooltip: "We'll use your phone number"},
+		{property: "applicant.email"},
+		{property: "source"},
+		{property: "type"},
+		{property: "coApplicantCount"}
+	],
+	martialStatusOptions: [
+		{value: "single", label: "Single"},
+		{value: "married", label: "Married"},
+		{value: "Divorced", label: "Divorced"}
+	],
 	coApplicantCount: 0,
 	actions: {
 		nextStep: function() {

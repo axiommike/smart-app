@@ -21,6 +21,7 @@ export default DS.Model.extend({
 	workPhone: Ember.computed.alias("currentEmployment.firstObject.company.phone"),
 	liabilities: DS.hasMany("liability"),
 	assets: DS.hasMany("asset"),
+	martialStatus: DS.attr("string"), /* Married, single, divorced */
 	totalAssets: function() {
 		let assets = this.get("assets");
 		return assets.reduce(function(previousValue, asset) {
