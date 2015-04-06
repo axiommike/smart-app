@@ -1,9 +1,11 @@
 {{#form-field title="Type"}}
 	{{view Ember.Select content=employmentTypes optionValuePath="content.value" optionLabelPath="content.label" value=type id="type"}}
 {{/form-field}}
-{{#form-field title="Employer"}}
-	{{input type="text" value=employer.name placeholder="Employer" required="required"}}
-{{/form-field}}
+{{#unless employment.isSelfEmployed}}
+	{{#form-field title="Employer"}}
+		{{input type="text" value=employer.name placeholder="Employer" required="required"}}
+	{{/form-field}}
+{{/unless}}
 {{#form-field title="Position Duration"}}
 	{{#if durationEnabled}}
 		{{input type="date" value=employment.startDate required="required"}}
