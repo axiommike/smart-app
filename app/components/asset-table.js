@@ -21,14 +21,18 @@ export default Ember.Component.extend({
 	caption: null,
 	assets: Ember.A(),
 	type: null,
-	filteredAssets: Ember.computed.filterBy("assets", "type", "type"),
+	filteredAssets: Ember.computed.filter("assets", function(asset) {
+		console.log(`Does ${this.get("type")} equal ${asset.get("valueType")}?`);
+		console.dir(asset);
+		return this.get("type") ? asset.valueType === this.get("type") : true;
+	}),
 	hasAssets: Ember.computed.notEmpty("assets"),
 	assetCount: Ember.computed.alias("assets.length"),
 	values: Ember.computed.mapBy("assets", "value"),
 	totalAssets: function() {
 		let assets = this.get("assets");
 		return assets.reduce(function(previousValue, asset) {
-			return previousValue + asset.get("value");
+			return parseInt(previousValue) + parseInt(asset.get("value"));
 		}, 0);
 	}.property("assets.@each.value"),
 	onAdd: null,

@@ -24,6 +24,10 @@ export default Ember.Component.extend({
 		removeEmployment: function(employment) {
 			this.get("applicant.employment").removeObject(employment);
 		},
+		addAddress: function() {
+			let store = this.get("targetObject.store"), addedAddress = store.createRecord("address");
+			this.get("applicant").get("previousAddresses").pushObject(addedAddress);
+		},
 		addAsset: function() {
 			let store = this.get("targetObject.store"), addedAsset = store.createRecord("asset");
 			this.get("applicant").get("assets").pushObject(addedAsset);
