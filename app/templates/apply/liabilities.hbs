@@ -1,0 +1,43 @@
+{{wizard-step stepName="Liabilities" totalSteps=5 step=3}}
+
+{{#validatable-form action="nextStep"}}
+	<ol class="form-steps">
+		<li class="form-step">
+			{{#form-field title="Do you have any credit cards?"}}
+				{{input type="checkbox" checked=hasCreditCard id="do-you-have-any-credit-cards?"}}
+			{{/form-field}}
+			{{#if ownsCreditCard}}
+				{{liability-table type="credit-card" liabilities=applicant.liabilities}}
+			{{/if}}
+		</li>
+		<li class="form-step">
+			{{#form-field title="Do you have a personal line of credit?"}}
+				{{input type="checkbox" checked=hasLineOfCredit id="do-you-have-a-personal-line-of-credit?"}}
+				{{#if hasLineOfCredit}}
+					{{liability-table type="line-of-credit" liabilities=applicant.liabilities}}
+				{{/if}}
+			{{/form-field}}
+		</li>
+		<li class="form-step">
+			{{#form-field title="Do you have any loans?"}}
+				{{input type="checkbox" checked=hasLoans id="do-you-own-any-loans?"}}
+				{{#if hasLoans}}
+					{{liability-table type="loan" liabilities=applicant.liabilities}}
+				{{/if}}
+			{{/form-field}}
+		</li>
+		<li class="form-step">
+			{{#form-field title="Do you have any other liabilities?"}}
+				{{#if applicant.liabilities.length}}
+					<span class="help">You have indicated that you have <strong>{{applicant.liabilities.length}}</strong> liabilities:</span>
+					{{liability-table liabilities=applicant.liabilities}}
+				{{/if}}
+				{{input type="checkbox" checked=applicant.liabilities.length title="Please indicate whether you have any other liabilities" required="required" id="do-you-have-any-rrsps-or-any-other-liabilities?"}}
+			{{/form-field}}
+		</li>
+	</ol>
+	<footer class="form-actions">
+		<button type="submit">Continue to Co-Applicants</button>
+	</footer>
+{{/validatable-form}}
+{{outlet}}

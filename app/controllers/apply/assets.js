@@ -28,13 +28,13 @@ export default Ember.ObjectController.extend({
 					this.get("model.applicant").save().then((applicant) => {
 						console.dir(applicant);
 						this.get("model").save().then((application) => {
-							this.transitionToRoute("apply.applicants", application);
+							this.transitionToRoute("apply.liabilities", application);
 						});
 					});
 				});
 			}
 			else {
-				this.transitionToRoute("apply.applicants");
+				this.transitionToRoute("apply.liabilities");
 			}
 		}
 	}

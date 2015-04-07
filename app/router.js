@@ -13,6 +13,7 @@ Router.map(function () {
 		this.route("summary");
 		this.route("assets");
 		this.route("thank-you");
+		this.route("liabilities");
 	});
 });
 
