@@ -5,9 +5,9 @@ export default Ember.Component.extend({
 	type: "radio",
 	attributeBindings: ["type", "htmlChecked:checked", "value", "name", "disabled"],
 
-	htmlChecked: function() {
+	htmlChecked: Ember.computed("value", "checked", function() {
 		return this.get("value") === this.get("checked");
-	}.property("value", "checked"),
+	}).readOnly(),
 
 	change: function() {
 		this.set("checked", this.get("value"));

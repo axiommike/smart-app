@@ -1,5 +1,8 @@
 {{#each option in content}}
 	{{radio-button content=option}}
+	{{#if option.label}}
+		<label {{bind-attr for=option.labelID}}>{{option.label}}</label>
+	{{/if}}
 {{/each}}
 
 {{yield}}
