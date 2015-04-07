@@ -5,7 +5,9 @@ export default Ember.Component.extend({
 	assetTypes: [
 		{value: "item", label: "Personal Item"},
 		{value: "savings", label: "Savings Investment"},
+		{value: "tfsa", label: "Tax-Free Savings Account (TFSA)"},
 		{value: "other", label: "Other"},
+		{value: "gic", label: "GIC, Term Deposit"},
 		{value: "rrsp", label: "RRSP"},
 		{value: "stocks", label: "Stocks Investment"},
 		{value: "vehicle", label: "Vehicle"}
@@ -18,6 +20,8 @@ export default Ember.Component.extend({
 	summary: null,
 	caption: null,
 	assets: Ember.A(),
+	type: null,
+	filteredAssets: Ember.computed.filterBy("assets", "type", "type"),
 	hasAssets: Ember.computed.notEmpty("assets"),
 	assetCount: Ember.computed.alias("assets.length"),
 	values: Ember.computed.mapBy("assets", "value"),

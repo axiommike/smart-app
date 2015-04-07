@@ -31,6 +31,14 @@
 				{{input value=applicant.debt type="number" step="any" min="0" placeholder="Debts" id="what-do-you-owe?"}}
 			{{/form-field}}
 		</li>
+		<li class="form-step">
+			{{#form-field title="Do you have any RRSPs or any other savings?"}}
+				{{input type="checkbox" checked=hasGICs title="Please indicate whether you have invested in any government funds or locked-in investments" required="required" id="do-you-have-any-rrsps-or-any-other-savings?"}}
+				{{#if hasGICs}}
+					{{asset-table assets=applicant.assets type="gic" onAdd="addAsset" summary="Table of all GIC, long-term, and term-based bank account assets" caption="Term Deposit Account Assets"}}
+				{{/if}}
+			{{/form-field}}
+		</li>
 	</ol>
 	<footer class="form-actions">
 		<button type="submit">Continue to Co-Applicants</button>

@@ -1,6 +1,7 @@
 import DS from "ember-data";
+import TimeableMixin from "../mixins/timeable";
 
-export default DS.Model.extend({
+export default DS.Model.extend(TimeableMixin, {
 	address: DS.attr("string"),
 	street: DS.attr("string"),
 	postalCode: DS.attr("string"),

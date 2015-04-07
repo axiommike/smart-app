@@ -1,7 +1,8 @@
 import DS from "ember-data";
 import Ember from "ember";
+import TimeableMixin from "../mixins/timeable";
 
-export default DS.Model.extend({
+export default DS.Model.extend(TimeableMixin, {
 	type: DS.attr("string"),
 	employer: DS.belongsTo("company"),
 	occupation: DS.attr("string"),
@@ -14,37 +15,6 @@ export default DS.Model.extend({
 		}
 	}.observes("hourlyRate", "weeklyHours"),
 	incomeType: DS.attr("string"),
-	startDate: DS.attr("date", {defaultValue: new Date()}),
-	endDate: DS.attr("date", {defaultValue: new Date()}),
-	tenure: DS.attr("number", {defaultValue: 0}), /* Total months in tenure */
-	tenureTotalYears: Ember.computed("tenure", function() {
-		return Math.floor(this.get("tenure") / 12);
-	}),
-	tenureYears: DS.attr("number", {defaultValue: 0}), // in years
-	tenureDays: Ember.computed("tenure", function() {
-		return Math.floor(this.get("tenure") * 365);
-	}),
-	tenureChanged: function() {
-		console.log("Tenure changed");
-		let employmentYears = parseInt(this.get("tenureYears")), employmentMonths = parseInt(this.get("tenureMonths"));
-		if (employmentYears && employmentMonths) {
-			this.set("tenure", Math.round(employmentMonths + (employmentYears * 12)));
-		}
-		else if (employmentYears) {
-			this.set("tenure", employmentYears * 12);
-		}
-		else if (employmentMonths) {
-			this.set("tenure", employmentMonths);
-		}
-	}.observes("tenureMonths", "tenureYears"),
-	tenureDatesChanged: function() {
-		let startDate = this.get("startDate"), endDate = this.get("endDate");
-		if (startDate && endDate) {
-			let differenceMS = Math.abs(startDate.getTime() - endDate.getTime());
-			let updatedTenure =  Math.round(differenceMS/86400000); // 86400000 is one day
-			this.set("tenure", updatedTenure);
-		}
-	}.observes("startDate", "endDate"),
 	isSelfEmployed: Ember.computed.equal("type", "self-employed"),
 	isCurrent: DS.attr("boolean", {defaultValue: false}),
 	isHourly: Ember.computed.equal("incomeType", "hourly"),

@@ -1,0 +1,31 @@
+{{#form-field title="Current Address"}}
+	{{input type="text" value=currentAddress.address placeholder="Current Address" required="required"}}
+{{/form-field}}
+
+{{#if previousAddressesRequired}}
+	<span class="error">Please provide up to 3 years of address information.</span>
+	<h3>Previous Addresses</h3>
+	<ul class="previous-addresses">
+		{{#each address in previousAddresses}}
+			<li class="address edit">
+				{{#form-field title="Previous Address"}}
+					{{input value=address.address placeholder="Address" title="Please provide historical addresses dating back at least 3 years" required="required"}}
+				{{/form-field}}
+				{{#form-field title="How Long?"}}
+					{{input type="number" value=address.tenureYears placeholder="Years" min="0" step="1" required="required" title="Please indicate the amount of time in which this address was resided"}}
+					<label for = "tenure-years">years</label>
+					{{input type="number" value=address.tenureMonths placeholder="mths" min="0" max="12" step="1"}}
+					<label for = "tenure-months">months</label>
+					{{#if address.tenureTotalYears}}
+						Lived here for {{address.tenureTotalYears}}
+					{{/if}}
+				{{/form-field}}
+			</li>
+		{{else}}
+			<!-- fallback -->
+		{{/each}}
+
+	</ul>
+{{/if}}
+
+{{yield}}

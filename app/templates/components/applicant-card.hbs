@@ -46,6 +46,10 @@
 			{{input type="date" value=applicant.birthDate required="required"}}
 		{{/form-field}}
 	{{/form-section}}
+	{{#form-section title="Location" icon="pin"}}
+		<button {{action "addAddress" applicant}} title="Add a previous address">Add Previous Address</button>
+		{{historical-addresses previousAddresses=applicant.previousAddresses currentAddress=applicant.currentAddress}}
+	{{/form-section}}
 	{{#form-section title="Employment" icon="hat"}}
 		<button {{action "addEmployment" applicant}}>Add Employment</button>
 		{{#each historicalEmployment in applicant.employment}}

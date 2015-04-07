@@ -12,16 +12,26 @@
 	{{/if}}
 	<thead>
 		<tr>
-			<th>Asset Type</th>
-			<th>Asset Value ($)</th>
-			<th>Actions</th>
+			{{#if type}}
+				{{#if filteredByInvestments}}
+					<th>Bank Name</th>
+					<th>Bank Location</th>
+				{{/if}}
+				<th>{{type}} Value</th>
+			{{else}}
+				<th>Asset Type</th>
+				<th>Asset Value ($)</th>
+				<th>Actions</th>
+			{{/if}}
 		</tr>
 	</thead>
 	<tbody>
-		{{#each asset in assets}}
+		{{#each asset in filteredAssets}}
 			<tr>
-				<td>{{view Ember.Select content=assetTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.valueType}}
-				</td>
+				{{#unless type}}
+					<td>{{view Ember.Select content=assetTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.valueType}}
+					</td>
+				{{/unless}}
 				<td>{{input type="number" value=asset.value placeholder="Asset Value" min="0" step="any"}}</td>
 				<td><button {{action "removeAsset" asset}}>Remove Asset</button></td>
 			</tr>
