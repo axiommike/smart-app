@@ -5,13 +5,15 @@ export default DS.Model.extend({
 	lender: DS.attr("string"),
 	rate: DS.attr("number"),
 	maturityDate: DS.attr("date"),
-	payment: DS.attr("number", {defaultValue: 0}),
+	payment: DS.attr("number", {defaultValue: 0}), /* Monthly payment for mortgage; estimated payment if credit card */
 	outstandingBalance: DS.attr("number", {defaultValue: 0}),
 	isCreditCard: Ember.computed.equal("type", "credit-card"),
 	isAutoLoan: Ember.computed.equal("type", "auto-loan"),
 	isLineOfCredit: Ember.computed.equal("type", "line-of-credit"),
+	isMortgage: Ember.computed.equal("type", "mortgage"),
 	creditLimit: DS.attr("number"),
-	creditCardType: DS.attr("string"),
+	creditCardType: DS.attr("string"), /* Bank name/Visa/mastercard */
 	willBePaidOff: DS.attr("boolean"),
-	isRepaying: DS.attr("boolean", {defaultValue: false})
+	isRepaying: DS.attr("boolean", {defaultValue: false}),
+	applicant: DS.belongsTo("applicant")
 });

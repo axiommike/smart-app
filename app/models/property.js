@@ -1,4 +1,5 @@
 import DS from "ember-data";
+import Ember from "ember";
 
 export default DS.Model.extend({
 	type: DS.attr("string"), /* Second home, rental, home residence */
@@ -11,6 +12,5 @@ export default DS.Model.extend({
 	isRental: Ember.computed.equal("type", "rental"),
 	isPurchase: Ember.computed.not("isRental"), /* Did the applicant buy the house? */
 	address: DS.belongsTo("address"),
-	mortgage: DS.belongsTo("liability"),
-	hasMortgage: DS.attr("boolean", {defaultValue: false}) /* Does the property have a mortgage liability? */
+	mortgage: DS.belongsTo("liability")
 });
