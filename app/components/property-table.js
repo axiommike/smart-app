@@ -2,16 +2,6 @@ import Ember from "ember";
 
 export default Ember.Component.extend({
 	tagName: "property-table",
-	propertyTypes: [
-		{value: "condo", "label": "Condo"},
-		{value: "duplex", "label": "Duplex"},
-		{value: "house", "label": "House"}
-	],
-	valueTypes: [
-		{value: "estimated", "label": "Estimated"},
-		{value: "purchased", "label": "Purchased"},
-		{value: "appraised", "label": "Appraised"}
-	],
 	summary: null,
 	caption: null,
 	properties: Ember.A(),

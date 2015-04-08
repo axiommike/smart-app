@@ -1,41 +1,22 @@
-<button title="Add a Liability" {{action "addLiability"}}>Add Liability</button>
+<button title="Add a Liability" {{action "addLiability"}}>Add
+	{{#if type}}
+		 {{type}}
+		{{else}}
+			 Liability
+	{{/if}}
+</button>
 
 <ul class="liabilities">
 	{{#each liability in filteredLiabilities}}
 		<li {{bind-attr class=":liability liability.type"}}>
-			{{#unless type}}
-				{{#form-field title="Type"}}
-					{{view "select" content=liabilityTypes optionValuePath="content.value" optionLabelPath="content.label" value=liability.type}}
-				{{/form-field}}
-			{{/unless}}
-			{{#if liability.isMortgage}}
-				{{#form-field title="Maturity Date"}}
-					{{input type="date" value=liability.maturityDate required=true}}
-				{{/form-field}}
-				{{#form-field title="Lender"}}
-					{{input type="text" value=liability.lender required=true placeholder="Lender"}}
-				{{/form-field}}
-			{{/if}}
-			{{#form-field title="Outstanding Balance"}}
-				{{input type="number" min="0" step="any" value=liability.outstandingBalance placeholder="$ Overdue" required=true}}
-			{{/form-field}}
-			{{#unless liability.isCreditCard}}
-				{{#form-field title="Monthly Payment"}}
-					{{input type="number" min="0" step="any" value=liability.payment placeholder="Payment" required=true}}
-				{{/form-field}}
-			{{/unless}}
-			{{#form-field title="Interest Rate (%)"}}
-				{{input type="number" min="0" max="100" step="any" value=liability.rate placeholder="Interest Rate" required=true}}
-			{{/form-field}}
-			{{#if liability.isCreditCard}}
-				{{#form-field title="Credit Card Type"}}
-					{{input type="text" value=liability.creditCardType placeholder="Bank Name/Mastercard, Visa"}}
-				{{/form-field}}
-				{{#form-field title="Credit Card Limit"}}
-					{{input type="number" min="0" step="any" value=liability.creditLimit placeholder="Credit Limit"}}
-				{{/form-field}}
-			{{/if}}
-			<button {{action "removeLiability" liability}}>Remove Liability</button>
+			{{liability-instance liability=liability typeEditingDisabled=type}}
+			<button {{action "removeLiability" liability}}>Remove
+				{{#if type}}
+					 {{type}}
+				{{else}}
+					 Liability
+				{{/if}}
+			</button>
 		</li>
 	{{else}}
 		<li>No liabilities found.  <a {{action "addLiability" title="Add a liability"}}>Add one</a></li>

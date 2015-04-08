@@ -1,0 +1,41 @@
+{{#if liability}}
+	{{#unless typeEditingDisabled}}
+		{{#form-field title="Type"}}
+			{{view "select" content=liabilityTypes optionValuePath="content.value" optionLabelPath="content.label" value=liability.type}}
+		{{/form-field}}
+	{{/unless}}
+	{{#if liability.isMortgage}}
+		{{#form-field title="Maturity Date"}}
+			{{input type="date" value=liability.maturityDate required=true}}
+		{{/form-field}}
+		{{#form-field title="Lender"}}
+			{{input type="text" value=liability.lender required=true placeholder="Lender"}}
+		{{/form-field}}
+		{{#form-field title="Mortgage Balance"}}
+			{{input type="number" min="0" step="any" value=liability.outstandingBalance placeholder="$ Overdue" required=true title="Please indicate the remaining balance of the mortgage"}}
+		{{/form-field}}
+	{{else}}
+		{{#form-field title="Outstanding Balance"}}
+			{{input type="number" min="0" step="any" value=liability.outstandingBalance placeholder="$ Overdue" required=true}}
+		{{/form-field}}
+	{{/if}}
+	{{#unless liability.isCreditCard}}
+		{{#form-field title="Monthly Payment"}}
+			{{input type="number" min="0" step="any" value=liability.payment placeholder="Payment" required=true title="Please indicate the monthly payment for this liability"}}
+		{{/form-field}}
+	{{/unless}}
+	{{#form-field title="Interest Rate (%)"}}
+		{{input type="number" min="0" max="100" step="any" value=liability.rate placeholder="Interest Rate" required=true}}
+	{{/form-field}}
+	{{#if liability.isCreditCard}}
+		{{#form-field title="Credit Card Type"}}
+			{{input type="text" value=liability.creditCardType placeholder="Bank Name/Mastercard, Visa"}}
+		{{/form-field}}
+		{{#form-field title="Credit Card Limit"}}
+			{{input type="number" min="0" step="any" value=liability.creditLimit placeholder="Credit Limit"}}
+		{{/form-field}}
+	{{/if}}
+{{else}}
+	Aww.  no liability found.
+{{/if}}
+{{yield}}

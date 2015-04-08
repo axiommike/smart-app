@@ -8,8 +8,12 @@ export default DS.Model.extend({
 	value: DS.attr("number", {defaultValue: 0}),
 	applicant: DS.belongsTo("applicant"),
 	isCurrent: DS.attr("boolean", {defaultValue: false}), /* That the house is currently being lived in by the applicant */
-	propertyTaxes: DS.attr("number"), /* Annual property taxes on the building */
-	isRental: Ember.computed.equal("type", "rental"),
+	propertyTaxes: DS.attr("number"), /* Monthly property taxes on the building */
+	propertyTaxesAnnual: Ember.computed("propertyTaxes", function() {
+		return parseInt(this.get("propertyTaxes")) * 12;
+	}),
+	isRental: DS.attr("boolean", {defaultValue: false}),
+	rentalIncome: DS.attr("number"),
 	isPurchase: Ember.computed.not("isRental"), /* Did the applicant buy the house? */
 	address: DS.belongsTo("address"),
 	mortgage: DS.belongsTo("liability")

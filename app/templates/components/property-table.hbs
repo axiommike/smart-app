@@ -1,40 +1,20 @@
-{{#if property}}
-	{{#form-field title="Value Type" labelID=property.id}}
-		{{view Ember.Select content=valueTypes optionValuePath="content.value" optionLabelPath="content.label" value=property.valueType id=property.id}}
-	{{/form-field}}
-	{{#form-field title="Value ($)"}}
-		{{input type="number" value=property.value placeholder="Property Value" min="0" step="any"}}
-	{{/form-field}}
-{{else}}
-	<button {{action "addProperty"}} title="Add a Property">Add Property</button>
-	<table {{bind-attr summary=summary}}>
-		{{#if caption}}
-			{{caption}}, ${{totalValue}} total
-		{{/if}}
-		<thead>
-			<tr>
-				<th>Value Type</th>
-				<th>Value ($)</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{{#each property in properties}}
-				<tr>
-					<td>{{view Ember.Select content=valueTypes optionValuePath="content.value" optionLabelPath="content.label" value=property.valueType}}
-					</td>
-					<td>{{input type="number" value=property.value placeholder="Property Value" min="0" step="any"}}</td>
-					<td><button {{action "removeProperty" property}}>Remove Property</button></td>
-				</tr>
-			{{else}}
-				<tr>
-					<td colspan = "3">
-						No properties found.
-						<button {{action "addProperty"}}>Add One?</button>
-					</td>
-				</tr>
-			{{/each}}
-		</tbody>
-	</table>
-{{/if}}
+<button {{action "addProperty"}} title="Add a Property">Add Property</button>
+<header>
+	<h4>{{#if caption}}
+		{{caption}}, <sup><strong>${{totalValue}}</strong> total</sup>
+	{{/if}}</h4>
+</header>
+
+<ul class="properties">
+	{{#each property in properties}}
+		<li {{bind-attr class=":property-asset property.isRental:rental"}}>
+			{{#property-asset property=property}}<button {{action "removeProperty" property}}>Remove Property</button>{{/property-asset}}
+		</li>
+	{{else}}
+		<li>
+			No properties found.
+			<button {{action "addProperty"}}>Add One?</button>
+		</li>
+	{{/each}}
+</ul>
 {{yield}}

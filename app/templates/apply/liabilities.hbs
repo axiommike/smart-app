@@ -31,6 +31,8 @@
 				{{#if model.applicant.liabilities.length}}
 					<span class="help">You have indicated that you have <strong>{{model.applicant.liabilities.length}}</strong> liabilities:</span>
 					{{liability-table liabilities=model.applicant.liabilities}}
+				{{else}}
+					<span class="help">No liabilities found.  <button {{action "addLiability"}}>Add Liability</button></span>
 				{{/if}}
 			{{/form-field}}
 		</li>

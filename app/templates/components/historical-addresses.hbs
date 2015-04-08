@@ -1,10 +1,11 @@
 {{#form-field title="Current Address"}}
-	{{input type="text" value=currentAddress.address placeholder="Current Address" required="required"}}
+	{{input type="text" value=currentAddress.address placeholder="Current Address" required=true title="Please indicate where you are currently living"}}
 {{/form-field}}
 
-{{#if previousAddressesRequired}}
-	<span class="error">Please provide up to 3 years of address information.</span>
-	<h3>Previous Addresses</h3>
+{{#form-section title="Previous Addresses"}}
+	{{#if previousAddressesRequired}}
+		<span class="error">Please provide up to 3 years of address information.</span>
+	{{/if}}
 	<ul class="previous-addresses">
 		{{#each address in previousAddresses}}
 			<li class="address edit">
@@ -20,12 +21,12 @@
 						Lived here for {{address.tenureTotalYears}}
 					{{/if}}
 				{{/form-field}}
+				<button {{action "removeAddress" address}}>Remove</button>
 			</li>
 		{{else}}
-			<!-- fallback -->
+			<li>No previous addresses found.</li>
 		{{/each}}
-
 	</ul>
-{{/if}}
+{{/form-section}}
 
 {{yield}}

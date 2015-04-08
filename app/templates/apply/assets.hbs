@@ -7,7 +7,7 @@
 				{{input type="checkbox" checked=ownsCurrentResidence id="do-you-own-your-current-residence?"}}
 			{{/form-field}}
 			{{#if ownsCurrentResidence}}
-				{{property-table property=currentProperty}}
+				{{property-asset property=currentProperty}}
 			{{/if}}
 		</li>
 		<li class="form-step">
@@ -24,11 +24,6 @@
 				{{#if ownsOtherAssets}}
 					{{asset-table assets=applicant.assets onAdd="addAsset"}}
 				{{/if}}
-			{{/form-field}}
-		</li>
-		<li class="form-step">
-			{{#form-field title="What do you owe?"}}
-				{{input value=applicant.debt type="number" step="any" min="0" placeholder="Debts" id="what-do-you-owe?"}}
 			{{/form-field}}
 		</li>
 		<li class="form-step">

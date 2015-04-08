@@ -33,7 +33,12 @@ export default DS.Model.extend({
 			return previousValue + asset.get("value");
 		}, 0);
 	}.property("assets.@each.value"),
-	debt: DS.attr("number", {defaultValue: 0}),
+	totalDebts: function() {
+		let assets = this.get("liabilities");
+		return assets.reduce(function(previousValue, liability) {
+			return previousValue + liability.get("value");
+		}, 0);
+	}.property("liabilities.@each.value"),
 	properties: DS.hasMany("property"),
 	isPrimary: DS.attr("boolean"),
 	currentProperty: Ember.computed.filterBy("properties", "isCurrent", true)

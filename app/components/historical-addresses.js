@@ -15,5 +15,10 @@ export default Ember.Component.extend({
 		else {
 			return false;
 		}
-	})
+	}),
+	actions: {
+		removeAddress: function(address) {
+			this.get("previousAddresses").removeObject(address);
+		}
+	}
 });

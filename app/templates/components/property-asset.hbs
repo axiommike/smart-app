@@ -1,0 +1,32 @@
+{{#if property}}
+	{{#form-section title="Address and Location"}}
+		{{#form-field title="Address"}}
+			{{input type="text" value=property.address.address autocomplete="address" placeholder="Property Address" required=true title="Please provide your property's address"}}
+		{{/form-field}}
+		{{#form-field title="Do you have a rental agreement?"}}
+			{{input type="checkbox" checked=property.isRental title="Please indicate whether this property was rented"}}
+			{{#if property.isRental}}
+				{{#form-field title="Rental Income"}}
+					{{input type="number" value=property.rentalIncome placeholder="Property Value" min="0" step="any"}}
+				{{/form-field}}
+			{{/if}}
+		{{/form-field}}
+		{{#form-field title="Property Value"}}
+			{{input type="number" value=property.value placeholder="Property Value" min="0" step="any"}}
+		{{/form-field}}
+		{{#form-field title="Property Taxes"}}
+			{{input type="number" value=property.propertyTaxes placeholder="Income Taxes" min="0" step="any"}}
+			{{#if property.propertyTaxes}}
+				<span class="help">{{property.propertyTaxes}} * 12 = <strong>{{property.propertyTaxesAnnual}} per year</strong></span>
+			{{/if}}
+
+		{{/form-field}}
+	{{/form-section}}
+	{{#form-section title="Mortgage"}}
+		{{liability-instance liability=property.mortgage typeEditingDisabled=true}}
+	{{/form-section}}
+{{else}}
+	Hmmm... no property was found here.  Maybe try refreshing?
+{{/if}}
+
+{{yield}}
