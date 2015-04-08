@@ -22,9 +22,7 @@ export default Ember.Component.extend({
 	assets: Ember.A(),
 	type: null,
 	filteredAssets: Ember.computed.filter("assets", function(asset) {
-		console.log(`Does ${this.get("type")} equal ${asset.get("valueType")}?`);
-		console.dir(asset);
-		return this.get("type") ? asset.valueType === this.get("type") : true;
+		return this.get("type") ? asset.get("type") === this.get("type") : true;
 	}),
 	hasAssets: Ember.computed.notEmpty("assets"),
 	assetCount: Ember.computed.alias("assets.length"),
@@ -39,7 +37,7 @@ export default Ember.Component.extend({
 	onRemove: null,
 	actions: {
 		addAsset: function() {
-			this.sendAction("onAdd", this.get("assets"));
+			this.sendAction("onAdd", this.get("type"));
 		},
 		removeAsset: function(property) {
 			this.get("assets").removeObject(property);

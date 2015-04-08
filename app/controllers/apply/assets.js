@@ -10,8 +10,11 @@ export default Ember.ObjectController.extend({
 			let addedProperty = this.store.createRecord("property");
 			this.get("model.applicant.properties").pushObject(addedProperty);
 		},
-		addAsset: function() {
+		addAsset: function(type) {
 			let addedAsset = this.store.createRecord("asset");
+			if (type) {
+				addedAsset.set("type", type);
+			}
 			this.get("model.applicant.assets").pushObject(addedAsset);
 		},
 		nextStep: function() {

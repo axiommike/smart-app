@@ -29,7 +29,7 @@
 		{{#each asset in filteredAssets}}
 			<tr>
 				{{#unless type}}
-					<td>{{view Ember.Select content=assetTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.valueType}}
+					<td>{{view "select" content=assetTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.type}}
 					</td>
 				{{/unless}}
 				<td>{{input type="number" value=asset.value placeholder="Asset Value" min="0" step="any"}}</td>
