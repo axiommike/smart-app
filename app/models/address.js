@@ -6,5 +6,8 @@ export default DS.Model.extend(TimeableMixin, {
 	street: DS.attr("string"),
 	postalCode: DS.attr("string"),
 	unit: DS.attr("number"),
-	province: DS.attr("string")
+	province: DS.attr("string"),
+	country: DS.attr("string"),
+	city: DS.attr("string"),
+	region: DS.attr("string")
 });

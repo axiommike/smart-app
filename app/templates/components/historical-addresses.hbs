@@ -1,5 +1,5 @@
 {{#form-field title="Current Address"}}
-	{{input type="text" value=currentAddress.address placeholder="Current Address" required=true title="Please indicate where you are currently living"}}
+	{{address-input address=currentAddress value=currentAddress.address placeholder="Current Address" required=true title="Please indicate where you are currently living"}}
 {{/form-field}}
 
 {{#form-section title="Previous Addresses"}}
@@ -10,7 +10,7 @@
 		{{#each address in previousAddresses}}
 			<li class="address edit">
 				{{#form-field title="Previous Address"}}
-					{{input value=address.address placeholder="Address" title="Please provide historical addresses dating back at least 3 years" required="required"}}
+					{{address-input value=address.address placeholder="Address" title="Please provide historical addresses dating back at least 3 years" required="required"}}
 				{{/form-field}}
 				{{#form-field title="How Long?"}}
 					{{input type="number" value=address.tenureYears placeholder="Years" min="0" step="1" required="required" title="Please indicate the amount of time in which this address was resided"}}

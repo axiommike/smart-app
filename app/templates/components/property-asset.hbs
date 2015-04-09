@@ -11,11 +11,11 @@
 				{{/form-field}}
 			{{/if}}
 		{{/form-field}}
-		{{#form-field title="Property Value"}}
+		{{#form-field title="Estimated Property Value"}}
 			{{input type="number" value=property.value placeholder="Property Value" min="0" step="any"}}
 		{{/form-field}}
 		{{#form-field title="Property Taxes"}}
-			{{input type="number" value=property.propertyTaxes placeholder="Income Taxes" min="0" step="any"}}
+			{{input type="number" value=property.propertyTaxes placeholder="Property Taxes" min="0" step="any"}}
 			{{#if property.propertyTaxes}}
 				<span class="help">{{property.propertyTaxes}} * 12 = <strong>{{property.propertyTaxesAnnual}} per year</strong></span>
 			{{/if}}
