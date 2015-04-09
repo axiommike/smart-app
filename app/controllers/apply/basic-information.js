@@ -10,6 +10,7 @@ export default Ember.ObjectController.extend({
 	goals: [
 		{value: "purchase", label: "I want to purchase"},
 		{value: "refinance", label: "I want to refinance"},
+		{value: "renewal", label: "I want to renew my mortgage"},
 		{value: "rental", label: "I want to purchase a rental"},
 		{value: "advice", label: "I need some advice"}
 	],

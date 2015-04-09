@@ -12,7 +12,7 @@
 			{{/if}}
 		{{/form-field}}
 		{{#form-field title="Estimated Property Value"}}
-			{{input type="number" value=property.value placeholder="Property Value" min="0" step="any"}}
+			{{input type="number" value=property.value placeholder="Property Value" min="0" step="10000"}}
 		{{/form-field}}
 		{{#form-field title="Property Taxes"}}
 			{{input type="number" value=property.propertyTaxes placeholder="Property Taxes" min="0" step="any"}}

@@ -6,6 +6,8 @@ export default Ember.Component.extend({
 	employmentTypes: [
 		{label: "Full-Time", value: "full-time"},
 		{label: "Part-Time", value: "part-time"},
+		{label: "Self-Employed", value: "self-employed"},
+		{label: "Pension", value: "pension"},
 		{label: "Other", value: "other"} /* Seasonal, etc. */
 	],
 	incomeTypes: [
