@@ -1,0 +1,67 @@
+{{#unless asset.type}}
+	{{#form-field title="Type"}}
+		{{view "select" content=assetTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.type required=true}}
+	{{/form-field}}
+	{{#form-field title="Asset Value"}}
+		{{input type="number" value=asset.value placeholder="Asset Value" min="0" step="100"}}
+	{{/form-field}}
+{{/unless}}
+
+{{#if asset.isPersonalItem}}
+	{{#form-field title="Item Description"}}
+		{{input type="text" value=asset.description placeholder="Item Description"}}
+	{{/form-field}}
+	{{#form-field title="Item Value"}}
+		{{input type="number" value=asset.value placeholder="Item Value" min="0" step="100"}}
+	{{/form-field}}
+{{/if}}
+
+{{#if asset.isSavings}}
+	{{#form-field title="Account Type"}}
+		{{view "select" content=savingsTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.description}}
+	{{/form-field}}
+	{{#form-field title="Account Balance"}}
+		{{input type="number" value=asset.value placeholder="Balance" min="0" step="100"}}
+	{{/form-field}}
+{{/if}}
+
+{{#if asset.isGIC}}
+	{{#form-field title="GIC Account Balance"}}
+		{{input type="number" value=asset.value placeholder="Balance" min="0" step="100"}}
+	{{/form-field}}
+{{/if}}
+
+{{#if asset.isRESP}}
+	{{#form-field title="RESP Account Balance"}}
+		{{input type="number" value=asset.value placeholder="Balance" min="0" step="100"}}
+	{{/form-field}}
+{{/if}}
+
+{{#if asset.RRSP}}
+	{{#form-field title="RRSP Account Balance"}}
+		{{input type="number" value=asset.value placeholder="Balance" min="0" step="100"}}
+	{{/form-field}}
+{{/if}}
+
+{{#if asset.isVehicle}}
+	{{#form-field title="Vehicle Year"}}
+		{{input type="month" value=vehicleYear required=true title="Plese provide the year the vehicle was manufactured"}}
+	{{/form-field}}
+	{{#form-field title="Vehicle Make"}}
+		{{view Ember.Select content=vehicleMakes value=vehicleMake}}
+	{{/form-field}}
+
+	{{#form-field title="Estimated Vehicle Value"}}
+		{{input type="number" value=asset.value placeholder="Balance" min="0" step="100"}}
+	{{/form-field}}
+{{/if}}
+
+{{#if asset.isOther}}
+	{{#form-field title="Description"}}
+		{{input type="text" value=asset.description placeholder="Asset Description" required=true}}
+	{{/form-field}}
+	{{#form-field title="Asset Value"}}
+		{{input type="number" value=asset.value placeholder="Asset Value" min="0" step="100"}}
+	{{/form-field}}
+{{/if}}
+{{yield}}

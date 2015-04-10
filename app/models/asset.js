@@ -1,7 +1,16 @@
 import DS from "ember-data";
+import Ember from "ember";
 
 export default DS.Model.extend({
-	type: DS.attr("string"), /* If a second home, then no rental! */
+	type: DS.attr("string"),
+	isPersonalItem: Ember.computed.equal("type", "item"),
+	isSavings: Ember.computed.equal("type", "savings"),
+	isGIC: Ember.computed.equal("type", "gic"),
+	isRESP: Ember.computed.equal("type", "resp"),
+	isRRSP: Ember.computed.equal("type", "rrsp"),
+	isVehicle: Ember.computed.equal("type", "vehicle"),
+	isOther: Ember.computed.equal("type", "other"),
+	description: DS.attr("string"), /* Primarily used for "other" type */
 	valueType: DS.attr("string"),
 	ownership: DS.attr("string"),
 	value: DS.attr("number", {defaultValue: 0}),

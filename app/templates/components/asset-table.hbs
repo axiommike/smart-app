@@ -13,14 +13,7 @@
 <ul class="assets">
 	{{#each asset in filteredAssets}}
 		<li class="asset">
-			{{#unless type}}
-				{{#form-field title="Type"}}
-					{{view "select" content=assetTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.type required=true}}
-				{{/form-field}}
-			{{/unless}}
-			{{#form-field title="Asset Value"}}
-				{{input type="number" value=asset.value placeholder="Asset Value" min="0" step="100"}}
-			{{/form-field}}
+			{{asset-instance asset=asset}}
 			<button {{action "removeAsset" asset}}>Remove Asset</button>
 		</li>
 	{{else}}
