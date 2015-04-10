@@ -1,60 +1,23 @@
 {{#form-field title="Current Address"}}
-	{{address-input address=currentAddress value=currentAddress.address placeholder="Current Address" required=true title="Please indicate where you are currently living"}}
+	{{historical-address address=currentAddress}}
 {{/form-field}}
-
-{{#form-section title="Previous Addresses"}}
-	{{#if previousAddressesRequired}}
+{{#if previousAddressesRequired}}
+	<button {{action "addAddress"}}>Add Previous Address</button>
+	{{#form-section title="Previous Addresses"}}
 		<span class="error">Please provide up to 3 years of address information.</span>
-	{{/if}}
-	<ul class="previous-addresses">
-		{{#each address in previousAddresses}}
-			<li class="address edit">
-				{{#form-field title="Previous Address"}}
-					{{address-input address=address value=address.address placeholder="Address" title="Please provide historical addresses dating back at least 3 years" required="required"}}
-					{{#if address.address}}
-						<dl class="address-info">
-							{{#if address.unit}}
-								<dt>Unit</dt>
-								<dd>{{address.unit}}</dd>
-							{{/if}}
-							{{#if address.city}}
-								<dt>City</dt>
-								<dd>{{address.city}}</dd>
-							{{/if}}
-							{{#if address.province}}
-								<dt>Province</dt>
-								<dd>{{address.province}}</dd>
-							{{/if}}
-							{{#if address.region}}
-								<dt>Region</dt>
-								<dd>{{address.region}}</dd>
-							{{/if}}
-							{{#if address.country}}
-								<dt>Country</dt>
-								<dd>{{address.country}}</dd>
-							{{/if}}
-							{{#if address.postalCode}}
-								<dt>Postal Code</dt>
-								<dd>{{address.postalCode}}</dd>
-							{{/if}}
-						</dl>
-					{{/if}}
-				{{/form-field}}
-				{{#form-field title="How Long?"}}
-					{{input type="number" value=address.tenureYears placeholder="Years" min="0" step="1" required="required" title="Please indicate the amount of time in which this address was resided"}}
-					<label for = "tenure-years">years</label>
-					{{input type="number" value=address.tenureMonths placeholder="mths" min="0" max="12" step="1"}}
-					<label for = "tenure-months">months</label>
-					{{#if address.tenureTotalYears}}
-						Lived here for {{address.tenureTotalYears}}
-					{{/if}}
-				{{/form-field}}
-				<button {{action "removeAddress" address}}>Remove</button>
-			</li>
-		{{else}}
-			<li>No previous addresses found.</li>
-		{{/each}}
-	</ul>
-{{/form-section}}
-
+		<ul class="previous-addresses">
+			{{#each address in previousAddresses}}
+				<li class="address edit">
+					{{historical-address address=address}}
+					<button {{action "removeAddress" address}}>Remove</button>
+				</li>
+			{{else}}
+				<li>No previous addresses found.  <button {{action "addAddress"}}>Add Previous Address</button></li>
+			{{/each}}
+		</ul>
+		<footer class="address-history-total">
+			<p>Total address history: <span {{bind-attr class="additionalPreviousAddressesRequired:error:success"}}>{{previousAddressTimespan}} years</span></p>
+		</footer>
+	{{/form-section}}
+{{/if}}
 {{yield}}

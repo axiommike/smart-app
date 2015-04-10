@@ -26,6 +26,12 @@ export default DS.Model.extend({
 	addresses: Ember.computed("currentAddress", "previousAddresses", function() {
 		return Ember.makeArray(this.get("previousAddresses").slice().concat(this.get("currentAddress")));
 	}),
+	totalAddressHistory: Ember.computed("address.@each.tenureTotalYears", function() {
+		let addresses = this.get("addresses");
+		return addresses.reduce(function(previousValue, address) {
+			return previousValue + address.get("tenureTotalYears");
+		}, 0);
+	}),
 	martialStatus: DS.attr("string"), /* Married, single, divorced */
 	totalAssets: function() {
 		let assets = this.get("assets");

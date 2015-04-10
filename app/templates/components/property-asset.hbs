@@ -2,6 +2,34 @@
 	{{#form-section title="Address and Location"}}
 		{{#form-field title="Address"}}
 			{{address-input address=property.address value=property.address.address placeholder="Property Address" required=true title="Please provide your property's address"}}
+			{{#if property.address.address}}
+				<dl class="address-info">
+					{{#if property.address.unit}}
+						<dt>Unit</dt>
+						<dd>{{property.address.unit}}</dd>
+					{{/if}}
+					{{#if property.address.city}}
+						<dt>City</dt>
+						<dd>{{property.address.city}}</dd>
+					{{/if}}
+					{{#if property.address.province}}
+						<dt>Province</dt>
+						<dd>{{property.address.province}}</dd>
+					{{/if}}
+					{{#if property.address.region}}
+						<dt>Region</dt>
+						<dd>{{property.address.region}}</dd>
+					{{/if}}
+					{{#if property.address.country}}
+						<dt>Country</dt>
+						<dd>{{property.address.country}}</dd>
+					{{/if}}
+					{{#if property.address.postalCode}}
+						<dt>Postal Code</dt>
+						<dd>{{property.address.postalCode}}</dd>
+					{{/if}}
+				</dl>
+			{{/if}}
 		{{/form-field}}
 		{{#form-field title="Do you have a rental agreement?"}}
 			{{input type="checkbox" checked=property.isRental title="Please indicate whether this property was rented"}}

@@ -47,8 +47,7 @@
 		{{/form-field}}
 	{{/form-section}}
 	{{#form-section title="Location" icon="pin"}}
-		<button {{action "addAddress" applicant}} title="Add a previous address">Add Previous Address</button>
-		{{historical-addresses previousAddresses=applicant.previousAddresses currentAddress=applicant.currentAddress}}
+		{{historical-addresses previousAddresses=applicant.previousAddresses currentAddress=applicant.currentAddress onAddAddress="addAddress"}}
 	{{/form-section}}
 	{{#form-section title="Employment" icon="hat"}}
 		<button {{action "addEmployment" applicant}}>Add Employment</button>
