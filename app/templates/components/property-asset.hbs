@@ -1,7 +1,7 @@
 {{#if property}}
 	{{#form-section title="Address and Location"}}
 		{{#form-field title="Address"}}
-			{{input type="text" value=property.address.address autocomplete="address" placeholder="Property Address" required=true title="Please provide your property's address"}}
+			{{address-input address=property.address value=property.address.address placeholder="Property Address" required=true title="Please provide your property's address"}}
 		{{/form-field}}
 		{{#form-field title="Do you have a rental agreement?"}}
 			{{input type="checkbox" checked=property.isRental title="Please indicate whether this property was rented"}}

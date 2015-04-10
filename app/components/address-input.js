@@ -4,6 +4,10 @@ export default Ember.TextField.extend({
 	address: null, /* Ember data model for address */
 	googlePlace: null, /* Google's place object once one is selected */
 	autocomplete: null,
+	classNameBindings: ["googlePlace:autocompleted", ":address-input"],
+	placeholder: "Address",
+	title: "Please provide a valid address",
+	size: Ember.computed.alias("address.address.length"),
 	addressFormats: {
 		street_number: {
 			format: "long_name",
@@ -53,25 +57,23 @@ export default Ember.TextField.extend({
 		if (this.get("address")) {
 			console.log("about to set the properties of address to:");
 			console.dir(address);
-			this.setProperties("address", address);
+			this.get("address").setProperties(address);
 		}
 		else {
 			console.warn("No address provided.  Please provide one!");
 		}
 	},
-	actions: {
-		initialize: function() {
-			console.log("resolveWith fired");
-			let autocomplete = new google.maps.places.Autocomplete(
-				this.$()[0], {
-					types: ["geocode"]
-				}
-			);
-			google.maps.event.addListener(autocomplete, "place_changed", function() {
-				console.log("selected location");
-				console.dir(autocomplete.getPlace);
-			})
-		}
+	initialize: function() {
+		window.__emberGoogleMapLoaded__ = null;
+		let autocomplete = new google.maps.places.Autocomplete(
+			this.$()[0], {
+				types: ["geocode"]
+			}
+		);
+		this.set("autocomplete", autocomplete);
+		google.maps.event.addListener(autocomplete, "place_changed", () => {
+			this.placeSelected();
+		});
 	},
 	/**
 	 * Initialize the Google Maps API autocomplete on the input
@@ -79,28 +81,23 @@ export default Ember.TextField.extend({
 	didInsertElement: function() {
 		console.log("didInsertElement fired");
 		let src = "//maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places";
-		var promise;
-		return promise = new Ember.RSVP.Promise((resolve, reject) => {
-			window.__emberGoogleMapLoaded__ = Ember.run.bind(() => {
-				promise = null;
-				window.__emberGoogleMapLoaded__ = null;
-				console.dir(this);
-				let autocomplete = new google.maps.places.Autocomplete(
-					this.$()[0], {
-						types: ["geocode"]
-					}
-				);
-				this.set("autocomplete", autocomplete);
-				google.maps.event.addListener(autocomplete, "place_changed", () => {
-					this.placeSelected();
+		if ("google" in window) {
+			return this.initialize();
+		}
+		else {
+			var promise;
+			return promise = new Ember.RSVP.Promise((resolve, reject) => {
+				window.__emberGoogleMapLoaded__ = Ember.run.bind(() => {
+					promise = null;
+					this.initialize();
+					resolve(this.get("resolveWith"));
 				});
-				resolve(this.get("resolveWith"));
+				Ember.$.getScript(src + "&callback=__emberGoogleMapLoaded__").fail(function (jqXhr) {
+					promise = null;
+					window.__emberGoogleMapLoaded__ = null;
+					reject(jqXhr);
+				});
 			});
-			Ember.$.getScript(src + "&callback=__emberGoogleMapLoaded__").fail(function (jqXhr) {
-				promise = null;
-				window.__emberGoogleMapLoaded__ = null;
-				reject(jqXhr);
-			});
-		});
+		}
 	}
 });

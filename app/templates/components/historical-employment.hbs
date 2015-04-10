@@ -21,7 +21,7 @@
 {{/unless}}
 
 {{#form-field title="Employer Address"}}
-	{{input type="text" value=employment.employer.address.address placeholder="Employer's Address" required="required"}}
+	{{address-input address=employoment.employer.address value=employment.employer.address.address placeholder="Employer's Address" required=true}}
 {{/form-field}}
 {{#form-field title="Employer Phone Number"}}
 	{{input type="tel" value=employment.employer.phone placeholder="Employer's Phone" required="required"}}

@@ -10,7 +10,35 @@
 		{{#each address in previousAddresses}}
 			<li class="address edit">
 				{{#form-field title="Previous Address"}}
-					{{address-input value=address.address placeholder="Address" title="Please provide historical addresses dating back at least 3 years" required="required"}}
+					{{address-input address=address value=address.address placeholder="Address" title="Please provide historical addresses dating back at least 3 years" required="required"}}
+					{{#if address.address}}
+						<dl class="address-info">
+							{{#if address.unit}}
+								<dt>Unit</dt>
+								<dd>{{address.unit}}</dd>
+							{{/if}}
+							{{#if address.city}}
+								<dt>City</dt>
+								<dd>{{address.city}}</dd>
+							{{/if}}
+							{{#if address.province}}
+								<dt>Province</dt>
+								<dd>{{address.province}}</dd>
+							{{/if}}
+							{{#if address.region}}
+								<dt>Region</dt>
+								<dd>{{address.region}}</dd>
+							{{/if}}
+							{{#if address.country}}
+								<dt>Country</dt>
+								<dd>{{address.country}}</dd>
+							{{/if}}
+							{{#if address.postalCode}}
+								<dt>Postal Code</dt>
+								<dd>{{address.postalCode}}</dd>
+							{{/if}}
+						</dl>
+					{{/if}}
 				{{/form-field}}
 				{{#form-field title="How Long?"}}
 					{{input type="number" value=address.tenureYears placeholder="Years" min="0" step="1" required="required" title="Please indicate the amount of time in which this address was resided"}}
