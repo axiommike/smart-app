@@ -1,49 +1,33 @@
 <header class="asset-table-header">
 	<button {{action "addAsset"}}>Add Asset</button>
-</header>
-<table {{bind-attr summary=summary}}>
 	{{#if caption}}
-		<caption>
+		<h5 class="caption">
 			{{caption}}
-		</caption>
-		{{#if totalAssets}}
-			, ${{totalAssets}} total
-		{{/if}}
-	{{/if}}
-	<thead>
-		<tr>
-			{{#if type}}
-				{{#if filteredByInvestments}}
-					<th>Bank Name</th>
-					<th>Bank Location</th>
-				{{/if}}
-				<th>{{type}} Value</th>
-			{{else}}
-				<th>Asset Type</th>
-				<th>Asset Value ($)</th>
-				<th>Actions</th>
+			{{#if totalAssets}}
+				<sup><strong>${{totalAssets}}</strong> total</sup>
 			{{/if}}
-		</tr>
-	</thead>
-	<tbody>
-		{{#each asset in filteredAssets}}
-			<tr>
-				{{#unless type}}
-					<td>{{view "select" content=assetTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.type}}
-					</td>
-				{{/unless}}
-				<td>{{input type="number" value=asset.value placeholder="Asset Value" min="0" step="any"}}</td>
-				<td><button {{action "removeAsset" asset}}>Remove Asset</button></td>
-			</tr>
-		{{else}}
-			<tr>
-				<td colspan = "3">
-					No assets found.
-					<button {{action "addAsset"}}>Add One?</button>
-				</td>
-			</tr>
-		{{/each}}
-	</tbody>
-</table>
+		</h5>
+	{{/if}}
+</header>
+
+<ul class="assets">
+	{{#each asset in filteredAssets}}
+		<li class="asset">
+			{{#unless type}}
+				{{#form-field title="Type"}}
+					{{view "select" content=assetTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.type required=true}}
+				{{/form-field}}
+			{{/unless}}
+			{{#form-field title="Asset Value"}}
+				{{input type="number" value=asset.value placeholder="Asset Value" min="0" step="100"}}
+			{{/form-field}}
+			<button {{action "removeAsset" asset}}>Remove Asset</button>
+		</li>
+	{{else}}
+		<li>
+			No assets found.  <button {{action "addAsset"}}>Add One?</button>
+		</li>
+	{{/each}}
+</ul>
 
 {{yield}}
