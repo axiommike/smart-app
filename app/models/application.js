@@ -9,5 +9,7 @@ export default DS.Model.extend({
 	}),
 	applicantNames: Ember.computed.alias("applicants.@each.fullName"),
 	type: DS.attr("string"),
-	source: DS.attr("string")
+	source: DS.attr("string"),
+	comment: DS.attr("string"),
+	isIncomplete: DS.attr("boolean", {defaultValue: false})
 });

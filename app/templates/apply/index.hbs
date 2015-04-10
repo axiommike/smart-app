@@ -1,12 +1,13 @@
+{{wizard-step stepName="Basic Information" totalSteps=5 step=1}}
 <article>
 	<section class="quick-application box">
 		{{#validatable-form action="nextStep"}}
 			<div class="row">
 				{{#form-field title="First Name" class="one-half"}}
-					{{input value=applicant.firstName placeholder="First Name" required="required" autofocus="autofocus" id="first-name"}}
+					{{input value=applicant.firstName placeholder="First Name" required="required" autofocus="autofocus" id="first-name" title="Please provide your first name"}}
 				{{/form-field}}
 				{{#form-field title="Last Name" class="one-half"}}
-					{{input value=applicant.lastName placeholder="Last Name" required="required" id="last-name"}}
+					{{input value=applicant.lastName placeholder="Last Name" required="required" id="last-name" title="Please provide your last name"}}
 				{{/form-field}}
 			</div>
 			{{#form-field title="Email"}}
@@ -15,6 +16,11 @@
 			{{#form-field title="Phone"}}
 				{{input value=applicant.phone type="tel" required="required" placeholder="Phone" id="phone"}}
 			{{/form-field}}
+			{{#form-section title="Comments"}}
+				{{#form-field title="Anything else I can do?"}}
+					{{textarea value=comment placeholder="Is there anything else I can do for you?" rows=comment.length id="anything-else-i-can-do?"}}
+				{{/form-field}}
+			{{/form-section}}
 			<footer class="form-actions">
 				<button type="submit" title="Continue to Full Application">Continue Application</button>
 				<div class="sub-actions">
