@@ -24,9 +24,11 @@
 			{{input type="number" min="0" step="any" value=liability.payment placeholder="Payment" required=true title="Please indicate the monthly payment for this liability"}}
 		{{/form-field}}
 	{{/unless}}
-	{{#form-field title="Interest Rate (%)"}}
-		{{input type="number" min="0" max="60" step="any" value=liability.rate placeholder="Interest Rate" required=true}}
-	{{/form-field}}
+	{{#unless liability.isChildSupport}}
+		{{#form-field title="Interest Rate (%)"}}
+			{{input type="number" min="0" max="60" step="any" value=liability.rate placeholder="Interest Rate" required=true}}
+		{{/form-field}}
+	{{/unless}}
 	{{#if liability.isCreditCard}}
 		{{#form-field title="Credit Card Type"}}
 			{{input type="text" value=liability.creditCardType placeholder="Bank Name/Mastercard, Visa"}}

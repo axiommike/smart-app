@@ -1,7 +1,6 @@
 import Ember from "ember";
 
 export default Ember.ObjectController.extend({
-	currentProperty: null, /* a fake property */
 	ownsCurrentResidence: false,
 	ownsOtherRealEstate: false,
 	ownsOtherAssets: false,
@@ -22,27 +21,33 @@ export default Ember.ObjectController.extend({
 			this.get("model.applicant.assets").pushObject(addedAsset);
 		},
 		nextStep: function() {
-			if (this.get("ownsOtherAssets")) {
-				this.get("model.applicant.assets").save();
-			}
-			if (this.get("ownsOtherRealEstate")) {
-				var applicantProperties = this.get("model.applicant.properties");
-				if (this.get("ownsCurrentResidence")) {
-					applicantProperties.pushObject(this.get("currentProperty")); // include the current property in all of the properties
-				}
-				applicantProperties.save().then((properties) => {
-					console.dir(properties);
-					this.get("model.applicant").save().then((applicant) => {
-						console.dir(applicant);
-						this.get("model").save().then((application) => {
-							this.transitionToRoute("mortgage-application.liabilities", application);
-						});
+			if (this.get("model.applicant.assets.length")) {
+				let applicantAssets = this.get("model.applicant.assets");
+				applicantAssets.forEach((asset) => {
+					asset.save().then((savedAsset) => {
+						console.log(`Saved ${asset.get("type")} of id ${asset.get("id")}`);
 					});
 				});
 			}
-			else {
-				this.transitionToRoute("mortgage-application.liabilities");
+			if (this.get("ownsCurrentResidence") || this.get("ownsOtherRealEstate")) {
+				this.get("model.applicant.properties").forEach((property) => {
+					property.get("address").save().then((address) => {
+						console.log(`Saved address ${address.get("id")} of property ${property.get("id")}`);
+					});
+					if (property.get("mortgage")) {
+						property.get("mortgage").save().then((mortgage) => {
+							console.log(`Saved mortgage ${mortgage.get("id")}`);
+						});
+					}
+					property.save().then((savedProperty) => {
+						console.log(`Saved property ${savedProperty.get("id")}`)
+					});
+				});
 			}
+			// this.get("model.applicant").save();
+			this.get("model").save().then((application) => {
+				this.transitionToRoute("mortgage-application.liabilities", application);
+			});
 		}
 	}
 });

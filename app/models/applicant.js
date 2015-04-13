@@ -21,7 +21,7 @@ export default DS.Model.extend({
 	workPhone: Ember.computed.alias("currentEmployment.firstObject.company.phone"),
 	liabilities: DS.hasMany("liability"),
 	assets: DS.hasMany("asset"),
-	currentAddress: DS.belongsTo("address"),
+	currentAddress: DS.belongsTo("address", {async: true}),
 	previousAddresses: DS.hasMany("address"),
 	addresses: Ember.computed("currentAddress", "previousAddresses", function() {
 		return Ember.makeArray(this.get("previousAddresses").slice().concat(this.get("currentAddress")));
@@ -47,5 +47,7 @@ export default DS.Model.extend({
 	}.property("liabilities.@each.value"),
 	properties: DS.hasMany("property"),
 	isPrimary: DS.attr("boolean"),
-	currentProperty: Ember.computed.filterBy("properties", "isCurrent", true)
+	currentProperties: Ember.computed.filterBy("properties", "isCurrent", true),
+	currentProperty: Ember.computed.alias("currentProperties.firstObject"),
+	otherProperties: Ember.computed.filterBy("properties", "isCurrent", false)
 });

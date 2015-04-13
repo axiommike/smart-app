@@ -19,11 +19,11 @@ export default Ember.Component.extend({
 	assetCount: Ember.computed.alias("assets.length"),
 	values: Ember.computed.mapBy("assets", "value"),
 	totalAssets: function() {
-		let assets = this.get("assets");
+		let assets = this.get("filteredAssets");
 		return assets.reduce(function(previousValue, asset) {
 			return parseInt(previousValue) + parseInt(asset.get("value"));
 		}, 0);
-	}.property("assets.@each.value"),
+	}.property("filteredAssets.@each.value"),
 	onAdd: null,
 	onRemove: null,
 	actions: {

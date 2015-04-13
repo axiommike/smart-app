@@ -7,14 +7,14 @@
 				{{input type="checkbox" checked=ownsCurrentResidence id="do-you-own-your-current-residence?"}}
 			{{/form-field}}
 			{{#if ownsCurrentResidence}}
-				{{property-asset property=currentProperty}}
+				{{property-asset property=applicant.currentProperty}}
 			{{/if}}
 		</li>
 		<li class="form-step">
 			{{#form-field title="Do you own any other real estate?"}}
 				{{input type="checkbox" checked=ownsOtherRealEstate id="do-you-own-any-other-real-estate?"}}
 				{{#if ownsOtherRealEstate}}
-					{{property-table properties=applicant.properties onAdd="addProperty" title="List of all Properties" caption="Other Properties"}}
+					{{property-table properties=applicant.otherProperties onAdd="addProperty" title="List of all Properties" caption="Other Properties"}}
 				{{/if}}
 			{{/form-field}}
 		</li>

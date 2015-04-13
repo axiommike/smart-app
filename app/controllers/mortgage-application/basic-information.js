@@ -32,13 +32,18 @@ export default Ember.ObjectController.extend({
 			if (this.get("coApplicantCount") > 0) {
 				for (let i = 0; i <= this.get("coApplicantCount"); i++) {
 					let addedCoApplicant = this.store.createRecord("applicant");
-					this.get("model.coApplicants").pushObject(addedCoApplicant);
+					addedCoApplicant.save().then((coApplicant) => {
+						this.get("model.coApplicants").pushObject(coApplicant);
+					});
 				}
 			}
-			this.get("model").save().then((application) => {
-					this.transitionToRoute("mortgage-application.assets", application);
-				}
-			);
+			var model = this.get("model"), currentApplicant = model.get("applicant");
+			currentApplicant.save().then((applicant) => {
+				model.save().then((application) => {
+						this.transitionToRoute("mortgage-application.assets", application);
+					}
+				);
+			});
 		}
 	}
 });

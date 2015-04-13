@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
 			let incompleteApplication = this.get("model");
 			incompleteApplication.set("isIncomplete", true);
 			this.get("model").save().then((application) => {
-				this.transitionToRoute("apply.thank-you", application);
+				this.transitionToRoute("mortgage-application.thank-you", application);
 			})
 		}
 	}

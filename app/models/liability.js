@@ -12,6 +12,7 @@ export default DS.Model.extend({
 	isAutoLoan: Ember.computed.equal("type", "auto-loan"),
 	isLineOfCredit: Ember.computed.equal("type", "line-of-credit"),
 	isMortgage: Ember.computed.equal("type", "mortgage"),
+	isChildSupport: Ember.computed.equal("type", "child-support"),
 	creditCardType: DS.attr("string"), /* Bank name/Visa/mastercard */
 	willBePaidOff: DS.attr("boolean"),
 	isRepaying: DS.attr("boolean", {defaultValue: false}),

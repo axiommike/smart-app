@@ -20,7 +20,7 @@
 		</li>
 		<li class="form-step">
 			{{#form-field title="Do you have any loans?"}}
-				{{input type="checkbox" checked=hasLoans id="do-you-own-any-loans?"}}
+				{{input type="checkbox" checked=hasLoans id="do-you-have-any-loans?"}}
 				{{#if hasLoans}}
 					{{liability-table type="loan" liabilities=model.applicant.liabilities}}
 				{{/if}}
