@@ -35,13 +35,13 @@ export default Ember.ObjectController.extend({
 					this.get("model.applicant").save().then((applicant) => {
 						console.dir(applicant);
 						this.get("model").save().then((application) => {
-							this.transitionToRoute("apply.liabilities", application);
+							this.transitionToRoute("mortgage-application.liabilities", application);
 						});
 					});
 				});
 			}
 			else {
-				this.transitionToRoute("apply.liabilities");
+				this.transitionToRoute("mortgage-application.liabilities");
 			}
 		}
 	}

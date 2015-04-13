@@ -7,7 +7,7 @@ export default Ember.ObjectController.extend({
 			model.save().then((savedApplication) => {
 				applicant.save().then((savedApplicant) => {
 					console.dir(savedApplicant);
-					this.transitionToRoute("apply.basic-information", savedApplication);
+					this.transitionToRoute("mortgage-application.basic-information", savedApplication);
 				});
 			});
 		}
