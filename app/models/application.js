@@ -8,6 +8,8 @@ export default DS.Model.extend({
 		return Ember.makeArray(this.get("coApplicants").slice().concat(this.get("applicant")));
 	}),
 	applicantNames: Ember.computed.alias("applicants.@each.fullName"),
+	dependentCount: DS.attr("string", {defaultValue: 0}),
+	hasDependents: Ember.computed.oneWay("dependentCount.length"),
 	type: DS.attr("string"),
 	source: DS.attr("string"),
 	comment: DS.attr("string"),
