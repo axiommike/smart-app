@@ -61,7 +61,7 @@
 		{{asset-table assets=applicant.assets onAdd="addAsset" caption="Assets for applicant"}}
 	{{/form-section}}
 	{{#form-section title="Liabilities" icon="hand"}}
-		{{liability-table liabilities=applicant.liabilities onAdd="addLiability"}}
+		{{liability-table liabilities=applicant.liabilities onAdd="addLiability" properties=applicant.properties}}
 	{{/form-section}}
 {{else}}
 	<dl class="applicant-card-details">

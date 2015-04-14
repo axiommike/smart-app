@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 export default Ember.Component.extend({
+	properties: Ember.A(), /* Should resolve to the list of all added properties */
 	creditCardTypes: [
 		{label: "VISA", value: "visa"},
 		{label: "Mastercard", value: "mastercard"}

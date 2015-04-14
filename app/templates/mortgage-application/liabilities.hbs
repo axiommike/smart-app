@@ -3,6 +3,14 @@
 {{#validatable-form action="nextStep"}}
 	<ol class="form-steps">
 		<li class="form-step">
+			{{#form-field title="Do you have any mortgages or secured lines of credit on any properties?"}}
+				{{input type="checkbox" checked=hasMortgages id="do-you-have-any-mortgages-or-secured-lines-of-credit-on-any-properties?"}}
+			{{/form-field}}
+			{{#if hasMortgages}}
+				{{liability-table type="mortgage" liabilities=model.applicant.liabilities properties=model.applicant.properties}}
+			{{/if}}
+		</li>
+		<li class="form-step">
 			{{#form-field title="Do you have any credit cards with outstanding balances?"}}
 				{{input type="checkbox" checked=hasCreditCard id="do-you-have-any-credit-cards-with-outstanding-balances?"}}
 			{{/form-field}}

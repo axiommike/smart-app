@@ -15,6 +15,9 @@
 		{{/form-field}}
 	{{/if}}
 	{{#if liability.isMortgage}}
+		{{#form-field title="Property"}}
+			{{view "select" content=properties optionValuePath="content.id" optionLabelPath="content.adddress.address" value=liability.property}}
+		{{/form-field}}
 		{{#form-field title="Maturity Date"}}
 			{{input type="date" value=liability.maturityDate required=true}}
 		{{/form-field}}
@@ -22,7 +25,7 @@
 			{{input type="text" value=liability.lender required=true placeholder="Lender"}}
 		{{/form-field}}
 		{{#form-field title="Mortgage Balance"}}
-			{{input type="number" min="0" step="any" value=liability.outstandingBalance placeholder="$ Overdue" required=true title="Please indicate the remaining balance of the mortgage"}}
+			{{input type="number" min="0" step="1000" value=liability.outstandingBalance placeholder="$ Overdue" required=true title="Please indicate the remaining balance of the mortgage"}}
 		{{/form-field}}
 		{{#form-field title="Payment Frequency"}}
 			{{view "select" content=paymentFrequencies value=liability.paymentFrequency}}

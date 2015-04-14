@@ -45,7 +45,8 @@ export default DS.Model.extend({
 			return previousValue + liability.get("value");
 		}, 0);
 	}.property("liabilities.@each.value"),
-	properties: DS.hasMany("property"),
+	mortgages: Ember.computed.alias("properties.@each.mortgage"),
+	properties: DS.hasMany("property", {async: true}),
 	isPrimary: DS.attr("boolean"),
 	currentProperties: Ember.computed.filterBy("properties", "isCurrent", true),
 	currentProperty: Ember.computed.alias("currentProperties.firstObject"),
