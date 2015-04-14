@@ -7,14 +7,20 @@ export default Ember.Component.extend({
 		return this.get("type") ? liability.get("type") === this.get("type") : true;
 	}),
 	hasLiabilities: Ember.computed.notEmpty("filteredLiabilities"),
+	onAdd: null, /* Override method for adding a liability */
 	actions: {
 		addLiability: function() {
-			let store = this.get("targetObject.store"), type = this.get("type"), liabilities = this.get("liabilities");
-			let createdLiability = store.createRecord("liability");
-			if (type) {
-				createdLiability.set("type", type);
+			if (this.get("onAdd")) {
+				this.sendAction("onAdd", this.get("type"));
 			}
-			liabilities.pushObject(createdLiability);
+			else {
+				let store = this.get("targetObject.store"), type = this.get("type"), liabilities = this.get("liabilities");
+				let createdLiability = store.createRecord("liability");
+				if (type) {
+					createdLiability.set("type", type);
+				}
+				liabilities.pushObject(createdLiability);
+			}
 		},
 		removeLiability: function(liability) {
 			return this.get("liabilities").removeObject(liability);

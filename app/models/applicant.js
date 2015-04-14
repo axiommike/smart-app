@@ -21,7 +21,7 @@ export default DS.Model.extend({
 	workPhone: Ember.computed.alias("currentEmployment.firstObject.company.phone"),
 	liabilities: DS.hasMany("liability"),
 	assets: DS.hasMany("asset"),
-	currentAddress: DS.belongsTo("address", {async: true}),
+	currentAddress: Ember.computed.alias("currentProperty.address"),
 	previousAddresses: DS.hasMany("address"),
 	addresses: Ember.computed("currentAddress", "previousAddresses", function() {
 		return Ember.makeArray(this.get("previousAddresses").slice().concat(this.get("currentAddress")));

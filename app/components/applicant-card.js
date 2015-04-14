@@ -34,6 +34,13 @@ export default Ember.Component.extend({
 		},
 		removeAsset: function(asset) {
 			this.get("applicant.assets").removeObject(asset);
+		},
+		addLiability: function(type) {
+			let store = this.get("targetObject.store"), createdLiability = store.createRecord("liability");
+			if (type) {
+				createdLiability.set("type", type);
+			}
+			this.get("applicant.liabilities").pushObject(createdLiability);
 		}
 	}
 });

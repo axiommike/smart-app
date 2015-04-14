@@ -9,6 +9,9 @@
 		{{else}}
 			<p>No applicants found.</p>
 	{{/each}}
+	{{#form-field title="Comments"}}
+		{{textarea value=comment placeholder="Anything else to add?" id="comments"}}
+	{{/form-field}}
 	<footer class="form-actions">
 		<button type="submit">Review Application</button>
 	</footer>

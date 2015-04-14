@@ -30,20 +30,20 @@
 	{{#form-section title="basic-information" icon="info-sign"}}
 		<div class = "row">
 			{{#form-field title="First Name" class="one-half"}}
-				{{input value=applicant.firstName placeholder="First Name" required="required" autofocus="autofocus"}}
+				{{input value=applicant.firstName placeholder="First Name" required="required" autofocus="autofocus" title="Please provide the applicant's first name"}}
 			{{/form-field}}
 			{{#form-field title="Last Name" class="one-half"}}
-				{{input value=applicant.lastName placeholder="Last Name" required="required"}}
+				{{input value=applicant.lastName placeholder="Last Name" required="required" title="Please provide the applicant's last name"}}
 			{{/form-field}}
 		</div>
 		{{#form-field title="Email"}}
-			{{input value=applicant.email required="required" type="email" placeholder="Email"}}
+			{{input value=applicant.email required="required" type="email" placeholder="Email" title="Please enter a valid e-mail"}}
 		{{/form-field}}
 		{{#form-field title="Phone"}}
-			{{input value=applicant.phone type="tel" required="required" placeholder="Phone"}}
+			{{input value=applicant.phone type="tel" required="required" placeholder="Phone" title="Please provide the applicant's phone number"}}
 		{{/form-field}}
 		{{#form-field title="Birth Date"}}
-			{{input type="date" value=applicant.birthDate required="required"}}
+			{{input type="date" value=applicant.birthDate required="required" title="Please provide the date of birth of the applicant"}}
 		{{/form-field}}
 	{{/form-section}}
 	{{#form-section title="Location" icon="pin"}}
@@ -58,10 +58,10 @@
 		{{/each}}
 	{{/form-section}}
 	{{#form-section title="Assets" icon="coin"}}
-		{{#form-field title="debts"}}
-			{{input value=applicant.debt type="number" step="any" min="0" placeholder="Debts"}}
-		{{/form-field}}
 		{{asset-table assets=applicant.assets onAdd="addAsset" caption="Assets for applicant"}}
+	{{/form-section}}
+	{{#form-section title="Liabilities" icon="hand"}}
+		{{liability-table liabilities=applicant.liabilities onAdd="addLiability"}}
 	{{/form-section}}
 {{else}}
 	<dl class="applicant-card-details">
