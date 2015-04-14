@@ -12,6 +12,7 @@ export default Ember.Component.extend({
 		{value: "investment", label: "Stocks/Bonds Investment"},
 		{value: "rrsp", label: "RRSP"},
 		{value: "vehicle", label: "Vehicle"},
+		{value: "property", label: "Property"},
 		{value: "other", label: "Other"}
 	],
 	savingsTypes: [

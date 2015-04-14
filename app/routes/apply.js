@@ -11,10 +11,12 @@ export default Ember.Route.extend({
 				{isCurrent: true}
 			),
 			applicantCurrentPropertyMortgage = this.store.createRecord("liability", {type: "mortgage"}),
+			applicantCurrentPropertyAsset = this.store.createRecord("asset", {type: "property"}),
 			applicantCurrentProperty = this.store.createRecord("property",
 				{
 					isCurrent: true,
 					address: applicantPrimaryAddress,
+					asset: applicantCurrentPropertyAsset,
 					mortgage: applicantCurrentPropertyMortgage
 				}),
 			emptyApplicant = this.store.createRecord("applicant",

@@ -6,10 +6,11 @@ export default Ember.ObjectController.extend({
 	ownsOtherAssets: false,
 	actions: {
 		addProperty: function() {
-			let addedProperty = this.store.createRecord("property"), mortgage = this.store.createRecord("liability", {type: "mortgage"}), addedAddress = this.store.createRecord("address");
+			let addedProperty = this.store.createRecord("property"), mortgage = this.store.createRecord("liability", {type: "mortgage"}), addedAddress = this.store.createRecord("address"), addedPropertyAsset = this.store.createRecord("asset", {type: "property"});
 			addedProperty.setProperties({
 				mortgage: mortgage,
-				address: addedAddress
+				address: addedAddress,
+				asset: addedPropertyAsset
 			});
 			this.get("model.applicant.properties").pushObject(addedProperty);
 		},
