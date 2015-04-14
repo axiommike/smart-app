@@ -1,4 +1,3 @@
-<button title="Remove this employment" {{action "remove"}}>Remove</button>
 {{#form-field title="Position"}}
 	{{input type="text" value=employment.occupation placeholder="Job Title" required="required"}}
 {{/form-field}}
@@ -65,3 +64,4 @@
 	{{/if}}
 {{/form-field}}
 {{yield}}
+<button title="Remove this employment" {{action "remove"}}>Remove</button>
