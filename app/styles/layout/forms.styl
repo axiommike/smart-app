@@ -1,0 +1,50 @@
+/*
+	stylus-boilerplate
+
+	forms.styl
+
+	Author: _admin
+
+	Created on 2014-12-23 by PhpStorm
+*/
+$inputSuccessColour ?= #00cc1c
+$inputErrorColour ?= #dc0000
+
+form
+	margin 2em
+button
+	@extend .button
+	font-family $baseFontFamily
+.input
+	&-error
+		color $inputErrorColour
+		display inline-block
+		font-weight bold
+		@extend $shake
+$textInput
+	max-width 100%
+	border-width 0 0 $borderWidth 0
+	margin 0 $margin
+	outline none
+fieldset
+	@extend $normal-margin, $normal-padding, $bordered-top
+textarea
+	@extend $textInput
+textarea, input
+	&[type="text"], &[type="tel"], &[type="url"], &[type="number"], &[type="email"], &[type="date"], &[type="datetime-local"], &[type="week"], &[type="month"], &[type="password"], &[type="file"]
+		@extend $textInput
+	&[type="number"]
+		&[max="100"]
+			max-width 3em
+	transition $transitionTime $transitionFunction border-color, outline-color
+	font-size $unit
+	font-family $baseFontFamily
+	&:focus
+		&:valid
+			border-color $inputSuccessColour
+		&:invalid
+			border-color $inputErrorColour
+			outline-color $inputErrorColour
+	+placeholder()
+		font-family $baseFontFamily
+		color luminosity($textColour) > 0.5 ? $inverseTextColour + 45 : $inverseTextColour - 45

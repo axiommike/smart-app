@@ -35,7 +35,9 @@
     "ember-cli-uglify": "1.0.1",
     "ember-data": "1.0.0-beta.16.1",
     "ember-export-application-global": "^1.0.2",
+    "ember-intl": "1.2.2",
     "ember-localstorage-adapter": "0.5.2",
+    "kouto-swiss": "^0.11.11",
     "liquid-fire": "0.19.3"
   }
 }

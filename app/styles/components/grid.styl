@@ -1,0 +1,117 @@
+/*
+	stylus-boilerplate
+
+	grid.styl
+
+	Author: Sean Goresht
+
+	Grid logic for generating grid placeholders
+	@example
+		@extend $col-4 (assuming 12 columns -- default) => width 33%
+*/
+
+$rowMargin ?= 1em
+$rowPadding ?= 1em
+$gridResponsive ?= true
+$flexGrid ?= true
+
+$row
+	gs($gridStyle) // default: fluid
+
+for column in (1..$columns)
+	$col-{column}
+		col(column)
+		@extend $border-box
+		if $gridResponsive
+			+media-query($breakpointMain)
+				display block
+				float none
+				width 100%
+				margin 0
+
+// table grid
+$column
+	display table-cell
+	if $flexGrid
+		// default flex is 1 for fill up all space
+		flex 1
+		display flex //fix for IE and FF not allowing display table-cell
+		flex-direction column
+
+.column
+	@extend $column
+	&-align-middle
+		@extend $column
+		vertical-align middle
+		if $flexGrid
+			justify-content center
+			display flex
+
+$grid-row
+	display table
+	if $flexGrid
+		display flex
+		flex-wrap wrap
+		margin 0 auto // centre content
+	width 100%
+	table-layout fixed
+	if $gridResponsive
+		+media-query($breakpointMain)
+			display block
+			.column, .column-align-middle
+				width 100%
+				display block
+.row
+	@extend $grid-row
+	&.distributed
+		align-content space-between
+		align-items center
+	&-padded
+		@extend $grid-row
+		if $flexGrid
+			.column, .column-align-middle
+				margin 0 $rowMargin
+		margin-left $rowMargin * -1
+		margin-right $rowMargin * -1
+		&, .row
+			border-spacing $rowPadding 0
+
+
+// grid sizes
+
+$numberMap = { // this is simply an object that fixes nuances in the generated class names in English
+	portions: {
+		two: half
+		three: third
+		four: fourth
+		five: fifth
+		six: sixth
+		eight: eigth
+		nine: ninth
+	}
+}
+use("integer-to-words.js") // helper for converting integers to English words
+
+getEnglishDenominator(column, word) // get the ratio for a given column and English-converted word
+	if column > 1
+		$plural = ths
+	if word in $numberMap.portions
+		if column > 1
+			s("%s%s", $numberMap.portions[word], s)
+		else
+			s("%s", $numberMap.portions[word])
+	else
+		if column > 1
+			s("%s%s", unquote(word), $plural)
+		else
+			s("%s%s", unquote(word), th)
+
+for column in (1..$columns)
+	for nestedColumn in ($columns..1)
+		if column < nestedColumn
+			.{int-to-word(column)}-{getEnglishDenominator(column, int-to-word(nestedColumn))}
+				if $flexGrid
+					flex inherit
+				$width = percent(column, nestedColumn)
+				+cache("w" + $width)
+					width $width

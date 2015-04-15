@@ -1,8 +1,10 @@
 <button {{action "addProperty"}} title="Add a Property">Add Property</button>
 <header>
-	<h4>{{#liquid-if caption}}
-		{{caption}}, <sup><strong>${{totalValue}}</strong> total real estate value</sup>
-	{{/liquid-if}}</h4>
+	<h4>
+	{{#if caption}}
+		{{caption}}, <sup><strong>{{format-number totalValue style="currency" currency="USD"}}</strong> total real estate value</sup>
+	{{/if}}
+	</h4>
 </header>
 
 <ul class="properties">

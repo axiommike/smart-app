@@ -1,49 +1,55 @@
-{{#liquid-unless asset.type}}
+{{#unless asset.type}}
 	{{#form-field title="Type"}}
 		{{view "select" content=assetTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.type required=true}}
 	{{/form-field}}
 	{{#form-field title="Asset Value"}}
-		{{input type="number" value=asset.value placeholder="Asset Value" min="0" step="100"}}
+		{{currency-input value=asset.value placeholder="Asset Value" min="0" step="100"}}
 	{{/form-field}}
-{{/liquid-unless}}
+{{/unless}}
 
-{{#liquid-if asset.isPersonalItem}}
+{{#if asset.isPersonalItem}}
 	{{#form-field title="Item Description"}}
 		{{input type="text" value=asset.description placeholder="Item Description"}}
 	{{/form-field}}
 	{{#form-field title="Item Value"}}
-		{{input type="number" value=asset.value placeholder="Item Value" min="0" step="100"}}
+		{{currency-input value=asset.value placeholder="Item Value" min="0" step="100"}}
 	{{/form-field}}
-{{/liquid-if}}
+{{/if}}
 
-{{#liquid-if asset.isSavings}}
+{{#if asset.isSavings}}
 	{{#form-field title="Account Type"}}
 		{{view "select" content=savingsTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.description}}
 	{{/form-field}}
 	{{#form-field title="Account Balance"}}
-		{{input type="number" value=asset.value placeholder="Balance" min="0" step="100"}}
+		{{currency-input value=asset.value placeholder="Balance" min="0" step="100"}}
 	{{/form-field}}
-{{/liquid-if}}
+{{/if}}
 
-{{#liquid-if asset.isGIC}}
+{{#if asset.isInvestment}}
+	{{#form-field title="Asset/Bond Investment Value"}}
+		{{currencyInput value=asset.value placeholder="Amount Invested" min="0" step="100"}}
+	{{/form-field}}
+{{/if}}
+
+{{#if asset.isGIC}}
 	{{#form-field title="GIC Account Balance"}}
-		{{input type="number" value=asset.value placeholder="Balance" min="0" step="100"}}
+		{{currency-input value=asset.value placeholder="Balance" min="0" step="100"}}
 	{{/form-field}}
-{{/liquid-if}}
+{{/if}}
 
-{{#liquid-if asset.isRESP}}
+{{#if asset.isRESP}}
 	{{#form-field title="RESP Account Balance"}}
-		{{input type="number" value=asset.value placeholder="Balance" min="0" step="100"}}
+		{{currency-input value=asset.value placeholder="Balance" min="0" step="100"}}
 	{{/form-field}}
-{{/liquid-if}}
+{{/if}}
 
-{{#liquid-if asset.isRRSP}}
+{{#if asset.isRRSP}}
 	{{#form-field title="RRSP Account Balance"}}
-		{{input type="number" value=asset.value placeholder="Balance" min="0" step="100"}}
+		{{currency-input value=asset.value placeholder="Balance" min="0" step="100"}}
 	{{/form-field}}
-{{/liquid-if}}
+{{/if}}
 
-{{#liquid-if asset.isVehicle}}
+{{#if asset.isVehicle}}
 	{{#form-field title="Vehicle Year"}}
 		{{input type="month" value=vehicleYear required=true title="Plese provide the year the vehicle was manufactured"}}
 	{{/form-field}}
@@ -54,16 +60,16 @@
 		{{input type="text" value=vehicleModel placeholder="Vehicle Model Name"}}
 	{{/form-field}}
 	{{#form-field title="Estimated Vehicle Value"}}
-		{{input type="number" value=asset.value placeholder="Balance" min="0" step="100"}}
+		{{currency-input value=asset.value placeholder="Balance" min="0" step="100"}}
 	{{/form-field}}
-{{/liquid-if}}
+{{/if}}
 
-{{#liquid-if asset.isOther}}
+{{#if asset.isOther}}
 	{{#form-field title="Description"}}
 		{{input type="text" value=asset.description placeholder="Asset Description" required=true}}
 	{{/form-field}}
 	{{#form-field title="Asset Value"}}
-		{{input type="number" value=asset.value placeholder="Asset Value" min="0" step="100"}}
+		{{currency-input value=asset.value placeholder="Asset Value" min="0" step="100"}}
 	{{/form-field}}
-{{/liquid-if}}
+{{/if}}
 {{yield}}

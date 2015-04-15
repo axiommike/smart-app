@@ -1,20 +1,20 @@
-{{#liquid-if liability}}
-	{{#liquid-unless typeEditingDisabled}}
+{{#if liability}}
+	{{#unless typeEditingDisabled}}
 		{{#form-field title="Type"}}
 			{{view "select" content=liabilityTypes optionValuePath="content.value" optionLabelPath="content.label" value=liability.type}}
 		{{/form-field}}
-	{{/liquid-unless}}
-	{{#liquid-if liability.isOther}}
+	{{/unless}}
+	{{#if liability.isOther}}
 		{{#form-field title="Liability Description"}}
 			{{input type="text" value=liability.description placeholder="Describe this liability" required=true title="Please describe the nature of this liability"}}
 		{{/form-field}}
-	{{/liquid-if}}
-	{{#liquid-if liability.isLoan}}
+	{{/if}}
+	{{#if liability.isLoan}}
 		{{#form-field title="Loan Type"}}
 			{{view "select" content=loanTypes value=liability.description}}
 		{{/form-field}}
-	{{/liquid-if}}
-	{{#liquid-if liability.isMortgage}}
+	{{/if}}
+	{{#if liability.isMortgage}}
 		{{#form-field title="Property"}}
 			{{view "select" content=properties optionValuePath="content.id" optionLabelPath="content.adddress.address" value=liability.property}}
 		{{/form-field}}
@@ -25,32 +25,32 @@
 			{{input type="text" value=liability.lender required=true placeholder="Lender"}}
 		{{/form-field}}
 		{{#form-field title="Mortgage Balance"}}
-			{{input type="number" min="0" step="1000" value=liability.outstandingBalance placeholder="$ Overdue" required=true title="Please indicate the remaining balance of the mortgage"}}
+			{{currency-input min="0" step="1000" value=liability.outstandingBalance placeholder="$ Overdue" required=true title="Please indicate the remaining balance of the mortgage"}}
 		{{/form-field}}
 		{{#form-field title="Payment Frequency"}}
 			{{view "select" content=paymentFrequencies value=liability.paymentFrequency}}
 		{{/form-field}}
 	{{else}}
 		{{#form-field title="Outstanding Balance"}}
-			{{input type="number" min="0" step="100" value=liability.outstandingBalance placeholder="$ Overdue" required=true}}
+			{{currency-input min="0" step="100" value=liability.outstandingBalance placeholder="$ Overdue" required=true}}
 		{{/form-field}}
-	{{/liquid-if}}
-	{{#liquid-unless liability.isCreditCard}}
+	{{/if}}
+	{{#unless liability.isCreditCard}}
 		{{#form-field title="Monthly Payment"}}
-			{{input type="number" min="0" step="100" value=liability.payment placeholder="Payment" required=true title="Please indicate the monthly payment for this liability"}}
+			{{currency-input min="0" step="100" value=liability.payment placeholder="Payment" required=true title="Please indicate the monthly payment for this liability"}}
 		{{/form-field}}
-	{{/liquid-unless}}
-	{{#liquid-unless liability.isChildSupport}}
+	{{/unless}}
+	{{#unless liability.isChildSupport}}
 		{{#form-field title="Interest Rate (%)"}}
 			{{input type="number" min="0" max="60" step="any" value=liability.rate placeholder="Interest Rate" required=true}}
 		{{/form-field}}
-	{{/liquid-unless}}
-	{{#liquid-if liability.isCreditCard}}
+	{{/unless}}
+	{{#if liability.isCreditCard}}
 		{{#form-field title="Credit Card Type"}}
 			{{input type="text" value=liability.creditCardType placeholder="Bank Name/Mastercard, Visa"}}
 		{{/form-field}}
-	{{/liquid-if}}
+	{{/if}}
 {{else}}
 	Aww.  no liability found.
-{{/liquid-if}}
+{{/if}}
 {{yield}}

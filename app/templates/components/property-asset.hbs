@@ -1,52 +1,52 @@
-{{#liquid-if property}}
+{{#if property}}
 	{{#form-section title="Address and Location"}}
 		{{#form-field title="Address"}}
 			{{address-input address=property.address value=property.address.address placeholder="Property Address" required=true title="Please provide your property's address"}}
-			{{#liquid-if property.address.address}}
+			{{#if property.address.address}}
 				<dl class="address-info">
-					{{#liquid-if property.address.unit}}
+					{{#if property.address.unit}}
 						<dt>Unit</dt>
 						<dd>{{property.address.unit}}</dd>
-					{{/liquid-if}}
-					{{#liquid-if property.address.city}}
+					{{/if}}
+					{{#if property.address.city}}
 						<dt>City</dt>
 						<dd>{{property.address.city}}</dd>
-					{{/liquid-if}}
-					{{#liquid-if property.address.province}}
+					{{/if}}
+					{{#if property.address.province}}
 						<dt>Province</dt>
 						<dd>{{property.address.province}}</dd>
-					{{/liquid-if}}
-					{{#liquid-if property.address.region}}
+					{{/if}}
+					{{#if property.address.region}}
 						<dt>Region</dt>
 						<dd>{{property.address.region}}</dd>
-					{{/liquid-if}}
-					{{#liquid-if property.address.country}}
+					{{/if}}
+					{{#if property.address.country}}
 						<dt>Country</dt>
 						<dd>{{property.address.country}}</dd>
-					{{/liquid-if}}
-					{{#liquid-if property.address.postalCode}}
+					{{/if}}
+					{{#if property.address.postalCode}}
 						<dt>Postal Code</dt>
 						<dd>{{property.address.postalCode}}</dd>
-					{{/liquid-if}}
+					{{/if}}
 				</dl>
-			{{/liquid-if}}
+			{{/if}}
 		{{/form-field}}
 		{{#form-field title="Do you have a rental agreement?"}}
 			{{input type="checkbox" checked=property.isRental title="Please indicate whether this property was rented"}}
-			{{#liquid-if property.isRental}}
+			{{#if property.isRental}}
 				{{#form-field title="Rental Income"}}
-					{{input type="number" value=property.rentalIncome placeholder="Property Value" min="0" step="100"}}
+					{{currency-input value=property.rentalIncome placeholder="Property Value" min="0" step="100"}}
 				{{/form-field}}
-			{{/liquid-if}}
+			{{/if}}
 		{{/form-field}}
 		{{#form-field title="Estimated Property Value"}}
-			{{input type="number" value=property.value placeholder="Property Value" min="0" step="10000"}}
+			{{currency-input value=property.value placeholder="Property Value" min="0" step="10000"}}
 		{{/form-field}}
 		{{#form-field title="Property Taxes"}}
-			{{input type="number" value=property.propertyTaxes placeholder="Property Taxes" min="0" step="any"}}
-			{{#liquid-if property.propertyTaxes}}
-				<span class="help">{{property.propertyTaxes}} * 12 = <strong>{{property.propertyTaxesAnnual}} per year</strong></span>
-			{{/liquid-if}}
+			{{currency-input value=property.propertyTaxes placeholder="Property Taxes" min="0" step="any"}}
+			{{#if property.propertyTaxes}}
+				<span class="help">{{property.propertyTaxes}} * 12 = <strong>{{format-number property.propertyTaxesAnnual style="currency" currency="USD"}} per year</strong></span>
+			{{/if}}
 		{{/form-field}}
 	{{/form-section}}
 	{{#form-section title="Mortgage"}}
@@ -54,6 +54,6 @@
 	{{/form-section}}
 {{else}}
 	Hmmm... no property was found here.  Maybe try refreshing?
-{{/liquid-if}}
+{{/if}}
 
 {{yield}}

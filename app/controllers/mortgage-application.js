@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
 			incompleteApplication.set("isIncomplete", true);
 			this.get("model").save().then((application) => {
 				this.transitionToRoute("mortgage-application.thank-you", application);
-			})
+			});
 		}
 	}
 });

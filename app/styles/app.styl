@@ -1,4 +1,8 @@
-@import "components/*"
+/* Imports */
+@require "helpers/index" // Import all dependencies: variables, mixin/placeholder helpers, and browser support configuration
 
-body
-	font-size 100%
+@require "components/animations/fading_entrances/*" // import basic fade animations; pick and choose as necessary, or import all animations by importing animation/index
+@require "components/animations/attention_seekers/shake"
+
+@require "components/*" // import all components; pick and choose as needed
+@require "layout/*" // import all layout styles

@@ -1,21 +1,24 @@
 <button title="Add a Liability" {{action "addLiability"}}>Add
-	{{#liquid-if type}}
+	{{#if type}}
 		 {{type}}
 		{{else}}
 			 Liability
-	{{/liquid-if}}
+	{{/if}}
 </button>
 
+{{#if totalLiabilities}}
+	<sup><strong>{{format-number totalLiabilities style="currency" currency="USD"}}</strong> total</sup>
+{{/if}}
 <ul class="liabilities">
 	{{#each liability in filteredLiabilities}}
 		<li {{bind-attr class=":liability liability.type"}}>
 			{{liability-instance liability=liability typeEditingDisabled=type}}
 			<button {{action "removeLiability" liability}}>Remove
-				{{#liquid-if type}}
+				{{#if type}}
 					 {{type}}
 				{{else}}
 					 Liability
-				{{/liquid-if}}
+				{{/if}}
 			</button>
 		</li>
 	{{else}}

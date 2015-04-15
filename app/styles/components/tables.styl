@@ -1,0 +1,65 @@
+/*
+	stylus-boilerplate
+
+	tables.styl
+
+	Author: Sean Goresht
+
+	Table component for rendering responsive tables
+*/
+
+$tableBackground ?= white
+$tableMargin ?= 1em
+$tableCellPadding ?= 0.3em
+$tableWidth ?= 100%
+
+$tableBorderWidth ?= 1px
+$tableBorderStyle ?= solid
+$tableBorderColour ?= transparentify((luminosity($tableBackground) > 0.5 ? $tableBackground - 20 : $tableBackground + 20), 0.6)
+
+$tableBorder
+	border $tableBorderWidth $tableBorderStyle color-fallback($tableBorderColour)
+
+$tableTransition ?= easing("in-quad") 0.1s background
+
+$table
+	background $tableBackground
+	width $tableWidth
+	max-width $tableWidth
+	margin-bottom $tableMargin
+	th
+		vertical-align bottom
+		text-align left
+		padding $tableCellPadding
+		font-weight bold
+	td
+		padding $tableCellPadding
+		vertical-align middle
+	caption
+		text-align right
+		margin $tableMargin
+		font-style italic
+.table
+	@extend $table
+	&-striped
+		tbody
+			tr
+				background $tableBackground
+				transition $tableTransition
+				&:nth-of-type(odd)
+					background luminosity($tableBackground) > 0.5 ? $tableBackground - 13 : $tableBackground + 13
+				&:hover
+					background luminosity($tableBackground) > 0.5 ? $tableBackground - 18 : $tableBackground + 18
+	&-bordered
+		th
+			@extend $tableBorder
+		tbody
+			& + tbody
+				@extend $tableBorder
+				border-width $tableBorderWidth * 2
+		td
+			@extend $tableBorder
+		caption
+			& + thead:first-child
+				th, td
+					border-top 0

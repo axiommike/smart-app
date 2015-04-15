@@ -1,0 +1,96 @@
+/*
+	stylus-boilerplate
+
+	type.styl
+
+	Author: Sean Goresht
+
+	Typography component; place your type styles here
+*/
+
+$heading
+	font-weight $headingFontWeight
+	font-family $headingFontFamily
+
+for num in (6..1)
+	h{num}
+		@extend $heading
+		@extend $normal-margin-bottom
+		font-size (1 + ($unit / num * $multiplier))
+
+p
+	@extend $normal-margin-bottom
+	&:only-child
+		@extend $margin-none
+a
+	color $linkColour
+	@extend $text-decoration-none
+	transition $transitionTime border-width $transitionFunction
+
+code, kbd, pre, samp
+	font-family font-stack("Consolas")
+pre
+	overflow auto
+	word-wrap break-word /* webkit */
+	white-space pre
+	white-space -moz-pre-wrap /* fennec */
+	white-space pre-wrap
+	white-space pre\9 /* IE7+ */
+	@extend $bordered, $small-padding, $normal-margin-bottom
+
+dl
+	@extend $normal-padding
+	dt, dd
+		@extend $normal-margin
+strong
+	font-weight bold
+em
+	font-style italic
+main, footer
+	a
+		&[href]
+			@extend $bordered-bottom
+			&:hover
+				border-width $borderWidth * 2
+			font-weight bold
+			&:visited
+				opacity 0.9
+// include print styles, if required - adapted from https://github.com/zurb/foundation/blob/master/scss/foundation/components/_type.scss
+
+if $printStylesEnabled
+	@media print
+		$show-print
+			display block !important
+		$hide-print
+			display none !important
+		*
+			background: transparent !important;
+			color: black !important; /* Black prints faster: h5bp.com/s */
+			box-shadow: none !important;
+			text-shadow: none !important;
+		a
+			&:visited
+				text-decoration underline
+			&[href]
+				&:after
+					content " (" attr(href) ")"
+			&[title]
+				&:after
+					content " (" attr(title) ")"
+		$ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after
+			content ""
+		pre, blockquote
+			border 1px solid gainsboro
+		thead
+			display table-header-group
+		tr, img, pre, blockquote
+			page-break-inside: avoid
+		img
+			max-width 100% !important
+		@page
+			margin 0.5cm
+		p, h2, h3
+			orphans 3
+			widows 3
+		h2, h3
+			page-break-after avoid

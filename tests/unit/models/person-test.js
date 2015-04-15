@@ -1,15 +1,15 @@
 import {
-  moduleForModel,
-  test
-} from 'ember-qunit';
+	moduleForModel,
+	test
+	} from "ember-qunit";
 
-moduleForModel('person', {
-  // Specify the other units that are required for this test.
-  needs: []
+moduleForModel("person", {
+	// Specify the other units that are required for this test.
+	needs: []
 });
 
-test('it exists', function(assert) {
-  var model = this.subject();
-  // var store = this.store();
-  assert.ok(!!model);
+test("it exists", function (assert) {
+	var model = this.subject();
+	// var store = this.store();
+	assert.ok(!!model);
 });

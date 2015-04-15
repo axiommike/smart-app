@@ -7,6 +7,12 @@ export default Ember.Component.extend({
 		return this.get("type") ? liability.get("type") === this.get("type") : true;
 	}),
 	hasLiabilities: Ember.computed.notEmpty("filteredLiabilities"),
+	totalLiabilities: function() {
+		let assets = this.get("filteredLiabilities");
+		return assets.reduce(function(previousValue, liability) {
+			return parseInt(previousValue) + parseInt(liability.get("value"));
+		}, 0);
+	}.property("filteredLiabilities.@each.value"),
 	onAdd: null, /* Override method for adding a liability */
 	actions: {
 		addLiability: function() {

@@ -1,0 +1,70 @@
+/*
+	stylus-boilerplate
+
+	buttons.styl
+
+	Author: _admin
+
+	Created on 2014-12-23 by PhpStorm
+*/
+$buttonBackground ?= #03a9f4
+$buttonPadding ?= 0.8em
+$buttonFontSize ?= 1em
+$buttonFontWeight ?= bold
+$buttonMargin ?= 1em
+$buttonBorder ?= 0
+$buttonBorderRadius ?= 0.2em
+
+$buttonColours ?= {
+	success: #00cc1c
+	warning: #edff36
+	info: #00abcc
+	error: #cc0d00
+}
+
+$buttonTransition ?= 0.1s easing("in-quad") background, border
+
+$buttonSizes ?= {
+	small: 0.8
+	medium: 1.2
+	large: 1.4
+	extra-large: 1.8
+}
+getButton(colour)
+	@extend $button
+	background color-fallback(colour)
+	color luminosity(colour) > 0.5 ? black : white
+	&[disabled]
+		@extend $disabled
+	&:hover, &:focus
+		background color-fallback(luminosity(colour) > 0.5 ? colour + 30 : colour - 30)
+$button
+	cursor pointer
+	if $buttonTransition
+		transition $buttonTransition
+	display inline-block
+	border $buttonBorder
+	margin-right $buttonMargin
+	padding $buttonPadding ($buttonPadding * 1.65)
+	font-size $buttonFontSize
+	font-weight $buttonFontWeight
+	white-space nowrap
+	vertical-align baseline
+	outline none
+	text-transform uppercase
+	border-radius $buttonBorderRadius
+	transition box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)
+$disabled
+	opacity 0.5
+	cursor not-allowed
+	user-select none
+	user-drag none
+
+.button
+	getButton($buttonBackground)
+	for size, multiplier in $buttonSizes
+		&-{size}
+			font-size $buttonFontSize * multiplier
+	for type, colour in $buttonColours
+		&-{type}
+			getButton(colour)

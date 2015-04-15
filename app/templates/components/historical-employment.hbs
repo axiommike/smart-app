@@ -50,7 +50,7 @@
 		{{/liquid-if}}
 	{{/form-field}}
 	{{#form-field title="Hourly Rate"}}
-		{{input type="number" min="0" step="any" value=employment.hourlyRate required="required"}}
+		{{currency-input min="0" step="any" value=employment.hourlyRate required="required"}}
 		{{#liquid-if employment.hourlyRate}}
 			<span>dollars per hour</span>
 		{{/liquid-if}}
@@ -58,7 +58,7 @@
 {{/liquid-if}}
 
 {{#form-field title="Annual Pay"}}
-	{{input type="number" min="0" step="any" value=employment.income required="required"}}
+	{{currency-input min="0" step="any" value=employment.income required="required"}}
 	{{#liquid-if employment.income}}
 		<span>annually</span>
 	{{/liquid-if}}

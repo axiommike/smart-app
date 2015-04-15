@@ -13,74 +13,74 @@
 		<li class="form-step">
 			{{#form-field title="Do you own any other real estate?"}}
 				{{input type="checkbox" checked=ownsOtherRealEstate id="do-you-own-any-other-real-estate?"}}
-				{{#liquid-if ownsOtherRealEstate}}
-					{{property-table properties=applicant.otherProperties onAdd="addProperty" title="List of all Properties" caption="Other Properties"}}
-				{{/liquid-if}}
 			{{/form-field}}
+			{{#liquid-if ownsOtherRealEstate}}
+				{{property-table properties=applicant.otherProperties onAdd="addProperty" title="List of all Properties" caption="Other Properties"}}
+			{{/liquid-if}}
 		</li>
 		<li class="form-step">
 			{{#form-field title="Do you have any savings or chequing accounts?"}}
 				{{input type="checkbox" checked=hasSavings title="Please indicate whether you have invested in any government funds or locked-in investments" id="do-you-have-any-savings-or-chequing-accounts?"}}
-				{{#liquid-if hasSavings}}
-					{{asset-table assets=applicant.assets type="savings" onAdd="addAsset" title="Table of all GIC, long-term, and term-based bank account assets" caption="Term Deposit Account Assets"}}
-				{{/liquid-if}}
 			{{/form-field}}
+			{{#liquid-if hasSavings}}
+				{{asset-table assets=applicant.assets type="savings" onAdd="addAsset" title="Table of all GIC, long-term, and term-based bank account assets" caption="Term Deposit Account Assets"}}
+			{{/liquid-if}}
 		</li>
 		<li class="form-step">
 			{{#form-field title="Do you have any personal items of significant value? (boats, toys, skidoos, man toys)"}}
 				{{input type="checkbox" checked=hasPersonalItems title="Please indicate whether you have any belongings worth of significant value" id="do-you-have-any-personal-items-of-significant-value?-(boats,-toys,-skidoos,-man-toys)"}}
-				{{#liquid-if hasPersonalItems}}
-					{{asset-table assets=applicant.assets type="item" onAdd="addAsset" title="Table of all personal assets" caption="All Personal Item Assets"}}
-				{{/liquid-if}}
 			{{/form-field}}
+			{{#liquid-if hasPersonalItems}}
+				{{asset-table assets=applicant.assets type="item" onAdd="addAsset" title="Table of all personal assets" caption="All Personal Item Assets"}}
+			{{/liquid-if}}
 		</li>
 		<li class="form-step">
 			{{#form-field title="Do you have any GIC or Term Deposit investments?"}}
 				{{input type="checkbox" checked=hasGICs title="Please indicate whether you have any GIC or Term Deposit investments" id="do-you-have-any-gic-or-term-deposit-investments?"}}
-				{{#liquid-if hasGICs}}
-					{{asset-table assets=applicant.assets type="gic" onAdd="addAsset" title="Table of all GIC and Term Deposit Accounts" caption="GIC and Term Deposit Accounts"}}
-				{{/liquid-if}}
 			{{/form-field}}
+			{{#liquid-if hasGICs}}
+				{{asset-table assets=applicant.assets type="gic" onAdd="addAsset" title="Table of all GIC and Term Deposit Accounts" caption="GIC and Term Deposit Accounts"}}
+			{{/liquid-if}}
 		</li>
 		<li class="form-step">
 			{{#form-field title="Do you have any RESP savings accounts?"}}
 				{{input type="checkbox" checked=hasRESPs title="Please indicate whether you have any RESP (Registered Educational Savings Plan) funds or accounts" id="do-you-have-any-resp-savings-accounts?"}}
-				{{#liquid-if hasRESPs}}
-					{{asset-table assets=applicant.assets type="resp" onAdd="addAsset" title="Table of all RESP Accounts" caption="All RESP Accounts"}}
-				{{/liquid-if}}
 			{{/form-field}}
+			{{#liquid-if hasRESPs}}
+				{{asset-table assets=applicant.assets type="resp" onAdd="addAsset" title="Table of all RESP Accounts" caption="All RESP Accounts"}}
+			{{/liquid-if}}
 		</li>
 		<li class="form-step">
 			{{#form-field title="Do you have any RRSP savings accounts?"}}
 				{{input type="checkbox" checked=hasRRSPs title="Please indicate whether you have any RRSP funds or accounts" id="do-you-have-any-rrsp-savings-accounts?"}}
-				{{#liquid-if hasRRSPs}}
-					{{asset-table assets=applicant.assets type="rrsp" onAdd="addAsset" title="Table of all RRSP Accounts" caption="All RRSP Accounts"}}
-				{{/liquid-if}}
 			{{/form-field}}
+			{{#liquid-if hasRRSPs}}
+				{{asset-table assets=applicant.assets type="rrsp" onAdd="addAsset" title="Table of all RRSP Accounts" caption="All RRSP Accounts"}}
+			{{/liquid-if}}
 		</li>
 		<li class="form-step">
 			{{#form-field title="Do you have any stocks or bond investments?"}}
 				{{input type="checkbox" checked=hasInvestments title="Please indicate whether you have any stocks or bond investments" id="do-you-have-any-stocks-or-bond-investments?"}}
-				{{#liquid-if hasInvestments}}
-					{{asset-table assets=applicant.assets type="investment" onAdd="addAsset" title="Table of all personal assets" caption="All Personal Item Assets"}}
-				{{/liquid-if}}
 			{{/form-field}}
+			{{#liquid-if hasInvestments}}
+				{{asset-table assets=applicant.assets type="investment" onAdd="addAsset" title="Table of all personal assets" caption="All Personal Item Assets"}}
+			{{/liquid-if}}
 		</li>
 		<li class="form-step">
 			{{#form-field title="Do you have any vehicles?"}}
 				{{input type="checkbox" checked=hasVehicles title="Please indicate whether you have any vehicles (rental, loan, or own)" id="do-you-have-any-vehicles?"}}
-				{{#liquid-if hasVehicles}}
-					{{asset-table assets=applicant.assets type="vehicle" onAdd="addAsset" title="Table of all vehicles" caption="All Vehicles"}}
-				{{/liquid-if}}
 			{{/form-field}}
+			{{#liquid-if hasVehicles}}
+				{{asset-table assets=applicant.assets type="vehicle" onAdd="addAsset" title="Table of all vehicles" caption="All Vehicles"}}
+			{{/liquid-if}}
 		</li>
 		<li class="form-step">
 			{{#form-field title="Do you own any other assets?"}}
 				{{input type="checkbox" checked=ownsOtherAssets id="do-you-own-any-other-assets?"}}
-				{{#liquid-if ownsOtherAssets}}
-					{{asset-table assets=applicant.assets type="other" onAdd="addAsset"}}
-				{{/liquid-if}}
 			{{/form-field}}
+			{{#liquid-if ownsOtherAssets}}
+				{{asset-table assets=applicant.assets type="other" onAdd="addAsset"}}
+			{{/liquid-if}}
 		</li>
 	</ol>
 	<footer class="form-actions">
