@@ -1,13 +1,13 @@
 <header class="asset-table-header">
 	<button {{action "addAsset"}}>Add Asset</button>
-	{{#if caption}}
+	{{#liquid-if caption}}
 		<h5 class="caption">
 			{{caption}}
-			{{#if totalAssets}}
+			{{#liquid-if totalAssets}}
 				<sup><strong>${{totalAssets}}</strong> total</sup>
-			{{/if}}
+			{{/liquid-if}}
 		</h5>
-	{{/if}}
+	{{/liquid-if}}
 </header>
 
 <ul class="assets">

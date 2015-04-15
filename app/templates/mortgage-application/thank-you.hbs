@@ -5,8 +5,8 @@
 <article class="details">
 	<p>Your application has been submitted with an <code>id</code> or {{id}}.  Please <a href="http://mail.google.com">check your e-mail for a confirmation of receipt</a>.</p>
 </article>
-{{#if model.isIncomplete}}
+{{#liquid-if model.isIncomplete}}
 	<button {{action "completeFullApp"}}>Actually, I'd like to complete full app</button>
-{{/if}}
+{{/liquid-if}}
 
 {{outlet}}

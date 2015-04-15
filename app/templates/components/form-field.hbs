@@ -1,6 +1,6 @@
-<label {{bind-attr for=labelID class=labelClassName}}>{{title}}{{#if labelText}}
+<label {{bind-attr for=labelID class=labelClassName}}>{{title}}{{#liquid-if labelText}}
 	{{labelText}}
-{{/if}}
+{{/liquid-if}}
 </label>
 <div {{bind-attr class=controlsClassName}}>
 	{{yield}}

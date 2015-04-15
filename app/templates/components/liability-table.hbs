@@ -1,9 +1,9 @@
 <button title="Add a Liability" {{action "addLiability"}}>Add
-	{{#if type}}
+	{{#liquid-if type}}
 		 {{type}}
 		{{else}}
 			 Liability
-	{{/if}}
+	{{/liquid-if}}
 </button>
 
 <ul class="liabilities">
@@ -11,11 +11,11 @@
 		<li {{bind-attr class=":liability liability.type"}}>
 			{{liability-instance liability=liability typeEditingDisabled=type}}
 			<button {{action "removeLiability" liability}}>Remove
-				{{#if type}}
+				{{#liquid-if type}}
 					 {{type}}
 				{{else}}
 					 Liability
-				{{/if}}
+				{{/liquid-if}}
 			</button>
 		</li>
 	{{else}}

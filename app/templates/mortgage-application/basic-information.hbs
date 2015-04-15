@@ -4,14 +4,14 @@
 	<dl class="application-overview">
 		<dt>Name</dt>
 		<dd>{{applicant.fullName}}</dd>
-		{{#if applicant.email}}
+		{{#liquid-if applicant.email}}
 			<dt>Email</dt>
 			<dd>{{applicant.email}}</dd>
-		{{/if}}
-		{{#if applicant.phone}}
+		{{/liquid-if}}
+		{{#liquid-if applicant.phone}}
 			<dt>Phone</dt>
 			<dd>{{applicant.phone}}</dd>
-		{{/if}}
+		{{/liquid-if}}
 	</dl>
 	{{tips-container tips=tips}}
 </aside>
@@ -36,22 +36,22 @@
 		<li class="form-step">
 			{{#form-field title="Do you have any dependents?"}}
 				{{input type="checkbox" checked=hasDependents title="Please indicate whether you have any dependents (kids, family, etc., for whom you are caring)" id="do-you-have-any-dependents?"}}
-				{{#if hasDependents}}
+				{{#liquid-if hasDependents}}
 					{{#form-field title="How many dependents do you have?"}}
 						{{input type="range" value=dependentCount step="1" required="required" min="1" max="15" title="How many dependents?" id="how-many-dependents-do-you-have?"}}
 						<span class="info">You have <strong>{{dependentCount}}</strong> dependents</span>
 					{{/form-field}}
-				{{/if}}
+				{{/liquid-if}}
 			{{/form-field}}
 		</li>
 		<li class="form-step">
 			{{#form-field title="How many co-applicants?"}}
 				{{input type="range" value=coApplicantCount step="1" required="required" min="0" max="3" id="how-many-co-applicants?"}}
-				{{#if coApplicantCount}}
+				{{#liquid-if coApplicantCount}}
 					<span class="info">This application will include <strong>{{coApplicantCount}}</strong> co-applicants</span>
 				{{else}}
 					<span class="info">You are applying alone.</span>
-				{{/if}}
+				{{/liquid-if}}
 			{{/form-field}}
 		</li>
 	</ol>

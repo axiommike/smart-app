@@ -77,10 +77,12 @@ export default Ember.Component.extend({
 		"Volvo"
 	],
 	vehicleMake: null,
+	vehicleModel: null,
 	vehicleYear: null,
 	vehicleInfoChanged: function() {
-		if (this.get("vehicleYear") && this.get("vehicleMake") && this.get("asset")) {
-			this.set("asset.description", `${this.get("vehicleMake")} - ${this.get("vehicleYear")}`);
+		if (this.get("vehicleYear") && !Ember.isBlank(this.get("vehicleMake")) && this.get("asset")) {
+			let vehicleModel = !Ember.isBlank(this.get("vehicleModel")) ? `${this.get("vehicleModel")} ` : "";
+			this.set("asset.description", `${this.get("vehicleMake")} ${vehicleModel}- ${this.get("vehicleYear")}`);
 		}
-	}.observes("vehicleMake", "vehicleYear")
+	}.observes("vehicleMake", "vehicleYear", "vehicleModel")
 });

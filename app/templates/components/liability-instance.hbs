@@ -1,20 +1,20 @@
-{{#if liability}}
-	{{#unless typeEditingDisabled}}
+{{#liquid-if liability}}
+	{{#liquid-unless typeEditingDisabled}}
 		{{#form-field title="Type"}}
 			{{view "select" content=liabilityTypes optionValuePath="content.value" optionLabelPath="content.label" value=liability.type}}
 		{{/form-field}}
-	{{/unless}}
-	{{#if liability.isOther}}
+	{{/liquid-unless}}
+	{{#liquid-if liability.isOther}}
 		{{#form-field title="Liability Description"}}
 			{{input type="text" value=liability.description placeholder="Describe this liability" required=true title="Please describe the nature of this liability"}}
 		{{/form-field}}
-	{{/if}}
-	{{#if liability.isLoan}}
+	{{/liquid-if}}
+	{{#liquid-if liability.isLoan}}
 		{{#form-field title="Loan Type"}}
 			{{view "select" content=loanTypes value=liability.description}}
 		{{/form-field}}
-	{{/if}}
-	{{#if liability.isMortgage}}
+	{{/liquid-if}}
+	{{#liquid-if liability.isMortgage}}
 		{{#form-field title="Property"}}
 			{{view "select" content=properties optionValuePath="content.id" optionLabelPath="content.adddress.address" value=liability.property}}
 		{{/form-field}}
@@ -34,23 +34,23 @@
 		{{#form-field title="Outstanding Balance"}}
 			{{input type="number" min="0" step="100" value=liability.outstandingBalance placeholder="$ Overdue" required=true}}
 		{{/form-field}}
-	{{/if}}
-	{{#unless liability.isCreditCard}}
+	{{/liquid-if}}
+	{{#liquid-unless liability.isCreditCard}}
 		{{#form-field title="Monthly Payment"}}
 			{{input type="number" min="0" step="100" value=liability.payment placeholder="Payment" required=true title="Please indicate the monthly payment for this liability"}}
 		{{/form-field}}
-	{{/unless}}
-	{{#unless liability.isChildSupport}}
+	{{/liquid-unless}}
+	{{#liquid-unless liability.isChildSupport}}
 		{{#form-field title="Interest Rate (%)"}}
 			{{input type="number" min="0" max="60" step="any" value=liability.rate placeholder="Interest Rate" required=true}}
 		{{/form-field}}
-	{{/unless}}
-	{{#if liability.isCreditCard}}
+	{{/liquid-unless}}
+	{{#liquid-if liability.isCreditCard}}
 		{{#form-field title="Credit Card Type"}}
 			{{input type="text" value=liability.creditCardType placeholder="Bank Name/Mastercard, Visa"}}
 		{{/form-field}}
-	{{/if}}
+	{{/liquid-if}}
 {{else}}
 	Aww.  no liability found.
-{{/if}}
+{{/liquid-if}}
 {{yield}}

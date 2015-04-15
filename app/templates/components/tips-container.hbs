@@ -1,17 +1,17 @@
-{{#if tips.length}}
+{{#liquid-if tips.length}}
 	<ul class="tips-list">
 		{{#each tip in enabledTips}}
 			<li class="tip">
-				{{#if tip.tooltip}}
+				{{#liquid-if tip.tooltip}}
 					{{tip.tooltip}}
 				{{else}}
 					We will use {{tip.property}} for...
-				{{/if}}
+				{{/liquid-if}}
 			</li>
 		{{/each}}
 	</ul>
 	{{else}}
 		No tips found
-{{/if}}
+{{/liquid-if}}
 
 {{yield}}

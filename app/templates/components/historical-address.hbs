@@ -1,45 +1,45 @@
 {{#form-field title=typeName}}
-	{{#if address.isCurrent}}
+	{{#liquid-if address.isCurrent}}
 		{{address-input address=address value=address.address placeholder=typeName title="Please indicate where you are currently living" required=required}}
 	{{else}}
 		{{address-input address=address value=address.address placeholder=typeName title="Please provide historical addresses dating back at least 3 years" required=required}}
-	{{/if}}
-	{{#if address.address}}
+	{{/liquid-if}}
+	{{#liquid-if address.address}}
 		<dl class="address-info">
-			{{#if address.unit}}
+			{{#liquid-if address.unit}}
 				<dt>Unit</dt>
 				<dd>{{address.unit}}</dd>
-			{{/if}}
-			{{#if address.city}}
+			{{/liquid-if}}
+			{{#liquid-if address.city}}
 				<dt>City</dt>
 				<dd>{{address.city}}</dd>
-			{{/if}}
-			{{#if address.province}}
+			{{/liquid-if}}
+			{{#liquid-if address.province}}
 				<dt>Province</dt>
 				<dd>{{address.province}}</dd>
-			{{/if}}
-			{{#if address.region}}
+			{{/liquid-if}}
+			{{#liquid-if address.region}}
 				<dt>Region</dt>
 				<dd>{{address.region}}</dd>
-			{{/if}}
-			{{#if address.country}}
+			{{/liquid-if}}
+			{{#liquid-if address.country}}
 				<dt>Country</dt>
 				<dd>{{address.country}}</dd>
-			{{/if}}
-			{{#if address.postalCode}}
+			{{/liquid-if}}
+			{{#liquid-if address.postalCode}}
 				<dt>Postal Code</dt>
 				<dd>{{address.postalCode}}</dd>
-			{{/if}}
+			{{/liquid-if}}
 		</dl>
-	{{/if}}
+	{{/liquid-if}}
 {{/form-field}}
 {{#form-field title="How Long?"}}
 	{{input type="number" value=address.tenureYears placeholder="Years" min="0" step="1" required="required" title="Please indicate the amount of time in which this address was resided"}}
 	<label for = "tenure-years">years</label>
 	{{input type="number" value=address.tenureMonths placeholder="mths" min="0" max="12" step="1"}}
 	<label for = "tenure-months">months</label>
-	{{#if address.tenureTotalYears}}
+	{{#liquid-if address.tenureTotalYears}}
 		Lived here for {{address.tenureTotalYears}} year(s)
-	{{/if}}
+	{{/liquid-if}}
 {{/form-field}}
 {{yield}}

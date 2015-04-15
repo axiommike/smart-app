@@ -1,32 +1,32 @@
 <header class="applicant-card-header">
-	{{#if applicant.hasName}}
+	{{#liquid-if applicant.hasName}}
 		<h1 class="applicant-name">
 			<span class="applicant-full-name">{{applicant.fullName}}</span>
-			{{#if applicant.isPrimary}}
+			{{#liquid-if applicant.isPrimary}}
 				 (primary applicant)
-			{{/if}}
+			{{/liquid-if}}
 		</h1>
-	{{/if}}
+	{{/liquid-if}}
 	<ul class="applicant-actions">
-		{{#unless applicant.isPrimary}}
+		{{#liquid-unless applicant.isPrimary}}
 			<li class="applicant-action">
 				<button {{action "removeApplicant" applicant}}>Remove {{applicant.fullName}}</button>
 			</li>
-		{{/unless}}
-		{{#if isEditable}}
+		{{/liquid-unless}}
+		{{#liquid-if isEditable}}
 			<li>
 				<button {{action "toggleEditing" applicant}}>
-					{{#if isEditing}}
+					{{#liquid-if isEditing}}
 						Done
 					{{else}}
 						Edit
-					{{/if}}
+					{{/liquid-if}}
 				</button>
 			</li>
-		{{/if}}
+		{{/liquid-if}}
 	</ul>
 </header>
-{{#if isEditing}}
+{{#liquid-if isEditing}}
 	{{#form-section title="basic-information" icon="info-sign"}}
 		<div class = "row">
 			{{#form-field title="First Name" class="one-half"}}
@@ -65,19 +65,19 @@
 	{{/form-section}}
 {{else}}
 	<dl class="applicant-card-details">
-		{{#if applicant.email}}
+		{{#liquid-if applicant.email}}
 			<dt>Email</dt>
 			<dd>{{applicant.email}}</dd>
-		{{/if}}
-		{{#if applicant.phone}}
+		{{/liquid-if}}
+		{{#liquid-if applicant.phone}}
 			<dt>Phone</dt>
 			<dd>{{applicant.phone}}</dd>
-		{{/if}}
-		{{#if applicant.birthDate}}
+		{{/liquid-if}}
+		{{#liquid-if applicant.birthDate}}
 			<dt>Birth Date</dt>
 			<dd>{{applicant.birthDate}}</dd>
-		{{/if}}
+		{{/liquid-if}}
 	</dl>
-{{/if}}
+{{/liquid-if}}
 
 {{yield}}

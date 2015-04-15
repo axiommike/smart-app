@@ -1,16 +1,16 @@
-{{#if title}}
+{{#liquid-if title}}
 	<h1 class="wizard-step-title">
 		{{title}}
-		{{#if stepName}}
+		{{#liquid-if stepName}}
 			<span class="wizard-step-name">{{stepName}}</span>
-		{{/if}}
+		{{/liquid-if}}
 	</h1>
-{{/if}}
+{{/liquid-if}}
 
-{{#if totalSteps}}
+{{#liquid-if totalSteps}}
 	<span class="total-steps">
 		of {{totalSteps}}
 	</span>
-{{/if}}
+{{/liquid-if}}
 
 {{yield}}
