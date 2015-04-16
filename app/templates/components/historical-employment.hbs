@@ -3,7 +3,7 @@
 {{/form-field}}
 
 {{#form-field title="Is Current Employment?"}}
-	{{input type="checkbox" checked=employment.isCurrent title="Is the job current?"}}
+	{{on-off-switch checked=employment.isCurrent title="Is the job current?"}}
 {{/form-field}}
 {{#form-field title="Type"}}
 	{{view Ember.Select content=employmentTypes optionValuePath="content.value" optionLabelPath="content.label" value=employment.type}}

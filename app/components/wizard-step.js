@@ -4,7 +4,7 @@ export default Ember.Component.extend({
 	tagName: "header",
 	classNameBindings: [":wizard-step"],
 	attributeBindings: ["role"],
-	role: "banner",
+	role: "status",
 	title: Ember.computed("step", function() {
 		return `Step ${this.get("step")}`;
 	}),

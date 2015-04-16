@@ -32,7 +32,7 @@
 			{{/if}}
 		{{/form-field}}
 		{{#form-field title="Do you have a rental agreement?"}}
-			{{input type="checkbox" checked=property.isRental title="Please indicate whether this property was rented"}}
+			{{on-off-switch checked=property.isRental title="Please indicate whether this property was rented"}}
 			{{#if property.isRental}}
 				{{#form-field title="Rental Income"}}
 					{{currency-input value=property.rentalIncome placeholder="Property Value" min="0" step="100"}}

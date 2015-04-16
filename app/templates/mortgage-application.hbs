@@ -3,6 +3,11 @@
 	<button {{action "sendIncomplete"}}>Submit Application As-is</button>
 </header>
 
+<datalist id="lenders">
+	{{#each lender in lenders}}
+		<option {{bind-attr value=lender}}></option>
+	{{/each}}
+</datalist>
 <main role="main">
 	{{liquid-outlet}}
 </main>

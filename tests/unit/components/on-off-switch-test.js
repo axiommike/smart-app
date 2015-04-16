@@ -19,3 +19,11 @@ test("it renders", function (assert) {
 	this.render();
 	assert.equal(component._state, "inDOM");
 });
+
+test("it has corresponding on/off data attributes", function(assert) {
+	assert.expect(2);
+	let component = this.subject();
+	this.render();
+	assert.ok(component.$().attr("onMessage"));
+	assert.ok(component.$().attr("offMessage"));
+});

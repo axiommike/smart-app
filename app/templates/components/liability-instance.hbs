@@ -22,7 +22,7 @@
 			{{input type="date" value=liability.maturityDate required=true}}
 		{{/form-field}}
 		{{#form-field title="Lender"}}
-			{{input type="text" value=liability.lender required=true placeholder="Lender"}}
+			{{autocomplete-input value=liability.lender required=true placeholder="Lender" list="lenders" title="Please provide the lender for this mortgage"}}
 		{{/form-field}}
 		{{#form-field title="Mortgage Balance"}}
 			{{currency-input min="0" step="1000" value=liability.outstandingBalance placeholder="$ Overdue" required=true title="Please indicate the remaining balance of the mortgage"}}

@@ -12,6 +12,12 @@
 main
 	padding $padding
 header
+	&[role="banner"]
+		position absolute
+		z-index 1
+		right 3em
+		top 6em
+		padding $padding
 	for num in (6..1)
 		h{num}
 			@extend $margin-none
