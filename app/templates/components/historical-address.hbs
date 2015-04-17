@@ -34,7 +34,7 @@
 	{{/liquid-if}}
 {{/form-field}}
 {{#form-field title="How Long?"}}
-	{{input type="number" value=address.tenureYears placeholder="Years" min="0" step="1" required="required" title="Please indicate the amount of time in which this address was resided"}}
+	{{input type="number" value=address.tenureYears placeholder="Years" min="0" step="1" required=true title="Please indicate the amount of time in which this address was resided"}}
 	<label for = "tenure-years">years</label>
 	{{input type="number" value=address.tenureMonths placeholder="mths" min="0" max="12" step="1"}}
 	<label for = "tenure-months">months</label>

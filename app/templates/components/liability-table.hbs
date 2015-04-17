@@ -1,10 +1,12 @@
-<button title="Add a Liability" {{action "addLiability"}}>Add
-	{{#if type}}
-		 {{type}}
+<header class="table-header">
+	<button title="Add a Liability" {{action "addLiability"}} class="add-button">Add
+		{{#if type}}
+			{{type}}
 		{{else}}
-			 Liability
-	{{/if}}
-</button>
+			Liability
+		{{/if}}
+	</button>
+</header>
 
 {{#if totalLiabilities}}
 	<sup><strong>{{format-number totalLiabilities style="currency" currency="USD"}}</strong> total</sup>
@@ -13,7 +15,7 @@
 	{{#each liability in filteredLiabilities}}
 		<li {{bind-attr class=":liability liability.type"}}>
 			{{liability-instance liability=liability typeEditingDisabled=type}}
-			<button {{action "removeLiability" liability}}>Remove
+			<button {{action "removeLiability" liability}} class="remove-button">Remove
 				{{#if type}}
 					 {{type}}
 				{{else}}

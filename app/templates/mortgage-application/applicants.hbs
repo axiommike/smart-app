@@ -1,13 +1,13 @@
 {{wizard-step stepName="Co-Applicants" totalSteps=5 step=4}}
 {{#validatable-form action="nextStep"}}
-	<button {{action "addApplicant"}}>Add Co-Applicant</button>
-	<ul class="applicants">
+	<button {{action "addApplicant"}} class="add-button">Add Co-Applicant</button>
+	<ul class="applicants row">
 		{{#each applicant in applicants}}
-			<li {{bind-attr class=":applicant applicant.isPrimary:primary:co-applicant"}}>
+			<li {{bind-attr class=":applicant-container :column applicant.isPrimary:primary:co-applicant"}}>
 				{{applicant-card applicant=applicant isEditing=true onRemoveApplicant="removeApplicant" isEditable=false}}
 			</li>
 		{{else}}
-			<li>No Co-Applicants selected.  <button {{action "addApplicant"}}>Add one</button></li>
+			<li>No Co-Applicants selected.  <button {{action "addApplicant"}} class="add-button">Add one</button></li>
 		{{/each}}
 	</ul>
 	<footer class="form-actions">

@@ -24,10 +24,9 @@ button
 $textInput
 	max-width 100%
 	border-width 0 0 $borderWidth 0
-	margin 0 $margin
 	outline none
 fieldset
-	@extend $normal-margin, $normal-padding, $bordered-top
+	@extend $normal-padding, $bordered-top
 textarea
 	@extend $textInput
 textarea, input
@@ -48,3 +47,7 @@ textarea, input
 	+placeholder()
 		font-family $baseFontFamily
 		color luminosity($textColour) > 0.5 ? $inverseTextColour + 45 : $inverseTextColour - 45
+
+.add-button, .remove-button
+	&:active
+		transform scale(1.05)

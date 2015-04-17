@@ -7,16 +7,33 @@ export default Ember.Component.extend({
 	layoutDirection: "horizontal",
 	defaultClassName: "form-field",
 	title: null,
+	childInput: null,
+	hasChildInput: Ember.computed.notEmpty("childInput"),
+	didInsertElement: function() {
+		let $firstInput = this.$().find("input[id], select[id], textarea[id]").first();
+		if (Ember.isArray($firstInput)) {
+			this.setProperties({
+				childInput: $firstInput
+			});
+		}
+	},
+	hasTitle: Ember.computed("title", function () {
+		return !Ember.isNone(this.get("title")) && !Ember.isEmpty(this.get("title"));
+	}),
+	isFocused: false, /* To be set from child components */
 	fullClassName: (function() {
 		return "" + (this.get("defaultClassName")) + "-" + (this.get("layoutDirection"));
 	}).property("layoutDirection"),
 	model: null,
 	labelText: null,
 	labelID: (function() {
-		if (this.get("title") != null) {
+		/*if (this.get("hasTitle")) {
 			return Ember.String.dasherize(this.get("title"));
+		}*/
+		if (this.get("hasChildInput")) {
+			return this.get("childInput")[0].id;
 		}
-	}).property("title"),
+	}).property("hasChildInput"),
 	labelClassName: (function() {
 		return "" + (this.get("classNamespace")) + "-label";
 	}).property("classNamespace"),

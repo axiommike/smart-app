@@ -29,32 +29,35 @@
 {{#liquid-if isEditing}}
 	{{#form-section title="basic-information" icon="info-sign"}}
 		<div class = "row">
-			{{#form-field title="First Name" class="one-half"}}
-				{{input value=applicant.firstName placeholder="First Name" required="required" autofocus="autofocus" title="Please provide the applicant's first name"}}
+			{{#form-field title="First Name" class="column one-half" layoutDirection="vertical"}}
+				{{input value=applicant.firstName placeholder="First Name" required=true autofocus="autofocus" title="Please provide the applicant's first name"}}
 			{{/form-field}}
-			{{#form-field title="Last Name" class="one-half"}}
-				{{input value=applicant.lastName placeholder="Last Name" required="required" title="Please provide the applicant's last name"}}
+			{{#form-field title="Last Name" class="column one-half" layoutDirection="vertical"}}
+				{{input value=applicant.lastName placeholder="Last Name" required=true title="Please provide the applicant's last name"}}
 			{{/form-field}}
 		</div>
-		{{#form-field title="Email"}}
-			{{input value=applicant.email required="required" type="email" placeholder="Email" title="Please enter a valid e-mail"}}
-		{{/form-field}}
-		{{#form-field title="Phone"}}
-			{{input value=applicant.phone type="tel" required="required" placeholder="Phone" title="Please provide the applicant's phone number"}}
-		{{/form-field}}
-		{{#form-field title="Birth Date"}}
-			{{input type="date" value=applicant.birthDate required="required" title="Please provide the date of birth of the applicant"}}
+		{{#form-section title="Contact Methods" icon="mail"}}
+			{{#form-field title="Email" layoutDirection="vertical"}}
+				{{input value=applicant.email required=true type="email" placeholder="Email" title="Please enter a valid e-mail"}}
+			{{/form-field}}
+			{{#form-field title="Phone" layoutDirection="vertical"}}
+				{{input value=applicant.phone type="tel" required=true placeholder="Phone" title="Please provide the applicant's phone number"}}
+			{{/form-field}}
+		{{/form-section}}
+
+		{{#form-field title="Birth Date" layoutDirection="vertical"}}
+			{{input type="date" value=applicant.birthDate required=true title="Please provide the date of birth of the applicant"}}
 		{{/form-field}}
 	{{/form-section}}
 	{{#form-section title="Location" icon="pin"}}
 		{{historical-addresses previousAddresses=applicant.previousAddresses currentAddress=applicant.currentAddress onAddAddress="addAddress"}}
 	{{/form-section}}
 	{{#form-section title="Employment" icon="hat"}}
-		<button {{action "addEmployment" applicant}}>Add Employment</button>
+		<button {{action "addEmployment" applicant}} class="add-button">Add Employment</button>
 		{{#each historicalEmployment in applicant.employment}}
 			{{historical-employment employment=historicalEmployment onRemove="removeEmployment"}}
 		{{else}}
-			No employment history for {{applicant.fullName}}.  <button {{action "addEmployment" applicant}}>Add Employment</button>
+			No employment history for {{applicant.fullName}}.  <button {{action "addEmployment" applicant}} class="add-button">Add Employment</button>
 		{{/each}}
 	{{/form-section}}
 	{{#form-section title="Assets" icon="coin"}}

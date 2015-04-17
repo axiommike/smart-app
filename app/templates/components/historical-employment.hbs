@@ -1,5 +1,5 @@
 {{#form-field title="Position"}}
-	{{input type="text" value=employment.occupation placeholder="Job Title" required="required"}}
+	{{input type="text" value=employment.occupation placeholder="Job Title" required=true}}
 {{/form-field}}
 
 {{#form-field title="Is Current Employment?"}}
@@ -15,7 +15,7 @@
 
 {{#liquid-unless employment.isSelfEmployed}}
 	{{#form-field title="Employer"}}
-		{{input type="text" value=employment.employer.name placeholder="Employer" required="required"}}
+		{{input type="text" value=employment.employer.name placeholder="Employer" required=true}}
 	{{/form-field}}
 {{/liquid-unless}}
 
@@ -23,16 +23,16 @@
 	{{address-input address=employoment.employer.address value=employment.employer.address.address placeholder="Employer's Address" required=true}}
 {{/form-field}}
 {{#form-field title="Employer Phone Number"}}
-	{{input type="tel" value=employment.employer.phone placeholder="Employer's Phone" required="required"}}
+	{{input type="tel" value=employment.employer.phone placeholder="Employer's Phone" required=true}}
 {{/form-field}}
 
 {{#form-field title="Position Duration"}}
 	{{#liquid-if durationEnabled}}
-		{{input type="date" value=employment.startDate required="required"}}
+		{{input type="date" value=employment.startDate required=true}}
 		<span>to</span>
-		{{input type="date" value=employment.endDate required="required"}}
+		{{input type="date" value=employment.endDate required=true}}
 	{{else}}
-		{{input type="number" value=employment.tenureYears required="required" placeholder="Years" min="0" step="1"}}
+		{{input type="number" value=employment.tenureYears required=true placeholder="Years" min="0" step="1"}}
 		<label for = "tenure-years">years</label>
 		{{input type="number" value=employment.tenureMonths placeholder="mths" min="0" max="12" step="1"}}
 		<label for = "tenure-months">months</label>
@@ -44,13 +44,13 @@
 
 {{#liquid-if employment.isSalaried}}
 	{{#form-field title="Hours Per Week"}}
-		{{input type="range" min="0" max="60" value=employment.weeklyHours required="required"}}
+		{{input type="range" min="0" max="60" value=employment.weeklyHours required=true}}
 		{{#liquid-if employment.weeklyHours}}
 			<span>worked {{employment.weeklyHours}} hours per week</span>
 		{{/liquid-if}}
 	{{/form-field}}
 	{{#form-field title="Hourly Rate"}}
-		{{currency-input min="0" step="any" value=employment.hourlyRate required="required"}}
+		{{currency-input min="0" step="any" value=employment.hourlyRate required=true}}
 		{{#liquid-if employment.hourlyRate}}
 			<span>dollars per hour</span>
 		{{/liquid-if}}
@@ -58,10 +58,10 @@
 {{/liquid-if}}
 
 {{#form-field title="Annual Pay"}}
-	{{currency-input min="0" step="any" value=employment.income required="required"}}
+	{{currency-input min="0" step="any" value=employment.income required=true}}
 	{{#liquid-if employment.income}}
 		<span>annually</span>
 	{{/liquid-if}}
 {{/form-field}}
 {{yield}}
-<button title="Remove this employment" {{action "remove"}}>Remove</button>
+<button title="Remove this employment" {{action "remove"}} class="remove-button">Remove</button>

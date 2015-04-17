@@ -6,3 +6,22 @@
 
 @require "components/*" // import all components; pick and choose as needed
 @require "layout/*" // import all layout styles
+
+$material-box
+	@extend $fadeInUp
+	margin 0 auto
+	border 1px solid #EAEAEA
+	max-width 55em
+	box-shadow 0 0.1em 0.2em 0 rgba(0,0,0,0.12), 0 0.1em 0.3em 0 rgba(0, 0, 0, 0.26)
+
+.quick-application-box
+	@extend $material-box
+
+.form-step
+	border-bottom 1px solid #E2E2E2
+	&s
+		background #FFF
+		@extend $material-box
+		list-style-type decimal
+.asset, .liability
+	@extend $fadeIn

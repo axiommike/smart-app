@@ -2,17 +2,17 @@
 	{{historical-address address=currentAddress}}
 {{/form-field}}
 {{#liquid-if previousAddressesRequired}}
-	<button {{action "addAddress"}}>Add Previous Address</button>
+	<button {{action "addAddress"}} class="add-button">Add Previous Address</button>
 	{{#form-section title="Previous Addresses"}}
-		<span class="error">Please provide up to 3 years of address information.</span>
+		<span class="input-error">Please provide up to 3 years of address information.</span>
 		<ul class="previous-addresses">
 			{{#each address in previousAddresses}}
 				<li class="address edit">
 					{{historical-address address=address}}
-					<button {{action "removeAddress" address}}>Remove</button>
+					<button {{action "removeAddress" address}} class="remove-button">Remove</button>
 				</li>
 			{{else}}
-				<li>No previous addresses found.  <button {{action "addAddress"}}>Add Previous Address</button></li>
+				<li>No previous addresses found.  <button {{action "addAddress"}} class="add-button">Add Previous Address</button></li>
 			{{/each}}
 		</ul>
 		<footer class="address-history-total">
