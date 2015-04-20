@@ -2865,6 +2865,17 @@ body {
   display: inline-block;
   margin: 1em;
 }
+.applicants {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+@media only screen and (max-width: 767px) {
+  .applicants {
+    display: block;
+  }
+}
 .applicant-card {
   display: inline-block;
   vertical-align: top;
