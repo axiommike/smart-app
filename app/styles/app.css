@@ -180,7 +180,7 @@ a {
 }
 @media only screen and (max-width: 767px) {
 }
-.icon-description {
+.icon-fallback-text {
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -192,7 +192,7 @@ a {
   left: -500%;
 }
 .input-error,
-.quick-application-box,
+.box,
 .form-steps,
 .asset,
 .liability,
@@ -208,7 +208,7 @@ a {
   animation-fill-mode: both;
 }
 body {
-  background: #fff;
+  background: #ededed;
   font-size: 100%;
   font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
   line-height: 1.5;
@@ -748,7 +748,7 @@ body {
     transform: translateX(0);
   }
 }
-.quick-application-box,
+.box,
 .form-steps {
   -webkit-animation-name: fadeInUp;
   -o-animation-name: fadeInUp;
@@ -1445,7 +1445,8 @@ body {
 .alert-warning >:first-child:before,
 .alert-info >:first-child:before,
 .alert-error >:first-child:before,
-.alert >:first-child:before {
+.alert >:first-child:before,
+.applicant-card.co-applicant:before {
   font-family: "icomoon";
   speak: none;
   font-style: normal;
@@ -2877,15 +2878,51 @@ body {
   }
 }
 .applicant-card {
+  position: relative;
   display: inline-block;
   vertical-align: top;
-  overflow: hidden;
   margin: 0.5rem 0 1rem;
   background: #fff;
   -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
   border-radius: 0.1em;
   min-width: 25em;
+}
+.applicant-card-relationship {
+  -webkit-transition: transform 0.4s ease, opacity 0.4s ease;
+  -o-transition: transform 0.4s ease, opacity 0.4s ease;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  content: "\e9cb";
+  position: absolute;
+  font-size: 4em;
+  top: 50%;
+  left: -1em;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+  filter: alpha(opacity=60);
+  opacity: 0.6;
+}
+.applicant-card.co-applicant {
+  -webkit-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  -o-transform: scale(0.9);
+  transform: scale(0.9);
+}
+.applicant-card.co-applicant:before {
+  -webkit-transition: transform 0.4s ease, opacity 0.4s ease;
+  -o-transition: transform 0.4s ease, opacity 0.4s ease;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  content: "\e9cb";
+  position: absolute;
+  font-size: 3em;
+  top: 50%;
+  left: -1.4em;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+  filter: alpha(opacity=60);
+  opacity: 0.6;
 }
 .applicant-card.primary-applicant .applicant-card-full-name {
   text-indent: 3em;
@@ -2896,6 +2933,7 @@ body {
 }
 .applicant-card-header {
   padding: 1.2em;
+  margin-bottom: 1em;
   background: #2be2e2;
   color: #fff;
 }
@@ -3304,6 +3342,9 @@ button-error:focus {
   .form {
     display: inherit;
   }
+}
+.form-section .form-section {
+  margin: 0 -1em;
 }
 .form-section-title {
   text-transform: uppercase;
@@ -4052,8 +4093,7 @@ button-error:focus {
   width: 91.6666666666667%;
 }
 .item-table .add-button,
-liability-table .add-button,
-asset-table .add-button {
+.table-header .add-button {
   float: right;
 }
 .loader {
@@ -4552,15 +4592,8 @@ input:-ms-input-placeholder {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-main {
-  padding: 1em;
-}
 header[role="banner"] {
-  position: absolute;
-  z-index: 1;
-  right: 3em;
-  top: 6em;
-  padding: 1em;
+  background: #0081ff;
 }
 h6,
 h5,
@@ -4680,7 +4713,7 @@ footer a[href]:visited {
     page-break-after: avoid;
   }
 }
-.quick-application-box,
+.box,
 .form-steps {
   margin: 0 auto;
   border: 1px solid #eaeaea;

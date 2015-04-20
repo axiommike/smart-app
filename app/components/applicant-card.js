@@ -8,6 +8,13 @@ export default Ember.Component.extend({
 	isEditing: false,
 	isEditable: true,
 	onRemoveApplicant: null,
+	onCopyAddresses: null,
+	relationshipTypes: [
+		"Spouse",
+		"Parent",
+		"Child (commonlaw)",
+		"Other"
+	],
 	actions: {
 		toggleEditing: function() {
 			this.toggleProperty("isEditing");
@@ -29,8 +36,12 @@ export default Ember.Component.extend({
 			this.get("applicant").get("previousAddresses").pushObject(addedAddress);
 		},
 		addAsset: function() {
-			let store = this.get("targetObject.store"), addedAsset = store.createRecord("asset");
+			console.log(`AddAsset on applicant-card called`);
+			let store = this.get("targetObject.store"), addedAsset = store.createRecord("asset", {type: null});
 			this.get("applicant").get("assets").pushObject(addedAsset);
+		},
+		copyAddresses: function() {
+			this.sendAction("onCopyAddresses", this.get("applicant"));
 		},
 		removeAsset: function(asset) {
 			this.get("applicant.assets").removeObject(asset);

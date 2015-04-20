@@ -49,6 +49,7 @@ export default DS.Model.extend({
 	mortgages: Ember.computed.alias("properties.@each.mortgage"),
 	properties: DS.hasMany("property", {async: true}),
 	isPrimary: DS.attr("boolean"),
+	relationship: DS.attr("string"), /* Spouse, parent, child (commonlaw), other */
 	currentProperties: Ember.computed.filterBy("properties", "isCurrent", true),
 	currentProperty: Ember.computed.alias("currentProperties.firstObject"),
 	otherProperties: Ember.computed.filterBy("properties", "isCurrent", false)

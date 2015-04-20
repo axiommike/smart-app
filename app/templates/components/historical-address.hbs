@@ -1,9 +1,9 @@
 {{#form-field title=typeName}}
-	{{#liquid-if address.isCurrent}}
+	{{#if address.isCurrent}}
 		{{address-input address=address value=address.address placeholder=typeName title="Please indicate where you are currently living" required=required}}
 	{{else}}
 		{{address-input address=address value=address.address placeholder=typeName title="Please provide historical addresses dating back at least 3 years" required=required}}
-	{{/liquid-if}}
+	{{/if}}
 	{{#liquid-if address.address}}
 		<dl class="address-info">
 			{{#liquid-if address.unit}}

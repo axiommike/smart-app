@@ -9,15 +9,9 @@
 */
 .container
 	box-sizing border-box
-main
-	padding $padding
 header
 	&[role="banner"]
-		position absolute
-		z-index 1
-		right 3em
-		top 6em
-		padding $padding
+		background rgb(0, 129, 255)
 	for num in (6..1)
 		h{num}
 			@extend $margin-none

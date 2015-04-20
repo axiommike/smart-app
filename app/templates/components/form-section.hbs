@@ -1,5 +1,5 @@
-<legend {{bind-attr class=titleClassName}}>{{#liquid-if icon}}
+<legend {{bind-attr class=titleClassName}}>{{#if icon}}
 	{{accessible-icon icon=icon title=title}}
-{{/liquid-if}}
+{{/if}}
 	{{title}}</legend>
 {{yield}}
