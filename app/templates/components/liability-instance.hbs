@@ -15,9 +15,6 @@
 		{{/form-field}}
 	{{/if}}
 	{{#if liability.isMortgage}}
-		{{#form-field title="Property"}}
-			{{view "select" content=properties optionValuePath="content.id" optionLabelPath="content.adddress.address" value=liability.property}}
-		{{/form-field}}
 		{{#form-field title="Maturity Date"}}
 			{{input type="date" value=liability.maturityDate required=true}}
 		{{/form-field}}

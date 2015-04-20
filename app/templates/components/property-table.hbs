@@ -3,7 +3,7 @@
 	{{#if caption}}
 		{{caption}},
 	{{/if}}
-		 <sup><strong>{{format-number totalValue style="currency" currency="USD"}}</strong> total real estate value</sup>
+		 <sup><strong>{{format-number totalValue style="currency" currency="CAD"}}</strong> total real estate value</sup>
 	</h4>
 	<button {{action "addProperty"}} title="Add a Property" class="add-button">Add Property</button>
 </header>
@@ -16,7 +16,7 @@
 	{{else}}
 		<li>
 			No properties found.
-			<button {{action "addProperty"}} class="add-button">Add One?</button>
+			<a {{action "addProperty"}} title="Add a property">Add One?</a>
 		</li>
 	{{/each}}
 </ul>

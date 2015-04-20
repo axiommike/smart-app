@@ -195,7 +195,8 @@ a {
 .quick-application-box,
 .form-steps,
 .asset,
-.liability {
+.liability,
+.applicant-card {
   -webkit-animation-duration: 1s;
   -o-animation-duration: 1s;
   animation-duration: 1s;
@@ -213,7 +214,8 @@ body {
   line-height: 1.5;
 }
 .asset,
-.liability {
+.liability,
+.applicant-card {
   -webkit-animation-name: fadeIn;
   -o-animation-name: fadeIn;
   animation-name: fadeIn;
@@ -2859,12 +2861,63 @@ body {
   font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
   font-weight: bold;
 }
+.applicant {
+  display: inline-block;
+  margin: 1em;
+}
 .applicant-card {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  margin: 0.5rem 0 1rem;
+  background: #fff;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+  border-radius: 0.1em;
   min-width: 25em;
+}
+.applicant-card.primary-applicant .applicant-card-full-name {
+  text-indent: 3em;
+  display: inline-block;
+}
+.applicant-card-full-name {
+  text-align: center;
+}
+.applicant-card-header {
+  padding: 1.2em;
+  background: #2be2e2;
+  color: #fff;
+}
+.applicant-card-role {
+  color: inherit;
+  float: right;
+  font-weight: 300;
+  font-size: 0.8rem;
   border: 1px solid currentColor;
+  padding: 0 0.6rem;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  vertical-align: top;
+  display: inline-block;
+}
+.applicant-card-title {
+  text-align: center;
+  line-height: 3;
+  font-size: 2.2em;
+}
+.applicant-card-image {
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+.applicant-card-actions {
+rgba(160,160,160,0.2)
+  padding: 1.2em;
 }
 .asset {
   min-width: 15em;
+  display: inline-block;
 }
 .badge,
 .badge-success,
@@ -3986,6 +4039,11 @@ button-error:focus {
 }
 .eleven-twelveths {
   width: 91.6666666666667%;
+}
+.item-table .add-button,
+liability-table .add-button,
+asset-table .add-button {
+  float: right;
 }
 .loader {
   color: #fff;

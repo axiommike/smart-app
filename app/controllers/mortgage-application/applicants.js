@@ -6,7 +6,10 @@ export default Ember.ObjectController.extend({
 			this.get("model.applicants").removeObject(applicant);
 		},
 		addApplicant: function() {
-			let addedApplicant = this.store.createRecord("applicant");
+			let addedApplicant = this.store.createRecord("applicant",
+				{
+					firstName: "New Applicant"
+				});
 			this.get("model.applicants").pushObject(addedApplicant);
 		},
 		nextStep: function() {

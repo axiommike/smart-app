@@ -1,86 +1,93 @@
 <header class="applicant-card-header">
-	{{#liquid-if applicant.hasName}}
-		<h1 class="applicant-name">
-			<span class="applicant-full-name">{{applicant.fullName}}</span>
-			{{#liquid-if applicant.isPrimary}}
-				 (primary applicant)
-			{{/liquid-if}}
+	{{#if applicant.hasName}}
+		<h1 class="applicant-card-title">
+			<span class="applicant-card-full-name">{{applicant.fullName}}</span>
+			{{#if applicant.isPrimary}}
+				<span class="applicant-card-role">Primary Applicant</span>
+			{{/if}}
 		</h1>
-	{{/liquid-if}}
-	<ul class="applicant-actions">
-		{{#liquid-unless applicant.isPrimary}}
-			<li class="applicant-action">
+	{{/if}}
+	{{#if applicant.hasValidEmail}}
+		{{gravatar-image email=applicant.email alt=applicant.fullName size=250 defaultImage="identicon" class="applicant-card-image" secure=false title=applicant.fullName}}
+	{{/if}}
+	<ul class="applicant-card-actions">
+		{{#unless applicant.isPrimary}}
+			<li class="applicant-card-action">
 				<button {{action "removeApplicant" applicant}}>Remove {{applicant.fullName}}</button>
 			</li>
-		{{/liquid-unless}}
-		{{#liquid-if isEditable}}
+		{{/unless}}
+		{{#if isEditable}}
 			<li>
 				<button {{action "toggleEditing" applicant}}>
-					{{#liquid-if isEditing}}
+					{{#if isEditing}}
 						Done
 					{{else}}
 						Edit
-					{{/liquid-if}}
+					{{/if}}
 				</button>
 			</li>
-		{{/liquid-if}}
+		{{/if}}
 	</ul>
 </header>
-{{#liquid-if isEditing}}
-	{{#form-section title="basic-information" icon="info-sign"}}
-		<div class = "row">
-			{{#form-field title="First Name" class="column one-half" layoutDirection="vertical"}}
-				{{input value=applicant.firstName placeholder="First Name" required=true autofocus="autofocus" title="Please provide the applicant's first name"}}
-			{{/form-field}}
-			{{#form-field title="Last Name" class="column one-half" layoutDirection="vertical"}}
-				{{input value=applicant.lastName placeholder="Last Name" required=true title="Please provide the applicant's last name"}}
-			{{/form-field}}
-		</div>
-		{{#form-section title="Contact Methods" icon="mail"}}
-			{{#form-field title="Email" layoutDirection="vertical"}}
-				{{input value=applicant.email required=true type="email" placeholder="Email" title="Please enter a valid e-mail"}}
-			{{/form-field}}
-			{{#form-field title="Phone" layoutDirection="vertical"}}
-				{{input value=applicant.phone type="tel" required=true placeholder="Phone" title="Please provide the applicant's phone number"}}
-			{{/form-field}}
+
+<article class="applicant-card-content">
+	{{#if isEditing}}
+		{{#form-section title="basic-information" icon="info-sign"}}
+			<div class = "row">
+				{{#form-field title="First Name" class="column one-half" layoutDirection="vertical"}}
+					{{input value=applicant.firstName placeholder="First Name" required=true autofocus="autofocus" title="Please provide the applicant's first name"}}
+				{{/form-field}}
+				{{#form-field title="Last Name" class="column one-half" layoutDirection="vertical"}}
+					{{input value=applicant.lastName placeholder="Last Name" required=true title="Please provide the applicant's last name"}}
+				{{/form-field}}
+			</div>
+			{{#form-section title="Contact Methods" icon="mail"}}
+				<div class="row">
+					{{#form-field title="Email" class="column" layoutDirection="vertical"}}
+						{{input value=applicant.email required=true type="email" placeholder="Email" title="Please enter a valid e-mail"}}
+					{{/form-field}}
+					{{#form-field title="Phone" class="column" layoutDirection="vertical"}}
+						{{input value=applicant.phone type="tel" required=true placeholder="Phone" title="Please provide the applicant's phone number"}}
+					{{/form-field}}
+					{{#form-field title="Birth Date" layoutDirection="vertical"}}
+						{{input type="date" value=applicant.birthDate required=true title="Please provide the date of birth of the applicant"}}
+					{{/form-field}}
+				</div>
+			{{/form-section}}
 		{{/form-section}}
+		{{#form-section title="Location" icon="pin"}}
+			{{historical-addresses previousAddresses=applicant.previousAddresses currentAddress=applicant.currentAddress onAddAddress="addAddress"}}
+		{{/form-section}}
+		{{#form-section title="Employment" icon="hat"}}
+			<button {{action "addEmployment" applicant}} class="add-button">Add Employment</button>
+			{{#each historicalEmployment in applicant.employment}}
+				{{historical-employment employment=historicalEmployment onRemove="removeEmployment"}}
+			{{else}}
+				No employment history for {{applicant.fullName}}.  <button {{action "addEmployment" applicant}} class="add-button">Add Employment</button>
+			{{/each}}
+		{{/form-section}}
+		{{#form-section title="Assets" icon="coin"}}
+			{{asset-table assets=applicant.assets onAdd="addAsset" caption="Assets for applicant"}}
+		{{/form-section}}
+		{{#form-section title="Liabilities" icon="hand"}}
+			{{liability-table liabilities=applicant.liabilities onAdd="addLiability" properties=applicant.properties}}
+		{{/form-section}}
+	{{else}}
+		<dl class="applicant-card-details">
+			{{#if applicant.email}}
+				<dt>Email</dt>
+				<dd>{{applicant.email}}</dd>
+			{{/if}}
+			{{#if applicant.phone}}
+				<dt>Phone</dt>
+				<dd>{{applicant.phone}}</dd>
+			{{/if}}
+			{{#if applicant.birthDate}}
+				<dt>Birth Date</dt>
+				<dd>{{applicant.birthDate}}</dd>
+			{{/if}}
+		</dl>
+	{{/if}}
 
-		{{#form-field title="Birth Date" layoutDirection="vertical"}}
-			{{input type="date" value=applicant.birthDate required=true title="Please provide the date of birth of the applicant"}}
-		{{/form-field}}
-	{{/form-section}}
-	{{#form-section title="Location" icon="pin"}}
-		{{historical-addresses previousAddresses=applicant.previousAddresses currentAddress=applicant.currentAddress onAddAddress="addAddress"}}
-	{{/form-section}}
-	{{#form-section title="Employment" icon="hat"}}
-		<button {{action "addEmployment" applicant}} class="add-button">Add Employment</button>
-		{{#each historicalEmployment in applicant.employment}}
-			{{historical-employment employment=historicalEmployment onRemove="removeEmployment"}}
-		{{else}}
-			No employment history for {{applicant.fullName}}.  <button {{action "addEmployment" applicant}} class="add-button">Add Employment</button>
-		{{/each}}
-	{{/form-section}}
-	{{#form-section title="Assets" icon="coin"}}
-		{{asset-table assets=applicant.assets onAdd="addAsset" caption="Assets for applicant"}}
-	{{/form-section}}
-	{{#form-section title="Liabilities" icon="hand"}}
-		{{liability-table liabilities=applicant.liabilities onAdd="addLiability" properties=applicant.properties}}
-	{{/form-section}}
-{{else}}
-	<dl class="applicant-card-details">
-		{{#liquid-if applicant.email}}
-			<dt>Email</dt>
-			<dd>{{applicant.email}}</dd>
-		{{/liquid-if}}
-		{{#liquid-if applicant.phone}}
-			<dt>Phone</dt>
-			<dd>{{applicant.phone}}</dd>
-		{{/liquid-if}}
-		{{#liquid-if applicant.birthDate}}
-			<dt>Birth Date</dt>
-			<dd>{{applicant.birthDate}}</dd>
-		{{/liquid-if}}
-	</dl>
-{{/liquid-if}}
-
-{{yield}}
+	{{yield}}
+</article>

@@ -17,6 +17,7 @@ export default DS.Model.extend({
 	employment: DS.hasMany("employment"),
 	currentEmployment: Ember.computed.filterBy("employment", "isCurrent", true),
 	email: DS.attr("string"),
+	hasValidEmail: Ember.computed.match("email", /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i),
 	phone: DS.attr("string"),
 	workPhone: Ember.computed.alias("currentEmployment.firstObject.company.phone"),
 	liabilities: DS.hasMany("liability"),

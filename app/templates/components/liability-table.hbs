@@ -1,27 +1,15 @@
 <header class="table-header">
-	<button title="Add a Liability" {{action "addLiability"}} class="add-button">Add
-		{{#if type}}
-			{{type}}
-		{{else}}
-			Liability
-		{{/if}}
-	</button>
+	<button title="Add a Liability" {{action "addLiability"}} class="add-button">Add {{typeName}}</button>
 </header>
 
 {{#if totalLiabilities}}
-	<sup><strong>{{format-number totalLiabilities style="currency" currency="USD"}}</strong> total</sup>
+	<sup><strong>{{format-number totalLiabilities style="currency" currency="CAD"}}</strong> total</sup>
 {{/if}}
 <ul class="liabilities">
 	{{#each liability in filteredLiabilities}}
 		<li {{bind-attr class=":liability liability.type"}}>
 			{{liability-instance liability=liability typeEditingDisabled=type}}
-			<button {{action "removeLiability" liability}} class="remove-button">Remove
-				{{#if type}}
-					 {{type}}
-				{{else}}
-					 Liability
-				{{/if}}
-			</button>
+			<button {{action "removeLiability" liability}} class="remove-button">Remove {{typeName}}</button>
 		</li>
 	{{else}}
 		<li>No liabilities found.  <a {{action "addLiability" title="Add a liability"}}>Add one</a></li>

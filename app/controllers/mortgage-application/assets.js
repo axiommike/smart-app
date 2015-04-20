@@ -6,6 +6,7 @@ export default Ember.ObjectController.extend({
 	ownsOtherAssets: false,
 	actions: {
 		addProperty: function() {
+			console.log(`Add property triggered`);
 			let addedProperty = this.store.createRecord("property"), mortgage = this.store.createRecord("liability", {type: "mortgage"}), addedAddress = this.store.createRecord("address"), addedPropertyAsset = this.store.createRecord("asset", {type: "property"});
 			addedProperty.setProperties({
 				mortgage: mortgage,

@@ -63,7 +63,7 @@
 				{{on-off-switch checked=hasInvestments title="Please indicate whether you have any stocks or bond investments" id="do-you-have-any-stocks-or-bond-investments?"}}
 			{{/form-field}}
 			{{#liquid-if hasInvestments}}
-				{{asset-table assets=applicant.assets type="investment" onAdd="addAsset" title="Table of all personal assets" caption="All Personal Item Assets"}}
+				{{asset-table assets=applicant.assets type="investment" onAdd="addAsset" caption="All Stock and Bond Investments"}}
 			{{/liquid-if}}
 		</li>
 		<li class="form-step">

@@ -1,10 +1,10 @@
 <header class="table-header">
-	<button {{action "addAsset"}} class="add-button">Add Asset</button>
+	<button {{action "addAsset"}} class="add-button">Add {{typeName}}</button>
 	{{#if caption}}
 		<h5 class="caption">
 			{{caption}}
 			{{#if totalAssets}}
-				<sup><strong>{{format-number totalAssets style="currency" currency="USD"}}</strong> total</sup>
+				<sup><strong>{{format-number totalAssets style="currency" currency="CAD"}}</strong> total</sup>
 			{{/if}}
 		</h5>
 	{{/if}}
@@ -14,11 +14,11 @@
 	{{#each asset in filteredAssets}}
 		<li class="asset">
 			{{asset-instance asset=asset}}
-			<button {{action "removeAsset" asset}} class="remove-button">Remove Asset</button>
+			<button {{action "removeAsset" asset}} class="remove-button">Remove {{typeName}}</button>
 		</li>
 	{{else}}
 		<li>
-			No assets found.  <button {{action "addAsset"}} class="add-button">Add One?</button>
+			No assets found.  <a {{action "addAsset"}}>Add One?</a>
 		</li>
 	{{/each}}
 </ul>

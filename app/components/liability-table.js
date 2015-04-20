@@ -3,6 +3,9 @@ import Ember from "ember";
 export default Ember.Component.extend({
 	liabilities: Ember.A(),
 	type: null,
+	typeName: Ember.computed("type", function() {
+		return this.get("type") ? this.get("type") : "Liability";
+	}),
 	filteredLiabilities: Ember.computed.filter("liabilities", function(liability) {
 		return this.get("type") ? liability.get("type") === this.get("type") : true;
 	}),

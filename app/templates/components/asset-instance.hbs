@@ -27,7 +27,7 @@
 
 {{#if asset.isInvestment}}
 	{{#form-field title="Asset/Bond Investment Value"}}
-		{{currencyInput value=asset.value placeholder="Amount Invested" min="0" step="100"}}
+		{{currency-input value=asset.value placeholder="Amount Invested" min="0" step="100"}}
 	{{/form-field}}
 {{/if}}
 

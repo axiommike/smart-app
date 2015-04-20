@@ -45,7 +45,7 @@
 		{{#form-field title="Property Taxes"}}
 			{{currency-input value=property.propertyTaxes placeholder="Property Taxes" min="0" step="any"}}
 			{{#if property.propertyTaxes}}
-				<span class="help">{{property.propertyTaxes}} * 12 = <strong>{{format-number property.propertyTaxesAnnual style="currency" currency="USD"}} per year</strong></span>
+				<span class="help">{{property.propertyTaxes}} * 12 = <strong>{{format-number property.propertyTaxesAnnual style="currency" currency="CAD"}} per year</strong></span>
 			{{/if}}
 		{{/form-field}}
 	{{/form-section}}

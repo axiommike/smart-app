@@ -5,6 +5,7 @@ export default DS.Model.extend({
 	type: DS.attr("string"),
 	isPersonalItem: Ember.computed.equal("type", "item"),
 	isSavings: Ember.computed.equal("type", "savings"),
+	isInvestment: Ember.computed.equal("type", "investment"),
 	isGIC: Ember.computed.equal("type", "gic"),
 	isRESP: Ember.computed.equal("type", "resp"),
 	isRRSP: Ember.computed.equal("type", "rrsp"),

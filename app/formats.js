@@ -8,7 +8,8 @@ export default {
 	},
 	number: {
 		EUR: {style: "currency", currency: "EUR"},
-		USD: {style: "currency", currency: "USD"}
+		USD: {style: "currency", currency: "USD"},
+		CAD: {style: "currency", currency: "CAD"}
 	},
 	time:   {
 		hhmmss: {
