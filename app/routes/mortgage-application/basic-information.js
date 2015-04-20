@@ -2,7 +2,8 @@ import Ember from "ember";
 
 export default Ember.Route.extend({
 	beforeModel: function() {
-		console.log("Before model triggered");
+		let mortgageController = this.controllerFor("mortgage-application");
+		mortgageController.set("currentStep", 0);
 	},
 	setupController: function (controller, model) {
 		// Call _super for default behavior

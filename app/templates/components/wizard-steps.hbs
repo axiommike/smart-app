@@ -1,0 +1,20 @@
+{{#if showBreadcrumbs}}
+	<ul class="wizard-steps-breadcrumbs">
+		{{#each step in steps}}
+			{{wizard-step step=step.step name=step.name icon=step.icon}}
+		{{else}}
+			No steps found!
+		{{/each}}
+	</ul>
+{{/if}}
+
+{{#if currentStepNumber}}
+	{{#if totalSteps}}
+		<progress {{bind-attr value=currentStepNumber min=min max=totalSteps}} class="wizard-steps-progress">
+			<span class="info">Step {{currentStepNumber}} of {{totalSteps}}</span>
+		</progress>
+		{{wizard-step step=realStepNumber stepName=currentStepName stepIcon=currentStepIcon totalSteps=totalSteps}}
+	{{/if}}
+{{/if}}
+
+{{yield}}

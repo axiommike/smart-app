@@ -132,7 +132,10 @@ p:only-child {
   margin: 0;
 }
 dl dt,
-dl dd {
+dl dd,
+.liabilities,
+.assets,
+.properties {
   margin: 1em;
 }
 h6,
@@ -4156,10 +4159,6 @@ button-error:focus {
   font-size: 1.5em;
   margin-bottom: 0 0 0.5em 0;
 }
-progress {
-  margin: 0 auto;
-  cursor: wait;
-}
 @-moz-keyframes spin {
   0% {
     left: 50%;
@@ -4487,6 +4486,23 @@ progress {
 .wizard-step {
   padding: 7%;
 }
+.wizard-steps-progress {
+  width: 100%;
+  position: absolute;
+  height: 0.2em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+}
+.wizard-steps-progress::-moz-progress-bar,
+.wizard-steps-progress::-webkit-progress-bar {
+  background: transparent !important;
+}
+.wizard-steps-progress::-moz-progress-value,
+.wizard-steps-progress::-webkit-progress-value {
+  background: #fff !important;
+}
 .wizard-step-current-step {
   font-weight: bold;
 }
@@ -4594,6 +4610,12 @@ input:-ms-input-placeholder {
 }
 header[role="banner"] {
   background: #0081ff;
+  color: #fff;
+}
+.header-action {
+  position: absolute;
+  top: 10em;
+  right: 10em;
 }
 h6,
 h5,

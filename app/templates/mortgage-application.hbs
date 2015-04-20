@@ -1,6 +1,6 @@
 <header role="banner">
-	<h1>Mortgage Application</h1>
-	<button {{action "sendIncomplete"}}>Submit Application As-is</button>
+	{{wizard-steps steps=steps currentStepNumber=currentStep}}
+	<button {{action "sendIncomplete"}} class="header-action">Submit Application As-is</button>
 </header>
 
 <datalist id="lenders">

@@ -1,6 +1,18 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+	steps: [
+		"Basic Information",
+		"Assets",
+		"Liabilities",
+		"Applicants",
+		"Summary",
+		"Thank You"
+	],
+	currentStep: 0,
+	realStep: Ember.computed("currentStep", function() {
+		return this.get("currentStep") + 1;
+	}),
 	lenders: [
 		"Alberta Treasury Branch (ATB)",
 		"Assiniboine Credit Union",
