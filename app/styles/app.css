@@ -131,6 +131,7 @@ header h1,
 p:only-child {
   margin: 0;
 }
+.sub-actions,
 dl dt,
 dl dd,
 .liabilities,
@@ -173,7 +174,8 @@ footer a[href] {
 .alert-warning >:first-child:before,
 .alert-info >:first-child:before,
 .alert-error >:first-child:before,
-.alert >:first-child:before {
+.alert >:first-child:before,
+.sub-actions {
   float: left;
 }
 a {
@@ -3435,6 +3437,7 @@ button-error:focus {
 }
 .form-actions {
   margin-top: 1em;
+  padding: 1em;
   text-align: right;
 }
 @media only screen and (max-width: 767px) {
@@ -4484,7 +4487,7 @@ button-error:focus {
   border-right: 3px solid #00abcc;
 }
 .wizard-step {
-  padding: 7%;
+  padding: 4em;
 }
 .wizard-steps-progress {
   width: 100%;
@@ -4510,7 +4513,7 @@ button-error:focus {
   font-weight: bold;
 }
 .wizard-step-title {
-  display: inline-block;
+  display: block;
   font-size: 2em;
 }
 .wizard-step .total-steps {
@@ -4610,12 +4613,35 @@ input:-ms-input-placeholder {
 }
 header[role="banner"] {
   background: #0081ff;
+  -webkit-transition: background 0.5s ease;
+  -o-transition: background 0.5s ease;
+  transition: background 0.5s ease;
   color: #fff;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+  -ms-align-items: baseline;
+  -o-align-items: baseline;
+  align-items: baseline;
+  -webkit-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  justify-content: space-between;
 }
-.header-action {
-  position: absolute;
-  top: 10em;
-  right: 10em;
+header[role="banner"][data-current-step="1"] {
+  background: #cd5c5c;
+}
+header[role="banner"][data-current-step="2"] {
+  background: #38cd6b;
+}
+header[role="banner"][data-current-step="3"] {
+  background: #cd6132;
+}
+header[role="banner"][data-current-step="4"] {
+  background: #00a7c5;
 }
 h6,
 h5,
@@ -4737,6 +4763,7 @@ footer a[href]:visited {
 }
 .box,
 .form-steps {
+  background: #fff;
   margin: 0 auto;
   border: 1px solid #eaeaea;
   max-width: 55em;
@@ -4749,4 +4776,8 @@ footer a[href]:visited {
 .form-steps {
   background: #fff;
   list-style-type: decimal;
+}
+.announcement {
+  text-align: center;
+  line-height: 3;
 }

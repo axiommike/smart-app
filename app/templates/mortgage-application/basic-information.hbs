@@ -1,19 +1,3 @@
-<aside class="tips">
-	<dl class="application-overview">
-		<dt>Name</dt>
-		<dd>{{applicant.fullName}}</dd>
-		{{#liquid-if applicant.email}}
-			<dt>Email</dt>
-			<dd>{{applicant.email}}</dd>
-		{{/liquid-if}}
-		{{#liquid-if applicant.phone}}
-			<dt>Phone</dt>
-			<dd>{{applicant.phone}}</dd>
-		{{/liquid-if}}
-	</dl>
-	{{tips-container tips=tips}}
-</aside>
-
 {{#validatable-form action="nextStep"}}
 	<ol class="form-steps">
 		<li class="form-step">
@@ -57,3 +41,4 @@
 		<button type="submit">Continue to Co-Applicants</button>
 	</footer>
 {{/validatable-form}}
+{{outlet}}

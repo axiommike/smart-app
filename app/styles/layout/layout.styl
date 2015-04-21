@@ -12,11 +12,19 @@
 header
 	&[role="banner"]
 		background rgb(0, 129, 255)
+		transition background 0.5s ease
+		&[data-current-step="1"]
+			background #cd5c5c
+		&[data-current-step="2"]
+			background #38cd6b
+		&[data-current-step="3"]
+			background rgba(205, 97, 50, 1)
+		&[data-current-step="4"]
+			background #00A7C5
 		color white
+		display flex
+		align-items baseline
+		justify-content space-between
 	for num in (6..1)
 		h{num}
 			@extend $margin-none
-.header-action
-	position absolute
-	top 10em
-	right 10em
