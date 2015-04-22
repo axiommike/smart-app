@@ -1,11 +1,11 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 export default Ember.Controller.extend({
 	steps: [
 		"Basic Information",
+		"Applicants",
 		"Assets",
 		"Liabilities",
-		"Applicants",
 		"Summary",
 		"Thank You"
 	],

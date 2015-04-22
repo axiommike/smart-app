@@ -10,23 +10,25 @@
 					{{input value=applicant.lastName placeholder="Last Name" required=true id="last-name" title="Please provide your last name"}}
 				{{/form-field}}
 			</div>
-			{{#form-section title="Contact Information" icon="mail"}}
-				<div class="row">
-					{{#form-field title="Email" class="column one-half" layoutDirection="vertical"}}
-						{{input value=applicant.email required=true type="email" placeholder="Email" id="email"}}
-					{{/form-field}}
-					{{#form-field title="Phone" class="column one-half" layoutDirection="vertical"}}
-						{{input value=applicant.phone type="tel" required=true placeholder="Phone" id="phone"}}
-					{{/form-field}}
-				</div>
-			{{/form-section}}
-			{{#form-section title="Comments" icon="comment"}}
-				{{#form-field title="Anything else I can do?" layoutDirection="vertical"}}
-					{{textarea value=comment class="row" placeholder="Is there anything else I can do for you?" rows=comment.length id="anything-else-i-can-do?"}}
+			<div class="row">
+				{{#form-field title="Email" class="column one-half" layoutDirection="vertical"}}
+					{{input value=applicant.email required=true type="email" placeholder="Email" id="email"}}
 				{{/form-field}}
-			{{/form-section}}
+				{{#form-field title="Phone" class="column one-half" layoutDirection="vertical"}}
+					{{input value=applicant.phone type="tel" required=true placeholder="Phone" id="phone"}}
+				{{/form-field}}
+			</div>
+			{{#form-field title="How'd you hear about me?"}}
+				{{view "select" content=sourceTypes optionValuePath="content.value" optionLabelPath="content.label" value=source id="how'd-you-hear-about-me?" required=true}}
+			{{/form-field}}
+			{{#form-field title="What Can I do for you?"}}
+				{{view "select" content=goals optionValuePath="content.value" optionLabelPath="content.label" value=type id="what-can-i-do-for-you?" required=true}}
+			{{/form-field}}
+			{{#form-field title="Additional Comments" layoutDirection="vertical"}}
+				{{textarea value=comment class="row" placeholder="Is there anything else I can do for you?" rows=comment.length id="anything-else-i-can-do?"}}
+			{{/form-field}}
 			<footer class="form-actions">
-				<button type="submit" title="Continue to Full Application">Continue Application</button>
+				<button type="submit" title="Continue to Full Application">Complete Application</button>
 				<div class="sub-actions">
 					<a href="tel:15555555555" title="Call me on my cell phone">or call me</a>
 				</div>

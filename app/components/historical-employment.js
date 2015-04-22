@@ -10,7 +10,7 @@ export default Ember.Component.extend({
 		{label: "Pension", value: "pension"},
 		{label: "Other", value: "other"} /* Seasonal, etc. */
 	],
-	incomeTypes: [
+	paymentFrequencies: [
 		{label: "Hourly", value: "hourly"},
 		{label: "Salary", value: "salary"},
 		{label: "Commission", value: "commission"},

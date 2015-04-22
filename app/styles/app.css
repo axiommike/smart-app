@@ -4599,12 +4599,23 @@ input:-ms-input-placeholder {
   font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
   color: #d2d2d2;
 }
+@media only screen and (max-width: 767px) {
+  .add-button,
+  .remove-button {
+    display: block;
+    float: none;
+    margin: 1em;
+  }
+}
 .add-button:active,
 .remove-button:active {
   -webkit-transform: scale(1.05);
   -ms-transform: scale(1.05);
   -o-transform: scale(1.05);
   transform: scale(1.05);
+}
+.add-applicant {
+  float: right;
 }
 .container {
   -webkit-box-sizing: border-box;
@@ -4773,8 +4784,10 @@ footer a[href]:visited {
 .form-step {
   border-bottom: 1px solid #e2e2e2;
 }
+.form-step > .form-field-controls {
+  float: right;
+}
 .form-steps {
-  background: #fff;
   list-style-type: decimal;
 }
 .announcement {

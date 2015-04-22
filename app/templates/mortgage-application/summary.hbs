@@ -3,7 +3,7 @@
 </header>
 {{#validatable-form action="nextStep"}}
 	{{#each applicant in model.applicants}}
-		{{applicant-card applicant=applicant}}
+		{{applicant-card applicant=applicant includeIncome=true includeAssets=true includeLiabilities=true}}
 		{{else}}
 			<p>No applicants found.</p>
 	{{/each}}
@@ -11,7 +11,7 @@
 		{{textarea value=model.comment placeholder="Anything else to add?" id="comments"}}
 	{{/form-field}}
 	<footer class="form-actions">
-		<button type="submit">Review Application</button>
+		<button type="submit">Submit Application</button>
 	</footer>
 {{/validatable-form}}
 {{outlet}}

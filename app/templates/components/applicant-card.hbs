@@ -54,6 +54,9 @@
 					{{/form-field}}
 				</div>
 			{{/form-section}}
+			{{#form-field title="Marital Status"}}
+				{{view "select" content=maritalStatusOptions optionValuePath="content.value" optionLabelPath="content.label" value=applicant.maritalStatus required=true}}
+			{{/form-field}}
 			{{#unless applicant.isPrimary}}
 				{{#form-field title="Relationship"}}
 					{{view "select" content=relationshipTypes value=applicant.relationship}}
@@ -66,22 +69,31 @@
 			{{/unless}}
 			{{historical-addresses previousAddresses=applicant.previousAddresses currentAddress=applicant.currentAddress onAddAddress="addAddress"}}
 		{{/form-section}}
-		{{#form-section title="Employment" icon="briefcase"}}
-			<header class="table-header">
-				<button {{action "addEmployment" applicant}} class="add-button">Add Employment</button>
-			</header>
-			{{#each historicalEmployment in applicant.employment}}
-				{{historical-employment employment=historicalEmployment onRemove="removeEmployment"}}
-			{{else}}
-				No employment history for {{applicant.fullName}}.  <a {{action "addEmployment" applicant}}>Add Employment</a>
-			{{/each}}
-		{{/form-section}}
-		{{#form-section title="Assets" icon="user-plus"}}
-			{{asset-table assets=applicant.assets onAdd="addAsset"}}
-		{{/form-section}}
-		{{#form-section title="Liabilities" icon="user-minus"}}
-			{{liability-table liabilities=applicant.liabilities onAdd="addLiability" properties=applicant.properties}}
-		{{/form-section}}
+		{{#if includeIncome}}
+			{{#form-section title="Employment" icon="briefcase"}}
+				<header class="table-header">
+					<button {{action "addEmployment" applicant}} class="add-button">Add Employment</button>
+				</header>
+				{{#each historicalEmployment in applicant.employment}}
+					{{historical-employment employment=historicalEmployment onRemove="removeEmployment"}}
+				{{else}}
+					No employment history for {{applicant.fullName}}.  <a {{action "addEmployment" applicant}}>Add Employment</a>
+				{{/each}}
+			{{/form-section}}
+			{{#form-section title="Extra Income Sources" icon="coin"}}
+				{{income-table income=applicant.income onAdd="addIncome" onRemove="removeIncome"}}
+			{{/form-section}}
+		{{/if}}
+		{{#if includeAssets}}
+			{{#form-section title="Assets" icon="user-plus"}}
+				{{asset-table assets=applicant.assets onAdd="addAsset"}}
+			{{/form-section}}
+		{{/if}}
+		{{#if includeLiabilities}}
+			{{#form-section title="Liabilities" icon="user-minus"}}
+				{{liability-table liabilities=applicant.liabilities onAdd="addLiability" properties=applicant.properties}}
+			{{/form-section}}
+		{{/if}}
 	{{else}}
 		<dl class="applicant-card-details">
 			{{#if applicant.email}}

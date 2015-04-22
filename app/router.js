@@ -17,6 +17,7 @@ Router.map(function () {
 		this.route("assets");
 		this.route("thank-you");
 		this.route("liabilities");
+		this.route("income");
 	});
 });
 

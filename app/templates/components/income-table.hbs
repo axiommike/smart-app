@@ -1,0 +1,15 @@
+<header class="table-header">
+	<button class="add-button" {{action "addIncome"}}>Add Extra Income</button>
+</header>
+
+<ul class="income">
+	{{#each extraIncome in income}}
+		<li {{bind-attr class=":income extraIncome.source:extraIncome.source"}}>
+			{{income-instance income=extraIncome}}
+			<button {{action "removeIncome" extraIncome}}>Remove Extra Income</button>
+		</li>
+	{{else}}
+		<li>No extra income sources found.  <a {{action "addIncome"}}>Add one?</a></li>
+	{{/each}}
+</ul>
+{{yield}}

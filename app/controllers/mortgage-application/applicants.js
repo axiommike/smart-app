@@ -30,7 +30,7 @@ export default Ember.ObjectController.extend({
 		},
 		nextStep: function() {
 			this.get("model").save().then((application) => {
-				this.transitionToRoute("mortgage-application.summary", application);
+				this.transitionToRoute("mortgage-application.assets", application);
 			});
 		}
 	}

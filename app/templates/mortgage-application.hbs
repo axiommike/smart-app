@@ -1,8 +1,6 @@
 <header role="banner" data-current-step="{{currentStep}}">
 	{{wizard-steps steps=steps currentStepNumber=currentStep}}
-	{{#if currentStep}}
-		<button {{action "sendIncomplete"}} class="header-action">Submit Application As-is</button>
-	{{/if}}
+	<button {{action "sendIncomplete"}} class="header-action">Call Me {{accessible-icon icon="phone" title="Call me for immediate assistance"}}</button>
 </header>
 
 <datalist id="lenders">

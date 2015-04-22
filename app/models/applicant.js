@@ -22,6 +22,18 @@ export default DS.Model.extend({
 	workPhone: Ember.computed.alias("currentEmployment.firstObject.company.phone"),
 	liabilities: DS.hasMany("liability"),
 	assets: DS.hasMany("asset"),
+	income: DS.hasMany("income"),
+	/*allIncome: Ember.computed("income", "employment.@each.income", function() {
+		let applicantIncome = this.get("income"), applicantEmployment = this.get("employment").forEach((employment) => {
+			applicantIncome.pushObject(employment.get("income"));
+		});
+	}),*/
+	totalIncome: Ember.computed("income.@each.value", "employment.@each.income", function() {
+		let incomes = this.get("income");
+		return incomes.reduce(function(previousValue, income) {
+			return previousValue + parseInt(income.get("yearlyValue"));
+		}, 0);
+	}),
 	currentAddress: Ember.computed.alias("currentProperty.address"),
 	previousAddresses: DS.hasMany("address"),
 	addresses: Ember.computed("currentAddress", "previousAddresses", function() {
@@ -33,7 +45,7 @@ export default DS.Model.extend({
 			return previousValue + address.get("tenureTotalYears");
 		}, 0);
 	}),
-	martialStatus: DS.attr("string"), /* Married, single, divorced */
+	maritalStatus: DS.attr("string"), /* Married, single, divorced */
 	totalAssets: function() {
 		let assets = this.get("assets");
 		return assets.reduce(function(previousValue, asset) {

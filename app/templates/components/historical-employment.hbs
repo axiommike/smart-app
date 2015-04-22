@@ -6,11 +6,11 @@
 	{{on-off-switch checked=employment.isCurrent title="Is the job current?"}}
 {{/form-field}}
 {{#form-field title="Type"}}
-	{{view Ember.Select content=employmentTypes optionValuePath="content.value" optionLabelPath="content.label" value=employment.type}}
+	{{view "select" content=employmentTypes optionValuePath="content.value" optionLabelPath="content.label" value=employment.type}}
 {{/form-field}}
 
-{{#form-field title="Income Type"}}
-	{{view Ember.Select content=incomeTypes optionValuePath="content.value" optionLabelPath="content.label" value=employment.incomeType}}
+{{#form-field title="Payment Frequency"}}
+	{{view "select" content=paymentFrequencies optionValuePath="content.value" optionLabelPath="content.label" value=employment.paymentFrequency}}
 {{/form-field}}
 
 {{#liquid-unless employment.isSelfEmployed}}
@@ -58,7 +58,7 @@
 {{/liquid-if}}
 
 {{#form-field title="Annual Pay"}}
-	{{currency-input min="0" step="any" value=employment.income required=true}}
+	{{currency-input min="0" step="any" value=employment.income.value required=true}}
 	{{#liquid-if employment.income}}
 		<span>annually</span>
 	{{/liquid-if}}

@@ -1,17 +1,7 @@
 {{#validatable-form action="nextStep"}}
 	<ol class="form-steps">
 		<li class="form-step">
-			{{#form-field title="How'd you hear about me?"}}
-				{{view "select" content=sourceTypes optionValuePath="content.value" optionLabelPath="content.label" value=source id="how'd-you-hear-about-me?" required=true}}
-			{{/form-field}}
-		</li>
-		<li class="form-step">
-			{{#form-field title="What Can I do for you?"}}
-				{{view "select" content=goals optionValuePath="content.value" optionLabelPath="content.label" value=type id="what-can-i-do-for-you?" required=true}}
-			{{/form-field}}
-		</li>
-		<li class="form-step">
-			{{#form-field title="Martial Status"}}
+			{{#form-field title="Marital Status"}}
 				{{view "select" content=martialStatusOptions optionValuePath="content.value" optionLabelPath="content.label" value=applicant.martialStatus required=true}}
 			{{/form-field}}
 		</li>

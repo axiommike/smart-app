@@ -7,6 +7,9 @@ export default Ember.Component.extend({
 	classNameBindings: ["isPrimaryApplicant:primary-applicant:co-applicant", ":applicant-card"],
 	isEditing: false,
 	isEditable: true,
+	includeLiabilities: false,
+	includeAssets: false,
+	includeIncome: false,
 	onRemoveApplicant: null,
 	onCopyAddresses: null,
 	relationshipTypes: [
@@ -15,6 +18,11 @@ export default Ember.Component.extend({
 		"Child (commonlaw)",
 		"Other"
 	],
+	maritalStatusOptions: [
+		{value: "single", label: "Single"},
+		{value: "married", label: "Married"},
+		{value: "Divorced", label: "Divorced"}
+	],
 	actions: {
 		toggleEditing: function() {
 			this.toggleProperty("isEditing");
@@ -22,11 +30,21 @@ export default Ember.Component.extend({
 		removeApplicant: function() {
 			this.sendAction("onRemoveApplicant", this.get("applicant"));
 		},
+		addIncome: function() {
+			let store = this.get("targetObject.store"), addedIncome = store.createRecord("income");
+			this.get("applicant.income").pushObject(addedIncome);
+		},
+		removeIncome: function(income) {
+			this.get("applicant.income").removeObject(income);
+		},
 		addEmployment: function() {
-			let store = this.get("targetObject.store"), addedEmployment = store.createRecord("employment"), addedEmploymentCompany = store.createRecord("company"), addedEmploymentCompanyAddress = store.createRecord("address");
+			let store = this.get("targetObject.store"), addedEmployment = store.createRecord("employment"), addedEmploymentCompany = store.createRecord("company"), addedEmploymentCompanyAddress = store.createRecord("address"), addedEmploymentIncome = store.createRecord("income");
 			addedEmploymentCompany.set("address", addedEmploymentCompanyAddress);
-			addedEmployment.set("employer", addedEmploymentCompany);
-			this.get("applicant").get("employment").pushObject(addedEmployment);
+			addedEmployment.setProperties({
+				employer: addedEmploymentCompany,
+				income: addedEmploymentIncome
+			});
+			this.get("applicant.employment").pushObject(addedEmployment);
 		},
 		removeEmployment: function(employment) {
 			this.get("applicant.employment").removeObject(employment);

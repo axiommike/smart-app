@@ -6,7 +6,7 @@ export default DS.Model.extend(TimeableMixin, {
 	type: DS.attr("string"),
 	employer: DS.belongsTo("company"),
 	occupation: DS.attr("string"),
-	income: DS.attr("number", {defaultValue: 0}), /* Annual income ($) */
+	income: DS.belongsTo("income"), /* Annual income ($) */
 	incomeChanged: function() {
 		let hourlyRate = parseInt(this.get("hourlyRate")), weeklyHours = parseInt(this.get("weeklyHours"));
 		if (hourlyRate && weeklyHours) {
@@ -14,15 +14,15 @@ export default DS.Model.extend(TimeableMixin, {
 			this.set("income", yearlySalary);
 		}
 	}.observes("hourlyRate", "weeklyHours"),
-	incomeType: DS.attr("string"),
+	paymentFrequency: DS.attr("string"),
 	isSelfEmployed: Ember.computed.equal("type", "self-employed"),
 	isCurrent: DS.attr("boolean", {defaultValue: false}),
-	isHourly: Ember.computed.equal("incomeType", "hourly"),
-	isSalaried: Ember.computed("incomeType", function() {
-		return this.get("incomeType") === "salary" || this.get("incomeType") === "hourly";
+	isHourly: Ember.computed.equal("paymentFrequency", "hourly"),
+	isSalaried: Ember.computed("paymentFrequency", function() {
+		return this.get("paymentFrequency") === "salary" || this.get("paymentFrequency") === "hourly";
 	}),
-	isCommission: Ember.computed("incomeType", function() {
-		return this.get("incomeType") === "commission" || this.get("incomeType") === "commission-salary" || this.get("incomeType") === "commission-hourly";
+	isCommission: Ember.computed("paymentFrequency", function() {
+		return this.get("paymentFrequency") === "commission" || this.get("paymentFrequency") === "commission-salary" || this.get("paymentFrequency") === "commission-hourly";
 	}),
 	tenureMonths: DS.attr("number", {defaultValue: 0}),
 	hourlyRate: DS.attr("number", {defaultValue: 0}),

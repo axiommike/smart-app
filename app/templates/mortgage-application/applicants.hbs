@@ -1,15 +1,15 @@
 {{#validatable-form action="nextStep"}}
-	<button {{action "addApplicant"}} class="add-button">Add Co-Applicant</button>
+	<button {{action "addApplicant"}} class="add-button add-applicant">Add Co-Applicant</button>
 	<ul class="applicants">
 		{{#each applicant in applicants}}
 			<li {{bind-attr class=":applicant applicant.isPrimary:primary:co-applicant"}}>
-				{{applicant-card applicant=applicant isEditing=true onRemoveApplicant="removeApplicant" onCopyAddresses="copyAddresses" isEditable=false}}
+				{{applicant-card applicant=applicant isEditing=true onRemoveApplicant="removeApplicant" onCopyAddresses="copyAddresses" isEditable=false includeIncome=true}}
 			</li>
 		{{else}}
 			<li>No Co-Applicants selected.  <button {{action "addApplicant"}} class="add-button">Add one</button></li>
 		{{/each}}
 	</ul>
 	<footer class="form-actions">
-		<button type="submit">Review Application</button>
+		<button type="submit">Continue to Assets</button>
 	</footer>
 {{/validatable-form}}

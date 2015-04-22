@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
 		},
 		nextStep: function() {
 			this.get("model").save().then((application) => {
-				this.transitionToRoute("mortgage-application.applicants", application);
+				this.transitionToRoute("mortgage-application.summary", application);
 			});
 		}
 	}
