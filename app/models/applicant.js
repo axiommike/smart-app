@@ -22,6 +22,14 @@ export default DS.Model.extend({
 	workPhone: Ember.computed.alias("currentEmployment.firstObject.company.phone"),
 	liabilities: DS.hasMany("liability"),
 	assets: DS.hasMany("asset"),
+	vehicleAssets: Ember.computed.filterBy("assets", "type", "vehicle"),
+	personalItemAssets: Ember.computed.filterBy("assets", "type", "item"),
+	savingsAssets: Ember.computed.filterBy("assets", "type", "savings"),
+	investmentAssets: Ember.computed.filterBy("assets", "type", "investment"),
+	gicAssets: Ember.computed.filterBy("assets", "type", "gic"),
+	respAssets: Ember.computed.filterBy("assets", "type", "resp"),
+	rrspAssets: Ember.computed.filterBy("assets", "type", "rrsp"),
+	otherAssets: Ember.computed.filterBy("assets", "type", "other"),
 	income: DS.hasMany("income"),
 	/*allIncome: Ember.computed("income", "employment.@each.income", function() {
 		let applicantIncome = this.get("income"), applicantEmployment = this.get("employment").forEach((employment) => {

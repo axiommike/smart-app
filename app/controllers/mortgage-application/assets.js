@@ -3,7 +3,35 @@ import Ember from "ember";
 export default Ember.ObjectController.extend({
 	ownsCurrentResidence: false,
 	ownsOtherRealEstate: false,
+	otherPropertiesToggled: function() {
+		if (this.get("ownsOtherRealEstate") && this.get("model.applicant.otherProperties.length") === 0) {
+			this.send("addProperty");
+		}
+	}.observes("ownsOtherRealEstate"),
+	hasSavings: false,
+	savingsToggled: function() {
+		if (this.get("hasSavings") && this.get("model.applicant.savingsAssets.length") === 0) {
+			this.send("addAsset", "savings");
+		}
+	}.observes("hasSavings"),
+	hasPersonalItems: false,
+	personalItemsToggled: function() {
+		if (this.get("hasPersonalItems") && this.get("model.applicant.personalItemAssets.length") === 0) {
+			this.send("addAsset", "item");
+		}
+	}.observes("hasPersonalItems"),
+	hasGICs: false,
+	hasRESPs: false,
+	hasInvestments: false,
+	hasVehicles: false,
+	hasRRSPs: false,
 	ownsOtherAssets: false,
+	otherAssetsToggled: function() {
+		if (this.get("ownsOtherAssets") && this.get("model.applicant.otherAssets.length") === 0) {
+			this.send("addAsset", "other");
+		}
+	}.observes("ownsOtherAssets"),
+
 	actions: {
 		addProperty: function() {
 			console.log(`Add property triggered`);
