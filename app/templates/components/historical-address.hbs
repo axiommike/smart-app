@@ -4,34 +4,6 @@
 	{{else}}
 		{{address-input address=address value=address.address placeholder=typeName title="Please provide historical addresses dating back at least 3 years" required=required}}
 	{{/if}}
-	{{#liquid-if address.address}}
-		<dl class="address-info">
-			{{#liquid-if address.unit}}
-				<dt>Unit</dt>
-				<dd>{{address.unit}}</dd>
-			{{/liquid-if}}
-			{{#liquid-if address.city}}
-				<dt>City</dt>
-				<dd>{{address.city}}</dd>
-			{{/liquid-if}}
-			{{#liquid-if address.province}}
-				<dt>Province</dt>
-				<dd>{{address.province}}</dd>
-			{{/liquid-if}}
-			{{#liquid-if address.region}}
-				<dt>Region</dt>
-				<dd>{{address.region}}</dd>
-			{{/liquid-if}}
-			{{#liquid-if address.country}}
-				<dt>Country</dt>
-				<dd>{{address.country}}</dd>
-			{{/liquid-if}}
-			{{#liquid-if address.postalCode}}
-				<dt>Postal Code</dt>
-				<dd>{{address.postalCode}}</dd>
-			{{/liquid-if}}
-		</dl>
-	{{/liquid-if}}
 {{/form-field}}
 {{#form-field title="How Long?"}}
 	{{input type="number" value=address.tenureYears placeholder="Years" min="0" step="1" required=true title="Please indicate the amount of time in which this address was resided"}}

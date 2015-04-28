@@ -170,6 +170,11 @@ footer a[href] {
 .table {
   display: table;
 }
+.agent-callout {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 .alert-success >:first-child:before,
 .alert-warning >:first-child:before,
 .alert-info >:first-child:before,
@@ -4670,6 +4675,10 @@ header[role="banner"] {
   -ms-align-items: baseline;
   -o-align-items: baseline;
   align-items: baseline;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  flex-wrap: wrap;
   -webkit-justify-content: space-between;
   -ms-justify-content: space-between;
   -o-justify-content: space-between;
@@ -4826,4 +4835,19 @@ footer a[href]:visited {
 .announcement {
   text-align: center;
   line-height: 3;
+}
+.agent-callout {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  -o-flex: 1;
+  flex: 1;
+  padding: 3em;
+  text-align: right;
+}
+.agent-callout-phone {
+  color: inherit;
+  font-weight: bold;
+}
+.header-action {
+  margin: 3em;
 }
