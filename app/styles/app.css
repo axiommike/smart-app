@@ -4351,8 +4351,41 @@ button-error:focus {
   background: #000;
   background: rgba(0,0,0,0.1);
 }
+.on-off-switch:after,
+.on-off-switch:checked:before {
+  background: #f9f9f9;
+  font-weight: inherit;
+}
+.on-off-switch:before,
+.on-off-switch:checked:after {
+  background: #dbdbdb;
+  font-weight: bold;
+}
 .on-off-switch {
   margin: 0 1em;
+  min-width: 5em;
+  cursor: pointer;
+}
+.on-off-switch:before,
+.on-off-switch:after {
+  font-size: 0.8em;
+  color: #000;
+  text-transform: uppercase;
+  border: 1px solid #eaeaea;
+  padding: 0.3em 1em;
+  -webkit-transition: background 0.5s ease, border 0.5s ease, transform 0.5s ease;
+  -o-transition: background 0.5s ease, border 0.5s ease, transform 0.5s ease;
+  transition: background 0.5s ease, border 0.5s ease, transform 0.5s ease;
+}
+.on-off-switch:before {
+  content: attr(offmessage);
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+}
+.on-off-switch:after {
+  content: attr(onmessage);
+  border-top-right-radius: 1em;
+  border-bottom-right-radius: 1em;
 }
 .table-bordered th,
 .table-bordered tbody + tbody,
@@ -4784,7 +4817,7 @@ footer a[href]:visited {
 .form-step {
   border-bottom: 1px solid #e2e2e2;
 }
-.form-step > .form-field-controls {
+.form-step > .form-field-horizontal .form-field-controls {
   float: right;
 }
 .form-steps {

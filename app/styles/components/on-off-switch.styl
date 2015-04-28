@@ -8,5 +8,56 @@ Author: michael
 Created on 15/04/2015 by PhpStorm
 */
 
+$switchIsRounded ?= true
+$switchBorderRadius ?= 1em
+$switchAccentAmount ?= 30
+$switchBackground ?= #f9f9f9
+$switchColour ?= dark($switchBackground) ? white : black
+
+$switchBorderStyle ?= solid
+$switchBorderWidth ?= 1px
+$switchBorderColour ?= dark($switchBackground) ? ($switchBackground + ($switchAccentAmount / 2)) : ($switchBackground - ($switchAccentAmount / 2))
+$switchBorder ?= $switchBorderWidth $switchBorderStyle $switchBorderColour
+
+$switchMinWidth ?= 5em
+$switchMargin ?= 1em
+$switchPadding ?= 0.3em 1em
+$switchTransitionTime ?= 0.5s
+$switchFontSize ?= 0.8em
+
+$switchDisabledState
+	background $switchBackground
+	font-weight inherit
+$switchEnabledState
+	background dark($switchBackground) ? ($switchBackground + $switchAccentAmount) : ($switchBackground - $switchAccentAmount)
+	font-weight bold
+
+
 .on-off-switch
-	margin 0 1em
+	margin 0 $switchMargin
+	min-width $switchMinWidth
+	cursor pointer
+	&:before, &:after
+		font-size $switchFontSize
+		color $switchColour
+		text-transform uppercase
+		border $switchBorder
+		padding $switchPadding
+		transition background $switchTransitionTime ease, border $switchTransitionTime ease, transform $switchTransitionTime ease
+	&:before
+		content attr(offmessage)
+		@extend $switchEnabledState
+		if $switchIsRounded is true
+			border-top-left-radius $switchBorderRadius
+			border-bottom-left-radius $switchBorderRadius
+	&:after
+		content attr(onmessage)
+		@extend $switchDisabledState
+		if $switchIsRounded is true
+			border-top-right-radius $switchBorderRadius
+			border-bottom-right-radius $switchBorderRadius
+	&:checked
+		&:before
+			@extend $switchDisabledState
+		&:after
+			@extend $switchEnabledState
