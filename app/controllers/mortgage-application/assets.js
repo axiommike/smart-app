@@ -21,10 +21,35 @@ export default Ember.ObjectController.extend({
 		}
 	}.observes("hasPersonalItems"),
 	hasGICs: false,
+	gicsToggled: function() {
+		if (this.get("hasGICs") && this.get("model.applicant.gicAssets.length") === 0) {
+			this.send("addAsset", "gic");
+		}
+	}.observes("hasGICs"),
 	hasRESPs: false,
+	respsToggled: function() {
+		if (this.get("hasRESPs") && this.get("model.applicant.respAssets.length") === 0) {
+			this.send("addAsset", "resp");
+		}
+	}.observes("hasRESPs"),
 	hasInvestments: false,
+	investmentsToggled: function() {
+		if (this.get("hasInvestments") && this.get("model.applicant.investmentAssets.length") === 0) {
+			this.send("addAsset", "investment");
+		}
+	}.observes("hasInvestments"),
 	hasVehicles: false,
+	vehiclesToggled: function() {
+		if (this.get("hasVehicles") && this.get("model.applicant.vehicleAssets.length") === 0) {
+			this.send("addAsset", "vehicle");
+		}
+	}.observes("hasVehicles"),
 	hasRRSPs: false,
+	rrspsToggled: function() {
+		if (this.get("hasRRSPs") && this.get("model.applicant.rrspAssets.length") === 0) {
+			this.send("addAsset", "rrsp");
+		}
+	}.observes("hasRRSPs"),
 	ownsOtherAssets: false,
 	otherAssetsToggled: function() {
 		if (this.get("ownsOtherAssets") && this.get("model.applicant.otherAssets.length") === 0) {
