@@ -1,6 +1,7 @@
 import Ember from "ember";
 
 export default Ember.Component.extend({
+	tagName: "income-table",
 	income: Ember.A(),
 	onRemove: null,
 	onAdd: null,

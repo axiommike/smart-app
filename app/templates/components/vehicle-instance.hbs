@@ -1,0 +1,21 @@
+{{#form-field title="Vehicle Year"}}
+	{{year-select value=vehicle.year required=true title="Plese provide the year the vehicle was manufactured"}}
+{{/form-field}}
+{{#form-field title="Vehicle Make"}}
+	{{view "select" content=makes value=vehicle.make}}
+{{/form-field}}
+{{#form-field title="Vehicle Model"}}
+	{{input type="text" value=vehicle.model placeholder="Vehicle Model Name"}}
+{{/form-field}}
+
+{{asset-instance asset=vehicle.asset}}
+
+{{#form-field title="Is this vehicle being loaned?"}}
+	{{on-off-switch checked=isLoaned title="Please indicate whether this vehicle is currently being loaned"}}
+{{/form-field}}
+{{#liquid-if isLoaned}}
+	{{liability-instance liability=vehicle.loan typeEditingDisabled=true}}
+{{/liquid-if}}
+
+
+{{yield}}

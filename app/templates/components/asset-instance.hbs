@@ -50,15 +50,6 @@
 {{/if}}
 
 {{#if asset.isVehicle}}
-	{{#form-field title="Vehicle Year"}}
-		{{year-select value=vehicleYear required=true title="Plese provide the year the vehicle was manufactured"}}
-	{{/form-field}}
-	{{#form-field title="Vehicle Make"}}
-		{{view Ember.Select content=vehicleMakes value=vehicleMake}}
-	{{/form-field}}
-	{{#form-field title="Vehicle Model"}}
-		{{input type="text" value=vehicleModel placeholder="Vehicle Model Name"}}
-	{{/form-field}}
 	{{#form-field title="Estimated Vehicle Value"}}
 		{{currency-input value=asset.value placeholder="Balance" min="0" step="100"}}
 	{{/form-field}}

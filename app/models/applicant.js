@@ -11,7 +11,6 @@ export default DS.Model.extend({
 	fullName: Ember.computed("names", function() {
 		return Ember.makeArray(this.get("names")).slice().concat().join(" ");
 	}),
-	/*type: DS.attr("string"),*/
 	birthDate: DS.attr("date"),
 	sin: DS.attr("number"),
 	employment: DS.hasMany("employment"),
@@ -21,8 +20,11 @@ export default DS.Model.extend({
 	phone: DS.attr("string"),
 	workPhone: Ember.computed.alias("currentEmployment.firstObject.company.phone"),
 	liabilities: DS.hasMany("liability"),
+	allLiabilities: Ember.computed.uniq("liabilities", "vehicles.@each.loan", "properties.@each.mortgage"),
+	allAssets: Ember.computed.uniq("assets", "vehicles.@each.asset", "properties.@each.asset"),
 	assets: DS.hasMany("asset"),
-	vehicleAssets: Ember.computed.filterBy("assets", "type", "vehicle"),
+	vehicles: DS.hasMany("vehicle"),
+	vehicleAssets: Ember.computed.alias("vehicles.@each.asset"),
 	personalItemAssets: Ember.computed.filterBy("assets", "type", "item"),
 	savingsAssets: Ember.computed.filterBy("assets", "type", "savings"),
 	investmentAssets: Ember.computed.filterBy("assets", "type", "investment"),
@@ -31,12 +33,8 @@ export default DS.Model.extend({
 	rrspAssets: Ember.computed.filterBy("assets", "type", "rrsp"),
 	otherAssets: Ember.computed.filterBy("assets", "type", "other"),
 	income: DS.hasMany("income"),
-	/*allIncome: Ember.computed("income", "employment.@each.income", function() {
-		let applicantIncome = this.get("income"), applicantEmployment = this.get("employment").forEach((employment) => {
-			applicantIncome.pushObject(employment.get("income"));
-		});
-	}),*/
-	totalIncome: Ember.computed("income.@each.value", "employment.@each.income", function() {
+	allIncome: Ember.computed.uniq("income", "employment.@each.income"),
+	totalIncome: Ember.computed("allIncome.@each.value", function() {
 		let incomes = this.get("income");
 		return incomes.reduce(function(previousValue, income) {
 			return previousValue + parseInt(income.get("yearlyValue"));

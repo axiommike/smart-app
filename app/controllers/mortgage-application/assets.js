@@ -40,8 +40,8 @@ export default Ember.ObjectController.extend({
 	}.observes("hasInvestments"),
 	hasVehicles: false,
 	vehiclesToggled: function() {
-		if (this.get("hasVehicles") && this.get("model.applicant.vehicleAssets.length") === 0) {
-			this.send("addAsset", "vehicle");
+		if (this.get("hasVehicles") && this.get("model.applicant.vehicles.length") === 0) {
+			this.send("addVehicle");
 		}
 	}.observes("hasVehicles"),
 	hasRRSPs: false,
@@ -66,7 +66,37 @@ export default Ember.ObjectController.extend({
 				address: addedAddress,
 				asset: addedPropertyAsset
 			});
+			this.get("model.applicant.liabilities").pushObject(mortgage);
+			this.get("model.applicant.assets").pushObject(addedPropertyAsset);
 			this.get("model.applicant.properties").pushObject(addedProperty);
+		},
+		removeProperty: function(property) {
+			property.destroyRecord().then((deletedProperty) => {
+				console.log(`Successfully deleted property ${deletedProperty.get("id")}`);
+			});
+		},
+		addVehicle: function() {
+			let addedVehicle = this.store.createRecord("vehicle"), vehicleLoan = this.store.createRecord("liability", {type: "auto-loan"}), vehicleAsset = this.store.createRecord("asset", {type: "vehicle"}), applicant = this.get("model.applicant");
+			addedVehicle.setProperties({
+				asset: vehicleAsset,
+				loan: vehicleLoan
+			});
+			this.get("model.applicant.assets").pushObject(vehicleAsset);
+			this.get("model.applicant.liabilities").pushObject(vehicleLoan);
+			this.get("model.applicant.vehicles").pushObject(addedVehicle);
+		},
+		removeVehicle: function(vehicle) {
+			let vehicleLoan = vehicle.get("loan"),
+				vehicleAsset = vehicle.get("asset");
+			if (vehicleLoan) {
+				vehicleLoan.destroyRecord();
+			}
+			if (vehicleAsset) {
+				vehicleAsset.destroyRecord();
+			}
+			vehicle.destroyRecord().then((result) => {
+				console.log(`Successfully deleted vehicle ${result.get("id")}`);
+			});
 		},
 		addAsset: function(type) {
 			let addedAsset = this.store.createRecord("asset");
@@ -74,6 +104,11 @@ export default Ember.ObjectController.extend({
 				addedAsset.set("type", type);
 			}
 			this.get("model.applicant.assets").pushObject(addedAsset);
+		},
+		removeAsset: function(asset) {
+			asset.destroyRecord().then((result) => {
+				console.log(`Successfully deleted asset ${result.get("id")}`);
+			});
 		},
 		nextStep: function() {
 			if (this.get("model.applicant.assets.length")) {

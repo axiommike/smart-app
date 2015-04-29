@@ -6,7 +6,7 @@
 	{{#each extraIncome in income}}
 		<li {{bind-attr class=":income extraIncome.source:extraIncome.source"}}>
 			{{income-instance income=extraIncome}}
-			<button {{action "removeIncome" extraIncome}}>Remove Extra Income</button>
+			<button {{action "removeIncome" extraIncome}} class="remove-button">Remove Extra Income</button>
 		</li>
 	{{else}}
 		<li>No extra income sources found.  <a {{action "addIncome"}}>Add one?</a></li>
