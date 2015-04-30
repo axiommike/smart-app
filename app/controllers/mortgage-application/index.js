@@ -3,8 +3,13 @@ import Ember from "ember";
 export default Ember.Controller.extend({
 	sourceTypes: [
 		{value: "phone", label: "Phone"},
+		{value: "website", label: "Website"},
 		{value: "email", label: "Email"},
+		{value: "radio", label: "Radio"},
+		{value: "billboard", label: "Billboard"},
 		{value: "word-of-mouth", label: "Word of Mouth"},
+		{value: "agent", label: "Realtor"},
+		{value: "past-client", label: "Past Client"},
 		{value: "other", label: "Other"}
 	],
 	goals: [

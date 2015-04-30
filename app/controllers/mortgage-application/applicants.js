@@ -22,8 +22,9 @@ export default Ember.ObjectController.extend({
 			this.get("model.applicants").pushObject(addedApplicant);
 		},
 		copyAddresses: function(applicant) {
-			let primaryApplicantAddresses = this.get("model.applicant.addresses");
-			applicant.set("addresses", primaryApplicantAddresses);
+			console.log("copy addresses triggered");
+			let primaryApplicantAddresses = this.get("model.applicant.previousAddresses");
+			applicant.get("previousAddresses").pushObjects(primaryApplicantAddresses);
 		},
 		removeApplicant: function(applicant) {
 			this.get("model.applicants").removeObject(applicant);

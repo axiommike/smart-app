@@ -4595,6 +4595,7 @@ input[type="file"] {
   max-width: 100%;
   border-width: 0 0 1px 0;
   outline: none;
+  border-color: #eee;
 }
 textarea,
 input {

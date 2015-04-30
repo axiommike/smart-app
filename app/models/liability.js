@@ -8,6 +8,7 @@ export default DS.Model.extend({
 	rate: DS.attr("number"),
 	maturityDate: DS.attr("date"),
 	payment: DS.attr("number", {defaultValue: 0}), /* Monthly payment for mortgage; estimated payment if credit card */
+	limit: DS.attr("number", {defaultValue: 0}),
 	paymentFrequency: DS.attr("string", {defaultValue: "Monthly"}),
 	outstandingBalance: DS.attr("number", {defaultValue: 0}),
 	isCreditCard: Ember.computed.equal("type", "credit-card"),

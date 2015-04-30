@@ -34,6 +34,15 @@
 			{{/form-field}}
 		{{/unless}}
 	{{/if}}
+	{{#if liability.isLineOfCredit}}
+		{{#form-field title="Bank/Financial Institution"}}
+			{{autocomplete-input value=liability.lender list="lenders" placeholder="Bank Name" required=true}}
+		{{/form-field}}
+		{{#form-field title="Available Limit"}}
+			{{currency-input value=liability.limit required=true title="Please provide the maximum amount that can be alotted to you by this line of credit"}}
+		{{/form-field}}
+	{{/if}}
+
 	{{#unless liability.isCreditCard}}
 		{{#form-field title="Monthly Payment"}}
 			{{currency-input min="0" step="100" value=liability.payment placeholder="Payment" required=true title="Please indicate the monthly payment for this liability"}}

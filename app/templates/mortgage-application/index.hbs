@@ -19,13 +19,28 @@
 				{{/form-field}}
 			</div>
 			{{#form-field title="How'd you hear about me?"}}
-				{{view "select" content=sourceTypes optionValuePath="content.value" optionLabelPath="content.label" value=model.source id="how'd-you-hear-about-me?" required=true}}
+				{{view "select" content=sourceTypes optionValuePath="content.value" optionLabelPath="content.label" value=model.source id="how'd-you-hear-about-me?" required=true prompt=" -- "}}
 			{{/form-field}}
+			{{#liquid-if model.isReferral}}
+				{{#form-field title="Who referred me?"}}
+					{{input type="text" value=model.referredBy required=true placeholder="Who referred me?" title="Please indicate who referred me to you"}}
+				{{/form-field}}
+			{{/liquid-if}}
+			{{#liquid-if model.isOther}}
+				{{#form-field title="Referral Source"}}
+					{{input type="text" value=model.referredBy required=true placeholder="Other Referral Source" title="Please indicate what other source brought you here"}}
+				{{/form-field}}
+			{{/liquid-if}}
+			{{#liquid-if model.referredByClient}}
+				{{#form-field title="Which client referred me?"}}
+					{{input type="text" value=model.referredBy required=true placeholder="Past Client Name" title="Please indicate what other source brought you here"}}
+				{{/form-field}}
+			{{/liquid-if}}
 			{{#form-field title="What Can I do for you?"}}
-				{{view "select" content=goals optionValuePath="content.value" optionLabelPath="content.label" value=model.type id="what-can-i-do-for-you?" required=true}}
+				{{view "select" content=goals optionValuePath="content.value" optionLabelPath="content.label" value=model.type id="what-can-i-do-for-you?" required=true prompt=" -- "}}
 			{{/form-field}}
 			{{#form-field title="Additional Comments" layoutDirection="vertical"}}
-				{{textarea value=model.comment class="row" placeholder="Is there anything else I can do for you?" rows=comment.length id="anything-else-i-can-do?"}}
+				{{textarea value=model.comment class="row" placeholder="Is there anything else I can do for you?" rows=model.commentRows id="anything-else-i-can-do?"}}
 			{{/form-field}}
 			<footer class="form-actions">
 				<button type="submit" title="Continue to Full Application">Complete Full Application</button>

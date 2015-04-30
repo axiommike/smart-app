@@ -1,15 +1,15 @@
 <header class="applicant-card-header">
-	{{#if applicant.hasName}}
+	{{#liquid-if applicant.hasName}}
 		<h1 class="applicant-card-title">
 			<span class="applicant-card-full-name">{{applicant.fullName}}</span>
 			{{#if applicant.isPrimary}}
 				<span class="applicant-card-role">Primary Applicant</span>
 			{{/if}}
 		</h1>
-	{{/if}}
-	{{#if applicant.hasValidEmail}}
+	{{/liquid-if}}
+	{{#liquid-if applicant.hasValidEmail}}
 		{{gravatar-image email=applicant.email alt=applicant.fullName size=250 defaultImage="identicon" class="applicant-card-image" secure=false title=applicant.fullName}}
-	{{/if}}
+	{{/liquid-if}}
 	<ul class="applicant-card-actions">
 		{{#unless applicant.isPrimary}}
 			<li class="applicant-card-action">
@@ -31,7 +31,7 @@
 </header>
 
 <article class="applicant-card-content">
-	{{#if isEditing}}
+	{{#liquid-if isEditing}}
 		{{#form-section title="basic-information" icon="information"}}
 			<div class = "row">
 				{{#form-field title="First Name" class="column one-half" layoutDirection="vertical"}}
@@ -112,7 +112,7 @@
 				<dd>{{format-date applicant.birthDate day="numeric" month="long" year="numeric"}}</dd>
 			{{/if}}
 		</dl>
-	{{/if}}
+	{{/liquid-if}}
 
 	{{yield}}
 </article>

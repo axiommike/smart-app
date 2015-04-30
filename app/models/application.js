@@ -12,6 +12,21 @@ export default DS.Model.extend({
 	hasDependents: Ember.computed.gt("dependentCount", 0),
 	type: DS.attr("string"),
 	source: DS.attr("string"),
+	isReferral: Ember.computed.equal("source", "agent"),
+	isOther: Ember.computed.equal("source", "other"),
+	referredByClient: Ember.computed.equal("source", "past-client"),
+	referredBy: DS.attr("string"),
+	referredByChanged: function() {
+		if (!Ember.isBlank(this.get("referredBy"))) {
+			this.set("comment", "Referred by " + this.get("referredBy") + ".\n\n");
+		}
+		else {
+			this.set("comment", "");
+		}
+	}.observes("referredBy"),
 	comment: DS.attr("string"),
+	commentRows: Ember.computed("comment", function() {
+		return Math.floor(this.get("comment.length") * 0.035);
+	}),
 	isIncomplete: DS.attr("boolean", {defaultValue: false})
 });
