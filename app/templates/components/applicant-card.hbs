@@ -101,15 +101,15 @@
 		<dl class="applicant-card-details">
 			{{#if applicant.email}}
 				<dt>Email</dt>
-				<dd>{{applicant.email}}</dd>
+				<dd>{{#email-address email=applicant.email}}{{applicant.email}}{{/email-address}}</dd>
 			{{/if}}
 			{{#if applicant.phone}}
 				<dt>Phone</dt>
-				<dd>{{applicant.phone}}</dd>
+				<dd>{{phone-number number=applicant.phone}}</dd>
 			{{/if}}
 			{{#if applicant.birthDate}}
 				<dt>Birth Date</dt>
-				<dd>{{applicant.birthDate}}</dd>
+				<dd>{{format-date applicant.birthDate day="numeric" month="long" year="numeric"}}</dd>
 			{{/if}}
 		</dl>
 	{{/if}}

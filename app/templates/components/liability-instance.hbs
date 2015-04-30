@@ -21,16 +21,18 @@
 		{{#form-field title="Lender"}}
 			{{autocomplete-input value=liability.lender required=true placeholder="Lender" list="lenders" title="Please provide the lender for this mortgage"}}
 		{{/form-field}}
-		{{#form-field title="Mortgage Balance"}}
+		{{#form-field title="Approximate Mortgage Balance"}}
 			{{currency-input min="0" step="1000" value=liability.outstandingBalance placeholder="$ Overdue" required=true title="Please indicate the remaining balance of the mortgage"}}
 		{{/form-field}}
 		{{#form-field title="Payment Frequency"}}
 			{{view "select" content=paymentFrequencies value=liability.paymentFrequency}}
 		{{/form-field}}
 	{{else}}
-		{{#form-field title="Outstanding Balance"}}
-			{{currency-input min="0" step="100" value=liability.outstandingBalance placeholder="$ Overdue" required=true}}
-		{{/form-field}}
+		{{#unless liability.isChildSupport}}
+			{{#form-field title="Outstanding Balance"}}
+				{{currency-input min="0" step="100" value=liability.outstandingBalance placeholder="$ Overdue" required=true}}
+			{{/form-field}}
+		{{/unless}}
 	{{/if}}
 	{{#unless liability.isCreditCard}}
 		{{#form-field title="Monthly Payment"}}
