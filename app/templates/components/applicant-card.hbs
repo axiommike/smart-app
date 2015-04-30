@@ -84,7 +84,7 @@
 				{{/each}}
 			{{/form-section}}
 			{{#form-section title="Extra Income Sources" icon="coin"}}
-				{{income-table income=applicant.income onAdd="addIncome" onRemove="removeIncome"}}
+				{{income-table income=applicant.income excluded=applicant.employmentIncome onAdd="addIncome" onRemove="removeIncome"}}
 			{{/form-section}}
 		{{/if}}
 		{{#if includeAssets}}

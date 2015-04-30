@@ -33,8 +33,8 @@ export default DS.Model.extend({
 	rrspAssets: Ember.computed.filterBy("assets", "type", "rrsp"),
 	otherAssets: Ember.computed.filterBy("assets", "type", "other"),
 	income: DS.hasMany("income"),
-	allIncome: Ember.computed.uniq("income", "employment.@each.income"),
-	totalIncome: Ember.computed("allIncome.@each.value", function() {
+	employmentIncome: Ember.computed.filterBy("income", "source", "employment"),
+	totalIncome: Ember.computed("income.@each.value", function() {
 		let incomes = this.get("income");
 		return incomes.reduce(function(previousValue, income) {
 			return previousValue + parseInt(income.get("yearlyValue"));

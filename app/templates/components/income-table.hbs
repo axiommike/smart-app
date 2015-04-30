@@ -3,7 +3,7 @@
 </header>
 
 <ul class="income">
-	{{#each extraIncome in income}}
+	{{#each extraIncome in filteredIncome}}
 		<li {{bind-attr class=":income extraIncome.source:extraIncome.source"}}>
 			{{income-instance income=extraIncome}}
 			<button {{action "removeIncome" extraIncome}} class="remove-button">Remove Extra Income</button>

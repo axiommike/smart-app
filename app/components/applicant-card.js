@@ -48,7 +48,7 @@ export default Ember.Component.extend({
 			});
 		},
 		addEmployment: function() {
-			let store = this.get("targetObject.store"), addedEmployment = store.createRecord("employment"), addedEmploymentCompany = store.createRecord("company"), addedEmploymentCompanyAddress = store.createRecord("address"), addedEmploymentIncome = store.createRecord("income", {type: "employment"});
+			let store = this.get("targetObject.store"), addedEmployment = store.createRecord("employment"), addedEmploymentCompany = store.createRecord("company"), addedEmploymentCompanyAddress = store.createRecord("address"), addedEmploymentIncome = store.createRecord("income", {source: "employment"});
 			addedEmploymentCompany.set("address", addedEmploymentCompanyAddress);
 			addedEmployment.setProperties({
 				employer: addedEmploymentCompany,
