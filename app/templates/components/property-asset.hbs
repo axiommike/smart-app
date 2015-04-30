@@ -20,7 +20,12 @@
 		{{/form-field}}
 	{{/form-section}}
 	{{#form-section title="Mortgage"}}
-		{{liability-instance liability=property.mortgage typeEditingDisabled=true}}
+		{{#form-field title="Does this property have a mortgage?"}}
+			{{on-off-switch checked=hasMortgage}}
+		{{/form-field}}
+		{{#liquid-if hasMortgage}}
+			{{liability-instance liability=property.mortgage typeEditingDisabled=true}}
+		{{/liquid-if}}
 	{{/form-section}}
 {{else}}
 	Hmmm... no property was found here.  Maybe try refreshing?
