@@ -46,7 +46,7 @@
 	{{#form-field title="Hours Per Week"}}
 		{{input type="range" min="0" max="60" value=employment.weeklyHours required=true}}
 		{{#liquid-if employment.weeklyHours}}
-			<span>worked {{employment.weeklyHours}} hours per week</span>
+			<span>worked <strong>{{employment.weeklyHours}}</strong> hours per week</span>
 		{{/liquid-if}}
 	{{/form-field}}
 	{{#form-field title="Hourly Rate"}}
@@ -59,7 +59,7 @@
 
 {{#form-field title="Annual Pay"}}
 	{{currency-input min="0" step="any" value=employment.income.value required=true}}
-	{{#liquid-if employment.income}}
+	{{#liquid-if employment.income.value}}
 		<span>annually</span>
 	{{/liquid-if}}
 {{/form-field}}

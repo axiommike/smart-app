@@ -12,6 +12,14 @@ export default Ember.Component.extend({
 	includeIncome: false,
 	onRemoveApplicant: null,
 	onCopyAddresses: null,
+	minEmploymentHistory: 3, /* How many years back are required - Expert requires 3 */
+	employmentHistoryTimespan: Ember.computed("applicant.employment.@each.tenureTotalYears", function() {
+		let employment = this.get("applicant.employment");
+		return employment.reduce(function(previousValue, employmentInstance) {
+			return previousValue + employmentInstance.get("tenureTotalYears");
+		}, 0);
+	}),
+	previousEmploymentRequired: Ember.computed.lt("employmentHistoryTimespan", "minEmploymentHistory"),
 	relationshipTypes: [
 		"Spouse",
 		"Parent",
@@ -35,19 +43,28 @@ export default Ember.Component.extend({
 			this.get("applicant.income").pushObject(addedIncome);
 		},
 		removeIncome: function(income) {
-			this.get("applicant.income").removeObject(income);
+			income.destroyRecord().then((deletedIncome) => {
+				console.log(`Successfully deleted income ${deletedIncome.get("id")}`);
+			});
 		},
 		addEmployment: function() {
-			let store = this.get("targetObject.store"), addedEmployment = store.createRecord("employment"), addedEmploymentCompany = store.createRecord("company"), addedEmploymentCompanyAddress = store.createRecord("address"), addedEmploymentIncome = store.createRecord("income");
+			let store = this.get("targetObject.store"), addedEmployment = store.createRecord("employment"), addedEmploymentCompany = store.createRecord("company"), addedEmploymentCompanyAddress = store.createRecord("address"), addedEmploymentIncome = store.createRecord("income", {type: "employment"});
 			addedEmploymentCompany.set("address", addedEmploymentCompanyAddress);
 			addedEmployment.setProperties({
 				employer: addedEmploymentCompany,
 				income: addedEmploymentIncome
 			});
+			this.get("applicant.income").pushObject(addedEmploymentIncome);
 			this.get("applicant.employment").pushObject(addedEmployment);
 		},
 		removeEmployment: function(employment) {
-			this.get("applicant.employment").removeObject(employment);
+			let employmentIncome = employment.get("income");
+			if (employmentIncome) {
+				employmentIncome.destroyRecord();
+			}
+			employment.destroyRecord().then((deletedEmployment) => {
+				console.log(`Successfully deleted employment ${deletedEmployment.get("id")}`);
+			});
 		},
 		addAddress: function() {
 			let store = this.get("targetObject.store"), addedAddress = store.createRecord("address");
@@ -62,7 +79,9 @@ export default Ember.Component.extend({
 			this.sendAction("onCopyAddresses", this.get("applicant"));
 		},
 		removeAsset: function(asset) {
-			this.get("applicant.assets").removeObject(asset);
+			asset.destroyRecord().then((deletedAsset) => {
+				console.log(`Successfully deleted asset ${deletedAsset.get("id")}`);
+			});
 		},
 		addLiability: function(type) {
 			let store = this.get("targetObject.store"), createdLiability = store.createRecord("liability");

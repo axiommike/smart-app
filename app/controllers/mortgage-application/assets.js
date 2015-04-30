@@ -71,6 +71,14 @@ export default Ember.ObjectController.extend({
 			this.get("model.applicant.properties").pushObject(addedProperty);
 		},
 		removeProperty: function(property) {
+			let propertyAsset = property.get("asset"),
+				propertyMortgage = property.get("mortgage");
+			if (propertyAsset) {
+				propertyAsset.destroyRecord();
+			}
+			if (propertyMortgage) {
+				propertyMortgage.destroyRecord();
+			}
 			property.destroyRecord().then((deletedProperty) => {
 				console.log(`Successfully deleted property ${deletedProperty.get("id")}`);
 			});

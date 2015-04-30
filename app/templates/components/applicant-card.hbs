@@ -74,6 +74,9 @@
 				<header class="table-header">
 					<button {{action "addEmployment" applicant}} class="add-button">Add Employment</button>
 				</header>
+				{{#if previousEmploymentRequired}}
+					<span class="error">Please provide the last <strong>{{minEmploymentHistory}}</strong> years of employment history.</span>
+				{{/if}}
 				{{#each historicalEmployment in applicant.employment}}
 					{{historical-employment employment=historicalEmployment onRemove="removeEmployment"}}
 				{{else}}

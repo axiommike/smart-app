@@ -17,6 +17,7 @@ export default Ember.Component.extend({
 		}, 0);
 	}.property("filteredLiabilities.@each.value"),
 	onAdd: null, /* Override method for adding a liability */
+	onRemove: null,
 	actions: {
 		addLiability: function() {
 			if (this.get("onAdd")) {
@@ -32,7 +33,7 @@ export default Ember.Component.extend({
 			}
 		},
 		removeLiability: function(liability) {
-			return this.get("liabilities").removeObject(liability);
+			this.sendAction("onRemove", liability);
 		}
 	}
 });

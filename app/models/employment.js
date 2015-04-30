@@ -11,7 +11,7 @@ export default DS.Model.extend(TimeableMixin, {
 		let hourlyRate = parseInt(this.get("hourlyRate")), weeklyHours = parseInt(this.get("weeklyHours"));
 		if (hourlyRate && weeklyHours) {
 			let yearlySalary = (hourlyRate * weeklyHours) * 52.1775; // there are 52.1775 weeks in a year
-			this.set("income", yearlySalary);
+			this.set("income.value", yearlySalary);
 		}
 	}.observes("hourlyRate", "weeklyHours"),
 	paymentFrequency: DS.attr("string"),
