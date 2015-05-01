@@ -21,15 +21,17 @@ $material-box
 .form-step
 	border-bottom 1px solid #E2E2E2
 	> .form-field-horizontal
+		+media-query($breakpointMain)
+			display flex
 		.form-field-controls
 			float right
 	&s
 		@extend $material-box
 		list-style-type decimal
-.asset, .liability, .applicant-card
+.asset, .liability, .applicant-card, .income
 	@extend $fadeIn
 
-.liabilities, .assets, .properties
+.liabilities, .assets, .properties, .employment
 	@extend $normal-margin
 
 .announcement
@@ -38,13 +40,29 @@ $material-box
 
 .agent
 	&-callout
+		@extend $fadeInUp
+		animation-delay 0.3s
+		&-name
+			+media-query($breakpointMain)
+				font-size 1.7em
+		&-image
+			float right
+			margin 0 0 0 3em
+			border-radius 50%
+			+media-query($breakpointMain)
+				float none
 		flex 1
 		padding 3em
+		+media-query($breakpointMain)
+			padding $padding
 		@extend $border-box
 		text-align right
 		&-phone
-			color inherit
-			font-weight bold
+			.phone-number
+				color inherit
+				font-weight bold
 .header
 	&-action
 		margin 3em
+		+media-query($breakpointMain)
+			display none

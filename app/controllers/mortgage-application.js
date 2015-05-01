@@ -9,6 +9,11 @@ export default Ember.Controller.extend({
 		"Summary",
 		"Thank You"
 	],
+	agent: {
+		fullName: "Sample Agent",
+		phone: "5552555555",
+		email: "joesample@gmail.com"
+	},
 	currentStep: 0,
 	realStep: Ember.computed("currentStep", function() {
 		return this.get("currentStep") + 1;

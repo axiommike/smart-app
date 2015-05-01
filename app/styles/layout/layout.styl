@@ -26,6 +26,13 @@ header
 		align-items baseline
 		flex-wrap wrap
 		justify-content space-between
+		+media-query($breakpointMain)
+			position relative
+			.wizard-step
+				padding $padding
+				&s
+					&-progress
+						bottom 0
 	for num in (6..1)
 		h{num}
 			@extend $margin-none

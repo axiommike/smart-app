@@ -136,7 +136,8 @@ dl dt,
 dl dd,
 .liabilities,
 .assets,
-.properties {
+.properties,
+.employment {
   margin: 1em;
 }
 h6,
@@ -206,7 +207,9 @@ a {
 .form-steps,
 .asset,
 .liability,
-.applicant-card {
+.applicant-card,
+.income,
+.agent-callout {
   -webkit-animation-duration: 1s;
   -o-animation-duration: 1s;
   animation-duration: 1s;
@@ -225,7 +228,8 @@ body {
 }
 .asset,
 .liability,
-.applicant-card {
+.applicant-card,
+.income {
   -webkit-animation-name: fadeIn;
   -o-animation-name: fadeIn;
   animation-name: fadeIn;
@@ -759,7 +763,8 @@ body {
   }
 }
 .box,
-.form-steps {
+.form-steps,
+.agent-callout {
   -webkit-animation-name: fadeInUp;
   -o-animation-name: fadeInUp;
   animation-name: fadeInUp;
@@ -4527,7 +4532,11 @@ button-error:focus {
 .wizard-step {
   padding: 4em;
 }
+.wizard-steps {
+  display: block;
+}
 .wizard-steps-progress {
+  display: inherit;
   width: 100%;
   position: absolute;
   height: 0.2em;
@@ -4697,6 +4706,17 @@ header[role="banner"][data-current-step="3"] {
 header[role="banner"][data-current-step="4"] {
   background: #00a7c5;
 }
+@media only screen and (max-width: 767px) {
+  header[role="banner"] {
+    position: relative;
+  }
+  header[role="banner"] .wizard-step {
+    padding: 1em;
+  }
+  header[role="banner"] .wizard-steps-progress {
+    bottom: 0;
+  }
+}
 h6,
 h5,
 h4,
@@ -4827,6 +4847,14 @@ footer a[href]:visited {
 .form-step {
   border-bottom: 1px solid #e2e2e2;
 }
+@media only screen and (max-width: 767px) {
+  .form-step > .form-field-horizontal {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
 .form-step > .form-field-horizontal .form-field-controls {
   float: right;
 }
@@ -4838,6 +4866,9 @@ footer a[href]:visited {
   line-height: 3;
 }
 .agent-callout {
+  -webkit-animation-delay: 0.3s;
+  -o-animation-delay: 0.3s;
+  animation-delay: 0.3s;
   -webkit-flex: 1;
   -ms-flex: 1;
   -o-flex: 1;
@@ -4845,10 +4876,35 @@ footer a[href]:visited {
   padding: 3em;
   text-align: right;
 }
-.agent-callout-phone {
+@media only screen and (max-width: 767px) {
+  .agent-callout-name {
+    font-size: 1.7em;
+  }
+}
+.agent-callout-image {
+  float: right;
+  margin: 0 0 0 3em;
+  border-radius: 50%;
+}
+@media only screen and (max-width: 767px) {
+  .agent-callout-image {
+    float: none;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .agent-callout {
+    padding: 1em;
+  }
+}
+.agent-callout-phone .phone-number {
   color: inherit;
   font-weight: bold;
 }
 .header-action {
   margin: 3em;
+}
+@media only screen and (max-width: 767px) {
+  .header-action {
+    display: none;
+  }
 }

@@ -1,9 +1,18 @@
 <header role="banner" data-current-step="{{currentStep}}">
 	{{wizard-steps steps=steps currentStepNumber=currentStep}}
-	<aside class="agent-callout">
-		<h1 class="agent-callout-name">Sample Agent</h1>
-		<a class="agent-callout-phone" href="tel:15555555555">{{accessible-icon icon="phone" title="Call me now"}} +1 555-555-5555</a>
-	</aside>
+	{{#if agent}}
+		<aside class="agent-callout" role="complementary">
+			{{#if agent.image}}
+				<img src = "{{agent.image}}" alt = "{{agent.fullName}}" class="agent-callout-image"/>
+			{{else}}
+				{{#if agent.email}}
+					{{gravatar-image email=agent.email alt=agent.fullName size=100 defaultImage="identicon" class="agent-callout-image" secure=false title=agent.fullName}}
+				{{/if}}
+			{{/if}}
+			<h1 class="agent-callout-name">{{agent.fullName}}</h1>
+			<span class="agent-callout-phone">{{phone-number number=agent.phone}}</span>
+		</aside>
+	{{/if}}
 	{{#liquid-if currentStep}}
 		<button {{action "sendIncomplete"}} class="header-action">Submit As-Is</button>
 	{{/liquid-if}}

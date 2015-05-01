@@ -30,6 +30,14 @@ export default Ember.ObjectController.extend({
 			this.get("model.applicants").removeObject(applicant);
 		},
 		nextStep: function() {
+			if (this.get("model.applicant.properties.length")) {
+				this.send("saveAssets");
+				this.send("saveLiabilities");
+				this.send("saveProperties");
+			}
+			if (this.get("model.applicant.income.employment.length")) {
+				this.send("saveEmployment");
+			}
 			this.get("model").save().then((application) => {
 				this.transitionToRoute("mortgage-application.assets", application);
 			});
