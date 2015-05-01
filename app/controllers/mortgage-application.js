@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
 	agent: {
 		fullName: "Sample Agent",
 		phone: "5552555555",
-		email: "joesample@gmail.com"
+		email: "seangores@gmail.com"
 	},
 	currentStep: 0,
 	realStep: Ember.computed("currentStep", function() {

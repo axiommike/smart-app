@@ -1461,7 +1461,8 @@ body {
 .alert-info >:first-child:before,
 .alert-error >:first-child:before,
 .alert >:first-child:before,
-.applicant-card.co-applicant:before {
+.applicant-card.co-applicant:before,
+.agent-callout-email:before {
   font-family: "icomoon";
   speak: none;
   font-style: normal;
@@ -2784,7 +2785,7 @@ body {
   content: "\eae9";
 }
 .address-input {
-  min-width: 11em;
+  min-width: 16em;
   max-width: 100%;
   -webkit-transition: 0.4s all linear;
   -o-transition: 0.4s all linear;
@@ -4895,6 +4896,48 @@ footer a[href]:visited {
   .agent-callout {
     padding: 1em;
   }
+}
+.agent-callout-name {
+  font-size: 2.2em;
+}
+.agent-callout-email {
+  background: transparent;
+  display: block;
+  -webkit-transition: background 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+  -o-transition: background 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+  transition: background 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  position: relative;
+  display: initial;
+}
+.agent-callout-email:before {
+  content: "\ea86";
+  position: absolute;
+  font-size: 6.4em;
+  right: 50%;
+  color: rgba(255,255,255,0.75);
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+}
+.agent-callout-email:hover {
+  background: rgba(0,0,0,0.2);
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+}
+.agent-callout-email:hover:before {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
 }
 .agent-callout-phone .phone-number {
   color: inherit;

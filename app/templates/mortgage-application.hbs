@@ -6,7 +6,9 @@
 				<img src = "{{agent.image}}" alt = "{{agent.fullName}}" class="agent-callout-image"/>
 			{{else}}
 				{{#if agent.email}}
-					{{gravatar-image email=agent.email alt=agent.fullName size=100 defaultImage="identicon" class="agent-callout-image" secure=false title=agent.fullName}}
+					{{#email-address email=agent.email title="Email me now" class="agent-callout-email"}}
+						{{gravatar-image email=agent.email alt=agent.fullName size=100 defaultImage="identicon" class="agent-callout-image" secure=false title=agent.fullName}}
+					{{/email-address}}
 				{{/if}}
 			{{/if}}
 			<h1 class="agent-callout-name">{{agent.fullName}}</h1>

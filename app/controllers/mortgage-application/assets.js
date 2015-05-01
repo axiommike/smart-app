@@ -120,27 +120,13 @@ export default Ember.ObjectController.extend({
 		},
 		nextStep: function() {
 			if (this.get("model.applicant.assets.length")) {
-				let applicantAssets = this.get("model.applicant.assets");
-				applicantAssets.forEach((asset) => {
-					asset.save().then((savedAsset) => {
-						console.log(`Saved ${asset.get("type")} of id ${asset.get("id")}`);
-					});
-				});
+				this.send("saveAssets");
 			}
-			if (this.get("ownsCurrentResidence") || this.get("ownsOtherRealEstate")) {
-				this.get("model.applicant.properties").forEach((property) => {
-					property.get("address").save().then((address) => {
-						console.log(`Saved address ${address.get("id")} of property ${property.get("id")}`);
-					});
-					if (property.get("mortgage")) {
-						property.get("mortgage").save().then((mortgage) => {
-							console.log(`Saved mortgage ${mortgage.get("id")}`);
-						});
-					}
-					property.save().then((savedProperty) => {
-						console.log(`Saved property ${savedProperty.get("id")}`)
-					});
-				});
+			if (this.get("ownsCurrentResidence")) {
+				this.send("saveProperties", this.get("model.applicant.currentProperties"));
+			}
+			if (this.get("ownsOtherRealEstate")) {
+				this.send("saveProperties", this.get("model.applicant.otherProperties"));
 			}
 			// this.get("model.applicant").save();
 			this.get("model").save().then((application) => {

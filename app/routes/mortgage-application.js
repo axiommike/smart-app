@@ -60,14 +60,24 @@ export default Ember.Route.extend({
 				income.save();
 			});
 		},
-		saveProperties: function() {
-			this.get("currentModel.applicant.properties").forEach((property) => {
+		saveProperties: function(properties) {
+			if (!properties) {
+				properties = this.get("currentModel.applicant.properties");
+			}
+			properties.forEach((property) => {
 				// first, save corresponding address
 				if (property.get("address")) {
-					property.get("address").save().then(() => {
-						property.save();
-					});
+					property.get("address").save();
 				}
+				if (property.get("mortgage")) {
+					property.get("mortgage").save();
+				}
+				if (property.get("asset")) {
+					property.get("asset").save();
+				}
+				property.save().then((savedProperty) => {
+					console.log(`Saved property of ID ${savedProperty.get("id")}`);
+				});
 			});
 		}
 	}
