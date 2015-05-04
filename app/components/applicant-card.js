@@ -1,12 +1,11 @@
 import Ember from "ember";
+import EditableMixin from "../mixins/editable";
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(EditableMixin, {
 	tagName: "applicant-card",
 	applicant: null,
 	isPrimaryApplicant: Ember.computed.alias("applicant.isPrimary"),
 	classNameBindings: ["isPrimaryApplicant:primary-applicant:co-applicant", ":applicant-card"],
-	isEditing: false,
-	isEditable: true,
 	includeLiabilities: false,
 	includeAssets: false,
 	includeIncome: false,
@@ -32,9 +31,6 @@ export default Ember.Component.extend({
 		{value: "Divorced", label: "Divorced"}
 	],
 	actions: {
-		toggleEditing: function() {
-			this.toggleProperty("isEditing");
-		},
 		removeApplicant: function() {
 			this.sendAction("onRemoveApplicant", this.get("applicant"));
 		},

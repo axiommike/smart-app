@@ -2,6 +2,9 @@ import DS from "ember-data";
 
 export default DS.Model.extend({
 	source: DS.attr("string"), /* child support alimony, rental property, investment, other */
+	isOther: Ember.computed.equal("source", "other"),
+	isRental: Ember.computed.equal("source", "property"),
+	isInvestment: Ember.computed.equal("source", "investment"),
 	value: DS.attr("number", {defaultValue: 0}), /* In dollars */
 	frequency: DS.attr("string", {defaultValue: "Yearly"}), /* Monthly, yearly */
 	description: DS.attr("string"),
@@ -22,5 +25,6 @@ export default DS.Model.extend({
 			case "Monthly":
 				return this.get("value");
 		}
-	})
+	}),
+	applicant: DS.belongsTo("applicant")
 });

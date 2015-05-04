@@ -25,7 +25,7 @@ export default Ember.Mixin.create({
 		else if (months) {
 			this.set("tenure", months);
 		}
-	}.observes("tenureMonths", "tenureYears"),
+	}.observes("tenureMonths", "tenureYears")/*,
 	tenureDatesChanged: function() {
 		let startDate = this.get("startDate"), endDate = this.get("endDate");
 		if (startDate && endDate) {
@@ -33,5 +33,5 @@ export default Ember.Mixin.create({
 			let updatedTenure =  Math.round(differenceMS/86400000); // 86400000 is one day
 			this.set("tenure", updatedTenure);
 		}
-	}.observes("startDate", "endDate")
+	}.observes("startDate", "endDate")*/
 });

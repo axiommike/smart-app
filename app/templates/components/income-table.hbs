@@ -2,14 +2,29 @@
 	<button class="add-button" {{action "addIncome"}}>Add Extra Income</button>
 </header>
 
-<ul class="income">
+{{#unless flatList}}
+	{{#liquid-if totalIncome}}
+		<sup><strong>{{format-number totalIncome style="currency" currency="CAD"}}</strong> total</sup>
+	{{/liquid-if}}
+{{/unless}}
+
+<ul {{bind-attr class=":income flatList:flat-list"}}>
 	{{#each extraIncome in filteredIncome}}
 		<li {{bind-attr class=":income extraIncome.source:extraIncome.source"}}>
-			{{income-instance income=extraIncome}}
+			{{income-instance income=extraIncome flatList=flatList isEditable=true}}
 			<button {{action "removeIncome" extraIncome}} class="remove-button">Remove Extra Income</button>
 		</li>
 	{{else}}
 		<li>No extra income sources found.  <a {{action "addIncome"}}>Add one?</a></li>
 	{{/each}}
 </ul>
+
+{{#if flatList}}
+	{{#liquid-if totalIncome}}
+		<footer class="income-total">
+			<sup><strong>{{format-number totalIncome style="currency" currency="CAD"}}</strong> total</sup>
+		</footer>
+	{{/liquid-if}}
+{{/if}}
+
 {{yield}}

@@ -22,5 +22,6 @@ export default DS.Model.extend({
 	isChildSupport: Ember.computed.equal("type", "child-support"),
 	creditCardType: DS.attr("string"), /* Bank name/Visa/mastercard */
 	willBePaidOff: DS.attr("boolean"),
-	isRepaying: DS.attr("boolean", {defaultValue: false})
+	isRepaying: DS.attr("boolean", {defaultValue: false}),
+	applicant: DS.belongsTo("applicant")
 });

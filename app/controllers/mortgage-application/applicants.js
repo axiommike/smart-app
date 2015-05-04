@@ -27,7 +27,7 @@ export default Ember.ObjectController.extend({
 			applicant.get("previousAddresses").pushObjects(primaryApplicantAddresses);
 		},
 		removeApplicant: function(applicant) {
-			this.get("model.applicants").removeObject(applicant);
+			applicant.destroyRecord();
 		},
 		nextStep: function() {
 			if (this.get("model.applicant.properties.length")) {

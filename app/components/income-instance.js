@@ -1,6 +1,7 @@
 import Ember from "ember";
+import EditableMixin from "../mixins/editable";
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(EditableMixin, {
 	incomeSources: [
 		"Investment",
 		"Child Support Alimony",
@@ -20,6 +21,7 @@ export default Ember.Component.extend({
 	],
 	pensionType: null,
 	income: null,
+	flatList: false,
 	isChildSupport: Ember.computed.equal("income.source", "Child Support Alimony"),
 	isInvestment: Ember.computed.equal("income.source", "Investment"),
 	isPension: Ember.computed.equal("income.source", "Pension"),

@@ -1,6 +1,7 @@
 import Ember from "ember";
+import EditableMixin from "../mixins/editable";
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(EditableMixin, {
 	tagName: "asset",
 	classNameBindings: [":asset", "asset.type"],
 	asset: null,

@@ -3,18 +3,23 @@
 	{{#if caption}}
 		<h5 class="caption">
 			{{caption}}
-			{{#if totalAssets}}
+			{{#liquid-if totalAssets}}
 				<sup><strong>{{format-number totalAssets style="currency" currency="CAD"}}</strong> total</sup>
-			{{/if}}
+			{{/liquid-if}}
 		</h5>
 	{{/if}}
 </header>
 
 <ul class="assets">
-	{{#each asset in filteredAssets}}
+	{{#each filteredAssets as |asset|}}
 		<li class="asset">
 			{{asset-instance asset=asset}}
-			<button {{action "removeAsset" asset}} class="remove-button">Remove {{typeName}}</button>
+			<button {{action "removeAsset" asset}} class="remove-button">Remove {{#if asset.type}}
+				{{asset.type}}
+			{{else}}
+				Asset
+			{{/if}}
+			</button>
 		</li>
 	{{else}}
 		<li>

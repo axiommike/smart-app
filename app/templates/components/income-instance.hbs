@@ -1,34 +1,61 @@
-{{#form-field title="Source"}}
-	{{view "select" content=incomeSources value=income.source}}
-{{/form-field}}
-
-{{#if isPension}}
-	{{#form-field title="Pension Source"}}
-		{{view "select" content=pensionTypes value=pensionType}}
-	{{/form-field}}
+{{#if isEditable}}
+	<button {{action "toggleEditing"}}>{{#if isEditing}}
+		Done
+	{{else}}
+		Edit
+	{{/if}}
+	</button>
 {{/if}}
 
-{{#if income.isOther}}
-	{{#form-field title="Description"}}
-		{{input type="text" required=true placeholder="Describe this income source" value=income.description size=income.description.length title="Please indicate the nature of this income source"}}
+{{#liquid-if isEditing}}
+	{{#form-field title="Source"}}
+		{{view "select" content=incomeSources value=income.source}}
 	{{/form-field}}
-{{/if}}
 
-<div class="row">
-	{{#form-field title="Income" class="column"}}
-		{{currency-input value=income.value}}
-		{{#if income.value}}
-			or
-			{{#if income.isYearly}}
-				<strong>{{format-number income.monthlyValue style="currency" currency="CAD"}}</strong> per month
+	{{#if isPension}}
+		{{#form-field title="Pension Source"}}
+			{{view "select" content=pensionTypes value=pensionType}}
+		{{/form-field}}
+	{{/if}}
+
+	{{#if income.isOther}}
+		{{#form-field title="Description"}}
+			{{input type="text" required=true placeholder="Describe this income source" value=income.description size=income.description.length title="Please indicate the nature of this income source"}}
+		{{/form-field}}
+	{{/if}}
+
+	<div class="row">
+		{{#form-field title="Income" class="column"}}
+			{{currency-input value=income.value}}
+			{{#if income.value}}
+				or
+				{{#if income.isYearly}}
+					<strong>{{format-number income.monthlyValue style="currency" currency="CAD"}}</strong> per month
+				{{else}}
+					<strong>{{format-number income.yearlyValue style="currency" currency="CAD"}}</strong> per year
+				{{/if}}
+			{{/if}}
+		{{/form-field}}
+		{{#form-field title="Frequency" class="column"}}
+			{{view "select" content=frequencies value=income.frequency}}
+		{{/form-field}}
+	</div>
+{{else}}
+	<span class="income-source">
+		{{#if income.isOther}}
+			{{#if income.description}}
+				<em class="income-description">{{income.description}}</em>
 			{{else}}
-				<strong>{{format-number income.yearlyValue style="currency" currency="CAD"}}</strong> per year
+				Other income source
 			{{/if}}
 		{{/if}}
-	{{/form-field}}
-	{{#form-field title="Frequency" class="column"}}
-		{{view "select" content=frequencies value=income.frequency}}
-	{{/form-field}}
-</div>
+	</span>
+	{{#if income.applicant.hasName}}
+		<span class="income-applicant">
+			{{income.applicant.fullName}}
+		</span>
+	{{/if}}
+	<strong class="income-value">{{format-number totalLiabilities style="currency" currency="CAD"}}</strong>
+{{/liquid-if}}
 
 {{yield}}

@@ -17,5 +17,6 @@ export default DS.Model.extend({
 				this.set("loan.description", vehicleDescription);
 			}
 		}
-	}.observes("make", "year", "model")
+	}.observes("make", "year", "model"),
+	applicant: DS.belongsTo("applicant")
 });

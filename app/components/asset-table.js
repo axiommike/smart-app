@@ -1,6 +1,7 @@
 import Ember from "ember";
+import EditableMixin from "../mixins/editable";
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(EditableMixin, {
 	tagName: "asset-table",
 	attributeBindings: ["title"],
 	valueTypes: [
@@ -12,9 +13,6 @@ export default Ember.Component.extend({
 	caption: null,
 	assets: Ember.A(),
 	type: null,
-	typeName: Ember.computed("type", function() {
-		return this.get("type") ? this.get("type") : "Asset";
-	}),
 	filteredAssets: Ember.computed.filter("assets", function(asset) {
 		return this.get("type") ? asset.get("type") === this.get("type") : true;
 	}),
@@ -33,9 +31,10 @@ export default Ember.Component.extend({
 		addAsset: function() {
 			this.sendAction("onAdd", this.get("type"));
 		},
-		removeAsset: function(property) {
-			this.get("assets").removeObject(property);
-			this.sendAction("onRemove", property);
+		removeAsset: function(asset) {
+			return asset.destroyRecord().then((deletedAsset) => {
+				this.sendAction("onRemove", deletedAsset);
+			});
 		}
 	}
 });

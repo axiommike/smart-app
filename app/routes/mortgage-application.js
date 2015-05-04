@@ -17,6 +17,9 @@ export default Ember.Route.extend({
 				}
 			);
 			model.get("applicant.properties").pushObject(currentProperty);
+			model.get("applicant.liabilities").pushObject(currentPropertyMortgage);
+			model.get("applicant.assets").pushObject(currentPropertyAsset);
+			model.get("applicant.previousAddresses").pushObject(currentPropertyAddress);
 		}
 		else {
 			model.set("ownsCurrentResidence", true);
@@ -30,6 +33,88 @@ export default Ember.Route.extend({
 	actions: {
 		error: function() {
 			this.transitionTo("apply");
+		},
+		addApplicant: function() {
+			let applicantAddress = this.store.createRecord("address",
+					{isCurrent: true}
+				),
+				applicantCurrentPropertyMortgage = this.store.createRecord("liability", {type: "mortgage"}),
+				applicantCurrentPropertyAsset = this.store.createRecord("asset", {type: "property"}),
+				applicantCurrentProperty = this.store.createRecord("property",
+					{
+						isCurrent: true,
+						address: applicantAddress,
+						asset: applicantCurrentPropertyAsset,
+						mortgage: applicantCurrentPropertyMortgage
+					}),
+				addedApplicant = this.store.createRecord("applicant",
+					{firstName: "New Applicant"}
+				);
+			addedApplicant.get("properties").pushObject(applicantCurrentProperty);
+			this.get("currentModel.applicants").pushObject(addedApplicant);
+		},
+		removeApplicant: function(coApplicant) {
+			return coApplicant.destroyRecord();
+		},
+		addProperty: function() {
+			console.log(`Add property triggered`);
+			let addedProperty = this.store.createRecord("property"), mortgage = this.store.createRecord("liability", {type: "mortgage"}), addedAddress = this.store.createRecord("address"), addedPropertyAsset = this.store.createRecord("asset", {type: "property"});
+			addedProperty.setProperties({
+				mortgage: mortgage,
+				address: addedAddress,
+				asset: addedPropertyAsset
+			});
+			this.get("currentModel.applicant.liabilities").pushObject(mortgage);
+			this.get("currentModel.applicant.assets").pushObject(addedPropertyAsset);
+			this.get("currentModel.applicant.properties").pushObject(addedProperty);
+		},
+		removeProperty: function(property) {
+			let propertyAsset = property.get("asset"),
+				propertyMortgage = property.get("mortgage");
+			if (propertyAsset) {
+				propertyAsset.destroyRecord();
+			}
+			if (propertyMortgage) {
+				propertyMortgage.destroyRecord();
+			}
+			return property.destroyRecord().then((deletedProperty) => {
+				console.log(`Successfully deleted property ${deletedProperty.get("id")}`);
+			});
+		},
+		addVehicle: function() {
+			let addedVehicle = this.store.createRecord("vehicle"), vehicleLoan = this.store.createRecord("liability", {type: "auto-loan"}), vehicleAsset = this.store.createRecord("asset", {type: "vehicle"}), applicant = this.get("model.applicant");
+			addedVehicle.setProperties({
+				asset: vehicleAsset,
+				loan: vehicleLoan
+			});
+			this.get("currentModel.applicant.assets").pushObject(vehicleAsset);
+			this.get("currentModel.applicant.liabilities").pushObject(vehicleLoan);
+			this.get("currentModel.applicant.vehicles").pushObject(addedVehicle);
+		},
+		removeVehicle: function(vehicle) {
+			let vehicleLoan = vehicle.get("loan"),
+				vehicleAsset = vehicle.get("asset");
+			if (vehicleLoan) {
+				vehicleLoan.destroyRecord();
+			}
+			if (vehicleAsset) {
+				vehicleAsset.destroyRecord();
+			}
+			vehicle.destroyRecord().then((result) => {
+				console.log(`Successfully deleted vehicle ${result.get("id")}`);
+			});
+		},
+		addAsset: function(type) {
+			let addedAsset = this.store.createRecord("asset");
+			if (type) {
+				addedAsset.set("type", type);
+			}
+			this.get("currentModel.applicant.assets").pushObject(addedAsset);
+		},
+		removeAsset: function(asset) {
+			asset.destroyRecord().then((result) => {
+				console.log(`Successfully deleted asset ${result.get("id")}`);
+			});
 		},
 		saveAssets: function() {
 			console.dir(this.get("currentModel"));

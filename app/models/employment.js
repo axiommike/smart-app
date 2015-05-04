@@ -28,5 +28,6 @@ export default DS.Model.extend(TimeableMixin, {
 	hourlyRate: DS.attr("number", {defaultValue: 0}),
 	weeklyHours: DS.attr("number", {defaultValue: 0}),
 	commission: DS.attr("number", {defaultValue: 0}),
-	occupationType: DS.attr("string")
+	occupationType: DS.attr("string"),
+	applicant: DS.belongsTo("applicant")
 });

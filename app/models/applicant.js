@@ -63,10 +63,10 @@ export default DS.Model.extend({
 			return previousValue + asset.get("value");
 		}, 0);
 	}.property("assets.@each.value"),
-	totalDebts: function() {
-		let assets = this.get("liabilities");
-		return assets.reduce(function(previousValue, liability) {
-			return previousValue + liability.get("value");
+	totalLiabilities: function() { /* Total Yearly liabilities */
+		let liabilities = this.get("liabilities");
+		return liabilities.reduce(function(previousValue, liability) {
+			return previousValue + liability.get("payment");
 		}, 0);
 	}.property("liabilities.@each.value"),
 	mortgages: Ember.computed.alias("properties.@each.mortgage"),

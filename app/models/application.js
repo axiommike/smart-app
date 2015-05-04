@@ -7,6 +7,30 @@ export default DS.Model.extend({
 	applicants: Ember.computed("applicant", "coApplicants", function() {
 		return Ember.makeArray(this.get("coApplicants").slice().concat(this.get("applicant")));
 	}),
+	liabilities: Ember.computed("applicants.@each.liabilities", function() {
+		let combinedLiabilities = [], applicants = this.get("applicants");
+		applicants.forEach((applicant) => {
+			let applicantLiabilities = applicant.get("liabilities").toArray();
+			combinedLiabilities.pushObjects(applicantLiabilities);
+		});
+		return combinedLiabilities;
+	}),
+	assets: Ember.computed("applicants.@each.assets", function() {
+		let combinedAssets = [], applicants = this.get("applicants");
+		applicants.forEach((applicant) => {
+			let applicantAssets = applicant.get("assets").toArray();
+			combinedAssets.pushObjects(applicantAssets);
+		});
+		return combinedAssets;
+	}),
+	income: Ember.computed("applicants.@each.income", function() {
+		let combinedIncome = [], applicants = this.get("applicants");
+		applicants.forEach((applicant) => {
+			let applicantIncome = applicant.get("income").toArray();
+			combinedIncome.pushObjects(applicantIncome);
+		});
+		return combinedIncome;
+	}),
 	applicantNames: Ember.computed.alias("applicants.@each.fullName"),
 	dependentCount: DS.attr("number", {defaultValue: 0}),
 	hasDependents: Ember.computed.gt("dependentCount", 0),
