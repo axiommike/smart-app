@@ -3,7 +3,7 @@
 	<article class="application-summary">
 		<section class="applicant-summary-personal-info">
 			{{#each application.applicants as |applicant|}}
-				{{applicant-card applicant=applicant}}
+				{{applicant-card applicant=applicant isEditable=true}}
 			{{else}}
 				<span class="error">Looks like you have no applicants... maybe you should <a {{action "addApplicant"}}>add one</a>.</span>
 			{{/each}}
@@ -16,11 +16,11 @@
 			<div class="row">
 				<section class="applicant-summary-joint-assets column">
 					<h2 class="applicant summary-title"><sup class="applicant-summary-title-type">Joint</sup> Assets</h2>
-					{{asset-table assets=application.assets}}
+					{{asset-table assets=application.assets isEditable=true}}
 				</section>
 				<section class="applicant-summary-joint-liabilities column">
 					<h2 class="applicant summary-title"><sup class="applicant-summary-title-type">Joint</sup> Liabilities</h2>
-					{{liability-table liabilities=application.liabilities}}
+					{{liability-table liabilities=application.liabilities isEditable=true}}
 				</section>
 			</div>
 		</section>

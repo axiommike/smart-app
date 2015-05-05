@@ -35,8 +35,11 @@ export default Ember.ObjectController.extend({
 				this.send("saveLiabilities");
 				this.send("saveProperties");
 			}
-			if (this.get("model.applicant.income.employment.length")) {
+			if (this.get("model.applicant.employment.length")) {
 				this.send("saveEmployment");
+			}
+			if (this.get("model.applicants.length") > 0) {
+				this.send("saveApplicants");
 			}
 			this.get("model").save().then((application) => {
 				this.transitionToRoute("mortgage-application.assets", application);

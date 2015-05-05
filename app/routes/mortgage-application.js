@@ -32,6 +32,7 @@ export default Ember.Route.extend({
 	},
 	actions: {
 		error: function() {
+			this._super();
 			this.transitionTo("apply");
 		},
 		addApplicant: function() {
@@ -143,6 +144,14 @@ export default Ember.Route.extend({
 		saveIncome: function() {
 			this.get("currentModel.applicant.income").forEach((income) => {
 				income.save();
+			});
+		},
+		saveApplicants: function(applicants) {
+			if (!applicants) {
+				applicants = this.get("currentModel.applicants");
+			}
+			applicants.forEach((applicant) => {
+				applicant.save();
 			});
 		},
 		saveProperties: function(properties) {

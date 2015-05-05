@@ -13,13 +13,13 @@ export default DS.Model.extend({
 	}),
 	birthDate: DS.attr("date"),
 	sin: DS.attr("number"),
-	employment: DS.hasMany("employment"),
+	employment: DS.hasMany("employment", {async: true}),
 	currentEmployment: Ember.computed.filterBy("employment", "isCurrent", true),
 	email: DS.attr("string"),
 	hasValidEmail: Ember.computed.match("email", /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i),
 	phone: DS.attr("string"),
 	workPhone: Ember.computed.alias("currentEmployment.firstObject.company.phone"),
-	liabilities: DS.hasMany("liability"),
+	liabilities: DS.hasMany("liability", {async: true}),
 	vehicleLoans: Ember.computed.alias("vehicles.@each.loan"),
 	childSupportLiabilities: Ember.computed.filterBy("liabilities", "type", "child-support"),
 	creditCardLiabilities: Ember.computed.filterBy("liabilities", "type", "credit-card"),
@@ -27,8 +27,8 @@ export default DS.Model.extend({
 	loanLiabilities: Ember.computed.filterBy("liabilities", "type", "loan"),
 	otherLiabilities: Ember.computed.filterBy("liabilities", "type", "other"),
 	allAssets: Ember.computed.uniq("assets", "vehicles.@each.asset", "properties.@each.asset"),
-	assets: DS.hasMany("asset"),
-	vehicles: DS.hasMany("vehicle"),
+	assets: DS.hasMany("asset", {async: true}),
+	vehicles: DS.hasMany("vehicle", {async: true}),
 	vehicleAssets: Ember.computed.alias("vehicles.@each.asset"),
 	personalItemAssets: Ember.computed.filterBy("assets", "type", "item"),
 	savingsAssets: Ember.computed.filterBy("assets", "type", "savings"),
@@ -37,7 +37,7 @@ export default DS.Model.extend({
 	respAssets: Ember.computed.filterBy("assets", "type", "resp"),
 	rrspAssets: Ember.computed.filterBy("assets", "type", "rrsp"),
 	otherAssets: Ember.computed.filterBy("assets", "type", "other"),
-	income: DS.hasMany("income"),
+	income: DS.hasMany("income", {async: true}),
 	employmentIncome: Ember.computed.filterBy("income", "source", "employment"),
 	totalIncome: Ember.computed("income.@each.value", function() {
 		let incomes = this.get("income");
@@ -46,7 +46,7 @@ export default DS.Model.extend({
 		}, 0);
 	}),
 	currentAddress: Ember.computed.alias("currentProperty.address"),
-	previousAddresses: DS.hasMany("address"),
+	previousAddresses: DS.hasMany("address", {async: true}),
 	addresses: Ember.computed("currentAddress", "previousAddresses", function() {
 		return Ember.makeArray(this.get("previousAddresses").slice().concat(this.get("currentAddress")));
 	}),

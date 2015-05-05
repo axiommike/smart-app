@@ -13,7 +13,7 @@
 <ul class="assets">
 	{{#each filteredAssets as |asset|}}
 		<li class="asset">
-			{{asset-instance asset=asset}}
+			{{asset-instance asset=asset isEditable=isEditable}}
 			<button {{action "removeAsset" asset}} class="remove-button">Remove {{#if asset.type}}
 				{{asset.type}}
 			{{else}}
