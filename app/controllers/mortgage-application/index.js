@@ -20,6 +20,15 @@ export default Ember.Controller.extend({
 		{value: "advice", label: "I need some advice"}
 	],
 	actions: {
+		sendIncomplete: function() {
+			var model = this.get("model"), applicant = model.get("applicant");
+			model.save().then((savedApplication) => {
+				applicant.save().then((savedApplicant) => {
+					console.dir(savedApplicant);
+					this.transitionToRoute("mortgage-application.thank-you", savedApplication);
+				});
+			});
+		},
 		nextStep: function() {
 			var model = this.get("model"), applicant = model.get("applicant");
 			model.save().then((savedApplication) => {

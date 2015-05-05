@@ -1,6 +1,18 @@
 import Ember from "ember";
 
 export default Ember.Route.extend({
+	addEmployment: function(applicant, isCurrent) {
+		let createdEmployment = this.store.createRecord("employment", {isCurrent: isCurrent}),
+			createdEmploymentAddress = this.store.createRecord("address"),
+			createdEmploymentCompany = this.store.createRecord("company", {address: createdEmploymentAddress});
+		createdEmployment.setProperties({
+			employer: createdEmploymentCompany
+		});
+		applicant.get("employment").pushObject(createdEmployment);
+		createdEmploymentAddress.save();
+		createdEmploymentCompany.save();
+		createdEmployment.save();
+	},
 	setupController: function (controller, model) {
 		// Call _super for default behaviour
 		this._super(controller, model);
@@ -20,9 +32,21 @@ export default Ember.Route.extend({
 			model.get("applicant.liabilities").pushObject(currentPropertyMortgage);
 			model.get("applicant.assets").pushObject(currentPropertyAsset);
 			model.get("applicant.previousAddresses").pushObject(currentPropertyAddress);
+			// save all these
+			currentPropertyAsset.save();
+			currentPropertyAddress.save();
+			currentPropertyMortgage.save();
+			currentProperty.save();
 		}
 		else {
 			model.set("ownsCurrentResidence", true);
+		}
+		if (model.get("applicant.employment.length") === 0) {
+			this.addEmployment(model.get("applicant"), false);
+			this.addEmployment(model.get("applicant"), true);
+		}
+		else if (model.get("applicant.currentEmployment.length") === 0) {
+			this.addEmployment(this.get("model.applicant"), true);
 		}
 	},
 	model: function(params) {
@@ -34,6 +58,9 @@ export default Ember.Route.extend({
 		error: function() {
 			this._super();
 			this.transitionTo("apply");
+		},
+		addEmployment: function(applicant, isCurrent) {
+			this.addEmployment(applicant, isCurrent);
 		},
 		addApplicant: function() {
 			let applicantAddress = this.store.createRecord("address",

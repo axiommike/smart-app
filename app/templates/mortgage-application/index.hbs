@@ -43,6 +43,7 @@
 				{{textarea value=model.comment class="row" placeholder="Is there anything else I can do for you?" rows=model.commentRows id="anything-else-i-can-do?"}}
 			{{/form-field}}
 			<footer class="form-actions">
+				<button class="button-success" {{action "sendIncomplete"}} type="submit">Contact Me Now</button>
 				<button type="submit" title="Continue to Full Application">Complete Full Application</button>
 			</footer>
 		{{/validatable-form}}

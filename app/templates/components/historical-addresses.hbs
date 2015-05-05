@@ -10,7 +10,7 @@
 					<button {{action "removeAddress" address}} class="remove-button">Remove</button>
 				</li>
 			{{else}}
-				<li>No previous addresses found.  <button {{action "addAddress"}} class="add-button">Add Previous Address</button></li>
+				<li>No previous addresses found.  <a {{action "addAddress"}}>Add Previous Address</a></li>
 			{{/each}}
 		</ul>
 		<footer class="address-history-total">
