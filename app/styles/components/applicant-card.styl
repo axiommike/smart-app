@@ -50,7 +50,8 @@ $applicantCardMinWidth ?= 25em
 			text-align center
 		&-header
 			padding 1.2em
-			margin-bottom 1em
+			& + .applicant-card-details
+				margin-top 1em
 			background rgb(43, 226, 226)
 			color white
 		&-role
@@ -76,6 +77,26 @@ $applicantCardMinWidth ?= 25em
 		&-actions
 			1px solid rgba(160,160,160,0.2)
 			padding 1.2em
+		&-finances
+			text-align center
+			color white
+			display flex
+			&-title
+				display block
+				font-size 1.5em
+			&-total
+				padding 1em
+				flex 1
+			.total
+				&-income
+					background rgb(1, 128, 75)
+				&-assets
+					background rgb(1, 128, 128)
+				&-liabilities
+					background rgb(255, 136, 0)
+			&-icon
+				display block
+				font-size 1.4em
 		margin 0.5rem 0 1rem
 		background white
 		box-shadow 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)

@@ -98,6 +98,29 @@
 			{{/form-section}}
 		{{/if}}
 	{{else}}
+		<ul class="applicant-card-finances">
+			{{#if applicant.totalIncome}}
+				<li class="applicant-card-finances-total total-income">
+					<span class="applicant-card-finances-icon">{{accessible-icon icon="coin"}}</span>
+					<span class="applicant-card-finances-title">Income</span>
+					<strong class="applicant-card-finances-value">{{format-number applicant.totalIncome style="currency" currency="CAD"}}</strong>
+				</li>
+			{{/if}}
+			{{#if applicant.totalAssets}}
+				<li class="applicant-card-finances-total total-assets">
+					<span class="applicant-card-finances-icon">{{accessible-icon icon="plus"}}</span>
+					<span class="applicant-card-finances-title">Assets</span>
+					<strong class="applicant-card-finances-value">{{format-number applicant.totalAssets style="currency" currency="CAD"}}</strong>
+				</li>
+			{{/if}}
+			{{#if applicant.totalLiabilities}}
+				<li class="applicant-card-finances-total total-liabilities">
+					<span class="applicant-card-finances-icon">{{accessible-icon icon="minus"}}</span>
+					<span class="applicant-card-finances-title">Debts</span>
+					<strong class="applicant-card-finances-value">{{format-number applicant.totalLiabilities style="currency" currency="CAD"}}</strong>
+				</li>
+			{{/if}}
+		</ul>
 		<dl class="applicant-card-details">
 			{{#if applicant.email}}
 				<dt>Email</dt>
@@ -110,6 +133,10 @@
 			{{#if applicant.birthDate}}
 				<dt>Birth Date</dt>
 				<dd>{{format-date applicant.birthDate day="numeric" month="long" year="numeric"}}</dd>
+			{{/if}}
+			{{#if applicant.currentAddress}}
+				<dt>Current Address</dt>
+				<dd>{{accessible-icon icon="pin"}} {{applicant.currentAddress.address}}</dd>
 			{{/if}}
 		</dl>
 	{{/liquid-if}}
