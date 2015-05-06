@@ -15,6 +15,7 @@ export default DS.Model.extend({
 	sin: DS.attr("number"),
 	employment: DS.hasMany("employment", {async: true}),
 	currentEmployment: Ember.computed.filterBy("employment", "isCurrent", true),
+	previousEmployment: Ember.computed.setDiff("employment", "currentEmployment"),
 	email: DS.attr("string"),
 	hasValidEmail: Ember.computed.match("email", /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i),
 	phone: DS.attr("string"),

@@ -71,17 +71,7 @@
 		{{/form-section}}
 		{{#if includeIncome}}
 			{{#form-section title="Employment" icon="briefcase"}}
-				<header class="table-header">
-					<button {{action "addEmployment" applicant}} class="add-button">Add Employment</button>
-				</header>
-				{{#if previousEmploymentRequired}}
-					<span class="error">Please provide the last <strong>{{minEmploymentHistory}}</strong> years of employment history.</span>
-				{{/if}}
-				{{#each historicalEmployment in applicant.employment}}
-					{{historical-employment employment=historicalEmployment onRemove="removeEmployment"}}
-				{{else}}
-					No employment history for {{applicant.fullName}}.  <a {{action "addEmployment" applicant}}>Add Employment</a>
-				{{/each}}
+				{{employment-table employment=applicant.employment previousEmployment=applicant.previousEmployment currentEmployment=applicant.currentEmployment onAddEmployment="addEmployment" onRemoveEmployment="removeEmployment"}}
 			{{/form-section}}
 			{{#form-section title="Extra Income Sources" icon="coin"}}
 				{{income-table income=applicant.income excluded=applicant.employmentIncome onAdd="addIncome" onRemove="removeIncome"}}

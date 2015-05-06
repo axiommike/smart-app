@@ -2,66 +2,82 @@
 	{{input type="text" value=employment.occupation placeholder="Job Title" required=true}}
 {{/form-field}}
 
-{{#form-field title="Is Current Employment?"}}
+{{#form-field title="I currently work here"}}
 	{{on-off-switch checked=employment.isCurrent title="Is the job current?"}}
 {{/form-field}}
 {{#form-field title="Type"}}
 	{{view "select" content=employmentTypes optionValuePath="content.value" optionLabelPath="content.label" value=employment.type}}
 {{/form-field}}
 
-{{#form-field title="Payment Frequency"}}
-	{{view "select" content=paymentFrequencies optionValuePath="content.value" optionLabelPath="content.label" value=employment.paymentFrequency}}
-{{/form-field}}
-
-{{#liquid-unless employment.isSelfEmployed}}
-	{{#form-field title="Employer"}}
-		{{input type="text" value=employment.employer.name placeholder="Employer" required=true}}
+{{#liquid-if employment.isSelfEmployed}}
+	{{#form-field title="Business Name"}}
+		{{input type="text" value=employment.employer.name placeholder="Business Name" required=true}}
 	{{/form-field}}
-{{/liquid-unless}}
+	{{#form-field title="Business Address"}}
+		{{address-input address=employoment.employer.address value=employment.employer.address.address placeholder="Business Address" required=true}}
+	{{/form-field}}
+	{{#form-field title="Business Type"}}
+		{{view "select" content=businessTypes optionValuePath="content.value" optionLabelPath="content.label" value=employment.employer.type}}
+	{{/form-field}}
+	{{#form-field title="Approximate annual, taxable income"}}
+		{{currency-input min="0" step="any" value=employment.income.value required=true}}
+	{{/form-field}}
+	{{#form-field title="How long?"}}
+		<label>{{input type="number" value=employment.tenureYears required=true placeholder="Years" min="0" step="1"}} years</label>
+		<label>{{input type="number" value=employment.tenureMonths placeholder="mths" min="0" max="12" step="1"}} months
+		</label>
+	{{/form-field}}
+{{else}}
+	{{#form-field title="Payment Frequency"}}
+		{{view "select" content=paymentFrequencies optionValuePath="content.value" optionLabelPath="content.label" value=employment.paymentFrequency}}
+	{{/form-field}}
+	{{#form-field title="Employer Address"}}
+		{{address-input address=employoment.employer.address value=employment.employer.address.address placeholder="Employer's Address" required=true}}
+	{{/form-field}}
+	{{#form-field title="Employer Phone Number"}}
+		{{input type="tel" value=employment.employer.phone placeholder="Employer's Phone" required=true}}
+	{{/form-field}}
 
-{{#form-field title="Employer Address"}}
-	{{address-input address=employoment.employer.address value=employment.employer.address.address placeholder="Employer's Address" required=true}}
-{{/form-field}}
-{{#form-field title="Employer Phone Number"}}
-	{{input type="tel" value=employment.employer.phone placeholder="Employer's Phone" required=true}}
-{{/form-field}}
-
-{{#form-field title="Position Duration"}}
-	{{#liquid-if durationEnabled}}
-		{{input type="date" value=employment.startDate required=true}}
-		<span>to</span>
-		{{input type="date" value=employment.endDate required=true}}
-	{{else}}
-		{{input type="number" value=employment.tenureYears required=true placeholder="Years" min="0" step="1"}}
-		<label for = "tenure-years">years</label>
-		{{input type="number" value=employment.tenureMonths placeholder="mths" min="0" max="12" step="1"}}
-		<label for = "tenure-months">months</label>
-	{{/liquid-if}}
-	{{#liquid-if employment.tenureTotalYears}}
-		<span class="help">position was held for {{employment.tenureTotalYears}} years</span>
-	{{/liquid-if}}
-{{/form-field}}
-
-{{#liquid-if employment.isSalaried}}
-	{{#form-field title="Hours Per Week"}}
-		{{input type="range" min=0 step=0.5 max=60 value=employment.weeklyHours required=true}}
-		{{#liquid-if employment.weeklyHours}}
-			<span>worked <strong>{{employment.weeklyHours}}</strong> hours per week</span>
+	{{#form-field title="Position Duration"}}
+		{{#liquid-if durationEnabled}}
+			{{input type="date" value=employment.startDate required=true}}
+			<span>to</span>
+			{{input type="date" value=employment.endDate required=true}}
+		{{else}}
+			{{input type="number" value=employment.tenureYears required=true placeholder="Years" min="0" step="1"}}
+			<label for = "tenure-years">years</label>
+			{{input type="number" value=employment.tenureMonths placeholder="mths" min="0" max="12" step="1"}}
+			<label for = "tenure-months">months</label>
+		{{/liquid-if}}
+		{{#liquid-if employment.tenureTotalYears}}
+			<span class="help">position was held for {{employment.tenureTotalYears}} years</span>
 		{{/liquid-if}}
 	{{/form-field}}
-	{{#form-field title="Hourly Rate"}}
-		{{currency-input min=0 step="any" value=employment.hourlyRate required=true}}
-		{{#liquid-if employment.hourlyRate}}
-			<span>dollars per hour</span>
+
+	{{#liquid-if employment.isSalaried}}
+		{{#form-field title="Hours Per Week"}}
+			{{input type="range" min=0 step=0.5 max=60 value=employment.weeklyHours required=true}}
+			{{#liquid-if employment.weeklyHours}}
+				<span>worked <strong>{{employment.weeklyHours}}</strong> hours per week</span>
+			{{/liquid-if}}
+		{{/form-field}}
+		{{#form-field title="Hourly Rate"}}
+			{{currency-input min=0 step="any" value=employment.hourlyRate required=true}}
+			{{#liquid-if employment.hourlyRate}}
+				<span>dollars per hour</span>
+			{{/liquid-if}}
+		{{/form-field}}
+	{{/liquid-if}}
+
+	{{#form-field title="Annual Pay"}}
+		{{currency-input min="0" step="any" value=employment.income.value required=true}}
+		{{#liquid-if employment.income.value}}
+			<span>annually</span>
 		{{/liquid-if}}
 	{{/form-field}}
 {{/liquid-if}}
 
-{{#form-field title="Annual Pay"}}
-	{{currency-input min="0" step="any" value=employment.income.value required=true}}
-	{{#liquid-if employment.income.value}}
-		<span>annually</span>
-	{{/liquid-if}}
-{{/form-field}}
 {{yield}}
-<button title="Remove this employment" {{action "remove"}} class="remove-button">Remove</button>
+{{#if onRemove}}
+	<button title="Remove this employment" {{action "remove"}} class="remove-button">Remove</button>
+{{/if}}

@@ -1,7 +1,11 @@
 import Ember from "ember";
 import EditableMixin from "../mixins/editable";
 
-export default Ember.Component.extend(EditableMixin,{
+export default Ember.Component.extend(EditableMixin, {
+	tagName: "historical-employment",
+	classNameBindings: ["employment.isCurrent", ":historical-employment"],
+	attributeBindings: ["data-tenure"],
+	"data-tenure": Ember.computed.alias("employment.tenureTotalYears"),
 	employment: null,
 	durationEnabled: false,
 	employmentTypes: [
@@ -10,6 +14,11 @@ export default Ember.Component.extend(EditableMixin,{
 		{label: "Self-Employed", value: "self-employed"},
 		{label: "Pension", value: "pension"},
 		{label: "Other", value: "other"} /* Seasonal, etc. */
+	],
+	businessTypes: [
+		{label: "Incorporated", value: "incorporated"},
+		{label: "Partnership", value: "partnership"},
+		{label: "Sole Proprietorship", value: "sole-propriety"}
 	],
 	paymentFrequencies: [
 		{label: "Hourly", value: "hourly"},
