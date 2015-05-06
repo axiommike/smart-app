@@ -64,7 +64,7 @@ export default Ember.Component.extend(EditableMixin, {
 		},
 		addAddress: function() {
 			let store = this.get("targetObject.store"), addedAddress = store.createRecord("address");
-			this.get("applicant").get("previousAddresses").pushObject(addedAddress);
+			this.get("applicant.previousAddresses").pushObject(addedAddress);
 		},
 		addAsset: function() {
 			console.log(`AddAsset on applicant-card called`);

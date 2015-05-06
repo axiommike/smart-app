@@ -8,25 +8,20 @@ export default Ember.Component.extend(EditableMixin, {
 		return Ember.makeArray(this.get("previousAddresses").slice().concat(this.get("currentAddress")));
 	}),
 	minHistory: 3, /* How many years back are required - Expert requires 3 */
-	previousAddressesRequired: Ember.computed.lt("currentAddress.tenureTotalYears", 3),
 	previousAddressTimespan: Ember.computed("addresses.@each.tenureTotalYears", function() {
 		let addresses = this.get("addresses");
 		return addresses.reduce(function(previousValue, address) {
 			return previousValue + address.get("tenureTotalYears");
 		}, 0);
 	}),
-	additionalPreviousAddressesRequired: Ember.computed("previousAddresses", "currentAddress", function() {
-		let currentAddressDuration = this.get("currentAddress.tenureTotalYears"), totalDuration = 0;
-		if (currentAddressDuration) {
-			this.get("previousAddresses").forEach((address) => {
-				totalDuration += address.get("tenureTotalYears");
-			});
-			return totalDuration <= this.get("maxHistory");
+	previousAddressesRequired: Ember.computed.lt("previousAddressTimespan", 3),
+	autoCreatePreviousAddress: function() {
+		if (this.get("previousAddressesRequired")) {
+			if (this.get("previousAddresses.length") === 0) {
+				this.sendAction("onAddAddress");
+			}
 		}
-		else {
-			return false;
-		}
-	}),
+	}.observes("currentAddress.tenureTotalYears"),
 	onAddAddress: null,
 	actions: {
 		addAddress: function() {
