@@ -28,7 +28,7 @@ $material-box
 	&s
 		@extend $material-box
 		list-style-type decimal
-.asset, .liability, .applicant-card, .income
+.asset, .liability, .applicant-card, .income, .historical-employment
 	@extend $fadeIn
 
 .liabilities, .assets, .properties, .employment
@@ -102,3 +102,8 @@ $material-box
 .info
 	@extend $normal-padding
 	font-weight bold
+.loader
+	@extend $fadeInUp
+	&-text
+		@extend $fadeIn
+		animation-delay 1s

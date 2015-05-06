@@ -36,17 +36,12 @@ export default Ember.Route.extend({
 			currentPropertyAsset.save();
 			currentPropertyAddress.save();
 			currentPropertyMortgage.save();
-			currentProperty.save();
-		}
-		else {
-			model.set("ownsCurrentResidence", true);
+			currentProperty.save().then((currentSavedProperty) => {
+				console.log(`Saved new current property of id ${currentSavedProperty.get("id")}`);
+			});
 		}
 		if (model.get("applicant.employment.length") === 0) {
-			this.addEmployment(model.get("applicant"), false);
 			this.addEmployment(model.get("applicant"), true);
-		}
-		else if (model.get("applicant.currentEmployment.length") === 0) {
-			this.addEmployment(this.get("model.applicant"), true);
 		}
 	},
 	model: function(params) {
@@ -55,10 +50,10 @@ export default Ember.Route.extend({
 		return this.store.find("application", params.application_id);
 	},
 	actions: {
-		error: function() {
+		/*error: function() {
 			this._super();
 			this.transitionTo("apply");
-		},
+		},*/
 		addEmployment: function(applicant, isCurrent) {
 			this.addEmployment(applicant, isCurrent);
 		},
@@ -80,6 +75,12 @@ export default Ember.Route.extend({
 				);
 			addedApplicant.get("properties").pushObject(applicantCurrentProperty);
 			this.get("currentModel.applicants").pushObject(addedApplicant);
+			// save records
+			applicantCurrentPropertyAsset.save();
+			applicantCurrentPropertyMortgage.save();
+			applicantCurrentProperty.save();
+			applicantAddress.save();
+			addedApplicant.save();
 		},
 		removeApplicant: function(coApplicant) {
 			return coApplicant.destroyRecord();

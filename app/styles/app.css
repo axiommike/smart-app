@@ -210,7 +210,10 @@ a {
 .liability,
 .applicant-card,
 .income,
-.agent-callout {
+.historical-employment,
+.agent-callout,
+.loader,
+.loader-text {
   -webkit-animation-duration: 1s;
   -o-animation-duration: 1s;
   animation-duration: 1s;
@@ -224,13 +227,15 @@ a {
 body {
   background: #ededed;
   font-size: 100%;
-  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Helvetica Neue", "Segoe UI", "Ubuntu", Frutiger, "Frutiger Linotype", "Dejavu Sans", Arial, sans-serif;
   line-height: 1.5;
 }
 .asset,
 .liability,
 .applicant-card,
-.income {
+.income,
+.historical-employment,
+.loader-text {
   -webkit-animation-name: fadeIn;
   -o-animation-name: fadeIn;
   animation-name: fadeIn;
@@ -765,7 +770,8 @@ body {
 }
 .box,
 .form-steps,
-.agent-callout {
+.agent-callout,
+.loader {
   -webkit-animation-name: fadeInUp;
   -o-animation-name: fadeInUp;
   animation-name: fadeInUp;
@@ -4179,7 +4185,7 @@ liability-instance {
   display: inline-block;
 }
 .loader {
-  color: #fff;
+  color: #000;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4213,6 +4219,7 @@ liability-instance {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  min-height: 100vh;
   box-orient: horizontal;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
@@ -4232,143 +4239,11 @@ liability-instance {
 }
 .loader-bar {
   cursor: wait;
+  width: 100%;
 }
 .loader-text {
-  font-weight: 100;
-  font-size: 1.5em;
-  margin-bottom: 0 0 0.5em 0;
-}
-@-moz-keyframes spin {
-  0% {
-    left: 50%;
-    -webkit-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  25% {
-    left: 45%;
-    font-size: 3.5em;
-    -ms-filter: none;
-    filter: none;
-    opacity: 1;
-  }
-  50% {
-    left: 40%;
-  }
-  75% {
-    left: 45%;
-    font-size: 1em;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
-    filter: alpha(opacity=10);
-    opacity: 0.1;
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-    left: 50%;
-  }
-}
-@-webkit-keyframes spin {
-  0% {
-    left: 50%;
-    -webkit-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  25% {
-    left: 45%;
-    font-size: 3.5em;
-    -ms-filter: none;
-    filter: none;
-    opacity: 1;
-  }
-  50% {
-    left: 40%;
-  }
-  75% {
-    left: 45%;
-    font-size: 1em;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
-    filter: alpha(opacity=10);
-    opacity: 0.1;
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-    left: 50%;
-  }
-}
-@-o-keyframes spin {
-  0% {
-    left: 50%;
-    -webkit-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  25% {
-    left: 45%;
-    font-size: 3.5em;
-    -ms-filter: none;
-    filter: none;
-    opacity: 1;
-  }
-  50% {
-    left: 40%;
-  }
-  75% {
-    left: 45%;
-    font-size: 1em;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
-    filter: alpha(opacity=10);
-    opacity: 0.1;
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-    left: 50%;
-  }
-}
-@keyframes spin {
-  0% {
-    left: 50%;
-    -webkit-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  25% {
-    left: 45%;
-    font-size: 3.5em;
-    -ms-filter: none;
-    filter: none;
-    opacity: 1;
-  }
-  50% {
-    left: 40%;
-  }
-  75% {
-    left: 45%;
-    font-size: 1em;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
-    filter: alpha(opacity=10);
-    opacity: 0.1;
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-    left: 50%;
-  }
+  font-size: 2.2em;
+  margin-top: 1em;
 }
 .nav-vertical,
 .nav-horizontal {
@@ -4637,7 +4512,7 @@ form {
   margin: 2em;
 }
 button {
-  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Helvetica Neue", "Segoe UI", "Ubuntu", Frutiger, "Frutiger Linotype", "Dejavu Sans", Arial, sans-serif;
 }
 .input-error {
   color: #dc0000;
@@ -4678,7 +4553,7 @@ input {
   -o-transition: 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) border-color, outline-color;
   transition: 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) border-color, outline-color;
   font-size: 1em;
-  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Helvetica Neue", "Segoe UI", "Ubuntu", Frutiger, "Frutiger Linotype", "Dejavu Sans", Arial, sans-serif;
 }
 textarea[type="number"][max="100"],
 input[type="number"][max="100"] {
@@ -4695,22 +4570,22 @@ input:focus:invalid {
 }
 textarea::-webkit-input-placeholder,
 input::-webkit-input-placeholder {
-  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Helvetica Neue", "Segoe UI", "Ubuntu", Frutiger, "Frutiger Linotype", "Dejavu Sans", Arial, sans-serif;
   color: #d2d2d2;
 }
 textarea:-moz-placeholder,
 input:-moz-placeholder {
-  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Helvetica Neue", "Segoe UI", "Ubuntu", Frutiger, "Frutiger Linotype", "Dejavu Sans", Arial, sans-serif;
   color: #d2d2d2;
 }
 textarea::-moz-placeholder,
 input::-moz-placeholder {
-  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Helvetica Neue", "Segoe UI", "Ubuntu", Frutiger, "Frutiger Linotype", "Dejavu Sans", Arial, sans-serif;
   color: #d2d2d2;
 }
 textarea:-ms-input-placeholder,
 input:-ms-input-placeholder {
-  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Helvetica Neue", "Segoe UI", "Ubuntu", Frutiger, "Frutiger Linotype", "Dejavu Sans", Arial, sans-serif;
   color: #d2d2d2;
 }
 @media only screen and (max-width: 767px) {
@@ -4790,7 +4665,7 @@ h3,
 h2,
 h1 {
   font-weight: 300;
-  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Helvetica Neue", "Segoe UI", "Ubuntu", Frutiger, "Frutiger Linotype", "Dejavu Sans", Arial, sans-serif;
 }
 h6 {
   font-size: 1.269666666666667em;
@@ -5032,4 +4907,9 @@ footer a[href]:visited {
 }
 .info {
   font-weight: bold;
+}
+.loader-text {
+  -webkit-animation-delay: 1s;
+  -o-animation-delay: 1s;
+  animation-delay: 1s;
 }

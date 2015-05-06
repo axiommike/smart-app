@@ -28,7 +28,7 @@ export default Ember.Component.extend(EditableMixin, {
 	maritalStatusOptions: [
 		{value: "single", label: "Single"},
 		{value: "married", label: "Married"},
-		{value: "Divorced", label: "Divorced"}
+		{value: "divorced", label: "Divorced"}
 	],
 	actions: {
 		removeApplicant: function() {
@@ -36,7 +36,9 @@ export default Ember.Component.extend(EditableMixin, {
 		},
 		addIncome: function() {
 			let store = this.get("targetObject.store"), addedIncome = store.createRecord("income");
-			this.get("applicant.income").pushObject(addedIncome);
+			addedIncome.save().then((savedIncome) => {
+				this.get("applicant.income").pushObject(savedIncome);
+			});
 		},
 		removeIncome: function(income) {
 			income.destroyRecord().then((deletedIncome) => {
@@ -50,6 +52,10 @@ export default Ember.Component.extend(EditableMixin, {
 				employer: addedEmploymentCompany,
 				income: addedEmploymentIncome
 			});
+			addedEmploymentCompanyAddress.save();
+			addedEmploymentIncome.save();
+			addedEmploymentCompany.save();
+			addedEmployment.save();
 			this.get("applicant.income").pushObject(addedEmploymentIncome);
 			this.get("applicant.employment").pushObject(addedEmployment);
 		},
@@ -64,12 +70,16 @@ export default Ember.Component.extend(EditableMixin, {
 		},
 		addAddress: function() {
 			let store = this.get("targetObject.store"), addedAddress = store.createRecord("address");
-			this.get("applicant.previousAddresses").pushObject(addedAddress);
+			addedAddress.save().then((savedAddress) => {
+				this.get("applicant.previousAddresses").pushObject(savedAddress);
+			});
 		},
 		addAsset: function() {
 			console.log(`AddAsset on applicant-card called`);
 			let store = this.get("targetObject.store"), addedAsset = store.createRecord("asset", {type: null});
-			this.get("applicant").get("assets").pushObject(addedAsset);
+			addedAsset.save().then((savedAsset) => {
+				this.get("applicant.assets").pushObject(savedAsset);
+			});
 		},
 		copyAddresses: function() {
 			this.sendAction("onCopyAddresses", this.get("applicant"));
@@ -84,7 +94,9 @@ export default Ember.Component.extend(EditableMixin, {
 			if (type) {
 				createdLiability.set("type", type);
 			}
-			this.get("applicant.liabilities").pushObject(createdLiability);
+			createdLiability.save().then((savedLiability) => {
+				this.get("applicant.liabilities").pushObject(savedLiability);
+			});
 		}
 	}
 });

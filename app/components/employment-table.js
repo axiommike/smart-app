@@ -25,7 +25,7 @@ export default Ember.Component.extend({
 		addEmployment: function() {
 			this.sendAction("onAddEmployment");
 		},
-		onRemoveEmployment: function(employment) {
+		removeEmployment: function(employment) {
 			this.sendAction("onRemoveEmployment", employment)
 		}
 	}

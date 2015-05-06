@@ -3,23 +3,7 @@ import Ember from "ember";
 export default Ember.ObjectController.extend({
 	actions: {
 		addApplicant: function() {
-			let applicantAddress = this.store.createRecord("address",
-					{isCurrent: true}
-				),
-				applicantCurrentPropertyMortgage = this.store.createRecord("liability", {type: "mortgage"}),
-				applicantCurrentPropertyAsset = this.store.createRecord("asset", {type: "property"}),
-				applicantCurrentProperty = this.store.createRecord("property",
-					{
-						isCurrent: true,
-						address: applicantAddress,
-						asset: applicantCurrentPropertyAsset,
-						mortgage: applicantCurrentPropertyMortgage
-					}),
-				addedApplicant = this.store.createRecord("applicant",
-					{firstName: "New Applicant"}
-				);
-			addedApplicant.get("properties").pushObject(applicantCurrentProperty);
-			this.get("model.applicants").pushObject(addedApplicant);
+			this.send("addApplicant");
 		},
 		copyAddresses: function(applicant) {
 			console.log("copy addresses triggered");
