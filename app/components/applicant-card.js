@@ -9,6 +9,7 @@ export default Ember.Component.extend(EditableMixin, {
 	includeLiabilities: false,
 	includeAssets: false,
 	includeIncome: false,
+	onAddEmployment: null,
 	onRemoveApplicant: null,
 	onCopyAddresses: null,
 	minEmploymentHistory: 3, /* How many years back are required - Expert requires 3 */
@@ -46,27 +47,10 @@ export default Ember.Component.extend(EditableMixin, {
 			});
 		},
 		addEmployment: function() {
-			let store = this.get("targetObject.store"), addedEmployment = store.createRecord("employment"), addedEmploymentCompany = store.createRecord("company"), addedEmploymentCompanyAddress = store.createRecord("address"), addedEmploymentIncome = store.createRecord("income", {source: "employment"});
-			addedEmploymentCompany.set("address", addedEmploymentCompanyAddress);
-			addedEmployment.setProperties({
-				employer: addedEmploymentCompany,
-				income: addedEmploymentIncome
-			});
-			addedEmploymentCompanyAddress.save();
-			addedEmploymentIncome.save();
-			addedEmploymentCompany.save();
-			addedEmployment.save();
-			this.get("applicant.income").pushObject(addedEmploymentIncome);
-			this.get("applicant.employment").pushObject(addedEmployment);
+			this.sendAction("onAddEmployment", this.get("applicant"));
 		},
 		removeEmployment: function(employment) {
-			let employmentIncome = employment.get("income");
-			if (employmentIncome) {
-				employmentIncome.destroyRecord();
-			}
-			employment.destroyRecord().then((deletedEmployment) => {
-				console.log(`Successfully deleted employment ${deletedEmployment.get("id")}`);
-			});
+			this.sendAction("onRemoveEmployment", employment);
 		},
 		addAddress: function() {
 			let store = this.get("targetObject.store"), addedAddress = store.createRecord("address");

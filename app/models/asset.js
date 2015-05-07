@@ -8,7 +8,6 @@ export default DS.Model.extend({
 	isInvestment: Ember.computed.equal("type", "investment"),
 	isProperty: Ember.computed.equal("type", "property"),
 	isGIC: Ember.computed.equal("type", "gic"),
-	isRESP: Ember.computed.equal("type", "resp"),
 	isRRSP: Ember.computed.equal("type", "rrsp"),
 	isVehicle: Ember.computed.equal("type", "vehicle"),
 	isOther: Ember.computed.equal("type", "other"),

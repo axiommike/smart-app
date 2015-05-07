@@ -41,14 +41,6 @@
 			{{/liquid-if}}
 		</li>
 		<li class="form-step">
-			{{#form-field title="Do you have any RESP savings accounts?"}}
-				{{on-off-switch checked=hasRESPs title="Please indicate whether you have any RESP (Registered Educational Savings Plan) funds or accounts" id="do-you-have-any-resp-savings-accounts?"}}
-			{{/form-field}}
-			{{#liquid-if hasRESPs}}
-				{{asset-table assets=model.applicant.assets type="resp" onAdd="addAsset" onRemove="removeAsset" title="Table of all RESP Accounts" caption="All RESP Accounts"}}
-			{{/liquid-if}}
-		</li>
-		<li class="form-step">
 			{{#form-field title="Do you have any RRSP savings accounts?"}}
 				{{on-off-switch checked=hasRRSPs title="Please indicate whether you have any RRSP funds or accounts" id="do-you-have-any-rrsp-savings-accounts?"}}
 			{{/form-field}}

@@ -26,6 +26,12 @@
 		{{#liquid-if hasMortgage}}
 			{{liability-instance liability=property.mortgage typeEditingDisabled=true}}
 		{{/liquid-if}}
+		{{#form-field title="Does this property have a secured line of credit?"}}
+			{{on-off-switch checked=hasLineOfCredit}}
+		{{/form-field}}
+		{{#liquid-if hasLineOfCredit}}
+			{{liability-instance liability=property.lineOfCredit typeEditingDisabled=true}}
+		{{/liquid-if}}
 	{{/form-section}}
 {{else}}
 	Hmmm... no property was found here.  Maybe try refreshing?

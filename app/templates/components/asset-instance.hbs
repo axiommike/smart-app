@@ -50,12 +50,6 @@
 		{{/form-field}}
 	{{/if}}
 
-	{{#if asset.isRESP}}
-		{{#form-field title="RESP Account Balance"}}
-			{{currency-input value=asset.value placeholder="Balance" min="0" step="100"}}
-		{{/form-field}}
-	{{/if}}
-
 	{{#if asset.isRRSP}}
 		{{#form-field title="RRSP Account Balance"}}
 			{{currency-input value=asset.value placeholder="Balance" min="0" step="100"}}

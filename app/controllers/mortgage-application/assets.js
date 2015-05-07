@@ -26,12 +26,6 @@ export default Ember.ObjectController.extend({
 			this.send("addAsset", "gic");
 		}
 	}.observes("hasGICs"),
-	hasRESPs: Ember.computed.oneWay("model.applicant.respAssets.length"),
-	respsToggled: function() {
-		if (this.get("hasRESPs") && this.get("model.applicant.respAssets.length") === 0) {
-			this.send("addAsset", "resp");
-		}
-	}.observes("hasRESPs"),
 	hasInvestments: Ember.computed.oneWay("model.applicant.investmentAssets.length"),
 	investmentsToggled: function() {
 		if (this.get("hasInvestments") && this.get("model.applicant.investmentAssets.length") === 0) {
@@ -56,67 +50,25 @@ export default Ember.ObjectController.extend({
 			this.send("addAsset", "other");
 		}
 	}.observes("ownsOtherAssets"),
-
 	actions: {
 		addProperty: function() {
 			console.log(`Add property triggered`);
-			let addedProperty = this.store.createRecord("property"), mortgage = this.store.createRecord("liability", {type: "mortgage"}), addedAddress = this.store.createRecord("address"), addedPropertyAsset = this.store.createRecord("asset", {type: "property"});
-			addedProperty.setProperties({
-				mortgage: mortgage,
-				address: addedAddress,
-				asset: addedPropertyAsset
-			});
-			this.get("model.applicant.liabilities").pushObject(mortgage);
-			this.get("model.applicant.assets").pushObject(addedPropertyAsset);
-			this.get("model.applicant.properties").pushObject(addedProperty);
+			this.send("addPropertyMaster");
 		},
 		removeProperty: function(property) {
-			let propertyAsset = property.get("asset"),
-				propertyMortgage = property.get("mortgage");
-			if (propertyAsset) {
-				propertyAsset.destroyRecord();
-			}
-			if (propertyMortgage) {
-				propertyMortgage.destroyRecord();
-			}
-			property.destroyRecord().then((deletedProperty) => {
-				console.log(`Successfully deleted property ${deletedProperty.get("id")}`);
-			});
+			this.send("removePropertyMaster", property);
 		},
 		addVehicle: function() {
-			let addedVehicle = this.store.createRecord("vehicle"), vehicleLoan = this.store.createRecord("liability", {type: "auto-loan"}), vehicleAsset = this.store.createRecord("asset", {type: "vehicle"}), applicant = this.get("model.applicant");
-			addedVehicle.setProperties({
-				asset: vehicleAsset,
-				loan: vehicleLoan
-			});
-			this.get("model.applicant.assets").pushObject(vehicleAsset);
-			this.get("model.applicant.liabilities").pushObject(vehicleLoan);
-			this.get("model.applicant.vehicles").pushObject(addedVehicle);
+			this.send("addVehicleMaster");
 		},
 		removeVehicle: function(vehicle) {
-			let vehicleLoan = vehicle.get("loan"),
-				vehicleAsset = vehicle.get("asset");
-			if (vehicleLoan) {
-				vehicleLoan.destroyRecord();
-			}
-			if (vehicleAsset) {
-				vehicleAsset.destroyRecord();
-			}
-			vehicle.destroyRecord().then((result) => {
-				console.log(`Successfully deleted vehicle ${result.get("id")}`);
-			});
+			this.send("removeVehicleMaster", vehicle);
 		},
 		addAsset: function(type) {
-			let addedAsset = this.store.createRecord("asset");
-			if (type) {
-				addedAsset.set("type", type);
-			}
-			this.get("model.applicant.assets").pushObject(addedAsset);
+			this.send("addAssetMaster", type);
 		},
 		removeAsset: function(asset) {
-			asset.destroyRecord().then((result) => {
-				console.log(`Successfully deleted asset ${result.get("id")}`);
-			});
+			this.send("removeAssetMaster", asset);
 		},
 		nextStep: function() {
 			if (this.get("model.applicant.assets.length")) {
