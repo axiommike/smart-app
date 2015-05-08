@@ -81,9 +81,8 @@ export default Ember.Route.extend({
 		removeApplicantMaster: function(coApplicant) {
 			return coApplicant.destroyRecord();
 		},
-		addPropertyMaster: function() {
-			console.log(`Add property triggered`);
-			this.addProperty(this.get("currentModel.applicant"), false);
+		addPropertyMaster: function(applicant) {
+			this.addProperty(applicant, false);
 		},
 		removePropertyMaster: function(property) {
 			let propertyAsset = property.get("asset"),
@@ -121,15 +120,15 @@ export default Ember.Route.extend({
 			}
 			employment.destroyRecord();
 		},
-		addVehicleMaster: function() {
-			let addedVehicle = this.store.createRecord("vehicle"), vehicleLoan = this.store.createRecord("liability", {type: "auto-loan"}), vehicleAsset = this.store.createRecord("asset", {type: "vehicle"}), applicant = this.get("model.applicant");
+		addVehicleMaster: function(applicant) {
+			let addedVehicle = this.store.createRecord("vehicle"), vehicleLoan = this.store.createRecord("liability", {type: "auto-loan"}), vehicleAsset = this.store.createRecord("asset", {type: "vehicle"});
 			addedVehicle.setProperties({
 				asset: vehicleAsset,
 				loan: vehicleLoan
 			});
-			this.get("currentModel.applicant.assets").pushObject(vehicleAsset);
-			this.get("currentModel.applicant.liabilities").pushObject(vehicleLoan);
-			this.get("currentModel.applicant.vehicles").pushObject(addedVehicle);
+			applicant.get("assets").pushObject(vehicleAsset);
+			applicant.get("liabilities").pushObject(vehicleLoan);
+			applicant.get("vehicles").pushObject(addedVehicle);
 			vehicleLoan.save();
 			vehicleAsset.save();
 			addedVehicle.save();
@@ -147,17 +146,37 @@ export default Ember.Route.extend({
 				console.log(`Successfully deleted vehicle ${result.get("id")}`);
 			});
 		},
-		addAssetMaster: function(type) {
-			let addedAsset = this.store.createRecord("asset");
-			if (type) {
-				addedAsset.set("type", type);
-			}
-			this.get("currentModel.applicant.assets").pushObject(addedAsset);
-			addedAsset.save();
+		addAssetMaster: function(applicant, type) {
+			let addedAsset = this.store.createRecord("asset", {type: type});
+			addedAsset.save().then((savedAsset) => {
+				applicant.get("assets").pushObject(savedAsset);
+			});
 		},
 		removeAssetMaster: function(asset) {
 			asset.destroyRecord().then((result) => {
 				console.log(`Successfully deleted asset ${result.get("id")}`);
+			});
+		},
+		addLiabilityMaster: function(applicant, type) {
+			let createdLiability = this.store.createRecord("liability", {type: type});
+			createdLiability.save().then((savedLiability) => {
+				applicant.get("liabilities").pushObject(savedLiability);
+			});
+		},
+		removeLiabilityMaster: function(liability) {
+			liability.destroyRecord().then((result) => {
+				console.log(`Successfully deleted liability ${result.get("id")}`);
+			});
+		},
+		addIncomeMaster: function(applicant) {
+			let addedIncome = store.createRecord("income");
+			addedIncome.save().then((savedIncome) => {
+				applicant.get("income").pushObject(savedIncome);
+			});
+		},
+		removeIncomeMaster: function(income) {
+			income.destroyRecord().then((deletedIncome) => {
+				console.log(`Successfully deleted income ${deletedIncome.get("id")}`);
 			});
 		},
 		saveAssets: function() {

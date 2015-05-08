@@ -2,7 +2,11 @@
 	<h1 class="announcement">Here's what we got so far:</h1>
 </header>
 {{#validatable-form action="nextStep"}}
-	{{application-summary application=model onAddApplicant="onAddApplicant"}}
+	{{application-summary application=model
+	onAddApplicant="addApplicant"
+	onAddLiability="addLiability" onRemoveLiability="removeLiability"
+	onAddAsset="addAsset" onRemoveAsset="removeAsset"
+	onAddIncome="addIncome" onRemoveIncome="removeIncome"}}
 	<footer {{bind-attr class=":disclaimer consentProvided:accepted"}}>
 		<span class="info">Disclaimer</span>
 		{{#form-field title="I hereby declare that the information declared in this form are valid as of today, and I consent to having my records checked by the Canadian Credit Bureau"}}

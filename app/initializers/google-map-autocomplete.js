@@ -3,6 +3,9 @@ import Ember from "ember";
 export function initialize(container, application) {
 	let src = "https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places";
 	var promise;
+	window.__emberGoogleMapLoaded__ = function() {
+		window.fetchingGoogle = false;
+	};
 	return Ember.$.getScript(src + "&callback=__emberGoogleMapLoaded__").then((scriptFetched) => {
 		window.fetchingGoogle = false;
 	}).fail(function (jqXhr) {

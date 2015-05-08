@@ -11,16 +11,16 @@
 		<section class="application-summary-joint box">
 			<section class="applicant-summary-joint-income">
 				<h2 class="applicant-summary-title"><sup class="applicant-summary-title-type">Joint</sup> Income</h2>
-				{{income-table flatList=true income=application.income}}
+				{{income-table flatList=true income=application.income onAdd="addIncome" onRemove="removeIncome"}}
 			</section>
 			<div class="row">
 				<section class="applicant-summary-joint-assets column">
 					<h2 class="applicant summary-title"><sup class="applicant-summary-title-type">Joint</sup> Assets</h2>
-					{{asset-table assets=application.assets isEditable=true}}
+					{{asset-table assets=application.assets isEditable=true onAdd="addAsset" onRemove="removeAsset"}}
 				</section>
 				<section class="applicant-summary-joint-liabilities column">
 					<h2 class="applicant summary-title"><sup class="applicant-summary-title-type">Joint</sup> Liabilities</h2>
-					{{liability-table liabilities=application.liabilities isEditable=true}}
+					{{liability-table liabilities=application.liabilities isEditable=true onAdd="addLiability" onRemove="removeLiability"}}
 				</section>
 			</div>
 		</section>

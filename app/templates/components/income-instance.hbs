@@ -1,11 +1,4 @@
-{{#if isEditable}}
-	<button {{action "toggleEditing"}}>{{#if isEditing}}
-		Done
-	{{else}}
-		Edit
-	{{/if}}
-	</button>
-{{/if}}
+{{partial "partials/toggle-edit-button"}}
 
 {{#liquid-if isEditing}}
 	{{#form-field title="Source"}}

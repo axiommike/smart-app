@@ -2,6 +2,8 @@ import Ember from "ember";
 import EditableMixin from "../mixins/editable";
 
 export default Ember.Component.extend(EditableMixin, {
+	tagName: "income-instance",
+	classNameBindings: [":income-instance"],
 	incomeSources: [
 		"Investment",
 		"Child Support Alimony",

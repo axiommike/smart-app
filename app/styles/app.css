@@ -4177,6 +4177,9 @@ button-error:focus {
 .eleven-twelveths {
   width: 91.6666666666667%;
 }
+.income-table-total {
+  text-align: right;
+}
 .item-table .add-button,
 .table-header .add-button {
   float: right;
@@ -4842,7 +4845,6 @@ footer a[href]:visited {
 }
 .agent-callout-email {
   background: transparent;
-  display: block;
   -webkit-transition: background 0.3s ease, transform 0.3s ease, filter 0.3s ease;
   -o-transition: background 0.3s ease, transform 0.3s ease, filter 0.3s ease;
   transition: background 0.3s ease, transform 0.3s ease, filter 0.3s ease;
@@ -4892,7 +4894,8 @@ footer a[href]:visited {
   }
 }
 .disclaimer {
-  margin: 3em 0;
+  margin: 3em auto;
+  max-width: 75em;
   background: #f80;
   padding: 1em;
   -webkit-transition: 0.5s background cubic-bezier(0.55, 0.085, 0.68, 0.53);

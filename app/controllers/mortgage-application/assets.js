@@ -52,20 +52,19 @@ export default Ember.ObjectController.extend({
 	}.observes("ownsOtherAssets"),
 	actions: {
 		addProperty: function() {
-			console.log(`Add property triggered`);
-			this.send("addPropertyMaster");
+			this.send("addPropertyMaster", this.get("model.applicant"));
 		},
 		removeProperty: function(property) {
 			this.send("removePropertyMaster", property);
 		},
 		addVehicle: function() {
-			this.send("addVehicleMaster");
+			this.send("addVehicleMaster", this.get("model.applicant"));
 		},
 		removeVehicle: function(vehicle) {
 			this.send("removeVehicleMaster", vehicle);
 		},
 		addAsset: function(type) {
-			this.send("addAssetMaster", type);
+			this.send("addAssetMaster", this.get("model.applicant"), type);
 		},
 		removeAsset: function(asset) {
 			this.send("removeAssetMaster", asset);

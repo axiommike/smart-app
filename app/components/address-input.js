@@ -7,7 +7,9 @@ export default Ember.TextField.extend({
 	classNameBindings: ["googlePlace:autocompleted", ":address-input"],
 	placeholder: "Address",
 	title: "Please provide a valid address",
-	size: Ember.computed.alias("address.address.length"),
+	size: Ember.computed("address.address", function() {
+		return this.get("address.address.length") > 0 ? this.get("address.address.length") : 1;
+	}),
 	addressFormats: {
 		street_number: {
 			format: "long_name",
