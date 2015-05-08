@@ -7,6 +7,14 @@
 @require "components/*" // import all components; pick and choose as needed
 @require "layout/*" // import all layout styles
 
+.agent-page
+	header[role="banner"]
+		align-items center
+		padding 2em
+		h1
+			+media-query($breakpointMain)
+				margin-bottom 1em
+			font-size 2em
 $material-box
 	@extend $fadeInUp
 	background $bodyBackground
@@ -17,6 +25,10 @@ $material-box
 
 .box
 	@extend $material-box
+
+.quick-application
+	+media-query($breakpointMain)
+		margin 2em
 
 .form-step
 	border-bottom 1px solid #E2E2E2
@@ -36,7 +48,9 @@ $material-box
 
 .announcement
 	text-align center
-	line-height 3
+	margin 1em
+	+media-query($breakpointMain)
+		font-size 2.4em
 
 .agent
 	&-callout

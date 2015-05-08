@@ -70,6 +70,9 @@
 	{{/liquid-if}}
 
 	{{#form-field title="Annual Pay"}}
+		{{#liquid-if employment.isCommission}}
+			<span class="form-field-hint">Please give us the closest guess to your annual pay.</span>
+		{{/liquid-if}}
 		{{currency-input min="0" step="any" value=employment.income.value required=true}}
 		{{#liquid-if employment.income.value}}
 			<span>annually</span>

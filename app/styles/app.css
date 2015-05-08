@@ -3511,6 +3511,10 @@ button-error:focus {
 .form-field-vertical .form-field-controls {
   display: block;
 }
+.form-field-hint {
+  font-weight: bold;
+  color: #528ce0;
+}
 .form-action {
   display: inline-block;
 }
@@ -4779,6 +4783,22 @@ footer a[href]:visited {
     page-break-after: avoid;
   }
 }
+.agent-page header[role="banner"] {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  padding: 2em;
+}
+.agent-page header[role="banner"] h1 {
+  font-size: 2em;
+}
+@media only screen and (max-width: 767px) {
+  .agent-page header[role="banner"] h1 {
+    margin-bottom: 1em;
+  }
+}
 .box,
 .form-steps {
   background: #fff;
@@ -4787,6 +4807,11 @@ footer a[href]:visited {
   max-width: 55em;
   -webkit-box-shadow: 0 0.1em 0.2em 0 rgba(0,0,0,0.12), 0 0.1em 0.3em 0 rgba(0,0,0,0.26);
   box-shadow: 0 0.1em 0.2em 0 rgba(0,0,0,0.12), 0 0.1em 0.3em 0 rgba(0,0,0,0.26);
+}
+@media only screen and (max-width: 767px) {
+  .quick-application {
+    margin: 2em;
+  }
 }
 .form-step {
   border-bottom: 1px solid #e2e2e2;
@@ -4807,7 +4832,12 @@ footer a[href]:visited {
 }
 .announcement {
   text-align: center;
-  line-height: 3;
+  margin: 1em;
+}
+@media only screen and (max-width: 767px) {
+  .announcement {
+    font-size: 2.4em;
+  }
 }
 .agent-callout {
   -webkit-animation-delay: 0.3s;

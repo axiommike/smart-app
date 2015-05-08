@@ -12,6 +12,9 @@ export default Ember.Component.extend({
 	didInsertElement: function() {
 		let $firstInput = this.$().find("input[id], select[id], textarea[id]").first();
 		if (Ember.isArray($firstInput)) {
+			if (!Ember.isBlank($firstInput.attr("title"))) {
+				this.set("tipTitle", $firstInput.attr("title"));
+			}
 			this.setProperties({
 				childInput: $firstInput
 			});
@@ -26,6 +29,8 @@ export default Ember.Component.extend({
 	}).property("layoutDirection"),
 	model: null,
 	labelText: null,
+	tip: false,
+	tipTitle: null,
 	labelID: (function() {
 		/*if (this.get("hasTitle")) {
 			return Ember.String.dasherize(this.get("title"));

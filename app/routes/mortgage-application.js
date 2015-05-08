@@ -169,7 +169,7 @@ export default Ember.Route.extend({
 			});
 		},
 		addIncomeMaster: function(applicant) {
-			let addedIncome = store.createRecord("income");
+			let addedIncome = this.store.createRecord("income");
 			addedIncome.save().then((savedIncome) => {
 				applicant.get("income").pushObject(savedIncome);
 			});

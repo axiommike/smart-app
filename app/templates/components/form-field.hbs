@@ -6,5 +6,8 @@
 {{/if}}
 
 <div {{bind-attr class=controlsClassName}}>
+	{{#if tip}}
+		<span class="form-field-hint">{{tipTitle}}</span>
+	{{/if}}
 	{{yield}}
 </div>
