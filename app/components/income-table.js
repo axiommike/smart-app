@@ -15,6 +15,7 @@ export default Ember.Component.extend(EditableMixin, {
 			return previousValue + parseInt(income.get("yearlyValue"));
 		}, 0);
 	}),
+	showApplicant: true,
 	filteredIncome: Ember.computed.setDiff("income", "excluded"),
 	onRemove: null,
 	onAdd: null,

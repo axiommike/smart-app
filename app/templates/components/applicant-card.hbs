@@ -13,7 +13,7 @@
 	<ul class="applicant-card-actions">
 		{{#unless applicant.isPrimary}}
 			<li class="applicant-card-action">
-				<button {{action "removeApplicant" applicant}}>Remove {{applicant.fullName}}</button>
+				<button {{action "removeApplicant"}}>Remove {{applicant.fullName}}</button>
 			</li>
 		{{/unless}}
 		{{#if isEditable}}

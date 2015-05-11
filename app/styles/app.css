@@ -3029,7 +3029,16 @@ rgba(160,160,160,0.2)
   border-style: solid;
 }
 .applicant-summary-joint-income {
+  border-bottom: 1px solid #e2e2e2;
   padding: 1em;
+}
+.application-summary .table-header {
+  text-align: right;
+}
+.application-summary income-table .table-header {
+  position: absolute;
+  top: 0;
+  right: -1em;
 }
 .asset {
   min-width: 15em;
@@ -4184,6 +4193,18 @@ button-error:focus {
 .income-table-total {
   text-align: right;
 }
+.income-subtotal {
+  text-align: right;
+}
+income-table {
+  display: block;
+}
+income-instance {
+  display: block;
+}
+income-instance .editable-link {
+  display: table;
+}
 .item-table .add-button,
 .table-header .add-button {
   float: right;
@@ -4945,4 +4966,8 @@ footer a[href]:visited {
   -webkit-animation-delay: 1s;
   -o-animation-delay: 1s;
   animation-delay: 1s;
+}
+.editable-link {
+  border-bottom: 1px dotted;
+  cursor: pointer;
 }

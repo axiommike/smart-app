@@ -6,6 +6,7 @@ export default Ember.Component.extend(EditableMixin, {
 	classNameBindings: [":income-instance"],
 	incomeSources: [
 		"Investment",
+		"employment",
 		"Child Support Alimony",
 		"Property Rental",
 		"Pension",
@@ -21,12 +22,20 @@ export default Ember.Component.extend(EditableMixin, {
 		"Yearly",
 		"Monthly"
 	],
+	showApplicant: true,
 	pensionType: null,
 	income: null,
+	onRemove: null,
 	flatList: false,
 	isChildSupport: Ember.computed.equal("income.source", "Child Support Alimony"),
 	isInvestment: Ember.computed.equal("income.source", "Investment"),
 	isPension: Ember.computed.equal("income.source", "Pension"),
+	isEmployment: Ember.computed.equal("income.source", "employment"),
 	isPropertyRental: Ember.computed.equal("income.source", "Property Rental"),
-	isOther: Ember.computed.equal("income.source", "Other")
+	isOther: Ember.computed.equal("income.source", "Other"),
+	actions: {
+		remove: function() {
+			this.sendAction("onRemove", this.get("income"));
+		}
+	}
 });

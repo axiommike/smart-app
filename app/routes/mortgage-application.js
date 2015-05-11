@@ -79,6 +79,18 @@ export default Ember.Route.extend({
 			this.addApplicant(this.get("currentModel.applicants"), "New Co-Applicant");
 		},
 		removeApplicantMaster: function(coApplicant) {
+			coApplicant.get("employment").forEach((employment) => {
+				employment.destroyRecord();
+			});
+			coApplicant.get("income").forEach((incomeInstance) => {
+				incomeInstance.destroyRecord();
+			});
+			coApplicant.get("properties").forEach((property) => {
+				property.destroyRecord();
+			});
+			coApplicant.get("assets").forEach((asset) => {
+				asset.destroyRecord();
+			});
 			return coApplicant.destroyRecord();
 		},
 		addPropertyMaster: function(applicant) {

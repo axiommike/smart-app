@@ -7,6 +7,9 @@ export default Ember.Controller.extend({
 		addApplicant: function() {
 			this.send("addApplicantMaster");
 		},
+		removeApplicant: function(applicant) {
+			this.send("removeApplicantMaster", applicant);
+		},
 		addAsset: function() {
 			this.send("addAssetMaster", this.get("model.applicant"));
 		},

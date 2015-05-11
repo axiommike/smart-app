@@ -5,6 +5,7 @@ export default Ember.Component.extend({
 	classNameBindings: [":application-summary", "hasApplicants", "hasCoApplicants"],
 	application: null,
 	onAddApplicant: null,
+	onRemoveApplicant: null,
 	onAddIncome: null,
 	onRemoveIncome: null,
 	onAddAsset: null,
@@ -16,6 +17,9 @@ export default Ember.Component.extend({
 	actions: {
 		addApplicant: function() {
 			this.sendAction("onAddApplicant");
+		},
+		removeApplicant: function(applicant) {
+			this.sendAction("onRemoveApplicant", applicant);
 		},
 		addIncome: function() {
 			this.sendAction("onAddIncome");

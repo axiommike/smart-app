@@ -3,7 +3,7 @@
 </header>
 {{#validatable-form action="nextStep"}}
 	{{application-summary application=model
-	onAddApplicant="addApplicant"
+	onAddApplicant="addApplicant" onRemoveApplicant="removeApplicant"
 	onAddLiability="addLiability" onRemoveLiability="removeLiability"
 	onAddAsset="addAsset" onRemoveAsset="removeAsset"
 	onAddIncome="addIncome" onRemoveIncome="removeIncome"}}

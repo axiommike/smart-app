@@ -1,6 +1,5 @@
-{{partial "partials/toggle-edit-button"}}
-
 {{#liquid-if isEditing}}
+	{{partial "partials/toggle-edit-button"}}
 	{{#form-field title="Source"}}
 		{{view "select" content=incomeSources value=income.source}}
 	{{/form-field}}
@@ -34,21 +33,48 @@
 		{{/form-field}}
 	</div>
 {{else}}
-	<span class="income-source">
-		{{#if income.isOther}}
-			{{#if income.description}}
-				<em class="income-description">{{income.description}}</em>
-			{{else}}
-				Other income source
+	<div class="row">
+		<div class="column">
+			<a {{action "toggleEditing"}} class="editable-link">
+				<span class="income-source">
+					{{#if income.description}}
+						<em class="income-description">{{income.description}}</em>
+					{{else}}
+						<em class="income-source-type">
+							{{#if income.source}}
+								{{income.source}}
+							{{else}}
+								Other income source
+							{{/if}}
+						</em>
+					{{/if}}
+				</span>
+			</a>
+		</div>
+		{{#if showApplicant}}
+			{{#if income.applicant.hasName}}
+				<div class="column">
+				<span class="income-applicant">
+					{{income.applicant.fullName}}
+				</span>
+				</div>
 			{{/if}}
 		{{/if}}
-	</span>
-	{{#if income.applicant.hasName}}
-		<span class="income-applicant">
-			{{income.applicant.fullName}}
-		</span>
-	{{/if}}
-	<strong class="income-value">{{format-number totalLiabilities style="currency" currency="CAD"}}</strong>
+		<div class="column income-subtotal">
+			<span class="income-value">{{format-number income.value style="currency" currency="CAD"}}</span>
+		</div>
+		{{#if income.onRemove}}
+			<div class="column actions">
+				<button {{bind-attr class="isEditing:remove-button:plain-warning"}} {{action "remove"}}>
+					{{#liquid-if isEditing}}
+						Remove Extra Income
+					{{else}}
+						{{accessible-icon icon="remove" title="Remove Extra Income"}}
+					{{/liquid-if}}
+				</button>
+			</div>
+		{{/if}}
+	</div>
 {{/liquid-if}}
 
 {{yield}}

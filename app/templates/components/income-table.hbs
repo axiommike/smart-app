@@ -10,8 +10,7 @@
 <ul {{bind-attr class=":income :income-table flatList:flat-list"}}>
 	{{#each extraIncome in filteredIncome}}
 		<li {{bind-attr class=":income extraIncome.source:extraIncome.source"}}>
-			{{income-instance income=extraIncome flatList=flatList isEditable=isEditable}}
-			<button {{action "removeIncome" extraIncome}} class="remove-button">Remove Extra Income</button>
+			{{income-instance income=extraIncome flatList=flatList isEditable=isEditable onRemove="removeIncome" showApplicant=showApplicant}}
 		</li>
 	{{else}}
 		<li>No extra income sources found.  <a {{action "addIncome"}}>Add one?</a></li>
