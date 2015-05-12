@@ -13,13 +13,7 @@
 <ul class="assets">
 	{{#each filteredAssets as |asset|}}
 		<li class="asset">
-			{{asset-instance asset=asset isEditable=isEditable}}
-			<button {{action "removeAsset" asset}} class="remove-button">Remove {{#if asset.type}}
-				{{asset.type}}
-			{{else}}
-				Asset
-			{{/if}}
-			</button>
+			{{asset-instance asset=asset isEditable=isEditable onRemove="removeAsset"}}
 		</li>
 	{{else}}
 		<li>
@@ -27,5 +21,11 @@
 		</li>
 	{{/each}}
 </ul>
+
+{{#liquid-if totalAssets}}
+	<footer class="table-total">
+		<sup><strong>{{format-number totalAssets style="currency" currency="CAD"}}</strong> total</sup>
+	</footer>
+{{/liquid-if}}
 
 {{yield}}

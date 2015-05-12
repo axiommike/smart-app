@@ -1,6 +1,6 @@
 {{#if liability}}
-	{{partial "partials/toggle-edit-button"}}
 	{{#liquid-if isEditing}}
+		{{partial "partials/toggle-edit-button"}}
 		{{#unless typeEditingDisabled}}
 			{{#form-field title="Type"}}
 				{{view "select" content=liabilityTypes optionValuePath="content.value" optionLabelPath="content.label" value=liability.type}}
@@ -21,7 +21,7 @@
 				{{input type="date" value=liability.maturityDate required=true}}
 			{{/form-field}}
 			{{#form-field title="Lender"}}
-				{{autocomplete-input value=liability.lender required=true placeholder="Lender" list="lenders" title="Please provide the lender for this mortgage"}}
+				{{autocomplete-input value=liability.lender required=true placeholder="Lender" datalist="lenders" title="Please provide the lender for this mortgage"}}
 			{{/form-field}}
 			{{#form-field title="Approximate Mortgage Balance"}}
 				{{currency-input min="0" step="1000" value=liability.outstandingBalance placeholder="$ Overdue" required=true title="Please indicate the remaining balance of the mortgage"}}
@@ -38,7 +38,7 @@
 		{{/if}}
 		{{#if liability.isLineOfCredit}}
 			{{#form-field title="Bank/Financial Institution"}}
-				{{autocomplete-input value=liability.lender list="lenders" placeholder="Bank Name" required=true}}
+				{{autocomplete-input value=liability.lender datalist="lenders" placeholder="Bank Name" required=true}}
 			{{/form-field}}
 			{{#form-field title="Available Limit"}}
 				{{currency-input value=liability.limit required=true title="Please provide the maximum amount that can be alotted to you by this line of credit"}}
@@ -61,16 +61,46 @@
 			{{/form-field}}
 		{{/if}}
 	{{else}}
-		{{#if liability.description}}
-			<span class="liability-description">{{liability.description}}</span>
-		{{/if}}
-		<span class="liability-type">{{liability.type}}</span>
-		{{#if liability.applicant}}
-			<span class="liability-applicant">{{liability.applicant.fullName}}</span>
-		{{/if}}
-		<span class="liability-payment">
-			<strong>{{format-number liability.payment style="currency" currency="CAD"}}</strong>
-		</span>
+		<div class="row">
+			<div class="column">
+				<div class="row">
+					<div class="column">
+						<a class="editable-link" {{action "toggleEditing"}}>
+							{{#if liability.description}}
+								<span class="liability-description">{{liability.description}}</span>
+							{{else}}
+								<em class="liability-type">
+									{{#if liability.type}}
+										{{liability.type}}
+									{{else}}
+										Other Liability
+									{{/if}}
+								</em>
+							{{/if}}
+						</a>
+					</div>
+					{{#if onRemove}}
+						<div class="column actions">
+							<button {{bind-attr class="isEditing:remove-button:button-plain-warning"}} {{action "remove"}}>
+								{{#liquid-if isEditing}}
+									Remove {{type}} Liability
+								{{else}}
+									{{accessible-icon icon="cross" title="Remove Extra Income"}}
+								{{/liquid-if}}
+							</button>
+						</div>
+					{{/if}}
+				</div>
+			</div>
+			{{#if liability.applicant}}
+				<div class="column">
+					<span class="liability-applicant">{{liability.applicant.fullName}}</span>
+				</div>
+			{{/if}}
+			<div class="column">
+				<span class="liability-payment table-subtotal">{{format-number liability.payment style="currency" currency="CAD"}}</span>
+			</div>
+		</div>
 	{{/liquid-if}}
 {{else}}
 	Aww.  no liability found.

@@ -4,6 +4,7 @@ import EditableMixin from "../mixins/editable";
 export default Ember.Component.extend(EditableMixin, {
 	tagName: "asset",
 	classNameBindings: [":asset", "asset.type"],
+	onRemove: null,
 	asset: null,
 	assetTypes: [
 		{value: "item", label: "Personal Item"},
@@ -20,5 +21,10 @@ export default Ember.Component.extend(EditableMixin, {
 		{value: "savings", label: "Savings Account"},
 		{value: "chequing", label: "Chequing Account"},
 		{value: "other", label: "Other"}
-	]
+	],
+	actions: {
+		remove: function() {
+			this.sendAction("onRemove", this.get("asset"));
+		}
+	}
 });

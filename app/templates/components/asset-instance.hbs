@@ -1,6 +1,5 @@
-{{partial "partials/toggle-edit-button"}}
-
 {{#liquid-if isEditing}}
+	{{partial "partials/toggle-edit-button"}}
 	{{#unless asset.type}}
 		{{#form-field title="Type"}}
 			{{view "select" content=assetTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.type required=true}}
@@ -71,17 +70,50 @@
 		{{/form-field}}
 	{{/if}}
 {{else}}
-	{{#if asset.description}}
-		<span class="asset-description">{{asset.description}}</span>
-	{{/if}}
-	<span class="asset-type">{{asset.type}}</span>
-	{{#if asset.applicant}}
-		<span class="asset-applicant">{{asset.applicant.fullName}}</span>
-	{{/if}}
-	<span class="asset-value">
-		<strong>{{format-number asset.value style="currency" currency="CAD"}}</strong>
-	</span>
-
+	<div class="row">
+		<div class="column">
+			<div class="row">
+				<a {{action "toggleEditing"}} class="editable-link">
+					<span class="asset-type">
+						{{#if asset.description}}
+							<em class="asset-description">{{income.description}}</em>
+						{{else}}
+							<em class="asset-type-type">
+								{{#if asset.type}}
+									{{asset.type}}
+								{{else}}
+									Other Asset
+								{{/if}}
+							</em>
+						{{/if}}
+					</span>
+				</a>
+				{{#if onRemove}}
+					<div class="column actions">
+						<button {{bind-attr class="isEditing:remove-button:button-plain-warning"}} {{action "remove"}}>
+							{{#liquid-if isEditing}}
+								Remove {{#if asset.type}}
+								{{asset.type}}
+							{{else}}
+								Asset
+							{{/if}}
+							{{else}}
+								{{accessible-icon icon="cross" title="Remove Extra Income"}}
+							{{/liquid-if}}
+						</button>
+					</div>
+				{{/if}}
+			</div>
+		</div>
+		{{#if asset.applicant}}
+			<div class="column">
+				<span class="asset-applicant">{{asset.applicant.fullName}}</span>
+			</div>
+		{{/if}}
+		<div class="column table-subtotal">
+			<span class="asset-value">{{format-number asset.value style="currency" currency="CAD"}}</span>
+		</div>
+	</div>
 {{/liquid-if}}
 
 

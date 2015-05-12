@@ -9,19 +9,33 @@ Created on 04/05/2015 by PhpStorm
 */
 
 .applicant-summary
+	asset-table, liability-table
+		.table-total
+			padding 0 1em
+	&-title
+		margin 1rem 1rem 0 1rem
 	&-personal-info
 		margin-bottom 1em
 		padding-bottom 1em
 		border-bottom 1px rgba(204, 204, 204, 0.38)
 		border-style solid
 	&-joint
+		&-income, &-assets, &-liabilities
+			position relative
 		&-income
 			border-bottom 1px solid #E2E2E2
 			padding 1em
+			.applicant-summary-title
+				margin 0 0 1rem 0
+			income-table
+				padding 0
+		&-assets
+			border-right 1px solid #E2E2E2
 .application-summary
 	.table-header
 		text-align right
-	income-table .table-header
-		position absolute
-		top 0
-		right -1em
+	income-table, liability-table, asset-table
+		.table-header
+			position absolute
+			top 0
+			right -1em

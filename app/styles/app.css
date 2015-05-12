@@ -131,6 +131,9 @@ header h1,
 p:only-child {
   margin: 0;
 }
+.editable-link:after {
+  margin-left: 0.666666666666667em;
+}
 .sub-actions,
 dl dt,
 dl dd,
@@ -172,6 +175,12 @@ footer a[href] {
 .table {
   display: table;
 }
+.editable-link:after {
+  position: absolute;
+}
+.editable-link {
+  position: relative;
+}
 .agent-callout {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -211,6 +220,7 @@ a {
 .applicant-card,
 .income,
 .historical-employment,
+.applicant-card-finances-total,
 .agent-callout,
 .loader,
 .loader-text {
@@ -235,6 +245,7 @@ body {
 .applicant-card,
 .income,
 .historical-employment,
+.applicant-card-finances-total,
 .loader-text {
   -webkit-animation-name: fadeIn;
   -o-animation-name: fadeIn;
@@ -1463,13 +1474,15 @@ body {
 .icon-browser4,
 .icon-safari,
 .icon-browser5,
+.address-input:before,
 .alert-success >:first-child:before,
 .alert-warning >:first-child:before,
 .alert-info >:first-child:before,
 .alert-error >:first-child:before,
 .alert >:first-child:before,
 .applicant-card.co-applicant:before,
-.agent-callout-email:before {
+.agent-callout-email:before,
+.editable-link:after {
   font-family: "icomoon";
   speak: none;
   font-style: normal;
@@ -2798,8 +2811,13 @@ body {
   -o-transition: 0.4s all linear;
   transition: 0.4s all linear;
 }
+.address-input:before {
+  content: "\e946";
+  margin: 0 0.4em;
+}
 .address-input.autocompleted {
-  border: 1px solid #008000;
+  border-color: #008000;
+  border-width: 2px;
 }
 .close {
   position: absolute;
@@ -2997,6 +3015,11 @@ rgba(160,160,160,0.2)
   display: -ms-flexbox;
   display: flex;
 }
+.applicant-card-finances-value {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
 .applicant-card-finances-title {
   display: block;
   font-size: 1.5em;
@@ -3021,6 +3044,13 @@ rgba(160,160,160,0.2)
   display: block;
   font-size: 1.4em;
 }
+.applicant-summary asset-table .table-total,
+.applicant-summary liability-table .table-total {
+  padding: 0 1em;
+}
+.applicant-summary-title {
+  margin: 1rem 1rem 0 1rem;
+}
 .applicant-summary-personal-info {
   margin-bottom: 1em;
   padding-bottom: 1em;
@@ -3028,38 +3058,37 @@ rgba(160,160,160,0.2)
   border-bottom: 1px rgba(204,204,204,0.38);
   border-style: solid;
 }
+.applicant-summary-joint-income,
+.applicant-summary-joint-assets,
+.applicant-summary-joint-liabilities {
+  position: relative;
+}
 .applicant-summary-joint-income {
   border-bottom: 1px solid #e2e2e2;
   padding: 1em;
 }
+.applicant-summary-joint-income .applicant-summary-title {
+  margin: 0 0 1rem 0;
+}
+.applicant-summary-joint-income income-table {
+  padding: 0;
+}
+.applicant-summary-joint-assets {
+  border-right: 1px solid #e2e2e2;
+}
 .application-summary .table-header {
   text-align: right;
 }
-.application-summary income-table .table-header {
+.application-summary income-table .table-header,
+.application-summary liability-table .table-header,
+.application-summary asset-table .table-header {
   position: absolute;
   top: 0;
   right: -1em;
 }
 .asset {
   min-width: 15em;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: end;
-  -webkit-align-items: flex-end;
-  -ms-align-items: flex-end;
-  -o-align-items: flex-end;
-  align-items: flex-end;
-  -webkit-align-content: center;
-  -ms-align-content: center;
-  -o-align-content: center;
-  align-content: center;
-  display: inline-block;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  -o-flex: 1;
-  flex: 1;
+  display: block;
 }
 .badge,
 .badge-success,
@@ -3135,10 +3164,35 @@ button {
   user-select: none;
   user-drag: none;
 }
+.button-plain,
+.button-plain-warning {
+  border: 0;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: 0.1s cubic-bezier(0.55, 0.085, 0.68, 0.53) transform;
+  -o-transition: 0.1s cubic-bezier(0.55, 0.085, 0.68, 0.53) transform;
+  transition: 0.1s cubic-bezier(0.55, 0.085, 0.68, 0.53) transform;
+}
+.button-plain:hover,
+.button-plain-warning:hover {
+  background: inherit;
+}
+.button-plain:focus,
+.button-plain-warning:focus {
+  -webkit-transform: scale(0.75);
+  -ms-transform: scale(0.75);
+  -o-transform: scale(0.75);
+  transform: scale(0.75);
+}
 .button,
 button {
   background: #00a0df;
   color: #fff;
+}
+.button-plain-warning,
+button-plain-warning {
+  color: #cc0d00;
 }
 .button:hover,
 button:hover,
@@ -3602,9 +3656,7 @@ button-error:focus {
 }
 @media only screen and (max-width: 767px) {
   .row,
-  .row-padded,
-.row,
-.row-padded {
+  .row-padded {
     display: block;
   }
   .row .column,
@@ -4210,7 +4262,7 @@ income-instance .editable-link {
   float: right;
 }
 liability-instance {
-  display: inline-block;
+  display: block;
 }
 .loader {
   color: #000;
@@ -4372,26 +4424,9 @@ liability-instance {
   border: 1px solid #dedede;
   border: 1px solid rgba(222,222,222,0.6);
 }
-.table {
-  background: #fff;
-  width: 100%;
-  max-width: 100%;
-  margin-bottom: 1em;
-}
-.table th {
-  vertical-align: bottom;
-  text-align: left;
-  padding: 0.3em;
-  font-weight: bold;
-}
-.table td {
-  padding: 0.3em;
-  vertical-align: middle;
-}
-.table caption {
+.table-subtotal,
+.table-total {
   text-align: right;
-  margin: 1em;
-  font-style: italic;
 }
 .table-header {
   padding: 1em;
@@ -4970,4 +5005,30 @@ footer a[href]:visited {
 .editable-link {
   border-bottom: 1px dotted;
   cursor: pointer;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+  filter: alpha(opacity=90);
+  opacity: 0.9;
+  -webkit-transition: opacity 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  -o-transition: opacity 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  transition: opacity 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+}
+.editable-link:after {
+  content: "\e905";
+  right: -1.2em;
+  top: 0.3em;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+.editable-link:hover {
+  color: #003776;
+  -ms-filter: none;
+  filter: none;
+  opacity: 1;
+  border-width: 2px;
+}
+.editable-link:hover:after {
+  -ms-filter: none;
+  filter: none;
+  opacity: 1;
 }

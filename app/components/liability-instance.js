@@ -31,5 +31,11 @@ export default Ember.Component.extend(EditableMixin, {
 	tagName: "liability-instance",
 	classNameBindings: [":liability-instance", "liability.type"],
 	liability: null,
-	typeEditingDisabled: false
+	typeEditingDisabled: false,
+	onRemove: null,
+	actions: {
+		remove: function() {
+			this.sendAction("onRemove", this.get("liability"));
+		}
+	}
 });

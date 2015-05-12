@@ -40,7 +40,7 @@ $material-box
 	&s
 		@extend $material-box
 		list-style-type decimal
-.asset, .liability, .applicant-card, .income, .historical-employment
+.asset, .liability, .applicant-card, .income, .historical-employment, .applicant-card-finances-total
 	@extend $fadeIn
 
 .liabilities, .assets, .properties, .employment
@@ -121,6 +121,22 @@ $material-box
 	&-text
 		@extend $fadeIn
 		animation-delay 1s
+
 .editable-link
+	@extend $relative
 	border-bottom $borderWidth dotted
 	cursor pointer
+	opacity 0.9
+	transition opacity $transitionTime $transitionFunction
+	&:after
+		content $icon-pencil
+		@extend $icomoon, $small-margin-left, $absolute
+		right -1.2em
+		top 0.3em
+		opacity 0
+	&:hover
+		color $linkColour - 70
+		opacity 1
+		border-width ($borderWidth * 2)
+		&:after
+			opacity 1

@@ -35,21 +35,36 @@
 {{else}}
 	<div class="row">
 		<div class="column">
-			<a {{action "toggleEditing"}} class="editable-link">
-				<span class="income-source">
-					{{#if income.description}}
-						<em class="income-description">{{income.description}}</em>
-					{{else}}
-						<em class="income-source-type">
-							{{#if income.source}}
-								{{income.source}}
+			<div class="row">
+				<div class="column">
+					<a {{action "toggleEditing"}} class="editable-link">
+						<span class="income-source">
+							{{#if income.description}}
+								<em class="income-description">{{income.description}}</em>
 							{{else}}
-								Other income source
+								<em class="income-source-type">
+									{{#if income.source}}
+										{{income.source}}
+									{{else}}
+										Other income source
+									{{/if}}
+								</em>
 							{{/if}}
-						</em>
-					{{/if}}
-				</span>
-			</a>
+						</span>
+					</a>
+				</div>
+				{{#if onRemove}}
+					<div class="column actions">
+						<button {{bind-attr class="isEditing:remove-button:button-plain-warning"}} {{action "remove"}}>
+							{{#liquid-if isEditing}}
+								Remove Extra Income
+							{{else}}
+								{{accessible-icon icon="cross" title="Remove Extra Income"}}
+							{{/liquid-if}}
+						</button>
+					</div>
+				{{/if}}
+			</div>
 		</div>
 		{{#if showApplicant}}
 			{{#if income.applicant.hasName}}
@@ -60,20 +75,9 @@
 				</div>
 			{{/if}}
 		{{/if}}
-		<div class="column income-subtotal">
+		<div class="column income-value table-subtotal">
 			<span class="income-value">{{format-number income.value style="currency" currency="CAD"}}</span>
 		</div>
-		{{#if income.onRemove}}
-			<div class="column actions">
-				<button {{bind-attr class="isEditing:remove-button:plain-warning"}} {{action "remove"}}>
-					{{#liquid-if isEditing}}
-						Remove Extra Income
-					{{else}}
-						{{accessible-icon icon="remove" title="Remove Extra Income"}}
-					{{/liquid-if}}
-				</button>
-			</div>
-		{{/if}}
 	</div>
 {{/liquid-if}}
 

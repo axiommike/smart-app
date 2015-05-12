@@ -60,7 +60,22 @@ $disabled
 	user-select none
 	user-drag none
 
+$plainButton
+	border 0
+	background transparent
+	margin 0
+	padding 0
+	transition 0.1s easing("in-quad") transform
+	&:hover
+		background inherit
+	&:focus
+		transform scale(0.75)
 .button
+	&-plain
+		@extend $plainButton
+		&-warning
+			@extend $plainButton
+			color $buttonColours["error"]
 	getButton($buttonBackground)
 	for size, multiplier in $buttonSizes
 		&-{size}
