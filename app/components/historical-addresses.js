@@ -15,13 +15,21 @@ export default Ember.Component.extend(EditableMixin, {
 		}, 0);
 	}),
 	previousAddressesRequired: Ember.computed.lt("previousAddressTimespan", 3),
+	currentAddressLongEnough: Ember.computed.gte("currentAddress.tenureTotalYears", 3),
 	autoCreatePreviousAddress: function() {
 		if (this.get("previousAddressesRequired")) {
-			if (this.get("previousAddresses.length") === 0) {
+			if (this.get("emptyAddresses.length") === 0) { // auto-create an address only if there are no pending addresses with 0 as their total tenure
 				this.sendAction("onAddAddress");
 			}
 		}
-	}.observes("currentAddress.tenureTotalYears"),
+		else {
+			// destroy any pending, empty addresses if the total tenure is 3 years already
+			if (this.get("emptyAddresses.length") > 0) {
+				this.get("previousAddresses").removeObjects(this.get("emptyAddresses"));
+			}
+		}
+	}.observes("addresses.@each.tenureTotalYears"),
+	emptyAddresses: Ember.computed.filterBy("previousAddresses", "tenureTotalYears", 0),
 	onAddAddress: null,
 	actions: {
 		addAddress: function() {
