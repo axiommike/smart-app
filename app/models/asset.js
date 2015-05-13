@@ -13,6 +13,7 @@ export default DS.Model.extend({
 	isOther: Ember.computed.equal("type", "other"),
 	description: DS.attr("string"), /* Primarily used for "other" type */
 	valueType: DS.attr("string"),
+	bank: DS.attr("string"),
 	ownership: DS.attr("string"),
 	value: DS.attr("number", {defaultValue: 0}),
 	applicant: DS.belongsTo("applicant")

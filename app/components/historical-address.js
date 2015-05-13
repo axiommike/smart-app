@@ -7,7 +7,12 @@ export default Ember.Component.extend(EditableMixin, {
 	classNameBindings: ["required", "tagName", "address"],
 	address: null,
 	showFullAddress: true,
-	typeName: Ember.computed("address", function() {
-		return this.get("address") ? `${this.get("address.isCurrent") ? "Current" : "Previous"} Address` : "Unknown Address";
+	customLabelPrefix: null,
+	showLabelPrefix: true,
+	labelPrefix: Ember.computed("address", function() {
+		return this.get("customLabelPrefix") ? this.get("customLabelPrefix") : this.get("address.isCurrent") ? "Current" : "Previous";
+	}),
+	label: Ember.computed("labelPrefix", function() {
+		return this.get("showLabelPrefix") ? `${this.get("labelPrefix")} Address` : "Address";
 	})
 });

@@ -1,7 +1,7 @@
 import Ember from "ember";
 
 export default Ember.Controller.extend({
-	steps: [
+	steps:       [
 		"Basic Information",
 		"Applicants",
 		"Assets",
@@ -9,16 +9,16 @@ export default Ember.Controller.extend({
 		"Summary",
 		"Thank You"
 	],
-	agent: {
+	agent:       {
 		fullName: "Sample Agent",
-		phone: "5552555555",
-		email: "seangores@gmail.com"
+		phone:    "5552555555",
+		email:    "seangores@gmail.com"
 	},
 	currentStep: 0,
-	realStep: Ember.computed("currentStep", function() {
+	realStep:    Ember.computed("currentStep", function () {
 		return this.get("currentStep") + 1;
 	}),
-	lenders: [
+	lenders:     [
 		"Alberta Treasury Branch (ATB)",
 		"Assiniboine Credit Union",
 		"B2B (Formerly Laurentian Bank)",
@@ -46,8 +46,93 @@ export default Ember.Controller.extend({
 		"TD Canada Trust",
 		"Van City"
 	],
-	actions: {
-		sendIncomplete: function() {
+	banks:       [
+		"B2B Bank",
+		"Bank of Montreal",
+		"Bank of Nova Scotia",
+		"Bridgewater Bank",
+		"Canadian Imperial Bank of Commerce",
+		"Canadian Tire Bank",
+		"Canadian Western Bank",
+		"CFF Bank",
+		"Citizens Bank of Canada",
+		"Continental Bank of Canada",
+		"CS Alterna Bank",
+		"DirectCash Bank",
+		"Equitable Bank",
+		"First Nations Bank of Canada",
+		"General Bank of Canada",
+		"Hollis Canadian Bank",
+		"HomEquity Bank",
+		"Laurentian Bank of Canada",
+		"Manulife Bank of Canada",
+		"National Bank of Canada",
+		"Pacific & Western Bank of Canada",
+		"President's Choice Bank",
+		"RedBrick Bank",
+		"Rogers Bank",
+		"RBC Royal Bank",
+		"Tangerine Bank",
+		"Toronto-Dominion Bank",
+		"Zag Bank",
+		"Amex Bank of Canada",
+		"Bank of America (Canada)",
+		"BofA Canada Bank",
+		"Bank Of China (Canada)",
+		"Bank of Tokyo - Mitsubishi UFJ (Canada) ",
+		"Bank One Canada",
+		"BNP Paribas (Canada)",
+		"Citco Bank Canada",
+		"Citibank Canada",
+		"CTC Bank of Canada",
+		"Habib Canadian Bank",
+		"HSBC Bank Canada",
+		"ICICI Bank Canada",
+		"Industrial and Commercial Bank of China (Canada)",
+		"JPMorgan Chase Bank",
+		"J.P. Morgan Canada",
+		"Korea Exchange Bank of Canada",
+		"Mega International Commercial Bank (Canada)",
+		"Shinhan Bank Canada",
+		"Société Générale (Canada) ",
+		"State Bank Of India (Canada)",
+		"Sumitomo Mitsui Banking Corporation Of Canada (Japan)",
+		"UBS Bank (Canada) ",
+		"Walmart Canada Bank",
+		"Bank Of America, N.A. (Canada Branch)",
+		"The Bank of New York Mellon ",
+		"Barclays Bank PLC, Canada Branch",
+		"Capital One Bank (Canada Branch)",
+		"Citibank, N.A.",
+		"Comerica Bank",
+		"Deutsche Bank A.G.",
+		"Dexia Credit Local S.A.",
+		"HSBC Bank USA N.A.",
+		"JPMorgan Chase Bank N.A.",
+		"Maple Bank GmbH",
+		"Mizuho Bank, Ltd., Canada Branch",
+		"M&T Bank",
+		"Northern Trust Company (Canada Branch)",
+		"PNC Bank Canada Branch",
+		"Rabobank Nederland, (Canada Branch)",
+		"Société Générale (Canada Branch)",
+		"The Royal Bank of Scotland plc, Canada Branch",
+		"State Street Bank And Trust Company",
+		"United Overseas Bank Limited",
+		"UBS AG (Canada Branch)",
+		"Wells Fargo Bank, N.A., Canadian Branch",
+		"Allied Irish Banks, p.l.c.",
+		"Credit Suisse, Toronto Branch",
+		"Merrill Lynch International Bank Limited",
+		"Union Bank of California, N.A.",
+		"U.S. Bank N.A.",
+		"First Commercial Bank",
+		"Fifth Third Bank",
+		"Scotiabank",
+		"TD Canada Trust"
+	],
+	actions:     {
+		sendIncomplete: function () {
 			let incompleteApplication = this.get("model");
 			incompleteApplication.set("isIncomplete", true);
 			this.get("model").save().then((application) => {

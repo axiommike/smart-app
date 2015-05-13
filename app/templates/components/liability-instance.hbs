@@ -26,13 +26,18 @@
 			{{#form-field title="Approximate Mortgage Balance"}}
 				{{currency-input min="0" step="1000" value=liability.outstandingBalance placeholder="$ Overdue" required=true title="Please indicate the remaining balance of the mortgage"}}
 			{{/form-field}}
+			{{#unless liability.isChildSupport}}
+				{{#form-field title="Interest Rate (%)"}}
+					{{input type="number" min="0" max="60" step="any" value=liability.rate placeholder="Interest Rate" required=true}}
+				{{/form-field}}
+			{{/unless}}
 			{{#form-field title="Payment Frequency"}}
 				{{view "select" content=paymentFrequencies value=liability.paymentFrequency}}
 			{{/form-field}}
 		{{else}}
 			{{#unless liability.isChildSupport}}
 				{{#form-field title="Outstanding Balance"}}
-					{{currency-input min="0" step="100" value=liability.outstandingBalance placeholder="$ Overdue" required=true}}
+					{{currency-input min="0" step="100" value=liability.outstandingBalance placeholder="$ Overdue"}}
 				{{/form-field}}
 			{{/unless}}
 		{{/if}}
@@ -48,11 +53,6 @@
 		{{#unless liability.isCreditCard}}
 			{{#form-field title="Monthly Payment"}}
 				{{currency-input min="0" step="100" value=liability.payment placeholder="Payment" required=true title="Please indicate the monthly payment for this liability"}}
-			{{/form-field}}
-		{{/unless}}
-		{{#unless liability.isChildSupport}}
-			{{#form-field title="Interest Rate (%)"}}
-				{{input type="number" min="0" max="60" step="any" value=liability.rate placeholder="Interest Rate" required=true}}
 			{{/form-field}}
 		{{/unless}}
 		{{#if liability.isCreditCard}}

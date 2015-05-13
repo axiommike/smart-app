@@ -55,7 +55,7 @@
 				</div>
 			{{/form-section}}
 			{{#form-field title="Marital Status"}}
-				{{view "select" content=maritalStatusOptions optionValuePath="content.value" optionLabelPath="content.label" value=applicant.maritalStatus required=true}}
+				{{view "select" content=maritalStatusOptions value=applicant.maritalStatus prompt=" -- "required=true}}
 			{{/form-field}}
 			{{#unless applicant.isPrimary}}
 				{{#form-field title="Relationship"}}

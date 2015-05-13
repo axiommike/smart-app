@@ -37,6 +37,12 @@
 		{{/form-field}}
 	{{/if}}
 
+	{{#if hasBank}}
+		{{#form-field title="Institution Name"}}
+			{{autocomplete-input value=asset.bank placeholder="Bank Name" required=true datalist="banks"}}
+		{{/form-field}}
+	{{/if}}
+
 	{{#if asset.isInvestment}}
 		{{#form-field title="Asset/Bond Investment Value"}}
 			{{currency-input value=asset.value placeholder="Amount Invested" min="0" step="100"}}

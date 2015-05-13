@@ -25,6 +25,13 @@
 		<option {{bind-attr value=lender}}></option>
 	{{/each}}
 </datalist>
+
+<datalist id="banks">
+	{{#each bank in banks}}
+		<option {{bind-attr value=bank}}></option>
+	{{/each}}
+</datalist>
+
 <main role="main">
 	{{liquid-outlet}}
 </main>

@@ -17,6 +17,7 @@ export default Ember.Component.extend(EditableMixin, {
 		{value: "property", label: "Property"},
 		{value: "other", label: "Other"}
 	],
+	hasBank: Ember.computed.or("asset.isSavings", "asset.isGIC", "asset.isRESP", "asset.isInvestment"),
 	savingsTypes: [
 		{value: "savings", label: "Savings Account"},
 		{value: "chequing", label: "Chequing Account"},

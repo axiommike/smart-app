@@ -2,7 +2,7 @@
 	{{#form-section title="Address and Location"}}
 		{{historical-address address=property.address}}
 		{{#form-field title="Estimated Property Value"}}
-			{{currency-input value=property.value placeholder="Property Value" min="0" step="10000"}}
+			{{currency-input value=property.value placeholder="Property Value" min="0" step="any"}}
 		{{/form-field}}
 		{{#form-field title="Property Taxes"}}
 			{{currency-input value=property.propertyTaxes placeholder="Property Taxes" min="0" step="any"}}

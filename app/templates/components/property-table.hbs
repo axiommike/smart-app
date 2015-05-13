@@ -11,7 +11,7 @@
 <ul class="properties">
 	{{#each property in properties}}
 		<li {{bind-attr class=":property-asset property.isRental:rental"}}>
-			{{#property-asset property=property}}<button {{action "removeProperty" property}} class="remove-button">Remove Property</button>{{/property-asset}}
+			{{#property-asset property=property showLabelPrefix=false}}<button {{action "removeProperty" property}} class="remove-button">Remove Property</button>{{/property-asset}}
 		</li>
 	{{else}}
 		<li>

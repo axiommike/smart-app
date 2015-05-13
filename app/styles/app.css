@@ -3659,7 +3659,9 @@ button-error:focus {
 }
 @media only screen and (max-width: 767px) {
   .row,
-  .row-padded {
+  .row-padded,
+.row,
+.row-padded {
     display: block;
   }
   .row .column,

@@ -27,9 +27,13 @@ export default Ember.Component.extend(EditableMixin, {
 		"Other"
 	],
 	maritalStatusOptions: [
-		{value: "single", label: "Single"},
-		{value: "married", label: "Married"},
-		{value: "divorced", label: "Divorced"}
+		"Single",
+		"Married",
+		"Widowed",
+		"Separated",
+		"Divorced",
+		"Common-law",
+		"Other"
 	],
 	actions: {
 		removeApplicant: function() {
