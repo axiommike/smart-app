@@ -2817,7 +2817,7 @@ body {
 }
 .address-input.autocompleted {
   border-color: #008000;
-  border-width: 2px;
+  border-bottom-width: 2px;
 }
 .close {
   position: absolute;
@@ -3089,6 +3089,9 @@ rgba(160,160,160,0.2)
 .asset {
   min-width: 15em;
   display: block;
+}
+.autocomplete-input {
+  min-width: 10em;
 }
 .badge,
 .badge-success,

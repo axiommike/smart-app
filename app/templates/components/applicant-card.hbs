@@ -35,10 +35,10 @@
 		{{#form-section title="basic-information" icon="information"}}
 			<div class = "row">
 				{{#form-field title="First Name" class="column one-half" layoutDirection="vertical"}}
-					{{input value=applicant.firstName placeholder="First Name" required=true autofocus="autofocus" title="Please provide the applicant's first name"}}
+					{{input value=applicant.firstName placeholder="First Name" required=true autofocus="autofocus" title="Please provide the applicant's first name" autocomplete="given-name"}}
 				{{/form-field}}
 				{{#form-field title="Last Name" class="column one-half" layoutDirection="vertical"}}
-					{{input value=applicant.lastName placeholder="Last Name" required=true title="Please provide the applicant's last name"}}
+					{{input value=applicant.lastName placeholder="Last Name" required=true title="Please provide the applicant's last name" autocomplete="family-name"}}
 				{{/form-field}}
 			</div>
 			{{#form-section title="Contact Methods" icon="mail"}}
@@ -50,7 +50,7 @@
 						{{input value=applicant.phone type="tel" required=true placeholder="Phone" title="Please provide the applicant's phone number"}}
 					{{/form-field}}
 					{{#form-field title="Birth Date" layoutDirection="vertical"}}
-						{{input type="date" value=applicant.birthDate required=true title="Please provide the date of birth of the applicant"}}
+						{{input type="date" value=applicant.birthDate required=true title="Please provide the date of birth of the applicant" autocomplete="bdate"}}
 					{{/form-field}}
 				</div>
 			{{/form-section}}

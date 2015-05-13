@@ -61,7 +61,7 @@
 				<span>worked <strong>{{employment.weeklyHours}}</strong> hours per week</span>
 			{{/liquid-if}}
 		{{/form-field}}
-		{{#form-field title="Hourly Rate"}}
+		{{#form-field title="Salary"}}
 			{{currency-input min=0 step="any" value=employment.hourlyRate required=true}}
 			{{#liquid-if employment.hourlyRate}}
 				<span>dollars per hour</span>

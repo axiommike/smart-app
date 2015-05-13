@@ -1,14 +1,6 @@
 {{#if property}}
 	{{#form-section title="Address and Location"}}
 		{{historical-address address=property.address}}
-		{{#form-field title="Do you have a rental agreement?"}}
-			{{on-off-switch checked=property.isRental title="Please indicate whether this property was rented"}}
-		{{/form-field}}
-		{{#liquid-if property.isRental}}
-			{{#form-field title="Rental Income"}}
-				{{currency-input value=property.rentalIncome placeholder="Property Value" min="0" step="100"}}
-			{{/form-field}}
-		{{/liquid-if}}
 		{{#form-field title="Estimated Property Value"}}
 			{{currency-input value=property.value placeholder="Property Value" min="0" step="10000"}}
 		{{/form-field}}

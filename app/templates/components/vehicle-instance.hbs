@@ -1,11 +1,22 @@
+<datalist id="vehicle-makes">
+	{{#each vehicles as |vehicleMake|}}
+		<option {{bind-attr value=vehicleMake.value}}>{{vehicleMake.title}}</option>
+	{{/each}}
+</datalist>
+<datalist id="vehicle-models">
+	{{#each models.firstObject.models as |model|}}
+		<option {{bind-attr value=model.value}}>{{model.title}}</option>
+	{{/each}}
+</datalist>
+
 {{#form-field title="Vehicle Year"}}
 	{{year-select value=vehicle.year required=true title="Plese provide the year the vehicle was manufactured"}}
 {{/form-field}}
 {{#form-field title="Vehicle Make"}}
-	{{view "select" content=makes value=vehicle.make}}
+	{{autocomplete-input type="text" value=vehicle.make title="Please enter a valid vehicle make" required=true placeholder="vehicle.make" datalist="vehicle-makes"}}
 {{/form-field}}
 {{#form-field title="Vehicle Model"}}
-	{{input type="text" value=vehicle.model placeholder="Vehicle Model Name"}}
+	{{autocomplete-input type="text" value=vehicle.model placeholder="Vehicle Model Name" datalist="vehicle-models"}}
 {{/form-field}}
 
 {{asset-instance asset=vehicle.asset}}

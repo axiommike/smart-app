@@ -50,7 +50,7 @@ export default DS.Model.extend({
 	}.observes("referredBy"),
 	comment: DS.attr("string"),
 	commentRows: Ember.computed("comment", function() {
-		return Math.floor(this.get("comment.length") * 0.035);
+		return this.get("comment") ? Math.floor(this.get("comment.length") * 0.015) + 1 : 1;
 	}),
 	isIncomplete: DS.attr("boolean", {defaultValue: false})
 });

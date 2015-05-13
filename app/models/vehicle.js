@@ -6,7 +6,7 @@ export default DS.Model.extend({
 	loan: DS.belongsTo("liability"),
 	make: DS.attr("string"),
 	model: DS.attr("string"),
-	year: DS.attr("number"),
+	year: DS.attr("number", {defaultValue: new Date().getFullYear()}),
 	infoChanged: function() {
 		if (this.get("year") && !Ember.isBlank(this.get("make"))) {
 			let model = !Ember.isBlank(this.get("model")) ? `${this.get("model")} ` : "",
