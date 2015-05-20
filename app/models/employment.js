@@ -8,19 +8,19 @@ export default DS.Model.extend(TimeableMixin, {
 	occupation: DS.attr("string"),
 	income: DS.belongsTo("income"), /* Annual income ($) */
 	incomeChanged: function() {
-		let hourlyRate = parseInt(this.get("hourlyRate")), weeklyHours = parseInt(this.get("weeklyHours"));
-		if (hourlyRate && weeklyHours) {
-			let yearlySalary = (hourlyRate * weeklyHours) * 52.1775; // there are 52.1775 weeks in a year
-			this.set("income.value", yearlySalary);
+		if (this.get("isHourly")) {
+			let hourlyRate = parseInt(this.get("hourlyRate")), weeklyHours = parseInt(this.get("weeklyHours"));
+			if (hourlyRate && weeklyHours) {
+				let yearlySalary = (hourlyRate * weeklyHours) * 52.1775; // there are 52.1775 weeks in a year
+				this.set("income.value", yearlySalary);
+			}
 		}
 	}.observes("hourlyRate", "weeklyHours"),
 	paymentFrequency: DS.attr("string"),
 	isSelfEmployed: Ember.computed.equal("type", "self-employed"),
 	isCurrent: DS.attr("boolean", {defaultValue: false}),
 	isHourly: Ember.computed.equal("paymentFrequency", "hourly"),
-	isSalaried: Ember.computed("paymentFrequency", function() {
-		return this.get("paymentFrequency") === "salary" || this.get("paymentFrequency") === "hourly";
-	}),
+	isSalaried: Ember.computed.equal("paymentFrequency", "salary"),
 	isCommission: Ember.computed("paymentFrequency", function() {
 		return this.get("paymentFrequency") === "commission" || this.get("paymentFrequency") === "commission-salary" || this.get("paymentFrequency") === "commission-hourly";
 	}),
