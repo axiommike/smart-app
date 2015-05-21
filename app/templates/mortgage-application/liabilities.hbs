@@ -9,15 +9,7 @@
 			{{/liquid-if}}
 		</li>
 		<li class="form-step">
-			{{#form-field title="Do you have a line of credit?"}}
-				{{on-off-switch checked=hasLineOfCredit id="do-you-have-a-line-of-credit?"}}
-			{{/form-field}}
-			{{#liquid-if hasLineOfCredit}}
-				{{liability-table type="line-of-credit" liabilities=model.applicant.liabilities onRemove="removeLiability"}}
-			{{/liquid-if}}
-		</li>
-		<li class="form-step">
-			{{#form-field title="Do you have any loans?"}}
+			{{#form-field title="Do you have any personal loans or lines of credit?"}}
 				{{on-off-switch checked=hasLoans id="do-you-have-any-loans?"}}
 			{{/form-field}}
 			{{#liquid-if hasLoans}}
