@@ -6,17 +6,20 @@
 	{{/each}}
 {{/form-section}}
 
-{{#form-section title="Previous Employment"}}
-	{{#if previousEmploymentRequired}}
-		<span class="input-error">Please provide the last <strong>{{minHistory}}</strong> years of employment history
+{{#if previousEmployment.length}}
+	{{#form-section title="Previous Employment"}}
+		{{#if previousEmploymentRequired}}
+			<span class="input-error">Please provide the last <strong>{{minHistory}}</strong> years of employment history
 			.</span>
-		<span>Total employment history: <strong>{{totalEmploymentTimespan}} years</strong></span>
-	{{/if}}
-	{{#each previousEmployment as |historicalEmployment|}}
-		{{historical-employment employment=historicalEmployment onRemove="removeEmployment"}}
-	{{else}}
-		No previous employment provided.  <a {{action "addEmployment"}}>Add previous employment</a>
-	{{/each}}
-{{/form-section}}
-<button {{action "addEmployment" applicant}}>Add Previous Employment</button>
+			<span>Total employment history: <strong>{{totalEmploymentTimespan}} years</strong></span>
+		{{/if}}
+		{{#each previousEmployment as |historicalEmployment|}}
+			{{historical-employment employment=historicalEmployment onRemove="removeEmployment"}}
+		{{else}}
+			No previous employment provided.  <a {{action "addEmployment"}}>Add previous employment</a>
+		{{/each}}
+	{{/form-section}}
+{{/if}}
+
+<button {{action "addEmployment"}}>Add Previous Employment</button>
 {{yield}}

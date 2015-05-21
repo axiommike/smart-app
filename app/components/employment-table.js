@@ -14,10 +14,18 @@ export default Ember.Component.extend({
 		}, 0);
 	}),
 	previousEmploymentRequired: Ember.computed.lt("totalEmploymentTimespan", 3),
+	emptyPreviousEmployment: Ember.computed.filterBy("previousEmployment", "tenureTotalYears", 0),
+	nonEmptyPreviousEmployment: Ember.computed.setDiff("previousEmployment", "emptyPreviousEmployment"),
 	autoCreateEmployment: function() {
 		if (this.get("previousEmploymentRequired")) {
-			if (this.get("previousEmployment.length") === 0) {
+			if (this.get("emptyPreviousEmployment.length") === 0) { // auto-create employment only if there are no pending historical employments with 0 as their total tenure
 				this.sendAction("onAddEmployment");
+			}
+		}
+		else {
+			// destroy any pending, empty employment if the total tenure is 3 years already
+			if (this.get("emptyPreviousEmployment.length") > 0) {
+				this.get("employment").removeObjects(this.get("emptyPreviousEmployment"));
 			}
 		}
 	}.observes("employment.@each.tenureTotalYears"),

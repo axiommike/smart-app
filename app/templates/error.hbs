@@ -1,14 +1,16 @@
-{{accessible-icon icon="warning-sign" title="Error"}}
-<header class="row align-middle">
-	<h1>Error {{error}}</h1>
-</header>
+<div class="container loader-container" role="presentation">
+	<div class="error-container box">
+		{{accessible-icon icon="warning-sign" title="Error"}}
+		<header class="error-title">
+			<h1>Error</h1>
+		</header>
+		<main role="main" class="error-description">
+			<p>Looks like we just encountered the error <strong><code>{{model.message}}</code></strong>.</p>
+			<p>Here's the error we got:</p>
+			<pre class="error-stack">
+				<code>{{model.stack}}</code>
+			</pre>
+		</main>
+	</div>
 
-<main role="main">
-	<p>Looks like we just encountered the error <strong>{{error}}</strong>.</p>
-	<p>Here's the error we got:</p>
-	{{#if stack}}
-		<pre>
-			<code>{{stack}}</code>
-		</pre>
-	{{/if}}
-</main>
+</div>

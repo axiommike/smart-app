@@ -36,3 +36,16 @@ header
 	for num in (6..1)
 		h{num}
 			@extend $margin-none
+.error
+	&-container
+		max-width 35em
+		@extend $normal-padding, $border-box
+	&-description
+		@extend $normal-margin-top-bottom
+	&-title
+		@extend $shake, $text-align-center
+		color rgb(187, 89, 89)
+		font-weight bold
+	&-stack
+		@extend $normal-padding, $border-box, $normal-margin
+

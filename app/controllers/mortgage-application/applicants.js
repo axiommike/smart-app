@@ -6,9 +6,11 @@ export default Ember.Controller.extend({
 			this.send("addApplicantMaster");
 		},
 		addEmployment: function(applicant) {
+			console.log(`add employment triggered`);
 			this.send("addEmploymentMaster", applicant, false);
 		},
 		removeEmployment: function(employment) {
+			console.log(`Remove Employment triggered`);
 			this.send("removeEmploymentMaster", employment);
 		},
 		copyAddresses: function(applicant) {
