@@ -145,3 +145,13 @@ $material-box
 		font-size 5em
 		text-transform uppercase
 		font-weight $headingFontWeight
+.address
+	&-details
+		flex 1
+	&-header
+		& + .address-details
+			margin-left 1em
+	&-details-container
+		@extend $fadeInUp, $border-box, $normal-padding, $normal-margin-top, $flex
+	&-postal-code, &-country, &-province
+		@extend $inline-block

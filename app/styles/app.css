@@ -144,6 +144,9 @@ dl dd,
 .employment {
   margin: 1em;
 }
+.address-details-container {
+  margin-top: 1em;
+}
 .error-description {
   margin-top: 1em;
   margin-bottom: 1em;
@@ -165,7 +168,8 @@ fieldset,
 .error-container,
 .error-stack,
 dl,
-.info {
+.info,
+.address-details-container {
   padding: 1em;
 }
 pre {
@@ -179,8 +183,19 @@ main a[href],
 footer a[href] {
   border-bottom: 1px solid rgba(0,0,0,0.4);
 }
+.address-postal-code,
+.address-country,
+.address-province {
+  display: inline-block;
+}
 .table {
   display: table;
+}
+.address-details-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 .editable-link:after {
   position: absolute;
@@ -190,7 +205,8 @@ footer a[href] {
 }
 .error-container,
 .error-stack,
-.agent-callout {
+.agent-callout,
+.address-details-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -236,7 +252,8 @@ a {
 .applicant-card-finances-total,
 .agent-callout,
 .loader,
-.loader-text {
+.loader-text,
+.address-details-container {
   -webkit-animation-duration: 1s;
   -o-animation-duration: 1s;
   animation-duration: 1s;
@@ -795,7 +812,8 @@ body {
 .box,
 .form-steps,
 .agent-callout,
-.loader {
+.loader,
+.address-details-container {
   -webkit-animation-name: fadeInUp;
   -o-animation-name: fadeInUp;
   animation-name: fadeInUp;
@@ -2832,6 +2850,9 @@ body {
 .address-input.autocompleted {
   border-color: #008000;
   border-bottom-width: 2px;
+}
+.address-details-container {
+  border: 1px solid #ccc;
 }
 .close {
   position: absolute;
@@ -5064,4 +5085,13 @@ footer a[href]:visited {
   font-size: 5em;
   text-transform: uppercase;
   font-weight: 300;
+}
+.address-details {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  -o-flex: 1;
+  flex: 1;
+}
+.address-header + .address-details {
+  margin-left: 1em;
 }
