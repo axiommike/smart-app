@@ -12,7 +12,7 @@
 			.</span>
 		<span>Total employment history: <strong>{{totalEmploymentTimespan}} years</strong></span>
 	{{/if}}
-	{{#each employment as |historicalEmployment|}}
+	{{#each previousEmployment as |historicalEmployment|}}
 		{{historical-employment employment=historicalEmployment onRemove="removeEmployment"}}
 	{{else}}
 		No previous employment provided.  <a {{action "addEmployment"}}>Add previous employment</a>
