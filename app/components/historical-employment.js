@@ -8,6 +8,7 @@ export default Ember.Component.extend(EditableMixin, {
 	"data-tenure": Ember.computed.alias("employment.tenureTotalYears"),
 	employment: null,
 	durationEnabled: false,
+	needsNOA: Ember.computed.or("employment.isSelfEmployed", "employment.isCommission"),
 	NOAYears: 2,
 	NOAValues: Ember.computed("NOAYears", function() {
 		let NOAs = Ember.A(),

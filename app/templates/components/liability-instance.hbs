@@ -24,13 +24,8 @@
 				{{autocomplete-input value=liability.lender required=true placeholder="Lender" datalist="lenders" title="Please provide the lender for this mortgage"}}
 			{{/form-field}}
 			{{#form-field title="Approximate Mortgage Balance"}}
-				{{currency-input min="0" step="1000" value=liability.outstandingBalance placeholder="$ Overdue" required=true title="Please indicate the remaining balance of the mortgage"}}
+				{{currency-input min="0" step="any" value=liability.outstandingBalance placeholder="$ Overdue" required=true title="Please indicate the remaining balance of the mortgage"}}
 			{{/form-field}}
-			{{#unless liability.isChildSupport}}
-				{{#form-field title="Interest Rate (%)"}}
-					{{input type="number" min="0" max="60" step="any" value=liability.rate placeholder="Interest Rate" required=true}}
-				{{/form-field}}
-			{{/unless}}
 			{{#form-field title="Payment Frequency"}}
 				{{view "select" content=paymentFrequencies value=liability.paymentFrequency}}
 			{{/form-field}}
@@ -51,7 +46,7 @@
 		{{/if}}
 
 		{{#unless liability.isCreditCard}}
-			{{#form-field title="Monthly Payment"}}
+			{{#form-field title=paymentLabel}}
 				{{currency-input min="0" step="100" value=liability.payment placeholder="Payment" required=true title="Please indicate the monthly payment for this liability"}}
 			{{/form-field}}
 		{{/unless}}
