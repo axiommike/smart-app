@@ -9,7 +9,7 @@ export default Ember.Component.extend(EditableMixin, {
 	],
 	liabilityTypes: [
 		{label: "Credit Card", value: "credit-card"},
-		{label: "Line of Credit", value: "line-of-credit"},
+		{label: "Personal Line of Credit", value: "line-of-credit"},
 		{label: "Loan", value: "loan"},
 		{label: "Auto Loan", value: "auto-loan"},
 		{label: "Child Support or Maintenance Payments", value: "child-support"},
