@@ -22,9 +22,14 @@ export default Ember.Component.extend(EditableMixin, {
 	previousEmploymentRequired: Ember.computed.lt("employmentHistoryTimespan", "minEmploymentHistory"),
 	relationshipTypes: [
 		"Spouse",
+		"Common-Law",
+		"Related Family Member",
+		"Other",
 		"Parent",
-		"Child (commonlaw)",
-		"Other"
+		"Sibling",
+		"Child",
+		"Grandchild",
+		"Grandparent"
 	],
 	maritalStatusOptions: [
 		"Single",
