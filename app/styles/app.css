@@ -4435,16 +4435,14 @@ liability-instance {
   background: #000;
   background: rgba(0,0,0,0.1);
 }
-.on-off-switch:after,
-.on-off-switch:checked:before {
+.on-off-switch:before {
   background: #cd5c5c;
-  color: #000;
+  color: #fff;
   font-weight: inherit;
 }
-.on-off-switch:before,
 .on-off-switch:checked:after {
   background: #38cd6b;
-  color: #000;
+  color: #fff;
   font-weight: bold;
 }
 .on-off-switch {
@@ -4455,9 +4453,9 @@ liability-instance {
 .on-off-switch:before,
 .on-off-switch:after {
   font-size: 0.8em;
-  color: #000;
+  color: #fff;
   text-transform: uppercase;
-  border: 1px solid #eaeaea;
+  border: 1px solid #c5c5c5;
   padding: 0.3em 1em;
   -webkit-transition: background 0.5s ease, border 0.5s ease, transform 0.5s ease;
   -o-transition: background 0.5s ease, border 0.5s ease, transform 0.5s ease;
@@ -4470,8 +4468,12 @@ liability-instance {
 }
 .on-off-switch:after {
   content: attr(onmessage);
+  background: #d4d4d4;
   border-top-right-radius: 1em;
   border-bottom-right-radius: 1em;
+}
+.on-off-switch:checked:before {
+  background: #d4d4d4;
 }
 .table-bordered th,
 .table-bordered tbody + tbody,

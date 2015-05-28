@@ -11,10 +11,10 @@ Created on 15/04/2015 by PhpStorm
 $switchIsRounded ?= true
 $switchBorderRadius ?= 1em
 $switchAccentAmount ?= 30
-$switchBackground ?= #f9f9f9
+$switchBackground ?= #D4D4D4
 $switchEnabledBackground ?= #38cd6b
 $switchDisabledBackground ?= #cd5c5c
-$switchColour ?= dark($switchBackground) ? white : black
+$switchColour ?= dark($switchBackground) ? black : white
 
 $switchBorderStyle ?= solid
 $switchBorderWidth ?= 1px
@@ -30,12 +30,12 @@ $switchFontSize ?= 0.8em
 $switchDisabledState
 	background $switchDisabledBackground ? $switchDisabledBackground : $switchBackground
 	if $switchDisabledBackground
-		color dark($switchDisabledBackground) ? white : black
+		color dark($switchDisabledBackground) ? black : white
 	font-weight inherit
 $switchEnabledState
 	background $switchEnabledBackground ? $switchEnabledBackground : (dark($switchBackground) ? ($switchBackground + $switchAccentAmount) : ($switchBackground - $switchAccentAmount))
 	if $switchEnabledBackground
-		color dark($switchEnabledBackground) ? white : black
+		color dark($switchEnabledBackground) ? black : white
 	font-weight bold
 
 
@@ -52,18 +52,18 @@ $switchEnabledState
 		transition background $switchTransitionTime ease, border $switchTransitionTime ease, transform $switchTransitionTime ease
 	&:before
 		content attr(offmessage)
-		@extend $switchEnabledState
+		@extend $switchDisabledState
 		if $switchIsRounded is true
 			border-top-left-radius $switchBorderRadius
 			border-bottom-left-radius $switchBorderRadius
 	&:after
 		content attr(onmessage)
-		@extend $switchDisabledState
+		background $switchBackground
 		if $switchIsRounded is true
 			border-top-right-radius $switchBorderRadius
 			border-bottom-right-radius $switchBorderRadius
 	&:checked
 		&:before
-			@extend $switchDisabledState
+			background $switchBackground
 		&:after
 			@extend $switchEnabledState
