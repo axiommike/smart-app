@@ -2,6 +2,7 @@ import Ember from "ember";
 
 export default Ember.Route.extend({
 	addEmployment: function(applicant, isCurrent) {
+		isCurrent = isCurrent ? true : false;
 		let createdEmployment = this.store.createRecord("employment", {isCurrent: isCurrent}),
 			createdEmploymentAddress = this.store.createRecord("address"),
 			createdEmploymentIncome = this.store.createRecord("income", {source: "employment"}),
@@ -11,7 +12,7 @@ export default Ember.Route.extend({
 			income: createdEmploymentIncome
 		});
 		applicant.get("income").pushObject(createdEmploymentIncome);
-		applicant.get("employment").pushObject(createdEmployment);
+		applicant.get("employment").pushObject(createdEmployment); // this somehow triggers the "addEmployment" action again
 		createdEmploymentAddress.save();
 		createdEmploymentIncome.save();
 		createdEmploymentCompany.save();
@@ -73,10 +74,21 @@ export default Ember.Route.extend({
 			this.transitionTo("apply");
 		},*/
 		addEmploymentMaster: function(applicant, isCurrent) {
+			console.log(`First triggered add employment`);
 			this.addEmployment(applicant, isCurrent);
+			console.log(`Triggered add employment master`);
 		},
 		addApplicantMaster: function() {
 			this.addApplicant(this.get("currentModel.applicants"), "New Co-Applicant");
+		},
+		addAddressMaster: function(applicant) {
+			let addedAddress = this.store.createRecord("address");
+			addedAddress.save().then((savedAddress) => {
+				applicant.get("previousAddresses").pushObject(savedAddress);
+			});
+		},
+		removeAddressMaster: function(address) {
+			address.destroyRecord();
 		},
 		removeApplicantMaster: function(coApplicant) {
 			coApplicant.get("employment").forEach((employment) => {
@@ -121,16 +133,18 @@ export default Ember.Route.extend({
 			let employmentCompany = employment.get("employer"),
 				employmentCompanyAddress = employmentCompany ? employmentCompany.get("address") : null,
 				employmentIncome = employment.get("income");
-			if (employmentCompany) {
-				employmentCompany.destroyRecord();
-			}
-			if (employmentCompanyAddress) {
-				employmentCompanyAddress.destroyRecord();
-			}
-			if (employmentIncome) {
-				employmentIncome.destroyRecord();
-			}
-			employment.destroyRecord();
+			Ember.RSVP.all([employmentCompany, employmentCompanyAddress, employmentIncome]).then((response) => {
+				if (employmentCompany.get("content")) {
+					employmentCompany.get("content").destroyRecord();
+				}
+				if (employmentCompanyAddress.get("content")) {
+					employmentCompanyAddress.get("content").destroyRecord();
+				}
+				if (employmentIncome.get("content")) {
+					employmentIncome.get("content").destroyRecord();
+				}
+				employment.destroyRecord();
+			});
 		},
 		addVehicleMaster: function(applicant) {
 			let addedVehicle = this.store.createRecord("vehicle"), vehicleLoan = this.store.createRecord("liability", {type: "auto-loan"}), vehicleAsset = this.store.createRecord("asset", {type: "vehicle"});

@@ -13,6 +13,18 @@ export default Ember.Controller.extend({
 			console.log(`Remove Employment triggered`);
 			this.send("removeEmploymentMaster", employment);
 		},
+		addAddress: function(applicant) {
+			this.send("addAddressMaster", applicant);
+		},
+		removeAddress: function(address) {
+			this.send("removeAddressMaster", address);
+		},
+		addIncome: function(applicant) {
+			this.send("addIncomeMaster", applicant);
+		},
+		removeIncome: function(income) {
+			this.send("removeIncomeMaster", income);
+		},
 		copyAddresses: function(applicant) {
 			console.log("copy addresses triggered");
 			let primaryApplicantAddresses = this.get("model.applicant.previousAddresses");

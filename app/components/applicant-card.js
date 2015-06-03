@@ -9,17 +9,16 @@ export default Ember.Component.extend(EditableMixin, {
 	includeLiabilities: false,
 	includeAssets: false,
 	includeIncome: false,
+	onAddIncome: null,
+	onRemoveIncome: null,
 	onAddEmployment: null,
 	onRemoveApplicant: null,
 	onCopyAddresses: null,
-	minEmploymentHistory: 3, /* How many years back are required - Expert requires 3 */
-	employmentHistoryTimespan: Ember.computed("applicant.employment.@each.tenureTotalYears", function() {
-		let employment = this.get("applicant.employment");
-		return employment.reduce(function(previousValue, employmentInstance) {
-			return previousValue + employmentInstance.get("tenureTotalYears");
-		}, 0);
-	}),
-	previousEmploymentRequired: Ember.computed.lt("employmentHistoryTimespan", "minEmploymentHistory"),
+	onAddAddress: null,
+	onAddAsset: null,
+	onRemoveAsset: null,
+	onAddLiability: null,
+	onRemoveLiability: null,
 	relationshipTypes: [
 		"Spouse",
 		"Common-Law",
@@ -45,15 +44,10 @@ export default Ember.Component.extend(EditableMixin, {
 			this.sendAction("onRemoveApplicant", this.get("applicant"));
 		},
 		addIncome: function() {
-			let store = this.get("targetObject.store"), addedIncome = store.createRecord("income");
-			addedIncome.save().then((savedIncome) => {
-				this.get("applicant.income").pushObject(savedIncome);
-			});
+			this.sendAction("onAddIncome", this.get("applicant"));
 		},
 		removeIncome: function(income) {
-			income.destroyRecord().then((deletedIncome) => {
-				console.log(`Successfully deleted income ${deletedIncome.get("id")}`);
-			});
+			this.sendAction("onRemoveIncome", income);
 		},
 		addEmployment: function() {
 			this.sendAction("onAddEmployment", this.get("applicant"));
@@ -62,34 +56,19 @@ export default Ember.Component.extend(EditableMixin, {
 			this.sendAction("onRemoveEmployment", employment);
 		},
 		addAddress: function() {
-			let store = this.get("targetObject.store"), addedAddress = store.createRecord("address");
-			addedAddress.save().then((savedAddress) => {
-				this.get("applicant.previousAddresses").pushObject(savedAddress);
-			});
+			this.sendAction("onAddAddress", this.get("applicant"));
 		},
 		addAsset: function() {
-			console.log(`AddAsset on applicant-card called`);
-			let store = this.get("targetObject.store"), addedAsset = store.createRecord("asset", {type: null});
-			addedAsset.save().then((savedAsset) => {
-				this.get("applicant.assets").pushObject(savedAsset);
-			});
+			this.sendAction("onAddAsset", this.get("applicant"));
 		},
 		copyAddresses: function() {
 			this.sendAction("onCopyAddresses", this.get("applicant"));
 		},
 		removeAsset: function(asset) {
-			asset.destroyRecord().then((deletedAsset) => {
-				console.log(`Successfully deleted asset ${deletedAsset.get("id")}`);
-			});
+			this.sendAction("onRemoveAsset", asset);
 		},
 		addLiability: function(type) {
-			let store = this.get("targetObject.store"), createdLiability = store.createRecord("liability");
-			if (type) {
-				createdLiability.set("type", type);
-			}
-			createdLiability.save().then((savedLiability) => {
-				this.get("applicant.liabilities").pushObject(savedLiability);
-			});
+			this.sendAction("addLiability", type, this.get("applicant"));
 		}
 	}
 });

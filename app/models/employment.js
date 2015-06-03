@@ -4,9 +4,9 @@ import TimeableMixin from "../mixins/timeable";
 
 export default DS.Model.extend(TimeableMixin, {
 	type: DS.attr("string"),
-	employer: DS.belongsTo("company"),
+	employer: DS.belongsTo("company", {async: true}),
 	occupation: DS.attr("string"),
-	income: DS.belongsTo("income"), /* Annual income ($) */
+	income: DS.belongsTo("income", {async: true}), /* Annual income ($) */
 	incomeChanged: function() {
 		if (this.get("isHourly")) {
 			let hourlyRate = parseInt(this.get("hourlyRate")), weeklyHours = parseInt(this.get("weeklyHours"));
@@ -29,5 +29,5 @@ export default DS.Model.extend(TimeableMixin, {
 	weeklyHours: DS.attr("number", {defaultValue: 0}),
 	commission: DS.attr("number", {defaultValue: 0}),
 	occupationType: DS.attr("string"),
-	applicant: DS.belongsTo("applicant")
+	applicant: DS.belongsTo("applicant", {async: true})
 });
