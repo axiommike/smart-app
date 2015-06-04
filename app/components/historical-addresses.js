@@ -11,7 +11,7 @@ export default Ember.Component.extend(EditableMixin, {
 	previousAddressTimespan: Ember.computed("addresses.@each.tenureTotalYears", function() {
 		let addresses = this.get("addresses");
 		return addresses.reduce(function(previousValue, address) {
-			return previousValue + address.get("tenureTotalYears");
+			return previousValue + (address ? address.get("tenureTotalYears") : 0);
 		}, 0);
 	}),
 	previousAddressesRequired: Ember.computed.lt("previousAddressTimespan", 3),

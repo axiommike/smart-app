@@ -91,19 +91,28 @@ export default Ember.Route.extend({
 			address.destroyRecord();
 		},
 		removeApplicantMaster: function(coApplicant) {
-			coApplicant.get("employment").forEach((employment) => {
-				employment.destroyRecord();
+			let employmentPromise = coApplicant.get("employment"),
+				incomePromise = coApplicant.get("income"),
+				propertyPromise = coApplicant.get("properties"),
+				assetsPromise = coApplicant.get("assets");
+			let incomeDeleted = coApplicant.get("income").then((incomeRecords) => {
+				incomeRecords.forEach((incomeInstance) => {
+					if (incomeInstance) {
+						incomeInstance.destroyRecord();
+					}
+				});
 			});
-			coApplicant.get("income").forEach((incomeInstance) => {
-				incomeInstance.destroyRecord();
+			let propertiesDeleted = coApplicant.get("properties").then((propertyRecords) => {
+				propertyRecords.forEach((property) => {
+					property.destroyRecord();
+				});
 			});
-			coApplicant.get("properties").forEach((property) => {
-				property.destroyRecord();
+			let assetsDeleted = coApplicant.get("assets").then((assetRecords) => {
+				assetRecords.forEach((asset) => {
+					asset.destroyRecord();
+				});
 			});
-			coApplicant.get("assets").forEach((asset) => {
-				asset.destroyRecord();
-			});
-			return coApplicant.destroyRecord();
+			return Ember.RSVP.all([employmentDeleted, incomeDeleted, propertiesDeleted, assetsDeleted]).then((resolvedPromises)=> coApplicant.destroyRecord());
 		},
 		addPropertyMaster: function(applicant) {
 			this.addProperty(applicant, false);
