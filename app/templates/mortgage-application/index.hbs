@@ -12,14 +12,14 @@
 			</div>
 			<div class="row">
 				{{#form-field title="Email" class="column one-half" layoutDirection="vertical"}}
-					{{input value=model.applicant.email required=true type="email" placeholder="Email" id="email" autocomplete="email"}}
+					{{input value=model.applicant.email required=true type="email" placeholder="Email" id="email" autocomplete="email" title="Please provide your e-mail address"}}
 				{{/form-field}}
 				{{#form-field title="Phone" class="column one-half" layoutDirection="vertical"}}
-					{{input value=model.applicant.phone type="tel" required=true placeholder="Phone" id="phone" autocomplete="tel"}}
+					{{input value=model.applicant.phone type="tel" required=true placeholder="Phone" id="phone" autocomplete="tel" title="Please provide your primary phone number"}}
 				{{/form-field}}
 			</div>
 			{{#form-field title="How'd you hear about me?"}}
-				{{view "select" content=sourceTypes optionValuePath="content.value" optionLabelPath="content.label" value=model.source required=true prompt=" -- "}}
+				{{view "select" content=sourceTypes optionValuePath="content.value" optionLabelPath="content.label" value=model.source required=true prompt=" -- " title="Please select the way that you heard about me"}}
 			{{/form-field}}
 			{{#liquid-if model.isReferral}}
 				{{#form-field title="Who referred me?"}}
@@ -37,10 +37,10 @@
 				{{/form-field}}
 			{{/liquid-if}}
 			{{#form-field title="What Can I do for you?"}}
-				{{view "select" content=goals optionValuePath="content.value" optionLabelPath="content.label" value=model.type id="what-can-i-do-for-you?" required=true prompt=" -- "}}
+				{{view "select" content=goals optionValuePath="content.value" optionLabelPath="content.label" value=model.type id="what-can-i-do-for-you?" required=true prompt=" -- " title="Please indicate how I can help you"}}
 			{{/form-field}}
 			{{#form-field title="Additional Comments" layoutDirection="vertical"}}
-				{{textarea value=model.comment class="row" placeholder="Is there anything else I can do for you?" rows=model.commentRows id="anything-else-i-can-do?"}}
+				{{textarea value=model.comment class="row" placeholder="Is there anything else I can do for you?" rows=model.commentRows id="anything-else-i-can-do?" title="Anything else you would like to add?"}}
 			{{/form-field}}
 			<footer class="form-actions">
 				<button class="button-success" {{action "sendIncomplete"}} type="submit">Contact Me Now</button>

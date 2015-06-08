@@ -55,7 +55,7 @@
 				</div>
 			{{/form-section}}
 			{{#form-field title="Marital Status"}}
-				{{view "select" content=maritalStatusOptions value=applicant.maritalStatus prompt=" -- "required=true}}
+				{{view "select" content=maritalStatusOptions value=applicant.maritalStatus prompt=" -- " required=true title="Please indicate the applicant's marital status (single, married, etc.)"}}
 			{{/form-field}}
 			{{#unless applicant.isPrimary}}
 				{{#form-field title="Relationship"}}

@@ -5,6 +5,7 @@ export default Ember.TextField.extend({
 	placeholder: "$.$",
 	step: "any",
 	min: 0,
+	title: "Please provide a valid value in CAD",
 	classNameBindings: [":currency-input"],
 	attributeBindings: ["size"],
 	size: Ember.computed("address.address", function() {

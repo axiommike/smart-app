@@ -1,4 +1,4 @@
-{{historical-address address=currentAddress}}
+{{historical-address address=currentAddress required=true}}
 {{#liquid-unless currentAddressLongEnough}}
 	<button {{action "addAddress"}} class="add-button">Add Previous Address</button>
 	{{#form-section title="Previous Addresses"}}
@@ -8,7 +8,7 @@
 		<ul class="previous-addresses">
 			{{#each address in previousAddresses}}
 				<li class="address edit">
-					{{historical-address address=address}}
+					{{historical-address address=address required=true}}
 					<button {{action "removeAddress" address}} class="remove-button">Remove</button>
 				</li>
 			{{else}}
