@@ -91,10 +91,6 @@ export default Ember.Route.extend({
 			address.destroyRecord();
 		},
 		removeApplicantMaster: function(coApplicant) {
-			let employmentPromise = coApplicant.get("employment"),
-				incomePromise = coApplicant.get("income"),
-				propertyPromise = coApplicant.get("properties"),
-				assetsPromise = coApplicant.get("assets");
 			let incomeDeleted = coApplicant.get("income").then((incomeRecords) => {
 				incomeRecords.forEach((incomeInstance) => {
 					if (incomeInstance) {
@@ -110,6 +106,11 @@ export default Ember.Route.extend({
 			let assetsDeleted = coApplicant.get("assets").then((assetRecords) => {
 				assetRecords.forEach((asset) => {
 					asset.destroyRecord();
+				});
+			});
+			let employmentDeleted = coApplicant.get("employment").then((employmentRecords) => {
+				employmentRecords.forEach((employment) => {
+					employment.destroyRecord();
 				});
 			});
 			return Ember.RSVP.all([employmentDeleted, incomeDeleted, propertiesDeleted, assetsDeleted]).then((resolvedPromises)=> coApplicant.destroyRecord());

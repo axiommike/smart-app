@@ -39,6 +39,31 @@
 			{{#form-field title="What Can I do for you?"}}
 				{{view "select" content=goals optionValuePath="content.value" optionLabelPath="content.label" value=model.type id="what-can-i-do-for-you?" required=true prompt=" -- "}}
 			{{/form-field}}
+			{{#liquid-if model.isPurchase}}
+				<section class="row">
+					{{#form-field title="Term" class="column"}}
+						{{view "select" content=mortgageTerms optionValuePath="content.value" optionLabelPath="content.label" value=model.term}}
+					{{/form-field}}
+					{{#form-field title="Amortization" class="column"}}
+						{{view "select" content=mortgageTerms optionValuePath="content.value" optionLabelPath="content.label" value=model.amortization}}
+					{{/form-field}}
+					{{#form-field title="Property Value" class="column"}}
+						{{currency-input value=model.propertyValue required=true title="Please indicate the value of the property you wish to purchase"}}
+					{{/form-field}}
+					{{#form-field title="Downpayment" class="column"}}
+						{{currency-input value=model.downPayment required=true title="Please indicate the amount which you can provide in CAD as a downpayment"}}
+						{{#if model.downPaymentPercentage}}
+							<span class="help">A downpayment of <strong>{{format-number model.downPaymentPercentage style="percent"}}</strong></span>
+						{{/if}}
+					{{/form-field}}
+					{{#if model.downPayment}}
+						{{#form-field title="Downpayment Source" class="column"}}
+							{{view "select" content=downPaymentSources optionValuePath="content.value" optionLabelPath="content.label" value=model.downPaymentSource}}
+						{{/form-field}}
+					{{/if}}
+				</section>
+			{{/liquid-if}}
+
 			{{#form-field title="Additional Comments" layoutDirection="vertical"}}
 				{{textarea value=model.comment class="row" placeholder="Is there anything else I can do for you?" rows=model.commentRows id="anything-else-i-can-do?"}}
 			{{/form-field}}

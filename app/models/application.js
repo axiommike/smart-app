@@ -32,14 +32,28 @@ export default DS.Model.extend({
 		return combinedIncome;
 	}),
 	applicantNames: Ember.computed.alias("applicants.@each.fullName"),
-	dependentCount: DS.attr("number", {defaultValue: 0}),
+	dependents: Ember.computed.alias("applicants.@each.dependents"),
 	hasDependents: Ember.computed.gt("dependentCount", 0),
+	propertyValue: DS.attr("number", {defaultValue: 0}),
+	downPaymentPercentage: Ember.computed("propertyValue", "downPayment", function() {
+		if (this.get("downPayment") > this.get("propertyValue")) {
+			return 1;
+		}
+		else if (this.get("downPayment") > 0 && this.get("propertyValue") > 0) {
+			return this.get("downPayment") / this.get("propertyValue");
+		}
+		else {
+			return 0;
+		}
+	}),
 	type: DS.attr("string"),
+	isPurchase: Ember.computed.equal("type", "purchase"),
 	source: DS.attr("string"),
 	isReferral: Ember.computed.equal("source", "agent"),
 	isOther: Ember.computed.equal("source", "other"),
 	referredByClient: Ember.computed.equal("source", "past-client"),
 	referredBy: DS.attr("string"),
+	downPayment: DS.attr("number"),
 	referredByChanged: function() {
 		if (!Ember.isBlank(this.get("referredBy"))) {
 			this.set("comment", "Referred by " + this.get("referredBy") + ".\n\n");

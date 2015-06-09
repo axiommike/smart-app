@@ -11,6 +11,7 @@ export default DS.Model.extend({
 	fullName: Ember.computed("names", function() {
 		return Ember.makeArray(this.get("names")).slice().concat().join(" ");
 	}),
+	dependents: DS.attr("number", {defaultValue: 0}),
 	birthDate: DS.attr("date"),
 	sin: DS.attr("number"),
 	employment: DS.hasMany("employment", {async: true}),
