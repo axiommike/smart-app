@@ -1,4 +1,5 @@
 import Ember from "ember";
+import ajax from "ic-ajax";
 
 export default Ember.Controller.extend({
 	steps:       [
@@ -9,11 +10,8 @@ export default Ember.Controller.extend({
 		"Summary",
 		"Thank You"
 	],
-	agent:       {
-		fullName: "Sample Agent",
-		phone:    "5552555555",
-		email:    "seangores@gmail.com"
-	},
+	agentID: null,
+	queryParams: ["agentID"],
 	currentStep: 0,
 	realStep:    Ember.computed("currentStep", function () {
 		return this.get("currentStep") + 1;

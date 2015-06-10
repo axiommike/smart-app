@@ -1,4 +1,5 @@
 import Ember from "ember";
+import ajax from "ic-ajax";
 
 export default Ember.Route.extend({
 	addEmployment: function(applicant, isCurrent) {
@@ -63,10 +64,27 @@ export default Ember.Route.extend({
 			this.addEmployment(model.get("applicant"), true);
 		}
 	},
+	queryParams: {
+		agentID: {
+			refreshModel: true
+		}
+	},
 	model: function(params) {
 		console.log("mortgage application route triggered");
 		console.dir(params);
-		return this.store.find("application", params.application_id);
+		if (!params["agentID"]) {
+			return this.store.find("application", params.application_id);
+		}
+		else {
+			return ajax({
+				url: `http://dev.myaxiom.ca/api/${params.agentID}`,
+				type: "GET",
+				dataType: "JSON"
+			}).then((agent) => this.store.find("application", params.application_id)).then((application) => {
+				application.set("agent", agent);
+				return application;
+			});
+		}
 	},
 	actions: {
 		/*error: function() {
