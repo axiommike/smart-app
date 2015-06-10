@@ -2,6 +2,7 @@ import DS from "ember-data";
 import Ember from "ember";
 
 export default DS.Model.extend({
+	agent: DS.belongsTo("agent", {async: true}),
 	applicant: DS.belongsTo("applicant"),
 	coApplicants: DS.hasMany("applicant"),
 	applicants: Ember.computed("applicant", "coApplicants", function() {

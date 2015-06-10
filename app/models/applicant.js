@@ -1,25 +1,14 @@
 import DS from "ember-data";
 import Ember from "ember";
+import PersonableMixin from "../mixins/personable";
 
-export default DS.Model.extend({
-	title: DS.attr("string"),
-	firstName: DS.attr("string"),
-	middleName: DS.attr("string"),
-	lastName: DS.attr("string"),
-	names: Ember.computed.collect("firstName", "lastName", "middleName"),
-	hasName: Ember.computed.notEmpty("names"),
-	fullName: Ember.computed("names", function() {
-		return Ember.makeArray(this.get("names")).slice().concat().join(" ");
-	}),
+export default DS.Model.extend(PersonableMixin, {
 	dependents: DS.attr("number", {defaultValue: 0}),
 	birthDate: DS.attr("date"),
 	sin: DS.attr("number"),
 	employment: DS.hasMany("employment", {async: true}),
 	currentEmployment: Ember.computed.filterBy("employment", "isCurrent", true),
 	previousEmployment: Ember.computed.setDiff("employment", "currentEmployment"),
-	email: DS.attr("string"),
-	hasValidEmail: Ember.computed.match("email", /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i),
-	phone: DS.attr("string"),
 	workPhone: Ember.computed.alias("currentEmployment.firstObject.company.phone"),
 	liabilities: DS.hasMany("liability", {async: true}),
 	vehicleLoans: Ember.computed.alias("vehicles.@each.loan"),
