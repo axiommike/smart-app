@@ -76,13 +76,27 @@ export default Ember.Route.extend({
 			return this.store.find("application", params.application_id);
 		}
 		else {
-			return ajax({
-				url: `http://dev.myaxiom.ca/api/${params.agentID}`,
-				type: "GET",
-				dataType: "JSON"
-			}).then((agent) => this.store.find("application", params.application_id)).then((application) => {
-				application.set("agent", agent);
-				return application;
+			var agentResponse;
+			return this.store.find("agent", params.agentID).then((agent) => {
+				return this.store.find("application", params.application_id).then((application) => {
+					application.set("agent", agent);
+					return application;
+				});
+			}, (rejection) => {
+				return ajax({
+					url: `http://dev.myaxiom.ca/api/agent/${params.agentID}/agent.php`,
+					type: "GET",
+					dataType: "JSON"
+				}).then((agent) => {
+					agentResponse = agent.agent;
+					return this.store.find("application", params.application_id)
+				}).then((application) => {
+					let addedAgent = this.store.createRecord("agent", agentResponse);
+					application.set("agent", addedAgent);
+					return addedAgent.save().then(() => {
+						return application;
+					});
+				});
 			});
 		}
 	},
