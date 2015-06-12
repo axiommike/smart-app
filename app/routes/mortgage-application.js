@@ -84,7 +84,7 @@ export default Ember.Route.extend({
 				});
 			}, (rejection) => {
 				return ajax({
-					url: `http://dev.myaxiom.ca/api/agent/${params.agentID}/agent.php`,
+					url: `http://dev.myaxiom.ca/api/agent/${params.agentID}`,
 					type: "GET",
 					dataType: "JSON"
 				}).then((agent) => {
