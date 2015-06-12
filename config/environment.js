@@ -15,9 +15,18 @@ module.exports = function (environment) {
 			"default-src": "'none'",
 			"script-src":  "'self' 'unsafe-eval' *.googleapis.com maps.gstatic.com",
 			"font-src":    "'self' fonts.gstatic.com",
-			"connect-src": "'self' maps.gstatic.com insights.hotjar.com *.myaxiom.ca localhost:81",
+			"connect-src": "'self' maps.gstatic.com insights.hotjar.com *.myaxiom.ca localhost:81 *.myaxiom.ca/*",
 			"img-src":     "'self' *.googleapis.com maps.gstatic.com csi.gstatic.com *.gravatar.com",
 			"style-src":   "'self' 'unsafe-inline' fonts.googleapis.com maps.gstatic.com"
+		},
+		manifest: {
+			enabled: true,
+			appcacheFile: "/manifest.appcache",
+			excludePaths: ["assets/components"],
+			fallback: ["/ index.html"],
+			includePaths: ["/"],
+			network: ["api/"],
+			showCreateDate: true
 		},
 		APP: {
 			// Here you can pass flags/options to your application instance when it is created
