@@ -36,6 +36,13 @@ export default Ember.Route.extend({
 			});
 			applicantJSON.liabilities = applicantLiabilities;
 		}
+		if (applicant.get("extraIncome.length")) {
+			let applicantExtraIncome = [];
+			applicant.get("extraIncome").forEach((income) => {
+				applicantExtraIncome.push(income.toJSON());
+			});
+			applicantJSON.extraIncome = applicantExtraIncome;
+		}
 		if (applicant.get("assets.length")) {
 			let applicantAssets = [];
 			applicant.get("assets").forEach((asset) => {
@@ -48,7 +55,7 @@ export default Ember.Route.extend({
 			applicant.get("vehicles").forEach((vehicle) => {
 				applicantVehicles.push(vehicle.toJSON());
 			});
-			applicantJSON.vehicles = applicantVehicles;
+			applicantJSON.vehicleAssets = applicantVehicles;
 		}
 		return applicantJSON;
 	},

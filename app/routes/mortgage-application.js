@@ -262,11 +262,11 @@ export default Ember.Route.extend({
 			this.get("currentModel.applicant.employment").forEach((employment) => {
 				if (employment.get("company")) {
 					if (employment.get("company.address")) {
-						employment.get("company.address").save();
+						employment.get("company.address").then((resolvedCompanyAddress) => resolvedCompanyAddress.save());
 					}
 				}
 				if (employment.get("income")) {
-					employment.get("income").save();
+					employment.get("income").then((resolvedIncome) => resolvedIncome.save());
 				}
 				employment.save();
 			});

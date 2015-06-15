@@ -3,9 +3,10 @@ import Ember from "ember";
 
 export default DS.Model.extend({
 	source: DS.attr("string"), /* child support alimony, rental property, investment, other */
-	isOther: Ember.computed.equal("source", "other"),
-	isRental: Ember.computed.equal("source", "property"),
-	isInvestment: Ember.computed.equal("source", "investment"),
+	isOther: Ember.computed.equal("source", "Other"),
+	isRental: Ember.computed.equal("source", "Property Rental"),
+	isInvestment: Ember.computed.equal("source", "Investment"),
+	isPension: Ember.computed.equal("source", "Pension"),
 	value: DS.attr("number", {defaultValue: 0}), /* In dollars */
 	frequency: DS.attr("string", {defaultValue: "Yearly"}), /* Monthly, yearly */
 	description: DS.attr("string"),
