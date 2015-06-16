@@ -53,7 +53,18 @@ export default Ember.Route.extend({
 		if (applicant.get("vehicles.length")) {
 			let applicantVehicles = [];
 			applicant.get("vehicles").forEach((vehicle) => {
-				applicantVehicles.push(vehicle.toJSON());
+				var vehicleJSON = vehicle.toJSON();
+				if (vehicle.get("loan")) {
+					vehicle.get("loan").then((loan) => {
+						vehicleJSON.loan = loan.toJSON();
+					});
+				}
+				if (vehicle.get("asset")) {
+					vehicle.get("asset").then((asset) => {
+						vehicleJSON.asset = asset.toJSON();
+					});
+				}
+				applicantVehicles.push(vehicleJSON);
 			});
 			applicantJSON.vehicleAssets = applicantVehicles;
 		}

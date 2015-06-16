@@ -1,6 +1,6 @@
 import Ember from "ember";
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
 	ownsCurrentResidence: false,
 	ownsOtherRealEstate: false,
 	otherPropertiesToggled: function() {
@@ -53,21 +53,27 @@ export default Ember.ObjectController.extend({
 	actions: {
 		addProperty: function() {
 			this.send("addPropertyMaster", this.get("model.applicant"));
+			this.get("model.applicant").save();
 		},
 		removeProperty: function(property) {
 			this.send("removePropertyMaster", property);
+			this.get("model.applicant").save();
 		},
 		addVehicle: function() {
 			this.send("addVehicleMaster", this.get("model.applicant"));
+			this.get("model.applicant").save();
 		},
 		removeVehicle: function(vehicle) {
 			this.send("removeVehicleMaster", vehicle);
+			this.get("model.applicant").save();
 		},
 		addAsset: function(type) {
 			this.send("addAssetMaster", this.get("model.applicant"), type);
+			this.get("model.applicant").save();
 		},
 		removeAsset: function(asset) {
 			this.send("removeAssetMaster", asset);
+			this.get("model.applicant").save();
 		},
 		nextStep: function() {
 			if (this.get("model.applicant.assets.length")) {
@@ -79,8 +85,10 @@ export default Ember.ObjectController.extend({
 			if (this.get("ownsOtherRealEstate")) {
 				this.send("saveProperties", this.get("model.applicant.otherProperties"));
 			}
-			// this.get("model.applicant").save();
-			this.get("model").save().then((application) => {
+			if (this.get("hasVehicles")) {
+				this.send("saveVehicles", this.get("model.applicant.vehicles"));
+			}
+			this.get("model.applicant").save().then((application) => {
 				this.transitionToRoute("mortgage-application.liabilities", application);
 			});
 		}

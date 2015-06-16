@@ -12,5 +12,5 @@ export default Ember.Component.extend(EditableMixin, {
 			});
 		}
 	}),
-	isLoaned: false
+	isLoaned: Ember.computed.alias("vehicle.isFinanced")
 });
