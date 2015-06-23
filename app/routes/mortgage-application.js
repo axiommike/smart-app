@@ -197,18 +197,20 @@ export default Ember.Route.extend({
 			applicant.get("assets").pushObject(vehicleAsset);
 			applicant.get("liabilities").pushObject(vehicleLoan);
 			applicant.get("vehicles").pushObject(addedVehicle);
-			vehicleLoan.save();
-			vehicleAsset.save();
-			addedVehicle.save();
+			return Ember.RSVP.all([
+				vehicleLoan.save(),
+				vehicleAsset.save(),
+				addedVehicle.save()
+			]);
 		},
 		removeVehicleMaster: function(vehicle) {
 			let vehicleLoan = vehicle.get("loan"),
 				vehicleAsset = vehicle.get("asset");
 			if (vehicleLoan) {
-				vehicleLoan.destroyRecord();
+				vehicleLoan.then((loan) => loan.destroyRecord());
 			}
 			if (vehicleAsset) {
-				vehicleAsset.destroyRecord();
+				vehicleAsset.then((asset) => asset.destroyRecord());
 			}
 			vehicle.destroyRecord().then((result) => {
 				console.log(`Successfully deleted vehicle ${result.get("id")}`);
@@ -253,6 +255,35 @@ export default Ember.Route.extend({
 				asset.save();
 			});
 		},
+		saveVehicles: function() {
+			var promises = [];
+			this.get("currentModel.applicant.vehicles").forEach((vehicle) => {
+				// only save vehicle loan when `hasLoan` is set
+				if (vehicle.get("loan")) {
+					let vehicleLoan = vehicle.get("loan");
+					if (vehicle.get("isFinanced")) {
+						vehicleLoan.then((loan) => {
+							return loan.save();
+						});
+					}
+					else {
+						vehicleLoan.then((loan) => {
+							// when the vehicle isn't financed, there's no liability
+							return loan.destroyRecord();
+						})
+					}
+					promises.push(vehicleLoan);
+				}
+				if (vehicle.get("asset")) {
+					let vehicleAsset = vehicle.get("asset").then((asset) => {
+						return asset.save();
+					});
+					promises.push(vehicleAsset);
+				}
+				promises.push(vehicle.save());
+			});
+			return Ember.RSVP.all(promises);
+		},
 		saveLiabilities: function() {
 			this.get("currentModel.applicant.liabilities").forEach((liability) => {
 				liability.save();
@@ -260,13 +291,13 @@ export default Ember.Route.extend({
 		},
 		saveEmployment: function() {
 			this.get("currentModel.applicant.employment").forEach((employment) => {
-				if (employment.get("company")) {
-					if (employment.get("company.address")) {
-						employment.get("company.address").save();
+				if (employment.get("employer")) {
+					if (employment.get("employer.address")) {
+						employment.get("employer.address").then((resolvedCompanyAddress) => resolvedCompanyAddress.save());
 					}
 				}
 				if (employment.get("income")) {
-					employment.get("income").save();
+					employment.get("income").then((resolvedIncome) => resolvedIncome.save());
 				}
 				employment.save();
 			});

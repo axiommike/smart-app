@@ -33,13 +33,10 @@ export default Ember.Controller.extend({
 	}.observes("hasOtherLiabilities"),
 	actions: {
 		addLiability: function(type) {
-			let createdLiability = this.store.createRecord("liability", {type: type});
-			this.get("model.applicant.liabilities").pushObject(createdLiability);
+			this.send("addLiabilityMaster", this.get("model.applicant"), type);
 		},
 		removeLiability: function(liability) {
-			liability.destroyRecord().then((deletedLiability) => {
-				console.log(`Successfully delete liability ${deletedLiability.get("id")}`);
-			});
+			this.send("removeLiabilityMaster", liability);
 		},
 		nextStep: function() {
 			this.get("model").save().then((application) => {

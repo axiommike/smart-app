@@ -1,20 +1,15 @@
 {{#liquid-if isEditing}}
 	{{partial "partials/toggle-edit-button"}}
-	{{#form-field title="Source"}}
-		{{view "select" content=incomeSources value=income.source}}
-	{{/form-field}}
-
-	{{#if isPension}}
-		{{#form-field title="Pension Source"}}
-			{{view "select" content=pensionTypes value=pensionType}}
+	<div class="row">
+		{{#form-field title="Source" class="column"}}
+			{{view "select" content=incomeSources value=income.source}}
 		{{/form-field}}
-	{{/if}}
-
-	{{#if income.isOther}}
-		{{#form-field title="Description"}}
-			{{input type="text" required=true placeholder="Describe this income source" value=income.description size=income.description.length title="Please indicate the nature of this income source"}}
-		{{/form-field}}
-	{{/if}}
+		{{#liquid-if isPension}}
+			{{#form-field title="Pension Source"}}
+				{{view "select" content=pensionTypes value=pensionType}}
+			{{/form-field}}
+		{{/liquid-if}}
+	</div>
 
 	<div class="row">
 		{{#form-field title="Income" class="column"}}
@@ -30,6 +25,11 @@
 		{{/form-field}}
 		{{#form-field title="Frequency" class="column"}}
 			{{view "select" content=frequencies value=income.frequency}}
+		{{/form-field}}
+	</div>
+	<div class="row">
+		{{#form-field title="Description"}}
+			{{input type="text" required=income.isOther placeholder="Describe this income source" value=income.description size=income.description.length title="Please indicate the nature of this income source"}}
 		{{/form-field}}
 	</div>
 {{else}}

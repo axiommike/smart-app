@@ -29,6 +29,7 @@ export default DS.Model.extend(PersonableMixin, {
 	otherAssets: Ember.computed.filterBy("assets", "type", "other"),
 	income: DS.hasMany("income", {async: true}),
 	employmentIncome: Ember.computed.filterBy("income", "source", "employment"),
+	extraIncome: Ember.computed.setDiff("income", "employmentIncome"),
 	totalIncome: Ember.computed("income.@each.value", function() {
 		let incomes = this.get("income");
 		return incomes.reduce(function(previousValue, income) {
