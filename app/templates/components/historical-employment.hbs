@@ -84,7 +84,7 @@
 {{#liquid-if needsNOA}}
 	<div class="row distributed">
 		{{#form-section title="Last 2 Years' Line 150" icon="dollar"}}
-			{{#each noaValues as |year|}}
+			{{#each noaValues key="@guid" as |year|}}
 				{{#form-field title=year.year}}
 					{{currency-input min="0" step="any" value=year.value required=true placeholder="Yearly Income" title="Please indicate the filed income for this yearly assesment"}}
 				{{/form-field}}

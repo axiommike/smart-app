@@ -11,7 +11,7 @@
 </header>
 
 <ul class="assets">
-	{{#each filteredAssets as |asset|}}
+	{{#each filteredAssets key="@guid" as |asset|}}
 		<li class="asset">
 			{{asset-instance asset=asset isEditable=isEditable onRemove="removeAsset"}}
 		</li>

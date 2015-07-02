@@ -1,10 +1,10 @@
 <datalist id="vehicle-makes">
-	{{#each vehicles as |vehicleMake|}}
+	{{#each vehicles key="@guid" as |vehicleMake|}}
 		<option {{bind-attr value=vehicleMake.value}}>{{vehicleMake.title}}</option>
 	{{/each}}
 </datalist>
 <datalist id="vehicle-models">
-	{{#each models.firstObject.models as |model|}}
+	{{#each models.firstObject.models key="@guid" as |model|}}
 		<option {{bind-attr value=model.value}}>{{model.title}}</option>
 	{{/each}}
 </datalist>

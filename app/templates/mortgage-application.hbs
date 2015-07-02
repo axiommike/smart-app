@@ -21,13 +21,13 @@
 </header>
 
 <datalist id="lenders">
-	{{#each lender in lenders}}
+	{{#each lenders key="@guid" as |lender|}}
 		<option {{bind-attr value=lender}}></option>
 	{{/each}}
 </datalist>
 
 <datalist id="banks">
-	{{#each bank in banks}}
+	{{#each banks key="@guid" as |bank|}}
 		<option {{bind-attr value=bank}}></option>
 	{{/each}}
 </datalist>

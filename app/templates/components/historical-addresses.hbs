@@ -6,7 +6,7 @@
 			<span class="input-error">Please provide up to 3 years of address information.</span>
 		{{/liquid-if}}
 		<ul class="previous-addresses">
-			{{#each address in previousAddresses}}
+			{{#each previousAddresses key="@guid" as |address|}}
 				<li class="address edit">
 					{{historical-address address=address required=true}}
 					<button {{action "removeAddress" address}} class="remove-button">Remove</button>

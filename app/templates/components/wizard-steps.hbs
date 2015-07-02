@@ -1,6 +1,6 @@
 {{#if showBreadcrumbs}}
 	<ul class="wizard-steps-breadcrumbs">
-		{{#each step in steps}}
+		{{#each steps key="@guid" as |step|}}
 			{{wizard-step step=step.step name=step.name icon=step.icon}}
 		{{else}}
 			No steps found!

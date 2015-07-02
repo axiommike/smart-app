@@ -3166,11 +3166,7 @@ rgba(160,160,160,0.2)
 .button-warning,
 .button-info,
 .button-error,
-button,
-button-success,
-button-warning,
-button-info,
-button-error {
+button {
   cursor: pointer;
   -webkit-transition: 0.1s cubic-bezier(0.55, 0.085, 0.68, 0.53) background, border;
   -o-transition: 0.1s cubic-bezier(0.55, 0.085, 0.68, 0.53) background, border;
@@ -3194,12 +3190,7 @@ button-error {
 .button-success[disabled],
 .button-warning[disabled],
 .button-info[disabled],
-.button-error[disabled],
-button[disabled],
-button-success[disabled],
-button-warning[disabled],
-button-info[disabled],
-button-error[disabled] {
+.button-error[disabled] {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
   filter: alpha(opacity=50);
   opacity: 0.5;
@@ -3212,9 +3203,7 @@ button-error[disabled] {
   user-drag: none;
 }
 .button-plain,
-.button-plain-warning,
-button-plain,
-button-plain-warning {
+.button-plain-warning {
   border: 0;
   background: transparent;
   margin: 0;
@@ -3224,15 +3213,11 @@ button-plain-warning {
   transition: 0.1s cubic-bezier(0.55, 0.085, 0.68, 0.53) transform;
 }
 .button-plain:hover,
-.button-plain-warning:hover,
-button-plain:hover,
-button-plain-warning:hover {
+.button-plain-warning:hover {
   background: inherit;
 }
 .button-plain:focus,
-.button-plain-warning:focus,
-button-plain:focus,
-button-plain-warning:focus {
+.button-plain-warning:focus {
   -webkit-transform: scale(0.75);
   -ms-transform: scale(0.75);
   -o-transform: scale(0.75);
@@ -3709,7 +3694,9 @@ button-error:focus {
 }
 @media only screen and (max-width: 767px) {
   .row,
-  .row-padded {
+  .row-padded,
+.row,
+.row-padded {
     display: block;
   }
   .row .column,
@@ -3750,7 +3737,7 @@ button-error:focus {
   flex: inherit;
 }
 .one-twelveth {
-  width: 8.333333333333332%;
+  width: 8.3333333333333%;
 }
 .one-eleventh {
   -webkit-flex: inherit;
@@ -3759,7 +3746,7 @@ button-error:focus {
   flex: inherit;
 }
 .one-eleventh {
-  width: 9.090909090909092%;
+  width: 9.090909090909099%;
 }
 .one-tenth {
   -webkit-flex: inherit;
@@ -3777,7 +3764,7 @@ button-error:focus {
   flex: inherit;
 }
 .one-ninth {
-  width: 11.11111111111111%;
+  width: 11.1111111111111%;
 }
 .one-eigth {
   -webkit-flex: inherit;
@@ -3795,7 +3782,7 @@ button-error:focus {
   flex: inherit;
 }
 .one-seventh {
-  width: 14.285714285714285%;
+  width: 14.285714285714299%;
 }
 .one-sixth {
   -webkit-flex: inherit;
@@ -3805,7 +3792,7 @@ button-error:focus {
 }
 .one-sixth,
 .two-twelveths {
-  width: 16.666666666666664%;
+  width: 16.6666666666667%;
 }
 .one-fifth {
   -webkit-flex: inherit;
@@ -3838,7 +3825,7 @@ button-error:focus {
 .two-sixths,
 .three-ninths,
 .four-twelveths {
-  width: 33.33333333333333%;
+  width: 33.3333333333333%;
 }
 .one-half {
   -webkit-flex: inherit;
@@ -3867,7 +3854,7 @@ button-error:focus {
   flex: inherit;
 }
 .two-elevenths {
-  width: 18.181818181818183%;
+  width: 18.181818181818198%;
 }
 .two-tenths {
   -webkit-flex: inherit;
@@ -3882,7 +3869,7 @@ button-error:focus {
   flex: inherit;
 }
 .two-ninths {
-  width: 22.22222222222222%;
+  width: 22.2222222222222%;
 }
 .two-eigths {
   -webkit-flex: inherit;
@@ -3897,7 +3884,7 @@ button-error:focus {
   flex: inherit;
 }
 .two-sevenths {
-  width: 28.57142857142857%;
+  width: 28.571428571428598%;
 }
 .two-sixths {
   -webkit-flex: inherit;
@@ -3931,7 +3918,7 @@ button-error:focus {
 .four-sixths,
 .six-ninths,
 .eight-twelveths {
-  width: 66.66666666666666%;
+  width: 66.6666666666667%;
 }
 .three-twelveths {
   -webkit-flex: inherit;
@@ -3946,7 +3933,7 @@ button-error:focus {
   flex: inherit;
 }
 .three-elevenths {
-  width: 27.27272727272727%;
+  width: 27.2727272727273%;
 }
 .three-tenths {
   -webkit-flex: inherit;
@@ -3979,7 +3966,7 @@ button-error:focus {
   flex: inherit;
 }
 .three-sevenths {
-  width: 42.857142857142854%;
+  width: 42.8571428571429%;
 }
 .three-sixths {
   -webkit-flex: inherit;
@@ -4021,7 +4008,7 @@ button-error:focus {
   flex: inherit;
 }
 .four-elevenths {
-  width: 36.36363636363637%;
+  width: 36.363636363636395%;
 }
 .four-tenths {
   -webkit-flex: inherit;
@@ -4036,7 +4023,7 @@ button-error:focus {
   flex: inherit;
 }
 .four-ninths {
-  width: 44.44444444444444%;
+  width: 44.4444444444444%;
 }
 .four-eigths {
   -webkit-flex: inherit;
@@ -4051,7 +4038,7 @@ button-error:focus {
   flex: inherit;
 }
 .four-sevenths {
-  width: 57.14285714285714%;
+  width: 57.142857142857096%;
 }
 .four-sixths {
   -webkit-flex: inherit;
@@ -4076,7 +4063,7 @@ button-error:focus {
   flex: inherit;
 }
 .five-twelveths {
-  width: 41.66666666666667%;
+  width: 41.6666666666667%;
 }
 .five-elevenths {
   -webkit-flex: inherit;
@@ -4085,7 +4072,7 @@ button-error:focus {
   flex: inherit;
 }
 .five-elevenths {
-  width: 45.45454545454545%;
+  width: 45.454545454545496%;
 }
 .five-tenths {
   -webkit-flex: inherit;
@@ -4100,7 +4087,7 @@ button-error:focus {
   flex: inherit;
 }
 .five-ninths {
-  width: 55.55555555555556%;
+  width: 55.5555555555556%;
 }
 .five-eigths {
   -webkit-flex: inherit;
@@ -4118,7 +4105,7 @@ button-error:focus {
   flex: inherit;
 }
 .five-sevenths {
-  width: 71.42857142857143%;
+  width: 71.4285714285714%;
 }
 .five-sixths {
   -webkit-flex: inherit;
@@ -4128,7 +4115,7 @@ button-error:focus {
 }
 .five-sixths,
 .ten-twelveths {
-  width: 83.33333333333334%;
+  width: 83.3333333333333%;
 }
 .six-twelveths {
   -webkit-flex: inherit;
@@ -4143,7 +4130,7 @@ button-error:focus {
   flex: inherit;
 }
 .six-elevenths {
-  width: 54.54545454545454%;
+  width: 54.5454545454545%;
 }
 .six-tenths {
   -webkit-flex: inherit;
@@ -4170,7 +4157,7 @@ button-error:focus {
   flex: inherit;
 }
 .six-sevenths {
-  width: 85.71428571428571%;
+  width: 85.7142857142857%;
 }
 .seven-twelveths {
   -webkit-flex: inherit;
@@ -4179,7 +4166,7 @@ button-error:focus {
   flex: inherit;
 }
 .seven-twelveths {
-  width: 58.333333333333336%;
+  width: 58.3333333333333%;
 }
 .seven-elevenths {
   -webkit-flex: inherit;
@@ -4188,7 +4175,7 @@ button-error:focus {
   flex: inherit;
 }
 .seven-elevenths {
-  width: 63.63636363636363%;
+  width: 63.636363636363605%;
 }
 .seven-tenths {
   -webkit-flex: inherit;
@@ -4206,7 +4193,7 @@ button-error:focus {
   flex: inherit;
 }
 .seven-ninths {
-  width: 77.77777777777779%;
+  width: 77.7777777777778%;
 }
 .seven-eigths {
   -webkit-flex: inherit;
@@ -4230,7 +4217,7 @@ button-error:focus {
   flex: inherit;
 }
 .eight-elevenths {
-  width: 72.72727272727273%;
+  width: 72.72727272727269%;
 }
 .eight-tenths {
   -webkit-flex: inherit;
@@ -4245,7 +4232,7 @@ button-error:focus {
   flex: inherit;
 }
 .eight-ninths {
-  width: 88.88888888888889%;
+  width: 88.8888888888889%;
 }
 .nine-twelveths {
   -webkit-flex: inherit;
@@ -4260,7 +4247,7 @@ button-error:focus {
   flex: inherit;
 }
 .nine-elevenths {
-  width: 81.81818181818183%;
+  width: 81.8181818181818%;
 }
 .nine-tenths {
   -webkit-flex: inherit;
@@ -4284,7 +4271,7 @@ button-error:focus {
   flex: inherit;
 }
 .ten-elevenths {
-  width: 90.9090909090909%;
+  width: 90.90909090909089%;
 }
 .eleven-twelveths {
   -webkit-flex: inherit;
@@ -4293,7 +4280,7 @@ button-error:focus {
   flex: inherit;
 }
 .eleven-twelveths {
-  width: 91.66666666666666%;
+  width: 91.6666666666667%;
 }
 .income-table-total {
   text-align: right;
@@ -4606,13 +4593,11 @@ liability-instance {
   appearance: none;
   border: 0;
 }
-.wizard-steps-progress::-moz-progress-bar,
 .wizard-steps-progress::-webkit-progress-bar {
-  background: transparent !important;
+  background: transparent;
 }
-.wizard-steps-progress::-moz-progress-value,
 .wizard-steps-progress::-webkit-progress-value {
-  background: #fff !important;
+  background: #fff;
 }
 .wizard-step-current-step {
   font-weight: bold;
@@ -5112,4 +5097,3 @@ footer a[href]:visited {
 .address-header + .address-details {
   margin-left: 1em;
 }
-/*# sourceMappingURL=app/styles/app.css.map */

@@ -3,7 +3,7 @@
 </header>
 
 <ul class="liabilities">
-	{{#each liability in filteredLiabilities}}
+	{{#each filteredLiabilities key="@guid" as |liability|}}
 		<li {{bind-attr class=":liability liability.type"}}>
 			{{liability-instance liability=liability typeEditingDisabled=type isEditable=isEditable onRemove="removeLiability"}}
 		</li>
