@@ -68,6 +68,36 @@ export default Ember.Route.extend({
 			});
 			applicantJSON.vehicleAssets = applicantVehicles;
 		}
+		if (applicant.get("properties.length")) {
+			let applicantProperties = [];
+			applicant.get("properties").then((allProperties) => {
+				allProperties.forEach((property) => {
+					var propertyJSON = property.toJSON();
+					if (property.get("mortgage")) {
+						property.get("mortgage").then((propertyMortgage) => {
+							propertyJSON.mortgage = propertyMortgage.toJSON();
+						});
+					}
+					if (property.get("address")) {
+						property.get("address").then((propertyAddress) => {
+							propertyJSON.address = propertyAddress.toJSON();
+						});
+					}
+					if (property.get("asset")) {
+						property.get("asset").then((propertyAsset) => {
+							propertyJSON.asset = propertyAsset.toJSON();
+						});
+					}
+					if (property.get("lineOfCredit")) {
+						property.get("lineOfCredit").then((propertyLineOfCredit) => {
+							propertyJSON.lineOfCredit = propertyLineOfCredit.toJSON();
+						});
+					}
+					applicantProperties.push(propertyJSON);
+				});
+				applicantJSON.properties = applicantProperties;
+			});
+		}
 		return applicantJSON;
 	},
 	setupController: function (controller, model) {
