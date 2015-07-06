@@ -19,6 +19,7 @@ export default Ember.Component.extend(EditableMixin, {
 	onRemoveAsset: null,
 	onAddLiability: null,
 	onRemoveLiability: null,
+	youngestApplicantAge: `${new Date().getFullYear() - 18}-${("0" + (new Date().getMonth() + 1)).slice(-2)}-${("0" + (new Date().getDate())).slice(-2)}`,
 	relationshipTypes: [
 		"Spouse",
 		"Common-Law",
