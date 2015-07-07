@@ -321,15 +321,15 @@ export default Ember.Route.extend({
 			}
 			properties.forEach((property) => {
 				// first, save corresponding address
-				if (property.get("address")) {
-					property.get("address").save();
-				}
-				if (property.get("mortgage")) {
-					property.get("mortgage").save();
-				}
-				if (property.get("asset")) {
-					property.get("asset").save();
-				}
+				property.get("address").then((address) => {
+					return address.save();
+				});
+				property.get("mortgage").then((mortgage) => {
+					return mortgage.save();
+				});
+				property.get("asset").then((asset) => {
+					return asset.save();
+				});
 				property.save().then((savedProperty) => {
 					console.log(`Saved property of ID ${savedProperty.get("id")}`);
 				});

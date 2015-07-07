@@ -7,7 +7,11 @@ export default Ember.Route.extend({
 		if (applicant.get("addresses.length")) {
 			let applicantAddresses = [];
 			applicant.get("addresses").forEach((address) => {
-				applicantAddresses.push(address.toJSON());
+				let resolvedAddress = address;
+				if (address.get("content")) {
+					resolvedAddress = address.get("content");
+				}
+				applicantAddresses.push(resolvedAddress.toJSON());
 			});
 			applicantJSON.addresses = applicantAddresses;
 		}
@@ -16,14 +20,26 @@ export default Ember.Route.extend({
 			applicant.get("employment").forEach((employment) => {
 				let employmentJSON = employment.toJSON();
 				if (employment.get("employer")) {
-					let employmentCompany = employment.get("employer").toJSON();
-					if (employment.get("employer.address")) {
-						employmentCompany.address = employment.get("employer.address").content.toJSON();
-					}
-					employmentJSON.employer = employmentCompany;
+					employment.get("employer").then((company) => {
+						var employmentCompany = company ? company.toJSON() : null;
+						if (company) {
+							if (company.get("address")) {
+								company.get("address").then((address) => {
+									if (address) {
+										employmentCompany.address = employment.get("employer.address").content.toJSON();
+									}
+								});
+							}
+						}
+						employmentJSON.employer = employmentCompany;
+					});
 				}
 				if (employment.get("income")) {
-					employmentJSON.income = employment.get("income").toJSON();
+					employment.get("income").then((income) => {
+						if (income) {
+							employmentJSON.income = income.toJSON();
+						}
+					});
 				}
 				applicantEmployment.push(employmentJSON);
 			});
@@ -120,8 +136,7 @@ export default Ember.Route.extend({
 			let apiRequest = new Ember.RSVP.Promise((resolve, reject) => {
 				return ajax({
 					type: "PUT",
-					/*url: "http://dev.myaxiom.ca/api/application",*/
-					url: "http://localhost:81/axiom-api/public/examples/application",
+					url: "http://dev.myaxiom.ca/api/application",
 					data: nestedJSON,
 					dataType: "json"
 				});

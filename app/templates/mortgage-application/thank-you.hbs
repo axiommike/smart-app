@@ -1,12 +1,14 @@
-<header>
-	<h1>Thanks... now you're <strong>done</strong></h1>
-</header>
+<article class="thank-you">
+	<header class="thank-you-header">
+		<h1>Thanks... now you're <strong>done</strong></h1>
+	</header>
 
-<article class="details">
-	<p>Your application has been submitted with an <code>id</code> or {{id}}.  Please <a href="http://mail.google.com">check your e-mail for a confirmation of receipt</a>.</p>
+	<article class="thank-you-details">
+		<p>Your application has been submitted with an <code>id</code> or {{id}}.  Please <a href="http://mail.google.com">check your e-mail for a confirmation of receipt</a>.</p>
+	</article>
+	{{#liquid-if model.isIncomplete}}
+		<button {{action "completeFullApp"}}>Actually, I'd like to complete full app</button>
+	{{/liquid-if}}
 </article>
-{{#liquid-if model.isIncomplete}}
-	<button {{action "completeFullApp"}}>Actually, I'd like to complete full app</button>
-{{/liquid-if}}
 
 {{outlet}}
