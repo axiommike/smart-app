@@ -1,5 +1,7 @@
 import DS from "ember-data";
+import LFAdapter from "ember-localforage-adapter/adapters/localforage";
 
-export default DS.LSAdapter.extend({
-	namespace: "axiom-application-prototype"
+export default LFAdapter.extend({
+	namespace: "axiom-application-prototype",
+	caching: "all"
 });

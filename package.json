@@ -41,7 +41,7 @@
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.2",
     "ember-intl": "2.0.0-beta.8",
-    "ember-localstorage-adapter": "0.5.3",
+    "ember-localforage-adapter": "0.7.3",
     "install": "^0.1.8",
     "kouto-swiss": "^0.11.11",
     "liquid-fire": "^0.20.4",
