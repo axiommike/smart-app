@@ -50,7 +50,7 @@
 						{{input value=applicant.phone type="tel" required=true placeholder="Phone" title="Please provide the applicant's phone number"}}
 					{{/form-field}}
 					{{#form-field title="Birth Date" layoutDirection="vertical"}}
-						{{input type="date" value=applicant.birthDate required=true title="Please provide the date of birth of the applicant" autocomplete="bdate"}}
+						{{input type="date" value=applicant.birthDate required=true title="Please provide the date of birth of the applicant" autocomplete="bdate" max=youngestApplicantAge}}
 					{{/form-field}}
 				</div>
 			{{/form-section}}
