@@ -37,11 +37,14 @@ $material-box
 			display flex
 			.form-field-controls
 				width inherit
+				margin-right 3em
 		.form-field-controls
 			float right
 	&s
 		@extend $material-box
 		list-style-type decimal
+		&-container
+			margin 2em
 .asset, .liability, .applicant-card, .income, .historical-employment, .applicant-card-finances-total
 	@extend $fadeIn
 
@@ -52,7 +55,7 @@ $material-box
 	text-align center
 	margin 1em
 	+media-query($breakpointMain)
-		font-size 2.4em
+		font-size 2.2em
 
 .agent
 	&-callout

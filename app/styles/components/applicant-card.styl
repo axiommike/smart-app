@@ -8,7 +8,7 @@ Author: michael
 Created on 17/04/2015 by PhpStorm
 */
 
-$applicantCardMinWidth ?= 25em
+$applicantCardMinWidth ?= 15em
 $applicantCardMaxWidth ?= 40em
 
 .applicant
@@ -44,6 +44,8 @@ $applicantCardMaxWidth ?= 40em
 			.applicant-card-full-name
 				text-indent 3em
 				display inline-block
+				+media-query($breakpointMain)
+					text-indent initial
 		display inline-block
 		vertical-align top
 		&-full-name

@@ -2,6 +2,12 @@
 	{{input type="text" value=employment.occupation placeholder="Job Title" required=true title="Please indicate the job title for this employment record"}}
 {{/form-field}}
 
+{{#liquid-unless employment.isSelfEmployed}}
+	{{#form-field title="Employer"}}
+		{{input type="text" value=employment.employer.name title="Please provide the employer for this position" required=true placeholder="Employer/Company Name"}}
+	{{/form-field}}
+{{/liquid-unless}}
+
 {{#form-field title="I currently work here"}}
 	{{on-off-switch checked=employment.isCurrent title="Is the job current?"}}
 {{/form-field}}

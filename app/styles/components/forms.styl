@@ -107,3 +107,9 @@ $formField
 			margin-top $formSectionMargin
 			padding 1em
 			text-align right
+			+media-query($breakpointMain)
+				button
+					width 100%
+					display block
+					& + button
+						margin-top $margin

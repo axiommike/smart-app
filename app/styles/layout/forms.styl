@@ -12,6 +12,8 @@ $inputErrorColour ?= #dc0000
 
 form
 	margin 2em
+	+media-query($breakpointMain)
+		margin inherit
 button
 	@extend .button
 	font-family $baseFontFamily
@@ -60,5 +62,7 @@ textarea, input
 		transform scale(1.05)
 .add-applicant
 	float right
+	+media-query($breakpointMain)
+		float none
 .sub-actions
 	@extend $normal-margin, $float-left
