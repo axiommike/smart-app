@@ -73,7 +73,6 @@ export default Ember.Route.extend({
 		}
 	},
 	checkClientID: function(params, application) {
-		debugger;
 		if (params["cid"]) {
 			// first, check the offline cache to see if the client is there; otherwise, fall back to the API
 			return this.store.find("applicant", params.cid).then((applicant) => {
