@@ -67,20 +67,45 @@ export default Ember.Route.extend({
 	queryParams: {
 		agentID: {
 			refreshModel: true
+		},
+		cid: {
+			refreshModel: true
+		}
+	},
+	checkClientID: function(params, application) {
+		debugger;
+		if (params["cid"]) {
+			// first, check the offline cache to see if the client is there; otherwise, fall back to the API
+			return this.store.find("applicant", params.cid).then((applicant) => {
+				application.set("applicant", applicant);
+				return application;
+			}, (rejection) => {
+				return ajax({
+					url: `http://dev.myaxiom.ca/api/applicants/${params.cid}`,
+					type: "GET",
+					dataType: "JSON"
+				}).then((applicant) => {
+					let addedApplicant = this.store.createRecord("applicant", applicant);
+					application.set("applicant", addedApplicant);
+					return addedApplicant.save().then(() => {
+						return application;
+					})
+				});
+			});
+		}
+		else {
+			return application;
 		}
 	},
 	model: function(params) {
 		console.log("mortgage application route triggered");
 		console.dir(params);
-		if (!params["agentID"]) {
-			return this.store.find("application", params.application_id);
-		}
-		else {
+		if (params["agentID"]) {
 			var agentResponse;
 			return this.store.find("agent", params.agentID).then((agent) => {
 				return this.store.find("application", params.application_id).then((application) => {
 					application.set("agent", agent);
-					return application;
+					return this.checkClientID(params, application);
 				});
 			}, (rejection) => {
 				return ajax({
@@ -94,9 +119,15 @@ export default Ember.Route.extend({
 					let addedAgent = this.store.createRecord("agent", agentResponse);
 					application.set("agent", addedAgent);
 					return addedAgent.save().then(() => {
-						return application;
+						return this.checkClientID(params, application);
 					});
 				});
+			});
+		}
+		else {
+			// this is only here for debugging purposes.  I don't think it makes sense to auto-populate client when we already know him/her from an existing application
+			return this.store.find("application", params.application_id).then((application) => {
+				return this.checkClientID(params, application);
 			});
 		}
 	},

@@ -11,7 +11,8 @@ export default Ember.Controller.extend({
 		"Thank You"
 	],
 	agentID: null,
-	queryParams: ["agentID"],
+	cid: null, /* client ID -- named cid because of legacy reasons */
+	queryParams: ["agentID", "cid"],
 	currentStep: 0,
 	realStep:    Ember.computed("currentStep", function () {
 		return this.get("currentStep") + 1;
