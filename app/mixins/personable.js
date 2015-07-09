@@ -16,8 +16,8 @@ export default Ember.Mixin.create({
 	workPhone: DS.attr("string"),
 	homePhone: DS.attr("string"),
 	preferredContactMethod: DS.attr("string"),
-	prefersCellPhone: Ember.computed.equal("preferredContactMethod", "cellPhone"),
-	prefersWorkPhone: Ember.computed.equal("preferredContactMethod", "workPhone"),
-	prefersHomePhone: Ember.computed.equal("preferredContactMethod", "homePhone"),
+	prefersCellPhone: Ember.computed.equal("preferredContactMethod", "cellphone"),
+	prefersWorkPhone: Ember.computed.equal("preferredContactMethod", "workphone"),
+	prefersHomePhone: Ember.computed.equal("preferredContactMethod", "homephone"),
 	prefersEmail: Ember.computed.equal("preferredContactMethod", "email")
 });

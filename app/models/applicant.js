@@ -9,7 +9,6 @@ export default DS.Model.extend(PersonableMixin, {
 	employment: DS.hasMany("employment", {async: true}),
 	currentEmployment: Ember.computed.filterBy("employment", "isCurrent", true),
 	previousEmployment: Ember.computed.setDiff("employment", "currentEmployment"),
-	workPhone: Ember.computed.alias("currentEmployment.firstObject.company.phone"),
 	liabilities: DS.hasMany("liability", {async: true}),
 	vehicleLoans: Ember.computed.alias("vehicles.@each.loan"),
 	childSupportLiabilities: Ember.computed.filterBy("liabilities", "type", "child-support"),

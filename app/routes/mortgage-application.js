@@ -85,6 +85,48 @@ export default Ember.Route.extend({
 					dataType: "JSON"
 				}).then((applicant) => {
 					if (applicant["applicant"]) {
+						console.dir(applicant.applicant);
+						if (applicant.applicant["employment"]) {
+							var applicantEmployment = [];
+							applicant.applicant.employment.forEach((employment) => {
+								var employmentAddress = null;
+								if (employment["company"]) {
+									if (employment.company["address"]) {
+										let generatedCompanyAddress = this.store.createRecord("address", employment.company.address);
+										generatedCompanyAddress.save().then((savedGeneratedAddress) => {
+											employmentAddress = savedGeneratedAddress;
+										});
+										delete employment.company.address;
+									}
+									let generatedCompany = this.store.createRecord("company", employment.company);
+									if (employmentAddress) {
+										generatedCompany.set("address", employmentAddress);
+									}
+									generatedCompany.save().then((savedGeneratedCompany) => {
+										employment.company = savedGeneratedCompany;
+									});
+								}
+								let generatedEmployment = this.store.createRecord("employment", employment);
+								generatedEmployment.save().then((savedEmployment) => {
+									applicantEmployment.push(savedEmployment);
+								});
+							});
+							applicant.applicant.employment = applicantEmployment;
+						}
+						if (applicant.applicant["previousAddresses"]) {
+							let applicantPreviousAddresses = [];
+							applicant.applicant.previousAddresses.forEach((address) => {
+								this.store.find("address", address.id).then((resolvedAddress) => {
+									applicantPreviousAddresses.push(resolvedAddress);
+								}, (reject) => {
+									let generatedAddress = this.store.createRecord("address", address);
+									return generatedAddress.save().then((savedAddress) => {
+										applicantPreviousAddresses.push(savedAddress);
+									});
+								});
+							});
+							applicant.applicant.previousAddresses = applicantPreviousAddresses;
+						}
 						let addedApplicant = this.store.createRecord("applicant", applicant.applicant);
 						application.set("applicant", addedApplicant);
 						return addedApplicant.save().then(() => {
