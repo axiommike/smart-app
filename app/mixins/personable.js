@@ -12,5 +12,12 @@ export default Ember.Mixin.create({
 	}),
 	email: DS.attr("string"),
 	hasValidEmail: Ember.computed.match("email", /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i),
-	phone: DS.attr("string")
+	phone: DS.attr("string"),
+	workPhone: DS.attr("string"),
+	homePhone: DS.attr("string"),
+	preferredContactMethod: DS.attr("string"),
+	prefersCellPhone: Ember.computed.equal("preferredContactMethod", "cellPhone"),
+	prefersWorkPhone: Ember.computed.equal("preferredContactMethod", "workPhone"),
+	prefersHomePhone: Ember.computed.equal("preferredContactMethod", "homePhone"),
+	prefersEmail: Ember.computed.equal("preferredContactMethod", "email")
 });

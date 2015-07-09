@@ -80,15 +80,36 @@ export default Ember.Route.extend({
 				return application;
 			}, (rejection) => {
 				return ajax({
-					url: `http://dev.myaxiom.ca/api/applicants/${params.cid}`,
+					url: `http://dev.myaxiom.ca/api/applicant/${params.cid}`,
 					type: "GET",
 					dataType: "JSON"
 				}).then((applicant) => {
-					let addedApplicant = this.store.createRecord("applicant", applicant);
-					application.set("applicant", addedApplicant);
-					return addedApplicant.save().then(() => {
+					if (applicant["applicant"]) {
+						let addedApplicant = this.store.createRecord("applicant", applicant.applicant);
+						application.set("applicant", addedApplicant);
+						return addedApplicant.save().then(() => {
+							return application;
+						});
+					}
+					else {
+						return Ember.RSVP.reject("Sorry, but it looks like we need to update our API");
+					}
+				}, (requestFailure) => {
+					switch (requestFailure.jqXHR.status) {
+						case 400:
+							return Ember.RSVP.reject("Looks like we need to update our API");
+						case 401:
+							return Ember.RSVP.reject("Looks like something's wrong with the authentication or authenticity of this page.");
+						case 404:
+							return Ember.RSVP.reject("Applicant not found");
+						default:
+							if (requestFailure.jqXHR["responseJSON"]) {
+								if (requestFailure.jqXHR.responseJSON["message"]) {
+									return Ember.RSVP.reject(requestFailure.jqXHR.responseJSON.message);
+								}
+							}
 						return application;
-					})
+					}
 				});
 			});
 		}
