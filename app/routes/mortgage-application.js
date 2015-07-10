@@ -80,7 +80,7 @@ export default Ember.Route.extend({
 				return application;
 			}, (rejection) => {
 				return ajax({
-					url: `http://dev.myaxiom.ca/api/applicant/${params.cid}`,
+					url: `http://dev.myaxiom.ca/api/applicant/?cid=${encodeURIComponent(params.cid)}`,
 					type: "GET",
 					dataType: "JSON"
 				}).then((applicant) => {
