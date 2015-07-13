@@ -136,9 +136,9 @@ export default Ember.Route.extend({
 			let apiRequest = new Ember.RSVP.Promise((resolve, reject) => {
 				return ajax({
 					type: "PUT",
-					url: "http://dev.myaxiom.ca/api/application",
-					data: nestedJSON,
-					dataType: "json"
+					dataType: "JSON",
+					url: "http://dev.myaxiom.ca/api/v1/",
+					data: JSON.stringify(nestedJSON)
 				});
 			});
 		}
