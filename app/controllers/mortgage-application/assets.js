@@ -88,8 +88,10 @@ export default Ember.Controller.extend({
 			if (this.get("hasVehicles")) {
 				this.send("saveVehicles", this.get("model.applicant.vehicles"));
 			}
-			this.get("model.applicant").save().then((application) => {
-				this.transitionToRoute("mortgage-application.liabilities", application);
+			this.get("model").save().then((application) => {
+				return application.get("applicant").save().then((savedApplicant) => {
+					return this.transitionToRoute("mortgage-application.liabilities", application);
+				});
 			});
 		}
 	}
