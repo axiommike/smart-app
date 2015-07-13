@@ -162,6 +162,36 @@ export default Ember.Route.extend({
 			return application;
 		}
 	},
+	setDefaultBrokerage: function (application, params) {
+		return this.store.find("brokerage", 2).then((resolvedBrokerage) => {
+			// resolve edge cases where client has already fetched Axiom, but it's not default
+			if (!resolvedBrokerage.get("isDefault")) {
+				resolvedBrokerage.set("isDefault", true);
+				return resolvedBrokerage.save().then((updatedBrokerage) => {
+					application.set("brokerage", updatedBrokerage);
+					return application.save().then((updatedApplication) => {
+						return this.checkClientID(params, updatedApplication);
+					});
+				});
+			}
+			application.set("brokerage", resolvedBrokerage);
+			return application.save().then((updatedApplication) => {
+				return this.checkClientID(params, updatedApplication);
+			});
+		}).catch(() => {
+			let createdBrokerage = this.store.createRecord("brokerage", {
+				id:        "2",
+				name:      "Axiom Mortgage Solutions",
+				isDefault: true
+			});
+			return createdBrokerage.save().then((savedBrokerage) => {
+				application.set("brokerage", savedBrokerage);
+				return application.save().then((updatedApplication) => {
+					return this.checkClientID(params, updatedApplication);
+				});
+			});
+		});
+	},
 	model: function(params) {
 		console.log("mortgage application route triggered");
 		console.dir(params);
@@ -193,31 +223,32 @@ export default Ember.Route.extend({
 			// this is only here for debugging purposes.  I don't think it makes sense to auto-populate client when we already know him/her from an existing application
 			return this.store.find("application", params.application_id).then((application) => {
 				if (params["brokerage"]) {
-					return ajax({
-						url: `http://dev.myaxiom.ca/api/brokerage/${params.brokerage}`,
-						type: "GET",
-						dataType: "JSON"
-					}).then((brokerage) => {
-						if (brokerage["brokerage"]) {
-							application.set("brokerage", brokerage.brokerage);
-						}
+					return this.store.find("brokerage", params.brokerage).then((resolvedBrokerage) => {
+						application.set("brokerage", resolvedBrokerage);
 						return this.checkClientID(params, application);
-					}).catch((noBrokerage) => {
-						application.set("brokerage", {
-							id: "2",
-							name: "Axiom Mortgage Solutions",
-							isDefault: true
+					}).catch(() => {
+						return ajax({
+							url: `http://dev.myaxiom.ca/api/brokerage/${params.brokerage}`,
+							type: "GET",
+							dataType: "JSON"
+						}).then((brokerage) => {
+							if (brokerage["brokerage"]) {
+								let createdBrokerage = this.store.createRecord("brokerage", brokerage.brokerage);
+								return createdBrokerage.save().then((savedBrokerage) => {
+									application.set("brokerage", savedBrokerage);
+									return application.save().then((updatedApplication) => {
+										return this.checkClientID(params, updatedApplication);
+									});
+								});
+							}
+							return this.checkClientID(params, application);
+						}).catch(() => {
+							return this.setDefaultBrokerage(application, params);
 						});
-						return this.checkClientID(params, application);
-					})
+					});
 				}
 				else {
-					application.set("brokerage", {
-						id: "2",
-						name: "Axiom Mortgage Solutions",
-						isDefault: true
-					});
-					return this.checkClientID(params, application);
+					return this.setDefaultBrokerage(application, params);
 				}
 			});
 		}

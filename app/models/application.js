@@ -3,7 +3,7 @@ import Ember from "ember";
 
 export default DS.Model.extend({
 	agent: DS.belongsTo("agent", {async: true}),
-	brokerage: DS.attr(), /* When agent isn't set, this defaults to 2 - axiom */
+	brokerage: DS.belongsTo("brokerage", {async: true}), /* When agent isn't set, this defaults to 2 - axiom */
 	applicant: DS.belongsTo("applicant"),
 	coApplicants: DS.hasMany("applicant"),
 	applicants: Ember.computed("applicant", "coApplicants", function() {

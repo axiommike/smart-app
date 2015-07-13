@@ -17,9 +17,15 @@
 	{{else}}
 		{{#unless model.brokerage.isDefault}}
 			<aside class="brokerage-callout" role="complementary">
-				<img src = "{{model.brokerage.image}}" alt = "{{model.brokerage.name}}" class="brokerage-callout-image"/>
-				<h1 class="brokerage-callout-name">{{model.brokerage.name}}</h1>
-				<span class="brokerage-callout-phone">{{phone-number number=model.brokerage.phone}}</span>
+				{{#if model.brokerage.website}}
+					<a href="{{model.brokerage.website}}" target="_blank">
+						<img src = "{{model.brokerage.image}}" alt = "{{model.brokerage.name}}" title="{{model.brokerage.name}}" class="brokerage-callout-image"/>
+						<span class="brokerage-callout-phone">{{phone-number number=model.brokerage.phone}}</span>
+					</a>
+				{{else}}
+					<img src = "{{model.brokerage.image}}" alt = "{{model.brokerage.name}}" title="{{model.brokerage.name}}" class="brokerage-callout-image"/>
+					<span class="brokerage-callout-phone">{{phone-number number=model.brokerage.phone}}</span>
+				{{/if}}
 			</aside>
 		{{/unless}}
 	{{/if}}
