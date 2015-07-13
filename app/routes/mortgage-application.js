@@ -70,6 +70,9 @@ export default Ember.Route.extend({
 		},
 		cid: {
 			refreshModel: true
+		},
+		brokerage: {
+			refreshModel: true
 		}
 	},
 	checkClientID: function(params, application) {
@@ -189,7 +192,33 @@ export default Ember.Route.extend({
 		else {
 			// this is only here for debugging purposes.  I don't think it makes sense to auto-populate client when we already know him/her from an existing application
 			return this.store.find("application", params.application_id).then((application) => {
-				return this.checkClientID(params, application);
+				if (params["brokerage"]) {
+					return ajax({
+						url: `http://dev.myaxiom.ca/api/brokerage/${params.brokerage}`,
+						type: "GET",
+						dataType: "JSON"
+					}).then((brokerage) => {
+						if (brokerage["brokerage"]) {
+							application.set("brokerage", brokerage.brokerage);
+						}
+						return this.checkClientID(params, application);
+					}).catch((noBrokerage) => {
+						application.set("brokerage", {
+							id: "2",
+							name: "Axiom Mortgage Solutions",
+							isDefault: true
+						});
+						return this.checkClientID(params, application);
+					})
+				}
+				else {
+					application.set("brokerage", {
+						id: "2",
+						name: "Axiom Mortgage Solutions",
+						isDefault: true
+					});
+					return this.checkClientID(params, application);
+				}
 			});
 		}
 	},

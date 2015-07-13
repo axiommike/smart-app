@@ -14,6 +14,14 @@
 			<h1 class="agent-callout-name">{{model.agent.fullName}}</h1>
 			<span class="agent-callout-phone">{{phone-number number=model.agent.phone}}</span>
 		</aside>
+	{{else}}
+		{{#unless model.brokerage.isDefault}}
+			<aside class="brokerage-callout" role="complementary">
+				<img src = "{{model.brokerage.image}}" alt = "{{model.brokerage.name}}" class="brokerage-callout-image"/>
+				<h1 class="brokerage-callout-name">{{model.brokerage.name}}</h1>
+				<span class="brokerage-callout-phone">{{phone-number number=model.brokerage.phone}}</span>
+			</aside>
+		{{/unless}}
 	{{/if}}
 	{{#liquid-if currentStep}}
 		<button {{action "sendIncomplete"}} class="header-action">Submit As-Is</button>
