@@ -65,8 +65,7 @@ export default Ember.TextField.extend({
 			console.warn("No address provided.  Please provide one!");
 		}
 	},
-	initialize: function() {
-		window.__emberGoogleMapLoaded__ = null;
+	didInsertElement: function() {
 		let autocomplete = new google.maps.places.Autocomplete(
 			this.$()[0], {
 				types: ["geocode"]
@@ -76,30 +75,5 @@ export default Ember.TextField.extend({
 		google.maps.event.addListener(autocomplete, "place_changed", () => {
 			this.placeSelected();
 		});
-	},
-	/**
-	 * Initialize the Google Maps API autocomplete on the input
-	 */
-	didInsertElement: function() {
-		console.log("didInsertElement fired");
-		let src = "//maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places";
-		if ("google" in window) {
-			return this.initialize();
-		}
-		else {
-			var promise;
-			return promise = new Ember.RSVP.Promise((resolve, reject) => {
-				window.__emberGoogleMapLoaded__ = Ember.run.bind(() => {
-					promise = null;
-					this.initialize();
-					resolve(this.get("resolveWith"));
-				});
-				Ember.$.getScript(src + "&callback=__emberGoogleMapLoaded__").fail(function (jqXhr) {
-					promise = null;
-					window.__emberGoogleMapLoaded__ = null;
-					reject(jqXhr);
-				});
-			});
-		}
 	}
 });

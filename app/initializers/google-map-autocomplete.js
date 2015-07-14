@@ -1,18 +1,9 @@
 import Ember from "ember";
+import loadGoogleMap from "../utils/load-google-map";
 
 export function initialize(container, application) {
-	let src = "https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places";
-	var promise;
-	window.__emberGoogleMapLoaded__ = function() {
-		window.fetchingGoogle = false;
-	};
-	return Ember.$.getScript(src + "&callback=__emberGoogleMapLoaded__").then((scriptFetched) => {
-		window.fetchingGoogle = false;
-	}).fail(function (jqXhr) {
-		promise = null;
-		window.__emberGoogleMapLoaded__ = null;
-		reject(jqXhr);
-	});
+	application.register("util:load-google-map", loadGoogleMap, {instantiate: false});
+	application.inject("route", "loadGoogleMap", "util:load-google-map");
 }
 
 export default {
