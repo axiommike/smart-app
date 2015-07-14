@@ -116,32 +116,31 @@ export default Ember.Route.extend({
 		}
 		return applicantJSON;
 	},
-	setupController: function (controller, model) {
-		// Call _super for default behaviour
-		this._super(controller, model);
+	model: function () {
 		// send JSON to server
-		if (model) {
-			let nestedJSON = model.toJSON();
-			if (model.get("coApplicants.length")) {
-				let coApplicants = [];
-				model.get("coApplicants").forEach((applicant) => {
-					coApplicants.push(this.serializeApplicant(applicant));
-				});
-				nestedJSON.coApplicants = coApplicants;
-			}
-			if (model.get("applicant")) {
-				nestedJSON.applicant = this.serializeApplicant(model.get("applicant"));
-			}
-			console.dir(nestedJSON);
-			let apiRequest = new Ember.RSVP.Promise((resolve, reject) => {
-				return ajax({
-					type: "PUT",
-					dataType: "JSON",
-					url: "http://dev.myaxiom.ca/api/v1/",
-					data: JSON.stringify(nestedJSON)
-				});
+		let model = this.get("currentModel"),
+			nestedJSON = model.toJSON();
+		if (model.get("coApplicants.length")) {
+			let coApplicants = [];
+			model.get("coApplicants").forEach((applicant) => {
+				coApplicants.push(this.serializeApplicant(applicant));
 			});
+			nestedJSON.coApplicants = coApplicants;
 		}
+		if (model.get("applicant")) {
+			nestedJSON.applicant = this.serializeApplicant(model.get("applicant"));
+		}
+		console.dir(nestedJSON);
+		return new Ember.RSVP.Promise((resolve, reject) => {
+			return ajax({
+				type: "PUT",
+				dataType: "JSON",
+				url: "http://dev.myaxiom.ca/api/v1/",
+				data: JSON.stringify(nestedJSON)
+			}).then((completedApplication) => {
+				return completedApplication; // the model will be the completed application in this case (not the "application model"
+			});
+		});
 	},
 	beforeModel: function() {
 		let mortgageController = this.controllerFor("mortgage-application");
