@@ -18,7 +18,7 @@
 		{{#unless model.brokerage.isDefault}}
 			<aside class="brokerage-callout" role="complementary">
 				{{#if model.brokerage.website}}
-					<a href="{{model.brokerage.website}}" target="_blank">
+					<a href="{{model.brokerage.website}}" class="brokerage-callout-link" target="_blank">
 						<img src = "{{model.brokerage.image}}" alt = "{{model.brokerage.name}}" title="{{model.brokerage.name}}" class="brokerage-callout-image"/>
 						<span class="brokerage-callout-phone">{{phone-number number=model.brokerage.phone}}</span>
 					</a>

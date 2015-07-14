@@ -1,6 +1,17 @@
 import Ember from "ember";
 
 export default Ember.Route.extend({
+	queryParams: {
+		agentID: {
+			refreshModel: true
+		},
+		cid: {
+			refreshModel: true
+		},
+		brokerage: {
+			refreshModel: true
+		}
+	},
 	addEmployment: function(applicant, isCurrent) {
 		isCurrent = isCurrent ? true : false;
 		let createdEmployment = this.store.createRecord("employment", {isCurrent: isCurrent}),
@@ -68,11 +79,12 @@ export default Ember.Route.extend({
 	 */
 	beforeModel: function(transition) {
 		let primaryApplicantPromise = this.addApplicant(true),
-			emptyApplication = this.store.createRecord("application");
+			emptyApplication = this.store.createRecord("application"),
+			params = this.paramsFor("apply");
 		return primaryApplicantPromise.then((primaryApplicant) => {
 			emptyApplication.set("applicant", primaryApplicant);
 			return emptyApplication.save().then((savedApplication) => {
-				this.transitionTo("mortgage-application", savedApplication);
+				this.transitionTo("mortgage-application", savedApplication, {queryParams: params});
 			});
 		});
 	}

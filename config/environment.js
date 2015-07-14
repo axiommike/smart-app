@@ -16,7 +16,7 @@ module.exports = function (environment) {
 			"script-src":  "'self' 'unsafe-eval' *.googleapis.com maps.gstatic.com",
 			"font-src":    "'self' fonts.gstatic.com",
 			"connect-src": "'self' maps.gstatic.com insights.hotjar.com *.myaxiom.ca localhost:81 *.myaxiom.ca/*",
-			"img-src":     "'self' *.googleapis.com maps.gstatic.com csi.gstatic.com *.gravatar.com",
+			"img-src":     "'self' *.googleapis.com maps.gstatic.com csi.gstatic.com *.gravatar.com *.myaxiom.ca",
 			"style-src":   "'self' 'unsafe-inline' fonts.googleapis.com maps.gstatic.com"
 		},
 		manifest: {
