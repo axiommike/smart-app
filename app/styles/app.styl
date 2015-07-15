@@ -61,6 +61,8 @@ $material-box
 	&-callout
 		@extend $fadeInUp
 		animation-delay 0.3s
+		&-link
+			color inherit
 		&-name
 			+media-query($breakpointMain)
 				font-size 1.7em
@@ -107,8 +109,6 @@ $material-box
 .brokerage
 	&-callout
 		padding 1em
-		&-link
-			color inherit
 		&-phone
 			display block
 		&-image
@@ -119,7 +119,13 @@ $material-box
 			margin-bottom 0.4em
 			border-radius initial
 			float none
-
+.agent
+	&-callout
+		&-link
+			transition $transitionTime $transitionFunction border-color
+			border-bottom 1px solid transparent
+			&:hover
+				border-color currentColor
 .header
 	&-action
 		margin 3em
