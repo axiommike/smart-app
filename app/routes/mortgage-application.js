@@ -183,62 +183,60 @@ export default Ember.Route.extend({
 		});
 	},
 	model: function(params) {
+		return this.store.find("application", params.application_id);
+	},
+	afterModel: function(resolvedModel, transition) {
+		let params = this.paramsFor("mortgage-application");
 		if (params["agentID"]) {
-			var agentResponse;
 			return this.store.find("agent", params.agentID).then((agent) => {
-				return this.store.find("application", params.application_id).then((application) => {
-					application.set("agent", agent);
-					return this.checkClientID(params, application);
-				});
-			}, (rejection) => {
+				resolvedModel.set("agent", agent);
+				return this.checkClientID(params, resolvedModel);
+			}).catch((rejection) => {
 				return ajax({
 					url: `http://dev.myaxiom.ca/api/agent/${params.agentID}`,
 					type: "GET",
 					dataType: "JSON"
 				}).then((agent) => {
-					agentResponse = agent.agent;
-					return this.store.find("application", params.application_id)
-				}).then((application) => {
-					let addedAgent = this.store.createRecord("agent", agentResponse);
-					application.set("agent", addedAgent);
+					let agentResponse = agent.agent,
+						addedAgent = this.store.createRecord("agent", agentResponse);
+					resolvedModel.set("agent", addedAgent);
 					return addedAgent.save().then(() => {
-						return this.checkClientID(params, application);
+						return this.checkClientID(params, resolvedModel);
 					});
+				}).catch((serverRejection) => {
+					return Ember.RSVP.reject(serverRejection); // propogate the rejection
+				});
+			});
+		}
+		else if (params["brokerage"]) {
+			return this.store.find("brokerage", params.brokerage).then((resolvedBrokerage) => {
+				resolvedModel.set("brokerage", resolvedBrokerage);
+				return this.checkClientID(params, resolvedModel);
+			}).catch(() => {
+				return ajax({
+					url: `http://dev.myaxiom.ca/api/brokerage/${params.brokerage}`,
+					type: "GET",
+					dataType: "JSON"
+				}).then((brokerage) => {
+					if (brokerage["brokerage"]) {
+						let createdBrokerage = this.store.createRecord("brokerage", brokerage.brokerage);
+						return createdBrokerage.save().then((savedBrokerage) => {
+							resolvedModel.set("brokerage", savedBrokerage);
+							return resolvedModel.save().then((updatedApplication) => {
+								return this.checkClientID(params, updatedApplication);
+							});
+						});
+					}
+					return this.checkClientID(params, resolvedModel);
+				}).catch(() => {
+					return this.setDefaultBrokerage(resolvedModel, params);
 				});
 			});
 		}
 		else {
-			// this is only here for debugging purposes.  I don't think it makes sense to auto-populate client when we already know him/her from an existing application
-			return this.store.find("application", params.application_id).then((application) => {
-				if (params["brokerage"]) {
-					return this.store.find("brokerage", params.brokerage).then((resolvedBrokerage) => {
-						application.set("brokerage", resolvedBrokerage);
-						return this.checkClientID(params, application);
-					}).catch(() => {
-						return ajax({
-							url: `http://dev.myaxiom.ca/api/brokerage/${params.brokerage}`,
-							type: "GET",
-							dataType: "JSON"
-						}).then((brokerage) => {
-							if (brokerage["brokerage"]) {
-								let createdBrokerage = this.store.createRecord("brokerage", brokerage.brokerage);
-								return createdBrokerage.save().then((savedBrokerage) => {
-									application.set("brokerage", savedBrokerage);
-									return application.save().then((updatedApplication) => {
-										return this.checkClientID(params, updatedApplication);
-									});
-								});
-							}
-							return this.checkClientID(params, application);
-						}).catch(() => {
-							return this.setDefaultBrokerage(application, params);
-						});
-					});
-				}
-				else {
-					return this.setDefaultBrokerage(application, params);
-				}
-			});
+			if (!resolvedModel.get("agent") && !resolvedModel.get("brokerage")) {
+				return this.setDefaultBrokerage(resolvedModel, params);
+			}
 		}
 	},
 	actions: {
