@@ -204,7 +204,8 @@ export default Ember.Route.extend({
 						return this.checkClientID(params, resolvedModel);
 					});
 				}).catch((serverRejection) => {
-					return Ember.RSVP.reject(serverRejection); // propogate the rejection
+					return this.checkClientID(params, resolvedModel);
+					// return Ember.RSVP.reject(serverRejection); // propogate the rejection
 				});
 			});
 		}
