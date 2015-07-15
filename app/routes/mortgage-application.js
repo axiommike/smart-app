@@ -70,7 +70,7 @@ export default Ember.Route.extend({
 			// first, check the offline cache to see if the client is there; otherwise, fall back to the API
 			return this.store.find("applicant", params.cid).then((applicant) => {
 				application.set("applicant", applicant);
-				return application;
+				return application.save();
 			}, (rejection) => {
 				return ajax({
 					url: `http://dev.myaxiom.ca/api/applicant/?cid=${encodeURIComponent(params.cid)}`,
@@ -123,7 +123,7 @@ export default Ember.Route.extend({
 						let addedApplicant = this.store.createRecord("applicant", applicant.applicant);
 						application.set("applicant", addedApplicant);
 						return addedApplicant.save().then(() => {
-							return application;
+							return application.save();
 						});
 					}
 					else {
@@ -143,13 +143,13 @@ export default Ember.Route.extend({
 									return Ember.RSVP.reject(requestFailure.jqXHR.responseJSON.message);
 								}
 							}
-						return application;
+						return application.save();
 					}
 				});
 			});
 		}
 		else {
-			return application;
+			return application.save();
 		}
 	},
 	setDefaultBrokerage: function (application, params) {
