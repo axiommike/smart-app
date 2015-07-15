@@ -116,30 +116,31 @@ export default Ember.Route.extend({
 		}
 		return applicantJSON;
 	},
-	model: function () {
+	afterModel: function (resolvedModel, transition) {
 		// send JSON to server
-		let model = this.get("currentModel"),
-			nestedJSON = model.toJSON();
-		if (model.get("coApplicants.length")) {
+		let nestedJSON = resolvedModel.toJSON();
+		if (resolvedModel.get("coApplicants.length")) {
 			let coApplicants = [];
-			model.get("coApplicants").forEach((applicant) => {
+			resolvedModel.get("coApplicants").forEach((applicant) => {
 				coApplicants.push(this.serializeApplicant(applicant));
 			});
 			nestedJSON.coApplicants = coApplicants;
 		}
-		if (model.get("applicant")) {
-			nestedJSON.applicant = this.serializeApplicant(model.get("applicant"));
+		if (resolvedModel.get("applicant")) {
+			nestedJSON.applicant = this.serializeApplicant(resolvedModel.get("applicant"));
 		}
 		console.dir(nestedJSON);
-		return new Ember.RSVP.Promise((resolve, reject) => {
-			return ajax({
-				type: "PUT",
-				dataType: "JSON",
-				url: "http://dev.myaxiom.ca/api/v1/",
-				data: JSON.stringify(nestedJSON)
-			}).then((completedApplication) => {
-				return completedApplication; // the model will be the completed application in this case (not the "application model"
-			});
+		return ajax({
+			type: "PUT",
+			dataType: "JSON",
+			url: "http://dev.myaxiom.ca/api/v1/",
+			data: JSON.stringify(nestedJSON)
+		}).then((completedApplication) => {
+			console.dir(completedApplication);
+			resolvedModel.set("isIncomplete", false);
+			return resolvedModel.save();
+		}).catch((error) => {
+			return Ember.RSVP.reject(error);
 		});
 	},
 	beforeModel: function() {

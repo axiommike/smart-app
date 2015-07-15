@@ -37,17 +37,6 @@ export default DS.Model.extend({
 	dependents: Ember.computed.alias("applicants.@each.dependents"),
 	hasDependents: Ember.computed.gt("dependentCount", 0),
 	propertyValue: DS.attr("number", {defaultValue: 0}),
-	downPaymentPercentage: Ember.computed("propertyValue", "downPayment", function() {
-		if (this.get("downPayment") > this.get("propertyValue")) {
-			return 1;
-		}
-		else if (this.get("downPayment") > 0 && this.get("propertyValue") > 0) {
-			return this.get("downPayment") / this.get("propertyValue");
-		}
-		else {
-			return 0;
-		}
-	}),
 	type: DS.attr("string"),
 	isPurchase: Ember.computed.equal("type", "purchase"),
 	source: DS.attr("string"),
@@ -56,6 +45,9 @@ export default DS.Model.extend({
 	referredByClient: Ember.computed.equal("source", "past-client"),
 	referredBy: DS.attr("string"),
 	downPayment: DS.attr("number"),
+	downPaymentSource: DS.attr("string"),
+	downPaymentExplanation: DS.attr("string"),
+	isOtherDownPaymentSource: Ember.computed.equal("downPaymentSource", "other"),
 	referredByChanged: function() {
 		if (!Ember.isBlank(this.get("referredBy"))) {
 			this.set("comment", "Referred by " + this.get("referredBy") + ".\n\n");

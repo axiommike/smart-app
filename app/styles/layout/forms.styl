@@ -8,7 +8,7 @@
 	Created on 2014-12-23 by PhpStorm
 */
 $inputSuccessColour ?= #00cc1c
-$inputErrorColour ?= #dc0000
+$inputErrorColour ?= #dc5b20
 
 form
 	margin 2em
@@ -22,7 +22,8 @@ button
 		color $inputErrorColour
 		display inline-block
 		font-weight bold
-		@extend $shake
+		@extend $pulse
+		animation-duration 0.3s
 $textInput
 	max-width 100%
 	border-width 0 0 $borderWidth 0
