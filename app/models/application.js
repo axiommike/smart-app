@@ -2,6 +2,7 @@ import DS from "ember-data";
 import Ember from "ember";
 
 export default DS.Model.extend({
+	applicationID: DS.attr("string"),
 	agent: DS.belongsTo("agent", {async: true}),
 	brokerage: DS.belongsTo("brokerage", {async: true}), /* When agent isn't set, this defaults to 2 - axiom */
 	applicant: DS.belongsTo("applicant"),

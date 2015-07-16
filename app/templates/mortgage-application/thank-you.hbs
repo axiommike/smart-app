@@ -4,7 +4,7 @@
 	</header>
 
 	<article class="thank-you-details">
-		<p>Your application has been submitted with an <code>id</code> or {{id}}.  Please <a href="http://mail.google.com">check your e-mail for a confirmation of receipt</a>.</p>
+		<p>Your application has been submitted with an application <code>id</code> of {{model.applicationID}}.  Please <a href="http://mail.google.com">check your e-mail for a confirmation of receipt</a>.</p>
 	</article>
 	{{#liquid-if model.isIncomplete}}
 		<button {{action "completeFullApp"}}>Actually, I'd like to complete full app</button>

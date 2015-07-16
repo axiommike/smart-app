@@ -137,6 +137,10 @@ export default Ember.Route.extend({
 			data: JSON.stringify(nestedJSON)
 		}).then((completedApplication) => {
 			console.dir(completedApplication);
+			resolvedModel.setProperties({
+				isIncomplete: false,
+				applicationID: completedApplication.application._bean_data.appid
+			});
 			resolvedModel.set("isIncomplete", false);
 			return resolvedModel.save();
 		}).catch((error) => {
