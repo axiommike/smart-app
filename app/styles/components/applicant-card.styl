@@ -18,6 +18,10 @@ $applicantCardMaxWidth ?= 40em
 		display flex
 		+media-query($breakpointMain)
 			display block
+	+media-query($breakpointMain)
+		max-width inherit
+		&s &, &s &-card
+			display block
 	&-card
 		position relative
 		&-relationship
@@ -41,6 +45,10 @@ $applicantCardMaxWidth ?= 40em
 				opacity 0.6
 				@extend $icomoon
 		&.primary-applicant
+			.applicant-card-role
+				position absolute
+				top 0
+				right 0
 			.applicant-card-full-name
 				text-indent 3em
 				display inline-block

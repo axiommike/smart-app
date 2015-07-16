@@ -251,7 +251,7 @@ export default Ember.Route.extend({
 			console.log(`Triggered add employment master`);
 		},
 		addApplicantMaster: function() {
-			this.addApplicant(this.get("currentModel.applicants"), "New Co-Applicant");
+			this.addApplicant(this.get("currentModel.coApplicants"), "New Co-Applicant");
 		},
 		addAddressMaster: function(applicant) {
 			let addedAddress = this.store.createRecord("address");
@@ -270,6 +270,16 @@ export default Ember.Route.extend({
 					}
 				});
 			});
+			let vehiclesDeleted = coApplicant.get("vehicles").then((vehicleRecords) => {
+				vehicleRecords.forEach((vehicle) => {
+					vehicle.destroyRecord();
+				});
+			});
+			let addressesDeleted = coApplicant.get("previousAddresses").then((previousAddressRecords) => {
+				previousAddressRecords.forEach((address) => {
+					address.destroyRecord();
+				});
+			});
 			let propertiesDeleted = coApplicant.get("properties").then((propertyRecords) => {
 				propertyRecords.forEach((property) => {
 					property.destroyRecord();
@@ -285,7 +295,9 @@ export default Ember.Route.extend({
 					employment.destroyRecord();
 				});
 			});
-			return Ember.RSVP.all([employmentDeleted, incomeDeleted, propertiesDeleted, assetsDeleted]).then((resolvedPromises)=> coApplicant.destroyRecord());
+			return Ember.RSVP.all([employmentDeleted, vehiclesDeleted, addressesDeleted, incomeDeleted, propertiesDeleted, assetsDeleted]).then((resolvedPromises) => {
+				return coApplicant.save().then((savedCoApplicant) => {return savedCoApplicant.destroyRecord()});
+			});
 		},
 		addPropertyMaster: function(applicant) {
 			this.addProperty(applicant, false);
