@@ -12,12 +12,10 @@ Router.map(function () {
 	this.route("mortgage-application", {path: "/mortgage-application/:application_id"}, function () {
 		this.route("basic-information");
 		this.route("applicants");
-		this.route("employment");
 		this.route("summary");
 		this.route("assets");
 		this.route("thank-you");
 		this.route("liabilities");
-		this.route("income");
 	});
 });
 

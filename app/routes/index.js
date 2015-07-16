@@ -2,7 +2,7 @@ import Ember from "ember";
 
 export default Ember.Route.extend({
 	beforeModel: function() {
-		let mortgageController = this.controllerFor("mortgage-application.index");
-		mortgageController.set("currentStep", 0);
+		let params = this.paramsFor("index");
+		this.transitionTo("apply", {queryParams: params});
 	}
 });
