@@ -46,6 +46,8 @@ $material-box
 		&-container
 			margin 2em
 .asset, .liability, .applicant-card, .income, .historical-employment, .applicant-card-finances-total
+	& + &
+		@extend $normal-margin-top
 	@extend $fadeIn
 
 .liabilities, .assets, .properties, .employment

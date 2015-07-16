@@ -75,6 +75,16 @@
 			{{currency-input value=asset.value placeholder="Asset Value" min="0" step="100"}}
 		{{/form-field}}
 	{{/if}}
+	{{#if onRemove}}
+		<button class="remove-button" {{action "remove"}}>
+				Remove
+			{{#if asset.type}}
+				{{asset.type}}
+			{{else}}
+				Asset
+			{{/if}}
+		</button>
+	{{/if}}
 {{else}}
 	<div class="row">
 		<div class="column">

@@ -13,6 +13,9 @@ export default Ember.Component.extend(EditableMixin, {
 	caption: null,
 	assets: Ember.A(),
 	type: null,
+	typeName: Ember.computed("type", function() {
+		return this.get("type") ? Ember.String.capitalize(this.get("type")) : "Asset";
+	}),
 	filteredAssets: Ember.computed.filter("assets", function(asset) {
 		return this.get("type") ? asset.get("type") === this.get("type") : true;
 	}),

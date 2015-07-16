@@ -57,6 +57,16 @@
 				{{input type="text" value=liability.creditCardType placeholder="Bank Name/Mastercard, Visa"}}
 			{{/form-field}}
 		{{/if}}
+		{{#if onRemove}}
+			<button class="remove-button" {{action "remove"}}>
+				Remove
+				{{#if liability.type}}
+					{{liability.type}}
+				{{else}}
+					Liability
+				{{/if}}
+			</button>
+		{{/if}}
 	{{else}}
 		<div class="row">
 			<div class="column">
