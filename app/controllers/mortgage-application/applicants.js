@@ -28,7 +28,13 @@ export default Ember.Controller.extend({
 		copyAddresses: function(applicant) {
 			console.log("copy addresses triggered");
 			let primaryApplicantAddresses = this.get("model.applicant.previousAddresses");
-			applicant.get("previousAddresses").pushObjects(primaryApplicantAddresses); // this fails because currentAddress is a function of currentProperty, and currentProperty is read-only
+			applicant.get("previousAddresses").pushObjects(primaryApplicantAddresses);
+			applicant.set("currentAddress", this.get("model.applicant.currentAddress"));
+		},
+		unlinkAddresses: function(applicant, previousCurrentAddress) {
+			let primaryApplicantAddresses = this.get("model.applicant.previousAddresses");
+			applicant.get("previousAddresses").removeObjects(primaryApplicantAddresses);
+			applicant.set("currentAddress", previousCurrentAddress);
 		},
 		removeApplicant: function(applicant) {
 			this.send("removeApplicantMaster", applicant);

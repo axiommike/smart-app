@@ -14,6 +14,9 @@ export default Ember.Component.extend(EditableMixin, {
 	onAddEmployment: null,
 	onRemoveApplicant: null,
 	onCopyAddresses: null,
+	onUnlinkAddresses: null,
+	isLinked: false, /* Whether the addresses are linked to the primary applicant */
+	previousCurrentAddress: null, /* This is needed for when we "unlink" addresses with the primary applicant */
 	onAddAddress: null,
 	onAddAsset: null,
 	onRemoveAsset: null,
@@ -63,7 +66,13 @@ export default Ember.Component.extend(EditableMixin, {
 			this.sendAction("onAddAsset", this.get("applicant"));
 		},
 		copyAddresses: function() {
+			this.toggleProperty("isLinked");
+			this.set("previousCurrentAddress", this.get("applicant.currentAddress"));
 			this.sendAction("onCopyAddresses", this.get("applicant"));
+		},
+		unlinkAddresses: function() {
+			this.toggleProperty("isLinked");
+			this.sendAction("onUnlinkAddresses", this.get("applicant"), this.get("previousCurrentAddress"))
 		},
 		removeAsset: function(asset) {
 			this.sendAction("onRemoveAsset", asset);

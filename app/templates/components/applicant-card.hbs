@@ -65,7 +65,11 @@
 		{{/form-section}}
 		{{#form-section title="Location" icon="pin"}}
 			{{#unless applicant.isPrimary}}
-				<button {{action "copyAddresses"}}>Same as primary applicant</button>
+				{{#if isLinked}}
+					<button {{action "unlinkAddresses"}}>Unlink Addresses</button>
+				{{else}}
+					<button {{action "copyAddresses"}}>Same as primary applicant</button>
+				{{/if}}
 			{{/unless}}
 			{{historical-addresses previousAddresses=applicant.previousAddresses currentAddress=applicant.currentAddress onAddAddress="addAddress"}}
 		{{/form-section}}
