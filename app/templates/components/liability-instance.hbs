@@ -34,7 +34,7 @@
 		{{else}}
 			{{#unless liability.isChildSupport}}
 				{{#form-field title="Outstanding Balance"}}
-					{{currency-input min="0" step="100" value=liability.outstandingBalance placeholder="$ Overdue"}}
+					{{currency-input min="0" step="any" value=liability.outstandingBalance placeholder="$ Overdue"}}
 				{{/form-field}}
 			{{/unless}}
 		{{/if}}
@@ -49,7 +49,7 @@
 
 		{{#unless liability.isCreditCard}}
 			{{#form-field title=paymentLabel}}
-				{{currency-input min="0" step="100" value=liability.payment placeholder="Payment" required=true title="Please indicate the monthly payment for this liability"}}
+				{{currency-input min="0" step="any" value=liability.payment placeholder="Payment" required=true title="Please indicate the monthly payment for this liability"}}
 			{{/form-field}}
 		{{/unless}}
 		{{#if liability.isCreditCard}}

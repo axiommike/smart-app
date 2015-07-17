@@ -5,7 +5,7 @@
 			{{view "select" content=assetTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.type required=true}}
 		{{/form-field}}
 		{{#form-field title="Asset Value"}}
-			{{currency-input value=asset.value placeholder="Asset Value" min="0" step="100"}}
+			{{currency-input value=asset.value placeholder="Asset Value" min="0" step="any"}}
 		{{/form-field}}
 	{{/unless}}
 
@@ -14,7 +14,7 @@
 			{{input type="text" value=asset.description placeholder="Item Description"}}
 		{{/form-field}}
 		{{#form-field title="Item Value"}}
-			{{currency-input value=asset.value placeholder="Item Value" min="0" step="100"}}
+			{{currency-input value=asset.value placeholder="Item Value" min="0" step="any"}}
 		{{/form-field}}
 	{{/if}}
 
@@ -24,7 +24,7 @@
 			<dd>Property</dd>
 		</dl>
 		{{#form-field title="Estimated Propery Value"}}
-			{{currency-input value=asset.value placeholder="Estimated Property Value" min="0" step="10000"}}
+			{{currency-input value=asset.value placeholder="Estimated Property Value" min="0" step="any"}}
 		{{/form-field}}
 	{{/if}}
 
@@ -33,7 +33,10 @@
 			{{view "select" content=savingsTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.description}}
 		{{/form-field}}
 		{{#form-field title="Account Balance"}}
-			{{currency-input value=asset.value placeholder="Balance" min="0" step="100"}}
+			{{currency-input value=asset.value placeholder="Balance" min="0" step="any"}}
+			{{#liquid-if asset.value}}
+				<span class="help"><strong>{{format-number asset.value style="currency" currency="CAD"}}</strong> invested</span>
+			{{/liquid-if}}
 		{{/form-field}}
 	{{/if}}
 
@@ -45,25 +48,37 @@
 
 	{{#if asset.isInvestment}}
 		{{#form-field title="Asset/Bond Investment Value"}}
-			{{currency-input value=asset.value placeholder="Amount Invested" min="0" step="100"}}
+			{{currency-input value=asset.value placeholder="Amount Invested" min="0" step="any"}}
+			{{#liquid-if asset.value}}
+				<span class="help"><strong>{{format-number asset.value style="currency" currency="CAD"}}</strong> invested</span>
+			{{/liquid-if}}
 		{{/form-field}}
 	{{/if}}
 
 	{{#if asset.isGIC}}
 		{{#form-field title="GIC Account Balance"}}
-			{{currency-input value=asset.value placeholder="Balance" min="0" step="100"}}
+			{{currency-input value=asset.value placeholder="Balance" min="0" step="any"}}
+			{{#liquid-if asset.value}}
+				<span class="help"><strong>{{format-number asset.value style="currency" currency="CAD"}}</strong> invested</span>
+			{{/liquid-if}}
 		{{/form-field}}
 	{{/if}}
 
 	{{#if asset.isRRSP}}
 		{{#form-field title="RRSP Account Balance"}}
-			{{currency-input value=asset.value placeholder="Balance" min="0" step="100"}}
+			{{currency-input value=asset.value placeholder="Balance" min="0" step="any"}}
+			{{#liquid-if asset.value}}
+				<span class="help"><strong>{{format-number asset.value style="currency" currency="CAD"}}</strong> invested</span>
+			{{/liquid-if}}
 		{{/form-field}}
 	{{/if}}
 
 	{{#if asset.isVehicle}}
 		{{#form-field title="Estimated Vehicle Value"}}
-			{{currency-input value=asset.value placeholder="Balance" min="0" step="100"}}
+			{{currency-input value=asset.value placeholder="Balance" min="0" step="any"}}
+			{{#liquid-if asset.value}}
+				<span class="help"><strong>{{format-number asset.value style="currency" currency="CAD"}}</strong> in approximate value</span>
+			{{/liquid-if}}
 		{{/form-field}}
 	{{/if}}
 
@@ -72,7 +87,10 @@
 			{{input type="text" value=asset.description placeholder="Asset Description" required=true}}
 		{{/form-field}}
 		{{#form-field title="Asset Value"}}
-			{{currency-input value=asset.value placeholder="Asset Value" min="0" step="100"}}
+			{{currency-input value=asset.value placeholder="Asset Value" min="0" step="any"}}
+			{{#liquid-if asset.value}}
+				<span class="help"><strong>{{format-number asset.value style="currency" currency="CAD"}}</strong> in value</span>
+			{{/liquid-if}}
 		{{/form-field}}
 	{{/if}}
 	{{#if onRemove}}

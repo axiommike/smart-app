@@ -70,7 +70,7 @@
 		{{#form-field title="Hourly Rate"}}
 			{{currency-input min=0 step="any" value=employment.hourlyRate required=true}}
 			{{#liquid-if employment.hourlyRate}}
-				<span>dollars per hour</span>
+				<span class="help"><strong>{{format-number employment.hourlyRate style="currency" currency="CAD"}}</strong> dollars per hour</span>
 			{{/liquid-if}}
 		{{/form-field}}
 	{{/liquid-if}}
@@ -81,7 +81,7 @@
 		{{/liquid-if}}
 		{{currency-input min="0" step="any" value=employment.income.value required=true}}
 		{{#liquid-if employment.income.value}}
-			<span>annually</span>
+			<span class="help"><strong>{{format-number employment.income.value style="currency" currency="CAD"}}</strong> annually</span>
 		{{/liquid-if}}
 	{{/form-field}}
 
