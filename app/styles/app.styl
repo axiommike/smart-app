@@ -45,11 +45,13 @@ $material-box
 		list-style-type decimal
 		&-container
 			margin 2em
-.asset, .liability, .applicant-card, .income, .historical-employment, .applicant-card-finances-total
+.asset, .liability, .applicant-card, .income, .historical-employment
 	& + &
 		@extend $normal-margin-top
 	@extend $fadeIn
 
+.applicant-card-finances-total
+	@extend $fadeIn
 .liabilities, .assets, .properties, .employment
 	@extend $normal-margin
 
@@ -137,6 +139,8 @@ $material-box
 	&.accepted
 		background rgb(0, 148, 255)
 	margin 3em auto
+	+media-query($breakpointMain)
+		margin $margin
 	max-width 75em
 	background rgb(255, 136, 0)
 	padding 1em
