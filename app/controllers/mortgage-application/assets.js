@@ -2,6 +2,18 @@ import Ember from "ember";
 
 export default Ember.Controller.extend({
 	ownsCurrentResidence: false,
+	ownsCurrentResidenceToggled: function() {
+		let currentProperty = this.get("model.applicant.currentProperty"),
+			properties = this.get("model.applicant.properties");
+		properties.then(() => {
+			console.dir(`Ownscurrentresidence is ${this.get("ownsCurrentResidence")} and mortgage is ${currentProperty.get("mortgage")}`);
+			if (this.get("ownsCurrentResidence") && !currentProperty.get("mortgage")) {
+				// recreate a mortgage for the property if the user navigates back to assets
+				let recreatedMortgage = this.store.createRecord("liability", {type: "mortgage"});
+				currentProperty.set("mortgage", recreatedMortgage);
+			}
+		});
+	}.observes("ownsCurrentResidence"),
 	ownsOtherRealEstate: false,
 	otherPropertiesToggled: function() {
 		if (this.get("ownsOtherRealEstate") && this.get("model.applicant.otherProperties.length") === 0) {
@@ -82,11 +94,34 @@ export default Ember.Controller.extend({
 			if (this.get("ownsCurrentResidence")) {
 				this.send("saveProperties", this.get("model.applicant.currentProperties"));
 			}
+			else {
+				// remove the current property's mortgage
+				let mortgage = this.get("model.applicant.currentProperty.mortgage");
+				if (mortgage) {
+					mortgage.then((resolvedMortgage) => {
+						return resolvedMortgage.destroyRecord().then(() => {
+							return this.get("model.applicant.currentProperty").save();
+						});
+					});
+				}
+			}
 			if (this.get("ownsOtherRealEstate")) {
 				this.send("saveProperties", this.get("model.applicant.otherProperties"));
 			}
+			else {
+				this.get("model.applicant.otherProperties").forEach((property) => {
+					this.send("removePropertyMaster", property);
+				});
+			}
 			if (this.get("hasVehicles")) {
 				this.send("saveVehicles", this.get("model.applicant.vehicles"));
+			}
+			else if (this.get("model.applicant.vehicles.length")) {
+				this.get("model.applicant.vehicles").then((vehicles) => {
+					vehicles.forEach((vehicle) => {
+						this.send("removeVehicleMaster", vehicle);
+					});
+				});
 			}
 			this.get("model").save().then((application) => {
 				return application.get("applicant").save().then((savedApplicant) => {
