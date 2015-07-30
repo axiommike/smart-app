@@ -130,11 +130,24 @@ export default Ember.Controller.extend({
 		"Scotiabank",
 		"TD Canada Trust"
 	],
-	actions:     {
+	actions: {
 		sendIncomplete: function () {
-			let incompleteApplication = this.get("model");
+			let incompleteApplication = this.get("model"),
+				applicant = incompleteApplication.get("applicant");
 			incompleteApplication.set("isIncomplete", true);
-			this.get("model").save().then((application) => {
+			if (applicant.get("assets.length")) {
+				this.send("saveAssets");
+			}
+			if (applicant.get("income.length")) {
+				this.send("saveIncome");
+			}
+			if (applicant.get("properties.length")) {
+				this.send("saveProperties", this.get("model.applicant.properties"));
+			}
+			if (applicant.get("vehicles.length")) {
+				this.send("saveVehicles", this.get("model.applicant.vehicles"));
+			}
+			Ember.RSVP.all([applicant.save(), incompleteApplication.save()]).then(([applicant, application]) => {
 				this.transitionToRoute("mortgage-application.thank-you", application);
 			});
 		}
