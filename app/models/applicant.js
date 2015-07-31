@@ -43,20 +43,20 @@ export default DS.Model.extend(PersonableMixin, {
 	totalAddressHistory: Ember.computed("address.@each.tenureTotalYears", function() {
 		let addresses = this.get("addresses");
 		return addresses.reduce(function(previousValue, address) {
-			return previousValue + (address ? address.get("tenureTotalYears") : 0);
+			return parseInt(previousValue) + (address ? address.get("tenureTotalYears") : 0);
 		}, 0);
 	}),
 	maritalStatus: DS.attr("string"), /* Married, single, divorced */
 	totalAssets: function() {
 		let assets = this.get("assets");
 		return assets.reduce(function(previousValue, asset) {
-			return previousValue + (asset ? asset.get("value") : 0);
+			return parseInt(previousValue) + (asset ? asset.get("value") : 0);
 		}, 0);
 	}.property("assets.@each.value"),
 	totalLiabilities: function() { /* Total Yearly liabilities */
 		let liabilities = this.get("liabilities");
 		return liabilities.reduce(function(previousValue, liability) {
-			return previousValue + (liability ? liability.get("payment") : 0);
+			return parseInt(previousValue) + (liability ? liability.get("payment") : 0);
 		}, 0);
 	}.property("liabilities.@each.value"),
 	mortgages: Ember.computed.alias("properties.@each.mortgage"),
