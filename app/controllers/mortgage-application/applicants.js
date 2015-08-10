@@ -21,6 +21,7 @@ export default Ember.Controller.extend({
 		},
 		addIncome: function(applicant) {
 			this.send("addIncomeMaster", applicant);
+			return applicant.save();
 		},
 		removeIncome: function(income) {
 			this.send("removeIncomeMaster", income);

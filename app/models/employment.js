@@ -6,11 +6,27 @@ export default DS.Model.extend(TimeableMixin, {
 	type: DS.attr("string"),
 	employer: DS.belongsTo("company", {async: true}),
 	updateDescription: function() {
-		let description = [this.get("employer.name"), this.get("paymentFrequency"), this.get("occupation")].filter((property) => {
-			return !Ember.isBlank(property);
-		}).slice().join(" - ");
-		this.set("income.description", description);
-	}.observes("employer.name", "paymentFrequency", "occupation"),
+		let description = "";
+		const hasOccupation = !Ember.isBlank(this.get("occupation")),
+			hasEmployer = !Ember.isBlank(this.get("employer.name"));
+		if (hasOccupation) {
+			description += this.get("occupation");
+		}
+		else {
+			if (this.get("type")) {
+				description += `${Ember.String.capitalize(this.get("type"))} Job`
+			}
+			else {
+				description = "Full-time Job"; // we have to hard-code the default, because of async behaviour
+			}
+		}
+		if (hasEmployer) {
+			description += ` at ${this.get("employer.name")}`;
+		}
+		this.get("income").then((resolvedIncome) => {
+			resolvedIncome.set("description", description);
+		});
+	}.observes("employer.name", "occupation", "type"),
 	occupation: DS.attr("string"),
 	income: DS.belongsTo("income", {async: true}), /* Annual income ($) */
 	incomeChanged: function() {
