@@ -6,8 +6,8 @@ export default Ember.TextField.extend({
 	hasList: Ember.computed.notEmpty("datalist"),
 	datalist: null, /* Corresponds to the `datalist` attribute on the input */
 	size: Ember.computed("value.length", function() {
-	return this.get("value.length") > 0 ? this.get("value.length") : 1;
-}),
+		return this.get("value.length") > 0 ? this.get("value.length") : 1;
+	}),
 	didInsertElement: function() {
 		// check that the datalist element is there.  If it isn't, warn the programmer
 		if (this.get("hasList")) {

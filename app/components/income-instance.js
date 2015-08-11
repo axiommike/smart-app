@@ -27,6 +27,9 @@ export default Ember.Component.extend(EditableMixin, {
 	income: null,
 	onRemove: null,
 	flatList: false,
+	descriptionSize: Ember.computed("income.description.length", function() {
+		return this.get("income.description.length") > 0 ? this.get("income.description.length") : 1;
+	}),
 	isChildSupport: Ember.computed.equal("income.source", "Child Support Alimony"),
 	isInvestment: Ember.computed.equal("income.source", "Investment"),
 	isPension: Ember.computed.equal("income.source", "Pension"),

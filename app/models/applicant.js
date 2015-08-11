@@ -30,9 +30,10 @@ export default DS.Model.extend(PersonableMixin, {
 	employmentIncome: Ember.computed.filterBy("income", "source", "employment"),
 	extraIncome: Ember.computed.setDiff("income", "employmentIncome"),
 	totalIncome: Ember.computed("income.@each.value", function() {
-		let incomes = this.get("income");
-		return incomes.reduce(function(previousValue, income) {
-			return previousValue + parseInt(income.get("yearlyValue"));
+		let incomes = this.get("income"),
+			previousEmploymentIncomes = this.get("previousEmployment.@each.income");
+		return Ember.computed.setDiff(incomes, previousEmploymentIncomes).reduce(function(previousValue, income) {
+			return parseInt(previousValue) + parseInt(income.get("yearlyValue"));
 		}, 0);
 	}),
 	currentAddress: Ember.computed.alias("currentProperty.address"),
@@ -50,13 +51,13 @@ export default DS.Model.extend(PersonableMixin, {
 	totalAssets: function() {
 		let assets = this.get("assets");
 		return assets.reduce(function(previousValue, asset) {
-			return parseInt(previousValue) + (asset ? asset.get("value") : 0);
+			return parseInt(previousValue) + (asset ? parseInt(asset.get("value")) : 0);
 		}, 0);
 	}.property("assets.@each.value"),
 	totalLiabilities: function() { /* Total Yearly liabilities */
 		let liabilities = this.get("liabilities");
 		return liabilities.reduce(function(previousValue, liability) {
-			return parseInt(previousValue) + (liability ? liability.get("payment") : 0);
+			return parseInt(previousValue) + (liability ? parseInt(liability.get("payment")) : 0);
 		}, 0);
 	}.property("liabilities.@each.value"),
 	mortgages: Ember.computed.alias("properties.@each.mortgage"),

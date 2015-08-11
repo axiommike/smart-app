@@ -15,12 +15,14 @@
 		{{#form-field title="Income" class="column"}}
 			{{currency-input value=income.value}}
 			{{#if income.value}}
-				or
-				{{#if income.isYearly}}
-					<strong>{{format-number income.monthlyValue style="currency" currency="CAD"}}</strong> per month
-				{{else}}
-					<strong>{{format-number income.yearlyValue style="currency" currency="CAD"}}</strong> per year
-				{{/if}}
+				<span class="help">
+					or
+					{{#if income.isYearly}}
+						<strong>{{format-number income.monthlyValue style="currency" currency="CAD"}}</strong> per month
+					{{else}}
+						<strong>{{format-number income.yearlyValue style="currency" currency="CAD"}}</strong> per year
+					{{/if}}
+				</span>
 			{{/if}}
 		{{/form-field}}
 		{{#form-field title="Frequency" class="column"}}
@@ -29,7 +31,7 @@
 	</div>
 	<div class="row">
 		{{#form-field title="Description"}}
-			{{input type="text" required=income.isOther placeholder="Describe this income source" value=income.description size=income.description.length title="Please indicate the nature of this income source"}}
+			{{input type="text" required=income.isOther placeholder="Describe this income source" value=income.description size=descriptionSize title="Please indicate the nature of this income source"}}
 		{{/form-field}}
 	</div>
 {{else}}

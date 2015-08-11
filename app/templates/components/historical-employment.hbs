@@ -1,10 +1,10 @@
 {{#form-field title="Position"}}
-	{{input type="text" value=employment.occupation placeholder="Job Title" required=true title="Please indicate the job title for this employment record"}}
+	{{input type="text" value=employment.occupation placeholder="Job Title" required=true title="Please indicate the job title for this employment record" size=employment.occupation.length}}
 {{/form-field}}
 
 {{#liquid-unless employment.isSelfEmployed}}
 	{{#form-field title="Employer"}}
-		{{input type="text" value=employment.employer.name title="Please provide the employer for this position" required=true placeholder="Employer/Company Name"}}
+		{{input type="text" value=employment.employer.name title="Please provide the employer for this position" required=true placeholder="Employer/Company Name" size=employment.employer.name.length}}
 	{{/form-field}}
 {{/liquid-unless}}
 
