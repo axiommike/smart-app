@@ -16,9 +16,9 @@ export default Ember.Component.extend(EditableMixin, {
 	totalLiabilities: function() {
 		let assets = this.get("filteredLiabilities");
 		return assets.reduce(function(previousValue, liability) {
-			return parseInt(previousValue) + parseInt(liability.get("value"));
+			return parseInt(previousValue) + parseInt(liability.get("payment"));
 		}, 0);
-	}.property("filteredLiabilities.@each.value"),
+	}.property("filteredLiabilities.@each.payment"),
 	onAdd: null, /* Override method for adding a liability */
 	onRemove: null,
 	actions: {

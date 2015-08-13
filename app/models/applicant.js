@@ -28,11 +28,10 @@ export default DS.Model.extend(PersonableMixin, {
 	otherAssets: Ember.computed.filterBy("assets", "type", "other"),
 	income: DS.hasMany("income", {async: true}),
 	employmentIncome: Ember.computed.filterBy("income", "source", "employment"),
+	currentYearlyIncome: Ember.computed.setDiff("income", "previousEmployment.@each.income"),
 	extraIncome: Ember.computed.setDiff("income", "employmentIncome"),
-	totalIncome: Ember.computed("income.@each.value", function() {
-		let incomes = this.get("income"),
-			previousEmploymentIncomes = this.get("previousEmployment.@each.income");
-		return Ember.computed.setDiff(incomes, previousEmploymentIncomes).reduce(function(previousValue, income) {
+	totalIncome: Ember.computed("currentYearlyIncome.@each.value", function() {
+		return this.get("currentYearlyIncome").reduce(function(previousValue, income) {
 			return parseInt(previousValue) + parseInt(income.get("yearlyValue"));
 		}, 0);
 	}),
@@ -59,7 +58,7 @@ export default DS.Model.extend(PersonableMixin, {
 		return liabilities.reduce(function(previousValue, liability) {
 			return parseInt(previousValue) + (liability ? parseInt(liability.get("payment")) : 0);
 		}, 0);
-	}.property("liabilities.@each.value"),
+	}.property("liabilities.@each.payment"),
 	mortgages: Ember.computed.alias("properties.@each.mortgage"),
 	properties: DS.hasMany("property", {async: true}),
 	isPrimary: DS.attr("boolean"),
