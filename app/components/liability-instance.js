@@ -5,7 +5,10 @@ export default Ember.Component.extend(EditableMixin, {
 	properties: Ember.A(), /* Should resolve to the list of all added properties */
 	creditCardTypes: [
 		{label: "VISA", value: "visa"},
-		{label: "Mastercard", value: "mastercard"}
+		{label: "Mastercard", value: "mastercard"},
+		{label: "Amex", value: "amex"},
+		{label: "Store Card", value: "store card"},
+		{label: "Other", value: "other"}
 	],
 	liabilityTypes: [
 		{label: "Credit Card", value: "credit-card"},

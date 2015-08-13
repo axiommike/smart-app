@@ -36,6 +36,8 @@ export default Ember.Component.extend(EditableMixin, {
 		{label: "Part-Time", value: "part-time"},
 		{label: "Self-Employed", value: "self-employed"},
 		{label: "Pension", value: "pension"},
+		{label: "Retired", value: "retired"},
+		{label: "Student", value: "student"},
 		{label: "Other", value: "other"} /* Seasonal, etc. */
 	],
 	businessTypes: [
