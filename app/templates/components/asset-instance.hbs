@@ -110,7 +110,7 @@
 				<a {{action "toggleEditing"}} class="editable-link">
 					<span class="asset-type">
 						{{#if asset.description}}
-							<em class="asset-description">{{income.description}}</em>
+							<em class="asset-description">{{asset.description}}</em>
 						{{else}}
 							<em class="asset-type-type">
 								{{#if asset.type}}
@@ -132,7 +132,7 @@
 								Asset
 							{{/if}}
 							{{else}}
-								{{accessible-icon icon="cross" title="Remove Extra Income"}}
+								{{accessible-icon icon="cross" title="Remove Asset"}}
 							{{/liquid-if}}
 						</button>
 					</div>

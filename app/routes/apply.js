@@ -81,6 +81,9 @@ export default Ember.Route.extend({
 		let primaryApplicantPromise = this.addApplicant(true),
 			emptyApplication = this.store.createRecord("application"),
 			params = this.paramsFor("apply");
+		if (!params.agentID && !params.brokerage) {
+			params.brokerage = 2;
+		}
 		return primaryApplicantPromise.then((primaryApplicant) => {
 			emptyApplication.set("applicant", primaryApplicant);
 			return emptyApplication.save().then((savedApplication) => {

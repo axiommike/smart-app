@@ -28,7 +28,10 @@
 			{{/form-field}}
 			<div class="row">
 				{{#form-field title="Approximate Mortgage Balance" class="column"}}
-					{{currency-input min="0" step="any" value=liability.outstandingBalance placeholder="$ Overdue" required=true title="Please indicate the remaining balance of the mortgage"}}
+					{{currency-input min="0" step="any" value=liability.outstandingBalance placeholder="$ Remaining" required=true title="Please indicate the remaining balance of the mortgage"}}
+					{{#liquid-if liability.outstandingBalance}}
+						<span class="help"><strong>{{format-number liability.outstandingBalance style="currency" currency="CAD"}}</strong> remaining</span>
+					{{/liquid-if}}
 				{{/form-field}}
 				{{#form-field title="Payment Frequency" class="column"}}
 					{{view "select" content=paymentFrequencies value=liability.paymentFrequency}}
@@ -39,6 +42,9 @@
 				{{#form-field title="Outstanding Balance"}}
 					{{currency-input min="0" step="any" value=liability.outstandingBalance placeholder="$ Overdue"}}
 				{{/form-field}}
+				{{#liquid-if liability.outstandingBalance}}
+					<span class="help"><strong>{{format-number liability.outstandingBalance style="currency" currency="CAD"}}</strong> remaining</span>
+				{{/liquid-if}}
 			{{/unless}}
 		{{/if}}
 		{{#if liability.isLineOfCredit}}
