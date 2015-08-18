@@ -22,7 +22,7 @@ export default Ember.Component.extend(EditableMixin, {
 		"Yearly",
 		"Monthly"
 	],
-	showApplicant: true,
+	showApplicant: false,
 	pensionType: null,
 	income: null,
 	onRemove: null,

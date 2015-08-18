@@ -10,6 +10,7 @@ export default Ember.Component.extend(EditableMixin, {
 		{value: "appraised", "label": "Appraised"}
 	],
 	title: null,
+	showApplicant: false,
 	caption: null,
 	assets: Ember.A(),
 	type: null,

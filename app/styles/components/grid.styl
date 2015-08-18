@@ -15,6 +15,9 @@ $rowPadding ?= 1em
 $gridResponsive ?= true
 $flexGrid ?= true
 
+if $flexGrid
+	$autoWidth
+		flex inherit
 $row
 	gs($gridStyle) // default: fluid
 
@@ -40,6 +43,9 @@ $column
 
 .column
 	@extend $column
+	if $flexGrid
+		&.auto, &-align-middle.auto
+			@extend $autoWidth
 	&-align-middle
 		@extend $column
 		vertical-align middle
@@ -111,7 +117,8 @@ for column in (1..$columns)
 		if column < nestedColumn
 			.{int-to-word(column)}-{getEnglishDenominator(column, int-to-word(nestedColumn))}
 				if $flexGrid
-					flex inherit
+					&.column, &.column-align-middle
+						@extend $autoWidth
 				$width = percent(column, nestedColumn)
 				+cache("w" + $width)
 					width $width

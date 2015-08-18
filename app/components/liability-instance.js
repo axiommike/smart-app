@@ -33,6 +33,7 @@ export default Ember.Component.extend(EditableMixin, {
 	],
 	tagName: "liability-instance",
 	classNameBindings: [":liability-instance", "liability.type"],
+	showApplicant: false,
 	liability: null,
 	paymentLabel: Ember.computed("liability.paymentFrequency", function() {
 		return Ember.String.capitalize(this.get("liability.paymentFrequency")) + " Payment";

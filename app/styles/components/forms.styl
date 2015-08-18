@@ -37,6 +37,8 @@ $formField
 			display inherit
 	&-section
 		@extend $formSection
+		+media-query($breakpointMain)
+			padding initial
 		& &
 			margin 0 ($formFieldPadding * -1)
 		&-title

@@ -14,7 +14,7 @@
 					{{on-off-switch checked=ownsOtherRealEstate id="do-you-own-any-other-real-estate?"}}
 				{{/form-field}}
 				{{#liquid-if ownsOtherRealEstate}}
-					{{property-table properties=model.applicant.otherProperties onAdd="addProperty" title="List of all other Properties" caption="Other Properties"}}
+					{{property-table properties=model.applicant.otherProperties onAdd="addProperty" title="List of all other Properties" caption="Other Properties" addressType="Other"}}
 				{{/liquid-if}}
 			</li>
 			<li class="form-step">

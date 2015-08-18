@@ -16,11 +16,11 @@
 			<div class="row">
 				<section class="applicant-summary-joint-assets column">
 					<h2 class="applicant-summary-title"><sup class="applicant-summary-title-type">Joint</sup> Assets</h2>
-					{{asset-table assets=application.assets isEditable=true onAdd="addAsset" onRemove="removeAsset"}}
+					{{asset-table assets=application.assets isEditable=true onAdd="addAsset" onRemove="removeAsset" showApplicant=hasCoApplicants}}
 				</section>
 				<section class="applicant-summary-joint-liabilities column">
 					<h2 class="applicant-summary-title"><sup class="applicant-summary-title-type">Joint</sup> Liabilities</h2>
-					{{liability-table liabilities=application.liabilities isEditable=true onAdd="addLiability" onRemove="removeLiability"}}
+					{{liability-table liabilities=application.liabilities isEditable=true onAdd="addLiability" onRemove="removeLiability" showApplicant=hasCoApplicants}}
 				</section>
 			</div>
 		</section>

@@ -37,6 +37,7 @@ export default Ember.Controller.extend({
 		},
 		removeLiability: function(liability) {
 			this.send("removeLiabilityMaster", liability);
+			return this.get("model.applicant").save();
 		},
 		nextStep: function() {
 			this.send("saveLiabilities");

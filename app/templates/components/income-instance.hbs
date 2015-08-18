@@ -38,23 +38,21 @@
 	<div class="row">
 		<div class="column">
 			<div class="row">
-				<div class="column">
-					<a {{action "toggleEditing"}} class="editable-link">
-						<span class="income-source">
-							{{#if income.description}}
-								<em class="income-description">{{income.description}}</em>
-							{{else}}
-								<em class="income-source-type">
-									{{#if income.source}}
-										{{income.source}}
-									{{else}}
-										Other income source
-									{{/if}}
-								</em>
-							{{/if}}
-						</span>
-					</a>
-				</div>
+				<a {{action "toggleEditing"}} class="editable-link">
+					<span class="income-source">
+						{{#if income.description}}
+							<em class="income-description">{{income.description}}</em>
+						{{else}}
+							<em class="income-source-type">
+								{{#if income.source}}
+									{{income.source}}
+								{{else}}
+									Other income source
+								{{/if}}
+							</em>
+						{{/if}}
+					</span>
+				</a>
 				{{#if onRemove}}
 					<div class="column actions">
 						<button {{bind-attr class="isEditing:remove-button:button-plain-warning"}} {{action "remove"}}>
@@ -68,15 +66,15 @@
 				{{/if}}
 			</div>
 		</div>
-		{{#if showApplicant}}
+		{{#liquid-if showApplicant}}
 			{{#if income.applicant.hasName}}
-				<div class="column">
-				<span class="income-applicant">
-					{{income.applicant.fullName}}
-				</span>
+				<div class="column income-applicant-container">
+					<span class="income-applicant">
+						{{income.applicant.fullName}}
+					</span>
 				</div>
 			{{/if}}
-		{{/if}}
+		{{/liquid-if}}
 		<div class="column income-value table-subtotal">
 			<span class="income-value">{{format-number income.value style="currency" currency="CAD"}}</span>
 		</div>

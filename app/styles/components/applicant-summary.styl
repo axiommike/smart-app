@@ -33,7 +33,23 @@ Created on 04/05/2015 by PhpStorm
 				padding 0
 		&-assets
 			border-right 1px solid #E2E2E2
+application-summary
+	display block
 .application-summary
+	.liability, .income, .asset
+		&-applicant
+			&-container
+				+media-query($breakpointMain)
+					width auto !important
+					float left
+	.editable-link
+		+media-query($breakpointMain)
+			display inline-block !important
+			margin-right 1em
+	.actions
+		+media-query($breakpointMain)
+			width auto !important
+			display inline-block !important
 	.table-header
 		text-align right
 	income-table, liability-table, asset-table
@@ -41,3 +57,5 @@ Created on 04/05/2015 by PhpStorm
 			position absolute
 			top 0
 			right -1em
+			+media-query($breakpointMain)
+				right 0

@@ -85,21 +85,19 @@
 		<div class="row">
 			<div class="column">
 				<div class="row">
-					<div class="column">
-						<a class="editable-link" {{action "toggleEditing"}}>
-							{{#if liability.description}}
-								<span class="liability-description">{{liability.description}}</span>
-							{{else}}
-								<em class="liability-type">
-									{{#if liability.type}}
-										{{liability.type}}
-									{{else}}
-										Other Liability
-									{{/if}}
-								</em>
-							{{/if}}
-						</a>
-					</div>
+					<a class="editable-link" {{action "toggleEditing"}}>
+						{{#if liability.description}}
+							<span class="liability-description">{{liability.description}}</span>
+						{{else}}
+							<em class="liability-type">
+								{{#if liability.type}}
+									{{liability.type}}
+								{{else}}
+									Other Liability
+								{{/if}}
+							</em>
+						{{/if}}
+					</a>
 					{{#if onRemove}}
 						<div class="column actions">
 							<button {{bind-attr class="isEditing:remove-button:button-plain-warning"}} {{action "remove"}}>
@@ -113,13 +111,15 @@
 					{{/if}}
 				</div>
 			</div>
-			{{#if liability.applicant}}
-				<div class="column">
-					<span class="liability-applicant">{{liability.applicant.fullName}}</span>
-				</div>
-			{{/if}}
-			<div class="column">
-				<span class="liability-payment table-subtotal">{{format-number liability.payment style="currency" currency="CAD"}}</span>
+			{{#liquid-if showApplicant}}
+				{{#if liability.applicant}}
+					<div class="column liability-applicant-container">
+						<span class="liability-applicant">{{liability.applicant.fullName}}</span>
+					</div>
+				{{/if}}
+			{{/liquid-if}}
+			<div class="column liability-value table-subtotal">
+				<span class="liability-payment">{{format-number liability.payment style="currency" currency="CAD"}}</span>
 			</div>
 		</div>
 	{{/liquid-if}}

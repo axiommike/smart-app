@@ -30,6 +30,11 @@ $tableTransition ?= easing("in-quad") 0.1s background
 	@extend $table
 	&-header
 		padding 1em
+		.add-button
+			+media-query($breakpointMain)
+				float none
+				width 100%
+				margin 0
 	&-striped
 		tbody
 			tr

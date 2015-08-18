@@ -383,6 +383,7 @@ export default Ember.Route.extend({
 			let createdLiability = this.store.createRecord("liability", {type: type});
 			createdLiability.save().then((savedLiability) => {
 				applicant.get("liabilities").pushObject(savedLiability);
+				return applicant.save();
 			});
 		},
 		removeLiabilityMaster: function(liability) {

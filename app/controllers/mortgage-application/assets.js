@@ -65,7 +65,6 @@ export default Ember.Controller.extend({
 	actions: {
 		addProperty: function() {
 			this.send("addPropertyMaster", this.get("model.applicant"));
-			this.get("model.applicant").save();
 		},
 		removeProperty: function(property) {
 			this.send("removePropertyMaster", property);

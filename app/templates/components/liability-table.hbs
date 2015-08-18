@@ -5,7 +5,7 @@
 <ul class="liabilities">
 	{{#each filteredLiabilities key="@guid" as |liability|}}
 		<li {{bind-attr class=":liability liability.type"}}>
-			{{liability-instance liability=liability typeEditingDisabled=type isEditable=isEditable onRemove="removeLiability"}}
+			{{liability-instance liability=liability typeEditingDisabled=type isEditable=isEditable onRemove="removeLiability" showApplicant=showApplicant}}
 		</li>
 	{{else}}
 		<li>No liabilities found.  <a {{action "addLiability" title="Add a liability"}}>Add one</a></li>

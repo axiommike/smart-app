@@ -72,12 +72,16 @@ export default Ember.Route.extend({
 				var vehicleJSON = vehicle.toJSON();
 				if (vehicle.get("loan")) {
 					vehicle.get("loan").then((loan) => {
-						vehicleJSON.loan = loan.toJSON();
+						if (loan) {
+							vehicleJSON.loan = loan.toJSON();
+						}
 					});
 				}
 				if (vehicle.get("asset")) {
 					vehicle.get("asset").then((asset) => {
-						vehicleJSON.asset = asset.toJSON();
+						if (asset) {
+							vehicleJSON.asset = asset.toJSON();
+						}
 					});
 				}
 				applicantVehicles.push(vehicleJSON);
@@ -91,7 +95,9 @@ export default Ember.Route.extend({
 					var propertyJSON = property.toJSON();
 					if (property.get("mortgage")) {
 						property.get("mortgage").then((propertyMortgage) => {
-							propertyJSON.mortgage = propertyMortgage.toJSON();
+							if (propertyMortgage) {
+								propertyJSON.mortgage = propertyMortgage.toJSON();
+							}
 						});
 					}
 					if (property.get("address")) {
@@ -101,12 +107,16 @@ export default Ember.Route.extend({
 					}
 					if (property.get("asset")) {
 						property.get("asset").then((propertyAsset) => {
-							propertyJSON.asset = propertyAsset.toJSON();
+							if (propertyAsset) {
+								propertyJSON.asset = propertyAsset.toJSON();
+							}
 						});
 					}
 					if (property.get("lineOfCredit")) {
 						property.get("lineOfCredit").then((propertyLineOfCredit) => {
-							propertyJSON.lineOfCredit = propertyLineOfCredit.toJSON();
+							if (propertyLineOfCredit) {
+								propertyJSON.lineOfCredit = propertyLineOfCredit.toJSON();
+							}
 						});
 					}
 					applicantProperties.push(propertyJSON);

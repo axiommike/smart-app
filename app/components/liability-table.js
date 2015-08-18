@@ -5,6 +5,7 @@ export default Ember.Component.extend(EditableMixin, {
 	tagName: "liability-table",
 	classNameBindings: [":liability-table", "hasLiabilities"],
 	liabilities: Ember.A(),
+	showApplicant: false,
 	type: null,
 	typeName: Ember.computed("type", function() {
 		return this.get("type") ? this.get("type") : "Liability";

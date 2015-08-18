@@ -2,10 +2,12 @@ import Ember from "ember";
 
 export default Ember.Component.extend({
 	tagName: "property-table",
+	classNameBindings: [":property-table", "hasProperties"],
 	summary: null,
 	caption: null,
 	properties: Ember.A(),
 	property: null, /* A single property, meaning an array wasn't passed in */
+	addressType: null,
 	hasProperties: Ember.computed.notEmpty("properties"),
 	propertyCount: Ember.computed.alias("properties.length"),
 	totalValue: function() {

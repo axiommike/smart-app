@@ -53,12 +53,14 @@ textarea, input
 	+placeholder()
 		font-family $baseFontFamily
 		color luminosity($textColour) > 0.5 ? $inverseTextColour + 45 : $inverseTextColour - 45
-
+.remove-button
+	@extend .button-error
 .add-button, .remove-button
 	+media-query($breakpointMain)
 		display block
+		width 100%
 		float none
-		margin $margin
+		margin $margin 0
 	&:active
 		transform scale(1.05)
 .add-applicant

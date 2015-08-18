@@ -13,7 +13,7 @@
 <ul class="assets">
 	{{#each filteredAssets key="@guid" as |asset|}}
 		<li class="asset">
-			{{asset-instance asset=asset isEditable=isEditable onRemove="removeAsset"}}
+			{{asset-instance asset=asset isEditable=isEditable onRemove="removeAsset" showApplicant=showApplicant}}
 		</li>
 	{{else}}
 		<li>
