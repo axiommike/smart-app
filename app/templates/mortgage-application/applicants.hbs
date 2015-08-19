@@ -1,7 +1,7 @@
 {{#validatable-form action="nextStep"}}
 	<button {{action "addApplicant"}} class="add-button add-applicant">Add Co-Applicant</button>
 	<ul class="applicants">
-		{{#each model.applicants key="@guid" as |applicant|}}
+		{{#each model.applicants as |applicant|}}
 			<li {{bind-attr class=":applicant applicant.isPrimary:primary:co-applicant"}}>
 				{{applicant-card applicant=applicant isEditing=true
 				onRemoveApplicant="removeApplicant"

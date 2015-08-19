@@ -26,7 +26,7 @@
 		{{view "select" content=businessTypes optionValuePath="content.value" optionLabelPath="content.label" value=employment.employer.type required=true title="Please indicate the legal classification of your business"}}
 	{{/form-field}}
 	{{#form-field title="Are income taxes paid up to date?"}}
-		{{input type="checkbox" checked=incomeTaxesPaid title="Please indicate whether you have paid the most recent year of income taxes"}}
+		{{on-off-switch checked=incomeTaxesPaid title="Please indicate whether you have paid the most recent year of income taxes"}}
 	{{/form-field}}
 	{{#form-field title="How long?"}}
 		<label>{{input type="number" value=employment.tenureYears required=true placeholder="Years" min="0" step="1" title="Please indicate how many years you have owned this company"}} years</label>
@@ -90,7 +90,7 @@
 {{#liquid-if needsNOA}}
 	<div class="row distributed">
 		{{#form-section title="Last 2 Years' Line 150" icon="dollar"}}
-			{{#each noaValues key="@guid" as |year|}}
+			{{#each noaValues as |year|}}
 				{{#form-field title=year.year}}
 					{{currency-input min="0" step="any" value=year.value required=true placeholder="Yearly Income" title="Please indicate the filed income for this yearly assesment"}}
 				{{/form-field}}

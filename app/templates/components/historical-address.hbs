@@ -25,7 +25,7 @@
 	{{input type="number" value=address.tenureMonths placeholder="mths" min="0" max="12" step="1"}}
 	<label for = "tenure-months">months</label>
 	{{#liquid-if address.tenureTotalYears}}
-		Lived here for {{address.tenureTotalYears}} year(s)
+		<span class="help">Lived here for {{address.tenureTotalYears}} year(s)</span>
 	{{/liquid-if}}
 {{/form-field}}
 {{yield}}

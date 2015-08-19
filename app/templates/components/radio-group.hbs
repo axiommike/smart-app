@@ -1,4 +1,4 @@
-{{#each content key="@guid" as |option|}}
+{{#each content as |option|}}
 	{{radio-button content=option}}
 	{{#liquid-if option.label}}
 		<label {{bind-attr for=option.labelID}}>{{option.label}}</label>

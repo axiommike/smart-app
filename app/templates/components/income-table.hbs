@@ -8,7 +8,7 @@
 </header>
 
 <ul {{bind-attr class=":income :income-table flatList:flat-list"}}>
-	{{#each filteredIncome key="@guid" as |extraIncome|}}
+	{{#each filteredIncome as |extraIncome|}}
 		<li {{bind-attr class=":income extraIncome.source:extraIncome.source"}}>
 			{{income-instance income=extraIncome flatList=flatList isEditable=isEditable onRemove="removeIncome" showApplicant=showApplicant}}
 		</li>

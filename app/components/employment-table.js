@@ -21,9 +21,6 @@ export default Ember.Component.extend({
 	 * Automatically create a previous employment if the total tenure for all employment is less than 3 years
 	 */
 	autoCreateEmployment: function() {
-		if (this.get("currentEmployment.length") === 0) {
-			this.sendAction("onAddEmployment");
-		}
 		if (this.get("previousEmploymentRequired")) {
 			if (this.get("emptyEmployment.length") === 0) { // auto-create employment only if there are no pending historical employments with 0 as their total tenure
 				console.log(`Triggered auto-create on employment`);

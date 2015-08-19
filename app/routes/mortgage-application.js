@@ -24,6 +24,7 @@ export default Ember.Route.extend({
 	addProperty: function(applicant, isCurrent) {
 		let addedProperty = this.store.createRecord("property", {isCurrent: isCurrent}), addedPropertyMortgage = this.store.createRecord("liability", {type: "mortgage"}), addedPropertyAddress = this.store.createRecord("address", {isCurrent: isCurrent}), addedPropertyAsset = this.store.createRecord("asset", {type: "property"}), addedPropertyLineOfCredit = this.store.createRecord("liability", {type: "mortgage"});
 		addedProperty.setProperties({
+			valueType: "estimated",
 			mortgage: addedPropertyMortgage,
 			lineOfCredit: addedPropertyLineOfCredit,
 			address: addedPropertyAddress,

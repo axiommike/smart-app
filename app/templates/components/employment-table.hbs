@@ -1,5 +1,5 @@
 {{#form-section title="Current Employment"}}
-	{{#each currentEmployment key="@guid" as |currentEmploymentInstance|}}
+	{{#each currentEmployment as |currentEmploymentInstance|}}
 		{{historical-employment employment=currentEmploymentInstance onRemove=false}}
 	{{else}}
 		<span class="input-error">No current employment found.  Please ensure you have a minimum of <strong>{{minHistory}}</strong> years of employment history</span>
@@ -13,7 +13,7 @@
 			.</span>
 			<span>Total employment history: <strong>{{totalEmploymentTimespan}} years</strong></span>
 		{{/if}}
-		{{#each previousEmployment key="@guid" as |historicalEmployment|}}
+		{{#each previousEmployment as |historicalEmployment|}}
 			{{historical-employment employment=historicalEmployment onRemove="removeEmployment"}}
 		{{else}}
 			No previous employment provided.  <a {{action "addEmployment"}}>Add previous employment</a>

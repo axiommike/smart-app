@@ -9,7 +9,7 @@
 </header>
 
 <ul class="properties">
-	{{#each properties key="@guid" as |property|}}
+	{{#each properties as |property|}}
 		<li {{bind-attr class=":property-asset property.isRental:rental"}}>
 			{{#property-asset property=property showLabelPrefix=false addressType=addressType}}
 				<footer class="property-asset-actions">

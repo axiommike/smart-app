@@ -2,7 +2,7 @@
 	<button {{action "addApplicant"}} class="add-button add-applicant">Add Co-Applicant</button>
 	<article class="application-summary">
 		<section class="applicant-summary-personal-info">
-			{{#each application.applicants key="@guid" as |applicant|}}
+			{{#each application.applicants as |applicant|}}
 				{{applicant-card applicant=applicant isEditable=true onRemoveApplicant="removeApplicant"}}
 			{{else}}
 				<span class="error">Looks like you have no applicants... maybe you should <a {{action "addApplicant"}}>add one</a>.</span>

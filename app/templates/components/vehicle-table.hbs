@@ -3,7 +3,7 @@
 </header>
 
 <ul class="vehicles">
-	{{#each vehicles key="@guid" as |vehicle|}}
+	{{#each vehicles as |vehicle|}}
 		<li {{bind-attr class=":vehicle :vehicle-asset vehicle.make:has-make"}}>
 			{{vehicle-instance vehicle=vehicle}}
 			<button {{action "removeVehicle" vehicle}} class="remove-button">Remove Vehicle</button>

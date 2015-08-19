@@ -1,6 +1,6 @@
 {{#liquid-if tips.length}}
 	<ul class="tips-list">
-		{{#each enabledTips key="@guid" as |tip|}}
+		{{#each enabledTips as |tip|}}
 			<li class="tip">
 				{{#liquid-if tip.tooltip}}
 					{{tip.tooltip}}
