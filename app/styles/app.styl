@@ -27,8 +27,10 @@ $material-box
 	@extend $material-box
 
 .quick-application
-	+media-query($breakpointMain)
-		margin 2em
+	&.box
+		@extend $normal-margin-bottom
+		+media-query($breakpointMain)
+			margin 2em
 
 .form-step
 	& + &

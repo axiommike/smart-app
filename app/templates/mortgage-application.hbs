@@ -61,3 +61,18 @@
 <main role="main">
 	{{liquid-outlet}}
 </main>
+
+<footer role="contentinfo">
+	{{#if model.brokerage}}
+		{{brokerage-address brokerage=model.brokerage}}
+	{{else}}
+		{{#if model.agent.brokerage}}
+			{{brokerage-address brokerage=model.agent.brokerage}}
+		{{else}}
+			<small>Copyright <strong><a href="http://{{model.brokerage.website}}" class="brokerage-link" target="_blank">{{model.brokerage.name}}</a></strong> {{format-date now day="numeric" month="long" year="numeric"}}</small>
+		{{/if}}
+	{{/if}}
+	<aside class="tips" role="complementary">
+		<small class="tip">Having trouble viewing this application?  <a href="https://legacy.secure-mortgage-online.ca/wizard?agent={{model.agent.id}}&brokerage={{model.brokerage.id}}">Try our legacy application</a></small>
+	</aside>
+</footer>

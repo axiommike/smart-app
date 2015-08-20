@@ -8,7 +8,7 @@
 	Created on 2014-11-17 by PhpStorm
 */
 .container
-	box-sizing border-box
+	@extend $border-box
 header
 	&[role="banner"]
 		background rgb(0, 129, 255)
@@ -22,7 +22,7 @@ header
 		&[data-current-step="4"]
 			background #00A7C5
 		color white
-		display flex
+		@extend $flex
 		align-items center
 		flex-wrap wrap
 		justify-content space-between
@@ -36,6 +36,20 @@ header
 	for num in (6..1)
 		h{num}
 			@extend $margin-none
+footer
+	&[role="contentinfo"]
+		opacity 0.8
+		font-size 0.8em
+		@extend $normal-padding, $border-box, $text-align-center
+		background #E4E4E4
+		details
+			summary
+				cursor pointer
+		address
+			small
+				@extend $block
+			white-space nowrap
+
 .error
 	&-container
 		max-width 35em
@@ -51,7 +65,7 @@ header
 
 .thank-you
 	padding 4em
-	text-align center
+	@extend $text-align-center
 	&-header, &-details
 		margin-bottom 4em
 

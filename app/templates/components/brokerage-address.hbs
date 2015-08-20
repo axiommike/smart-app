@@ -1,0 +1,12 @@
+{{#if brokerage.address}}
+	<details>
+		<summary><small>Copyright {{format-date now day="numeric" month="long" year="numeric"}} <strong><a href="http://{{brokerage.website}}" class="brokerage-link" target="_blank">{{brokerage.name}}</a></strong></small></summary>
+		<address>
+			<small>{{brokerage.address.address}}</small>
+			<small>{{brokerage.address.city}}, {{brokerage.address.province}}</small>
+			<small>{{brokerage.address.postalCode}}</small>
+			<small>{{phone-number number=brokerage.phone}}</small>
+		</address>
+		{{yield}}
+	</details>
+{{/if}}

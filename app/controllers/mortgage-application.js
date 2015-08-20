@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
 		"Summary",
 		"Thank You"
 	],
+	now: new Date(),
 	isDefault: Ember.computed.equal("model.brokerage", 2),
 	agent: null,
 	cid: null, /* client ID -- named cid because of legacy reasons */
