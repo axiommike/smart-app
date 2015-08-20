@@ -59,10 +59,16 @@
 		{{#unless liability.isCreditCard}}
 			{{#form-field title=paymentLabel}}
 				{{currency-input min="0" step="any" value=liability.payment placeholder="Payment" required=true title="Please indicate the monthly payment for this liability"}}
+				{{#liquid-if liability.payment}}
+					<span class="help">Paying <strong>{{format-number liability.payment style="currency" currency="CAD"}}</strong> monthly</span>
+				{{/liquid-if}}
 			{{/form-field}}
 		{{else}}
 			{{#form-field title="Monthly Payment"}}
 				{{currency-input min="0" step="any" value=liability.payment placeholder="Payment" required=true title="Please indicate the monthly amount you are being charged for this credit card"}}
+				{{#liquid-if liability.payment}}
+					<span class="help">Paying <strong>{{format-number liability.payment style="currency" currency="CAD"}}</strong> monthly</span>
+				{{/liquid-if}}
 			{{/form-field}}
 			{{#form-field title="Credit Card Type"}}
 				{{view "select" content=creditCardTypes optionValuePath="content.value" optionLabelPath="content.label" value=liability.creditCardType required=true title="Please select a credit card type"}}

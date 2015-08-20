@@ -10,9 +10,10 @@ export default Ember.Controller.extend({
 		"Summary",
 		"Thank You"
 	],
-	agentID: null,
+	isDefault: Ember.computed.equal("model.brokerage", 2),
+	agent: null,
 	cid: null, /* client ID -- named cid because of legacy reasons */
-	queryParams: ["agentID", "cid", "brokerage"],
+	queryParams: ["agent", "cid", "brokerage"],
 	currentStep: 0,
 	realStep:    Ember.computed("currentStep", function () {
 		return this.get("currentStep") + 1;

@@ -7,6 +7,8 @@ var Router = Ember.Router.extend({
 
 Router.map(function () {
 	this.route("apply");
+	this.route("wizard"); // simple redirect to apply
+	this.route("agent"); // simple redirect to apply
 	this.route("apply", {path: "/apply/*catchall"});
 	this.route("apply", {path: "/mortgage-application"});
 	this.route("mortgage-application", {path: "/mortgage-application/:application_id"}, function () {

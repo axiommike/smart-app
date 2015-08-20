@@ -56,7 +56,7 @@ export default Ember.Route.extend({
 		addedApplicant.save();
 	},
 	queryParams: {
-		agentID: {
+		agent: {
 			refreshModel: true
 		},
 		cid: {
@@ -188,13 +188,13 @@ export default Ember.Route.extend({
 	},
 	afterModel: function(resolvedModel, transition) {
 		let params = this.paramsFor("mortgage-application");
-		if (params["agentID"]) {
-			return this.store.find("agent", params.agentID).then((agent) => {
+		if (params["agent"]) {
+			return this.store.find("agent", params.agent).then((agent) => {
 				resolvedModel.set("agent", agent);
 				return this.checkClientID(params, resolvedModel);
 			}).catch((rejection) => {
 				return ajax({
-					url: `http://dev.myaxiom.ca/api/agent/${params.agentID}`,
+					url: `http://dev.myaxiom.ca/api/agent/${params.agent}`,
 					type: "GET",
 					dataType: "JSON"
 				}).then((agent) => {

@@ -140,6 +140,8 @@ export default Ember.Route.extend({
 			nestedJSON.applicant = this.serializeApplicant(resolvedModel.get("applicant"));
 		}
 		console.dir(nestedJSON);
+		console.dir(nestedJSON.applicant.properties);
+		console.dir(JSON.stringify(nestedJSON));
 		return ajax({
 			type: "PUT",
 			dataType: "JSON",

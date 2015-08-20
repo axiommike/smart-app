@@ -2,7 +2,7 @@ import Ember from "ember";
 
 export default Ember.Route.extend({
 	queryParams: {
-		agentID: {
+		agent: {
 			refreshModel: true
 		},
 		cid: {
@@ -81,7 +81,7 @@ export default Ember.Route.extend({
 		let primaryApplicantPromise = this.addApplicant(true),
 			emptyApplication = this.store.createRecord("application"),
 			params = this.paramsFor("apply");
-		if (!params.agentID && !params.brokerage) {
+		if (!params.agent && !params.brokerage) {
 			params.brokerage = 2;
 		}
 		return primaryApplicantPromise.then((primaryApplicant) => {

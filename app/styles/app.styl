@@ -73,7 +73,6 @@ $material-box
 				font-size 1.7em
 		&-image
 			float right
-			margin 0 0 0 3em
 			border-radius 0.2em
 			max-height 6em
 			+media-query($breakpointMain)
@@ -126,6 +125,9 @@ $material-box
 			float none
 .agent
 	&-callout
+		&-image
+			+media-query($breakpointMainOpposite)
+				margin 0 0 0 3em
 		&-link
 			transition $transitionTime $transitionFunction border-color
 			border-bottom 1px solid transparent
