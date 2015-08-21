@@ -4,7 +4,7 @@
 		<meta charset = "utf-8">
 		<meta http-equiv = "X-UA-Compatible" content = "IE=edge">
 		<title>SmartApp</title>
-		<meta name = "description" content = "Axiom Mortgage Application">
+		<meta name = "description" content = "SmartApp Mortgage Application">
 		<meta name = "viewport" content = "width=device-width, initial-scale=1">
 
 		{{content-for "head"}}
@@ -15,6 +15,16 @@
 		{{content-for "head-footer"}}
 	</head>
 	<body>
+		<noscript>
+			<div role="alert">
+				<header>
+					<h1 class="announcement">Please Enable Javascript</h1>
+				</header>
+				<p>It looks like you've either disabled javascript in your current browser, or you're using an addon which blocks scripts from loading.</p>
+				<p>SmartApp relies heavily on client-side javascript, and as such, will not load without javascript.</p>
+				<p>Please try reloading with javascript enabled, or <a href="http://browsehappy.com/?locale=en" target="_browsehappy">try with another browser</a>.</p>
+			</div>
+		</noscript>
 		{{content-for "body"}}
 
 		<script src = "assets/vendor.js"></script>

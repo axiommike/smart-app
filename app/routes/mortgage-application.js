@@ -1,5 +1,6 @@
 import Ember from "ember";
 import ajax from "ic-ajax";
+import ENV from "../config/environment";
 
 export default Ember.Route.extend({
 	addEmployment: function(applicant, isCurrent) {
@@ -74,7 +75,7 @@ export default Ember.Route.extend({
 				return application.save();
 			}, (rejection) => {
 				return ajax({
-					url: `http://dev.myaxiom.ca/api/applicant/?cid=${encodeURIComponent(params.cid)}`,
+					url: `${ENV.apiURL}/applicant/?cid=${encodeURIComponent(params.cid)}`,
 					type: "GET",
 					dataType: "JSON"
 				}).then((applicant) => {
@@ -194,7 +195,7 @@ export default Ember.Route.extend({
 				return this.checkClientID(params, resolvedModel);
 			}).catch((rejection) => {
 				return ajax({
-					url: `http://dev.myaxiom.ca/api/agent/${params.agent}`,
+					url: `${ENV.apiURL}/agent/${params.agent}`,
 					type: "GET",
 					dataType: "JSON"
 				}).then((agent) => {
@@ -216,7 +217,7 @@ export default Ember.Route.extend({
 				return this.checkClientID(params, resolvedModel);
 			}).catch(() => {
 				return ajax({
-					url: `http://dev.myaxiom.ca/api/brokerage/${params.brokerage}`,
+					url: `${ENV.apiURL}/brokerage/${params.brokerage}`,
 					type: "GET",
 					dataType: "JSON"
 				}).then((brokerage) => {

@@ -1,5 +1,6 @@
 import Ember from "ember";
 import ajax from "ic-ajax";
+import ENV from "../../config/environment";
 
 export default Ember.Route.extend({
 	serializeApplicant: function (applicant) {
@@ -164,7 +165,7 @@ export default Ember.Route.extend({
 			return ajax({
 				type: "PUT",
 				dataType: "JSON",
-				url: "http://dev.myaxiom.ca/api/v1/",
+				url: `${ENV.apiURL}/v1/`,
 				data: JSON.stringify(nestedJSON)
 			}).then((completedApplication) => {
 				console.dir(completedApplication);

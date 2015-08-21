@@ -43,6 +43,7 @@ module.exports = function (environment) {
 		// ENV.APP.LOG_TRANSITIONS = true;
 		// ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
 		// ENV.APP.LOG_VIEW_LOOKUPS = true;
+		ENV.apiURL = "http://dev.myaxiom.ca/api"
 	}
 
 	if (environment === "test") {
@@ -55,10 +56,11 @@ module.exports = function (environment) {
 		ENV.APP.LOG_VIEW_LOOKUPS = false;
 
 		ENV.APP.rootElement = "#ember-testing";
+		ENV.apiURL = "http://dev.myaxiom.ca/api"
 	}
 
 	if (environment === "production") {
-
+		ENV.apiURL = "https://myaxiom.ca/api"
 	}
 
 	return ENV;
