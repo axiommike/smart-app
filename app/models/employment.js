@@ -3,7 +3,7 @@ import Ember from "ember";
 import TimeableMixin from "../mixins/timeable";
 
 export default DS.Model.extend(TimeableMixin, {
-	type: DS.attr("string"),
+	type: DS.attr("string", {defaultValue: "full-time"}),
 	employer: DS.belongsTo("company", {async: true}),
 	updateDescription: function() {
 		let description = "";
@@ -34,11 +34,13 @@ export default DS.Model.extend(TimeableMixin, {
 			let hourlyRate = parseInt(this.get("hourlyRate")), weeklyHours = parseInt(this.get("weeklyHours"));
 			if (hourlyRate && weeklyHours) {
 				let yearlySalary = (hourlyRate * weeklyHours) * 52.1775; // there are 52.1775 weeks in a year
-				this.set("income.value", yearlySalary);
+				this.get("income").then((resolvedIncome) => {
+					resolvedIncome.set("value", yearlySalary);
+				});
 			}
 		}
 	}.observes("hourlyRate", "weeklyHours"),
-	paymentFrequency: DS.attr("string"),
+	paymentFrequency: DS.attr("string", {defaultValue: "hourly"}),
 	isSelfEmployed: Ember.computed.equal("type", "self-employed"),
 	isCurrent: DS.attr("boolean", {defaultValue: false}),
 	isHourly: Ember.computed.equal("paymentFrequency", "hourly"),
