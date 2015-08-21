@@ -2,8 +2,9 @@ import Ember from "ember";
 import ajax from "ic-ajax";
 
 export default Ember.Route.extend({
-	serializeApplicant: function(applicant) {
-		let applicantJSON = applicant.toJSON();
+	serializeApplicant: function (applicant) {
+		let applicantJSON = applicant.toJSON(),
+			promises = [];
 		if (applicant.get("addresses.length")) {
 			let applicantAddresses = [];
 			applicant.get("addresses").forEach((address) => {
@@ -17,40 +18,45 @@ export default Ember.Route.extend({
 		}
 		if (applicant.get("employment.length")) {
 			let applicantEmployment = [];
-			applicant.get("employment").forEach((employment) => {
-				let employmentJSON = employment.toJSON();
-				if (employment.get("employer")) {
-					employment.get("employer").then((company) => {
-						var employmentCompany = company ? company.toJSON() : null;
-						if (company) {
-							if (company.get("address")) {
-								company.get("address").then((address) => {
-									if (address) {
-										employmentCompany.address = employment.get("employer.address").content.toJSON();
-									}
-								});
+			promises.push(applicant.get("employment").then((allEmployment) => {
+				allEmployment.forEach((employment) => {
+					let employmentJSON = employment.toJSON(),
+						employmentPromises = [];
+					if (employment.get("employer")) {
+						employmentPromises.push(employment.get("employer").then((company) => {
+							var employmentCompany = company ? company.toJSON() : null;
+							if (company) {
+								if (company.get("address")) {
+									company.get("address").then((address) => {
+										if (address) {
+											employmentCompany.address = employment.get("employer.address").content.toJSON();
+										}
+									});
+								}
 							}
-						}
-						employmentJSON.employer = employmentCompany;
-					});
-				}
-				if (employment.get("income")) {
-					employment.get("income").then((income) => {
-						if (income) {
-							employmentJSON.income = income.toJSON();
-						}
-					});
-				}
-				applicantEmployment.push(employmentJSON);
-			});
-			applicantJSON.employment = applicantEmployment;
+							employmentJSON.employer = employmentCompany;
+						}));
+					}
+					if (employment.get("income")) {
+						employmentPromises.push(employment.get("income").then((income) => {
+							if (income) {
+								employmentJSON.income = income.toJSON();
+							}
+						}));
+					}
+					applicantEmployment.push(employmentJSON);
+				});
+				applicantJSON.employment = applicantEmployment;
+			}));
 		}
 		if (applicant.get("liabilities.length")) {
-			let applicantLiabilities = [];
-			applicant.get("liabilities").forEach((liability) => {
-				applicantLiabilities.push(liability.toJSON());
-			});
-			applicantJSON.liabilities = applicantLiabilities;
+			promises.push(applicant.get("liabilities").then((allLiabilities) => {
+				let applicantLiabilities = [];
+				allLiabilities.forEach((liability) => {
+					applicantLiabilities.push(liability.toJSON());
+				});
+				applicantJSON.liabilities = applicantLiabilities;
+			}));
 		}
 		if (applicant.get("extraIncome.length")) {
 			let applicantExtraIncome = [];
@@ -60,37 +66,41 @@ export default Ember.Route.extend({
 			applicantJSON.extraIncome = applicantExtraIncome;
 		}
 		if (applicant.get("assets.length")) {
-			let applicantAssets = [];
-			applicant.get("assets").forEach((asset) => {
-				applicantAssets.push(asset.toJSON());
-			});
-			applicantJSON.assets = applicantAssets;
+			promises.push(applicant.get("assets").then((allAssets) => {
+				let applicantAssets = [];
+				allAssets.forEach((asset) => {
+					applicantAssets.push(asset.toJSON());
+				});
+				applicantJSON.assets = applicantAssets;
+			}));
 		}
 		if (applicant.get("vehicles.length")) {
-			let applicantVehicles = [];
-			applicant.get("vehicles").forEach((vehicle) => {
-				var vehicleJSON = vehicle.toJSON();
-				if (vehicle.get("loan")) {
-					vehicle.get("loan").then((loan) => {
-						if (loan) {
-							vehicleJSON.loan = loan.toJSON();
-						}
-					});
-				}
-				if (vehicle.get("asset")) {
-					vehicle.get("asset").then((asset) => {
-						if (asset) {
-							vehicleJSON.asset = asset.toJSON();
-						}
-					});
-				}
-				applicantVehicles.push(vehicleJSON);
-			});
-			applicantJSON.vehicleAssets = applicantVehicles;
+			promises.push(applicant.get("vehicles").then((allVehicles) => {
+				let applicantVehicles = [];
+				allVehicles.forEach((vehicle) => {
+					var vehicleJSON = vehicle.toJSON();
+					if (vehicle.get("loan")) {
+						vehicle.get("loan").then((loan) => {
+							if (loan) {
+								vehicleJSON.loan = loan.toJSON();
+							}
+						});
+					}
+					if (vehicle.get("asset")) {
+						vehicle.get("asset").then((asset) => {
+							if (asset) {
+								vehicleJSON.asset = asset.toJSON();
+							}
+						});
+					}
+					applicantVehicles.push(vehicleJSON);
+				});
+				applicantJSON.vehicleAssets = applicantVehicles;
+			}));
 		}
 		if (applicant.get("properties.length")) {
 			let applicantProperties = [];
-			applicant.get("properties").then((allProperties) => {
+			promises.push(applicant.get("properties").then((allProperties) => {
 				allProperties.forEach((property) => {
 					var propertyJSON = property.toJSON();
 					if (property.get("mortgage")) {
@@ -102,7 +112,9 @@ export default Ember.Route.extend({
 					}
 					if (property.get("address")) {
 						property.get("address").then((propertyAddress) => {
-							propertyJSON.address = propertyAddress.toJSON();
+							if (propertyAddress) {
+								propertyJSON.address = propertyAddress.toJSON();
+							}
 						});
 					}
 					if (property.get("asset")) {
@@ -122,44 +134,54 @@ export default Ember.Route.extend({
 					applicantProperties.push(propertyJSON);
 				});
 				applicantJSON.properties = applicantProperties;
-			});
+			}));
 		}
-		return applicantJSON;
+		return Ember.RSVP.all(promises).then(() => {
+			return applicantJSON;
+		});
 	},
 	afterModel: function (resolvedModel, transition) {
 		// send JSON to server
-		let nestedJSON = resolvedModel.toJSON();
+		let nestedJSON = resolvedModel.toJSON(),
+			applicantPromises = [];
 		if (resolvedModel.get("coApplicants.length")) {
-			let coApplicants = [];
+			nestedJSON.coApplicants = []; // reset the array
 			resolvedModel.get("coApplicants").forEach((applicant) => {
-				coApplicants.push(this.serializeApplicant(applicant));
+				applicantPromises.push(this.serializeApplicant(applicant).then((coApplicant) => {
+					return nestedJSON.coApplicants.push(coApplicant);
+				}));
 			});
-			nestedJSON.coApplicants = coApplicants;
 		}
 		if (resolvedModel.get("applicant")) {
-			nestedJSON.applicant = this.serializeApplicant(resolvedModel.get("applicant"));
+			applicantPromises.push(this.serializeApplicant(resolvedModel.get("applicant")).then((serializedApplicant) => {
+				return nestedJSON.applicant = serializedApplicant;
+			}));
 		}
-		console.dir(nestedJSON);
-		console.dir(nestedJSON.applicant.properties);
-		console.dir(JSON.stringify(nestedJSON));
-		return ajax({
-			type: "PUT",
-			dataType: "JSON",
-			url: "http://dev.myaxiom.ca/api/v1/",
-			data: JSON.stringify(nestedJSON)
-		}).then((completedApplication) => {
-			console.dir(completedApplication);
-			resolvedModel.setProperties({
-				isIncomplete: false,
-				applicationID: completedApplication.application._bean_data.appid
+		return Ember.RSVP.all(applicantPromises).then(() => {
+			console.dir(nestedJSON);
+			console.dir(nestedJSON.applicant.properties);
+			console.dir(JSON.stringify(nestedJSON));
+			return ajax({
+				type: "PUT",
+				dataType: "JSON",
+				url: "http://dev.myaxiom.ca/api/v1/",
+				data: JSON.stringify(nestedJSON)
+			}).then((completedApplication) => {
+				console.dir(completedApplication);
+				resolvedModel.setProperties({
+					isIncomplete: false,
+					applicationID: completedApplication.application._bean_data.appid
+				});
+				resolvedModel.set("isIncomplete", false);
+				return resolvedModel.save();
+			}).catch((error) => {
+				return Ember.RSVP.reject(error);
 			});
-			resolvedModel.set("isIncomplete", false);
-			return resolvedModel.save();
-		}).catch((error) => {
-			return Ember.RSVP.reject(error);
+		}).catch((reason) => {
+			return Ember.RSVP.reject(reason);
 		});
 	},
-	beforeModel: function() {
+	beforeModel: function () {
 		let mortgageController = this.controllerFor("mortgage-application");
 		mortgageController.set("currentStep", 5);
 	}
