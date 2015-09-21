@@ -377,9 +377,10 @@ export default Ember.Route.extend({
 			});
 		},
 		removeAssetMaster: function(asset) {
-			asset.destroyRecord().then((result) => {
-				console.log(`Successfully deleted asset ${result.get("id")}`);
-			});
+			let applicant = asset.get("applicant"),
+				applicantAssets = applicant.get("assets").then((applicantAssets) => {
+					applicantAssets.removeObject("asset");
+				});
 		},
 		addLiabilityMaster: function(applicant, type) {
 			let createdLiability = this.store.createRecord("liability", {type: type});

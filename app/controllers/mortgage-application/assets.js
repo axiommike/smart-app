@@ -108,8 +108,10 @@ export default Ember.Controller.extend({
 				this.send("saveProperties", this.get("model.applicant.otherProperties"));
 			}
 			else {
-				this.get("model.applicant.otherProperties").forEach((property) => {
-					this.send("removePropertyMaster", property);
+				this.get("model.applicant.properties").then((allApplicantProperties) => {
+					this.get("model.applicant.otherProperties").forEach((property) => {
+						this.send("removePropertyMaster", property);
+					});
 				});
 			}
 			if (this.get("hasVehicles")) {
