@@ -71,7 +71,6 @@ module.exports = function (environment) {
 	}
 
 	if (environment === "production") {
-		ENV.baseURL = "/application/";
 		ENV.apiURL = "https://myaxiom.ca/api"
 	}
 
