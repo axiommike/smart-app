@@ -2,11 +2,11 @@
 	{{partial "partials/toggle-edit-button"}}
 	<div class="row">
 		{{#form-field title="Source" class="column"}}
-			{{view "select" content=incomeSources value=income.source}}
+			{{select-list content=incomeSources value=income.source action=(action (mut income.source))}}
 		{{/form-field}}
 		{{#liquid-if isPension}}
 			{{#form-field title="Pension Source"}}
-				{{view "select" content=pensionTypes value=pensionType}}
+				{{select-list content=pensionTypes value=income.description action=(action (mut income.description))}}
 			{{/form-field}}
 		{{/liquid-if}}
 	</div>
@@ -26,7 +26,7 @@
 			{{/if}}
 		{{/form-field}}
 		{{#form-field title="Frequency" class="column"}}
-			{{view "select" content=frequencies value=income.frequency}}
+			{{select-list content=frequencies value=income.frequency action=(action (mut income.frequency))}}
 		{{/form-field}}
 	</div>
 	<div class="row">

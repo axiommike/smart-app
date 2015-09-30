@@ -8,7 +8,7 @@ export default Ember.Component.extend(EditableMixin, {
 	],
 	models: Ember.computed("vehicles", "vehicle.make", function() {
 		if (!Ember.isBlank(this.get("vehicle.make"))) {
-			return this.get("vehicles").filter((vehicle, index, array) => {
+			return this.get("vehicles").filter((vehicle) => {
 				return vehicle.value === this.get("vehicle.make");
 			});
 		}

@@ -12,7 +12,7 @@
 	{{on-off-switch checked=employment.isCurrent title="Is the job current?"}}
 {{/form-field}}
 {{#form-field title="Type"}}
-	{{view "select" content=employmentTypes optionValuePath="content.value" optionLabelPath="content.label" value=employment.type title="Please choose the type of employment"}}
+	{{select-list content=employmentTypes optionValuePath="value" optionLabelPath="label" value=employment.type title="Please choose the type of employment" action=(action (mut employment.type))}}
 {{/form-field}}
 
 {{#liquid-if employment.isSelfEmployed}}
@@ -23,7 +23,7 @@
 		{{address-input address=employoment.employer.address value=employment.employer.address.address placeholder="Business Address" required=true}}
 	{{/form-field}}
 	{{#form-field title="Business Type"}}
-		{{view "select" content=businessTypes optionValuePath="content.value" optionLabelPath="content.label" value=employment.employer.type required=true title="Please indicate the legal classification of your business"}}
+		{{select-list content=businessTypes optionValuePath="value" optionLabelPath="label" value=employment.employer.type required=true title="Please indicate the legal classification of your business" action=(action (mut employment.employer.type))}}
 	{{/form-field}}
 	{{#form-field title="Are income taxes paid up to date?"}}
 		{{on-off-switch checked=incomeTaxesPaid title="Please indicate whether you have paid the most recent year of income taxes"}}
@@ -35,7 +35,7 @@
 	{{/form-field}}
 {{else}}
 	{{#form-field title="Payment Frequency"}}
-		{{view "select" content=paymentFrequencies optionValuePath="content.value" optionLabelPath="content.label" value=employment.paymentFrequency title="Please select the payment frequency for this position"}}
+		{{select-list content=paymentFrequencies optionValuePath="value" optionLabelPath="label" value=employment.paymentFrequency title="Please select the payment frequency for this position" action=(action (mut employment.paymentFrequency))}}
 	{{/form-field}}
 	{{#form-field title="Employer Address"}}
 		{{address-input address=employoment.employer.address value=employment.employer.address.address placeholder="Employer's Address" required=true}}

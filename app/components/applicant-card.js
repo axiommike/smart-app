@@ -72,7 +72,7 @@ export default Ember.Component.extend(EditableMixin, {
 		},
 		unlinkAddresses: function() {
 			this.toggleProperty("isLinked");
-			this.sendAction("onUnlinkAddresses", this.get("applicant"), this.get("previousCurrentAddress"))
+			this.sendAction("onUnlinkAddresses", this.get("applicant"), this.get("previousCurrentAddress"));
 		},
 		removeAsset: function(asset) {
 			this.sendAction("onRemoveAsset", asset);

@@ -2,7 +2,7 @@
 	<ol class="form-steps">
 		<li class="form-step">
 			{{#form-field title="Marital Status"}}
-				{{view "select" content=martialStatusOptions optionValuePath="content.value" optionLabelPath="content.label" value=applicant.martialStatus required=true}}
+				{{select-list content=martialStatusOptions optionValuePath="content.value" optionLabelPath="content.label" value=applicant.martialStatus required=true}}
 			{{/form-field}}
 		</li>
 		<li class="form-step">

@@ -2,7 +2,7 @@
 	{{partial "partials/toggle-edit-button"}}
 	{{#unless asset.type}}
 		{{#form-field title="Type"}}
-			{{view "select" content=assetTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.type required=true title="Please choose a type for this asset"}}
+			{{select-list content=assetTypes optionValuePath="value" optionLabelPath="label" value=asset.type required=true title="Please choose a type for this asset" action=(action (mut asset.type))}}
 		{{/form-field}}
 		{{#form-field title="Asset Value"}}
 			{{currency-input value=asset.value placeholder="Asset Value" min="0" step="any" required=true title="Please indicate the value of this asset"}}
@@ -30,7 +30,7 @@
 
 	{{#if asset.isSavings}}
 		{{#form-field title="Account Type"}}
-			{{view "select" content=savingsTypes optionValuePath="content.value" optionLabelPath="content.label" value=asset.description title="Please indicate an account type fot this savings account" required=true}}
+			{{select-list content=savingsTypes optionValuePath="value" optionLabelPath="label" value=asset.description title="Please indicate an account type fot this savings account" required=true action=(action (mut asset.description))}}
 		{{/form-field}}
 		{{#form-field title="Account Balance"}}
 			{{currency-input value=asset.value placeholder="Balance" min="0" step="any" title="Please indicate the banking institution of this account" required=true}}

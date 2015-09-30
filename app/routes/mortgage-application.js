@@ -298,7 +298,7 @@ export default Ember.Route.extend({
 				});
 			});
 			return Ember.RSVP.all([employmentDeleted, vehiclesDeleted, addressesDeleted, incomeDeleted, propertiesDeleted, assetsDeleted]).then((resolvedPromises) => {
-				return coApplicant.save().then((savedCoApplicant) => {return savedCoApplicant.destroyRecord()});
+				return coApplicant.save().then((savedCoApplicant) => {return savedCoApplicant.destroyRecord();});
 			});
 		},
 		addPropertyMaster: function(applicant) {

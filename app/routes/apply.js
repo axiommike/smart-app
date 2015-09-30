@@ -69,7 +69,7 @@ export default Ember.Route.extend({
 				return resolvedApplicant;
 			});
 		}).catch(() => {
-			return Ember.RSVP.reject("Sorry, but we couldn't create a new application for you.  Please try again later.")
+			return Ember.RSVP.reject("Sorry, but we couldn't create a new application for you.  Please try again later.");
 		});
 	},
 	/**

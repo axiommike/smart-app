@@ -19,7 +19,7 @@
 				{{/form-field}}
 			</div>
 			{{#form-field title="How'd you hear about me?"}}
-				{{view "select" content=sourceTypes optionValuePath="content.value" optionLabelPath="content.label" value=model.source required=true prompt=" -- " title="Please select the way that you heard about me"}}
+				{{select-list content=sourceTypes optionValuePath="value" optionLabelPath="label" value=model.source required=true prompt=" -- " title="Please select the way that you heard about me" action=(action (mut model.source))}}
 			{{/form-field}}
 			{{#liquid-if model.isReferral}}
 				{{#form-field title="Who referred me?"}}
@@ -37,7 +37,7 @@
 				{{/form-field}}
 			{{/liquid-if}}
 			{{#form-field title="What Can I do for you?"}}
-				{{view "select" content=goals optionValuePath="content.value" optionLabelPath="content.label" value=model.type id="what-can-i-do-for-you?" required=true prompt=" -- " title="Please indicate how I can help you"}}
+				{{select-list content=goals optionValuePath="value" optionLabelPath="label" value=model.type id="what-can-i-do-for-you?" required=true prompt=" -- " title="Please indicate how I can help you" action=(action (mut model.type))}}
 			{{/form-field}}
 			{{#liquid-if model.isPurchase}}
 				{{#form-field title="How much do you have?"}}
@@ -48,7 +48,7 @@
 				{{/form-field}}
 				{{#liquid-if model.downPayment}}
 					{{#form-field title="Where is your downpayment coming from?"}}
-						{{view "select" content=downPaymentSources optionValuePath="content.value" optionLabelPath="content.label" value=model.downPaymentSource}}
+						{{select-list content=downPaymentSources optionValuePath="value" optionLabelPath="label" value=model.downPaymentSource action=(action (mut model.downPaymentSource))}}
 					{{/form-field}}
 					{{#liquid-if model.isOtherDownPaymentSource}}
 						{{#form-field title="Please describe your other 'other' downpayment source"}}

@@ -45,6 +45,7 @@
     "ember-intl": "2.0.0-beta.18",
     "ember-localstorage-adapter": "^0.5.4",
     "ember-metrics": "0.2.0",
+    "ember-select-list": "0.9.1",
     "install": "^0.1.8",
     "kouto-swiss": "^0.11.11",
     "liquid-fire": "^0.20.4",

@@ -55,11 +55,11 @@
 				</div>
 			{{/form-section}}
 			{{#form-field title="Marital Status"}}
-				{{view "select" content=maritalStatusOptions value=applicant.maritalStatus prompt=" -- " required=true title="Please indicate the applicant's marital status (single, married, etc.)"}}
+				{{select-list content=maritalStatusOptions value=applicant.maritalStatus prompt=" -- " required=true title="Please indicate the applicant's marital status (single, married, etc.)" action=(action (mut applicant.maritalStatus))}}
 			{{/form-field}}
 			{{#unless applicant.isPrimary}}
 				{{#form-field title="Relationship"}}
-					{{view "select" content=relationshipTypes value=applicant.relationship}}
+					{{select-list content=relationshipTypes value=applicant.relationship action=(action (mut applicant.relationship))}}
 				{{/form-field}}
 			{{/unless}}
 		{{/form-section}}

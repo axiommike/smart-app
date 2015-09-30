@@ -14,7 +14,7 @@ export default DS.Model.extend(TimeableMixin, {
 		}
 		else {
 			if (this.get("type")) {
-				description += `${Ember.String.capitalize(this.get("type"))} Job`
+				description += `${Ember.String.capitalize(this.get("type"))} Job`;
 			}
 			else {
 				description = "Full-time Job"; // we have to hard-code the default, because of async behaviour

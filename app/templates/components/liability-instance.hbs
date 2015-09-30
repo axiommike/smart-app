@@ -3,7 +3,7 @@
 		{{partial "partials/toggle-edit-button"}}
 		{{#unless typeEditingDisabled}}
 			{{#form-field title="Type"}}
-				{{view "select" content=liabilityTypes optionValuePath="content.value" optionLabelPath="content.label" value=liability.type}}
+				{{select-list content=liabilityTypes optionValuePath="value" optionLabelPath="label" value=liability.type action=(action (mut liability.type))}}
 			{{/form-field}}
 		{{/unless}}
 		{{#if liability.isOther}}
@@ -13,7 +13,7 @@
 		{{/if}}
 		{{#if liability.isLoan}}
 			{{#form-field title="Loan Type"}}
-				{{view "select" content=loanTypes value=liability.description}}
+				{{select-list content=loanTypes value=liability.description action=(action (mut liability.description))}}
 			{{/form-field}}
 			{{#form-field title="Lender"}}
 				{{autocomplete-input value=liability.lender datalist="lenders" placeholder="Lender/Bank" required=true}}
@@ -34,7 +34,7 @@
 					{{/liquid-if}}
 				{{/form-field}}
 				{{#form-field title="Payment Frequency" class="column"}}
-					{{view "select" content=paymentFrequencies value=liability.paymentFrequency}}
+					{{select-list content=paymentFrequencies value=liability.paymentFrequency action=(action (mut liability.paymentFrequency))}}
 				{{/form-field}}
 			</div>
 		{{else}}
@@ -71,7 +71,7 @@
 				{{/liquid-if}}
 			{{/form-field}}
 			{{#form-field title="Credit Card Type"}}
-				{{view "select" content=creditCardTypes optionValuePath="content.value" optionLabelPath="content.label" value=liability.creditCardType required=true title="Please select a credit card type"}}
+				{{select-list content=creditCardTypes optionValuePath="value" optionLabelPath="label" value=liability.creditCardType required=true title="Please select a credit card type" action=(action (mut liability.creditCardType))}}
 			{{/form-field}}
 			{{#form-field title="Bank/Financial Institution"}}
 				{{autocomplete-input value=liability.lender datalist="lenders" placeholder="Bank Name" required=true title="Please provide the bank you use for your credit card"}}
