@@ -13,7 +13,7 @@
 			{{income-instance income=extraIncome flatList=flatList isEditable=isEditable onRemove="removeIncome" showApplicant=showApplicant}}
 		</li>
 	{{else}}
-		<li>No extra income sources found.  <a {{action "addIncome"}}>Add one?</a></li>
+		<li>Add <a {{action "addIncome"}}><strong>investment</strong>, <strong>child support</strong>, <strong>rental</strong>, <strong>pension</strong>, or other sources of income</a></li>
 	{{/each}}
 </ul>
 

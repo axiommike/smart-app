@@ -4,15 +4,15 @@
 		{{#validatable-form action="nextStep"}}
 			<div class="row">
 				{{#form-field title="First Name" class="column one-half" layoutDirection="vertical"}}
-					{{input value=model.applicant.firstName placeholder="First Name" required=true autofocus="autofocus" id="first-name" autocomplete="given-name" title="Please provide your first name"}}
+					{{expandable-input value=model.applicant.firstName placeholder="First Name" required=true autofocus="autofocus" id="first-name" autocomplete="given-name" title="Please provide your first name"}}
 				{{/form-field}}
 				{{#form-field title="Last Name" class="column one-half" layoutDirection="vertical"}}
-					{{input value=model.applicant.lastName placeholder="Last Name" required=true id="last-name" title="Please provide your last name" autocomplete="family-name"}}
+					{{expandable-input value=model.applicant.lastName placeholder="Last Name" required=true id="last-name" title="Please provide your last name" autocomplete="family-name"}}
 				{{/form-field}}
 			</div>
 			<div class="row">
 				{{#form-field title="Email" class="column one-half" layoutDirection="vertical"}}
-					{{input value=model.applicant.email required=true type="email" placeholder="Email" id="email" autocomplete="email" title="Please provide your e-mail address"}}
+					{{expandable-input value=model.applicant.email required=true type="email" placeholder="Email" id="email" autocomplete="email" title="Please provide your e-mail address"}}
 				{{/form-field}}
 				{{#form-field title="Phone" class="column one-half" layoutDirection="vertical"}}
 					{{input value=model.applicant.phone type="tel" required=true placeholder="Phone" id="phone" autocomplete="tel" title="Please provide your primary phone number"}}
