@@ -3,7 +3,7 @@
 		{{partial "partials/toggle-edit-button"}}
 		{{#unless typeEditingDisabled}}
 			{{#form-field title="Type"}}
-				{{select-list content=liabilityTypes optionValuePath="value" optionLabelPath="label" value=liability.type action=(action (mut liability.type))}}
+				{{select-list content=liabilityTypes required=true title="Please select a liability type from the list" optionValuePath="value" optionLabelPath="label" value=liability.type action=(action (mut liability.type))}}
 			{{/form-field}}
 		{{/unless}}
 		{{#if liability.isOther}}
@@ -13,7 +13,7 @@
 		{{/if}}
 		{{#if liability.isLoan}}
 			{{#form-field title="Loan Type"}}
-				{{select-list content=loanTypes value=liability.description action=(action (mut liability.description))}}
+				{{select-list required=true title="Please choose a loan type" content=loanTypes value=liability.description action=(action (mut liability.description))}}
 			{{/form-field}}
 			{{#form-field title="Lender"}}
 				{{autocomplete-input value=liability.lender datalist="lenders" placeholder="Lender/Bank" required=true}}

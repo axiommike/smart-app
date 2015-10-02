@@ -10,10 +10,12 @@ export default Ember.Route.extend({
 			let applicantAddresses = [];
 			applicant.get("addresses").forEach((address) => {
 				let resolvedAddress = address;
-				if (address.get("content")) {
-					resolvedAddress = address.get("content");
+				if (address) {
+					if (address.get("content")) {
+						resolvedAddress = address.get("content");
+					}
+					applicantAddresses.push(resolvedAddress.toJSON());
 				}
-				applicantAddresses.push(resolvedAddress.toJSON());
 			});
 			applicantJSON.addresses = applicantAddresses;
 		}
