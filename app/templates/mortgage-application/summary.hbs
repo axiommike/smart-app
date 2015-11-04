@@ -9,7 +9,7 @@
 	onAddIncome="addIncome" onRemoveIncome="removeIncome"}}
 	<footer {{bind-attr class=":disclaimer consentProvided:accepted"}}>
 		<span class="info">Disclaimer</span>
-		{{#form-field title="I hereby declare that the information declared in this form are valid as of today, and I consent to having my records checked by the Canadian Credit Bureau"}}
+		{{#form-field label="I hereby declare that the information declared in this form are valid as of today, and I consent to having my records checked by the Canadian Credit Bureau"}}
 			{{input type="checkbox" checked=consentProvided required=true title="Please consent to the validity of the information you have provided in order to submit your application"}}
 		{{/form-field}}
 	</footer>

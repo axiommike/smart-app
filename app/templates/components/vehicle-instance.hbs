@@ -9,19 +9,19 @@
 	{{/each}}
 </datalist>
 
-{{#form-field title="Vehicle Year"}}
+{{#form-field label="Vehicle Year"}}
 	{{year-select value=vehicle.year required=true title="Plese provide the year the vehicle was manufactured"}}
 {{/form-field}}
-{{#form-field title="Vehicle Make"}}
+{{#form-field label="Vehicle Make"}}
 	{{autocomplete-input type="text" value=vehicle.make title="Please enter a valid vehicle make" required=true placeholder="Vehicle Make" datalist="vehicle-makes"}}
 {{/form-field}}
-{{#form-field title="Vehicle Model"}}
+{{#form-field label="Vehicle Model"}}
 	{{autocomplete-input type="text" value=vehicle.model placeholder="Vehicle Model Name" datalist="vehicle-models"}}
 {{/form-field}}
 
 {{asset-instance asset=vehicle.asset}}
 
-{{#form-field title="Is there financing on this vehicle?"}}
+{{#form-field label="Is there financing on this vehicle?"}}
 	{{on-off-switch checked=isLoaned title="Please indicate whether this vehicle is currently being loaned"}}
 {{/form-field}}
 {{#liquid-if isLoaned}}

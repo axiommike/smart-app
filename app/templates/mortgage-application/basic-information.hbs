@@ -1,15 +1,15 @@
 {{#validatable-form action="nextStep"}}
 	<ol class="form-steps">
 		<li class="form-step">
-			{{#form-field title="Marital Status"}}
+			{{#form-field label="Marital Status"}}
 				{{select-list content=martialStatusOptions optionValuePath="content.value" optionLabelPath="content.label" value=applicant.martialStatus required=true}}
 			{{/form-field}}
 		</li>
 		<li class="form-step">
-			{{#form-field title="Do you have any dependents?"}}
+			{{#form-field label="Do you have any dependents?"}}
 				{{on-off-switch checked=hasDependents title="Please indicate whether you have any dependents (kids, family, etc., for whom you are caring)" id="do-you-have-any-dependents?"}}
 				{{#liquid-if hasDependents}}
-					{{#form-field title="How many dependents do you have?"}}
+					{{#form-field label="How many dependents do you have?"}}
 						{{input type="range" value=dependentCount step="1" required=true min="1" max="15" title="How many dependents?" id="how-many-dependents-do-you-have?"}}
 						<span class="info">You have <strong>{{dependentCount}}</strong> dependents</span>
 					{{/form-field}}
@@ -17,7 +17,7 @@
 			{{/form-field}}
 		</li>
 		<li class="form-step">
-			{{#form-field title="How many co-applicants?"}}
+			{{#form-field label="How many co-applicants?"}}
 				{{input type="range" value=coApplicantCount step="1" required=true min="0" max="3" id="how-many-co-applicants?"}}
 				{{#liquid-if coApplicantCount}}
 					<span class="info">This application will include <strong>{{coApplicantCount}}</strong> co-applicants</span>

@@ -2,7 +2,7 @@
 	<div class="form-steps-container">
 		<ol class="form-steps">
 			<li class="form-step">
-				{{#form-field title="Do you own your current residence?"}}
+				{{#form-field label="Do you own your current residence?"}}
 					{{on-off-switch checked=ownsCurrentResidence id="do-you-own-your-current-residence?"}}
 				{{/form-field}}
 				{{#liquid-if ownsCurrentResidence}}
@@ -10,7 +10,7 @@
 				{{/liquid-if}}
 			</li>
 			<li class="form-step">
-				{{#form-field title="Do you own any other real estate?"}}
+				{{#form-field label="Do you own any other real estate?"}}
 					{{on-off-switch checked=ownsOtherRealEstate id="do-you-own-any-other-real-estate?"}}
 				{{/form-field}}
 				{{#liquid-if ownsOtherRealEstate}}
@@ -18,7 +18,7 @@
 				{{/liquid-if}}
 			</li>
 			<li class="form-step">
-				{{#form-field title="Do you have any savings or chequing accounts?"}}
+				{{#form-field label="Do you have any savings or chequing accounts?"}}
 					{{on-off-switch checked=hasSavings title="Please indicate whether you have invested in any government funds or locked-in investments" id="do-you-have-any-savings-or-chequing-accounts?"}}
 				{{/form-field}}
 				{{#liquid-if hasSavings}}
@@ -26,7 +26,7 @@
 				{{/liquid-if}}
 			</li>
 			<li class="form-step">
-				{{#form-field title="Do you have any personal items of significant value? (boats, toys, skidoos, man toys)"}}
+				{{#form-field label="Do you have any personal items of significant value? (boats, toys, skidoos, man toys)"}}
 					{{on-off-switch checked=hasPersonalItems title="Please indicate whether you have any belongings worth of significant value" id="do-you-have-any-personal-items-of-significant-value?-(boats,-toys,-skidoos,-man-toys)"}}
 				{{/form-field}}
 				{{#liquid-if hasPersonalItems}}
@@ -34,7 +34,7 @@
 				{{/liquid-if}}
 			</li>
 			<li class="form-step">
-				{{#form-field title="Do you have any GIC or Term Deposit investments?"}}
+				{{#form-field label="Do you have any GIC or Term Deposit investments?"}}
 					{{on-off-switch checked=hasGICs title="Please indicate whether you have any GIC or Term Deposit investments" id="do-you-have-any-gic-or-term-deposit-investments?"}}
 				{{/form-field}}
 				{{#liquid-if hasGICs}}
@@ -42,7 +42,7 @@
 				{{/liquid-if}}
 			</li>
 			<li class="form-step">
-				{{#form-field title="Do you have any RRSP savings accounts?"}}
+				{{#form-field label="Do you have any RRSP savings accounts?"}}
 					{{on-off-switch checked=hasRRSPs title="Please indicate whether you have any RRSP funds or accounts" id="do-you-have-any-rrsp-savings-accounts?"}}
 				{{/form-field}}
 				{{#liquid-if hasRRSPs}}
@@ -50,7 +50,7 @@
 				{{/liquid-if}}
 			</li>
 			<li class="form-step">
-				{{#form-field title="Do you have any stocks or bond investments?"}}
+				{{#form-field label="Do you have any stocks or bond investments?"}}
 					{{on-off-switch checked=hasInvestments title="Please indicate whether you have any stocks or bond investments" id="do-you-have-any-stocks-or-bond-investments?"}}
 				{{/form-field}}
 				{{#liquid-if hasInvestments}}
@@ -58,7 +58,7 @@
 				{{/liquid-if}}
 			</li>
 			<li class="form-step">
-				{{#form-field title="Do you have any vehicles?"}}
+				{{#form-field label="Do you have any vehicles?"}}
 					{{on-off-switch checked=hasVehicles title="Please indicate whether you have any vehicles (rental, loan, or own)" id="do-you-have-any-vehicles?"}}
 				{{/form-field}}
 				{{#liquid-if hasVehicles}}
@@ -66,7 +66,7 @@
 				{{/liquid-if}}
 			</li>
 			<li class="form-step">
-				{{#form-field title="Do you own any other assets?"}}
+				{{#form-field label="Do you own any other assets?"}}
 					{{on-off-switch checked=ownsOtherAssets id="do-you-own-any-other-assets?"}}
 				{{/form-field}}
 				{{#liquid-if ownsOtherAssets}}

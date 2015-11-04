@@ -1,50 +1,50 @@
-{{#form-field title="Position"}}
+{{#form-field label="Position"}}
 	{{input type="text" value=employment.occupation placeholder="Job Title" required=true title="Please indicate the job title for this employment record" size=employment.occupation.length}}
 {{/form-field}}
 
 {{#liquid-unless employment.isSelfEmployed}}
-	{{#form-field title="Employer"}}
+	{{#form-field label="Employer"}}
 		{{input type="text" value=employment.employer.name title="Please provide the employer for this position" required=true placeholder="Employer/Company Name" size=employment.employer.name.length}}
 	{{/form-field}}
 {{/liquid-unless}}
 
-{{#form-field title="I currently work here"}}
+{{#form-field label="I currently work here"}}
 	{{on-off-switch checked=employment.isCurrent title="Is the job current?"}}
 {{/form-field}}
-{{#form-field title="Type"}}
+{{#form-field label="Type"}}
 	{{select-list content=employmentTypes optionValuePath="value" optionLabelPath="label" value=employment.type title="Please choose the type of employment" action=(action (mut employment.type))}}
 {{/form-field}}
 
 {{#liquid-if employment.isSelfEmployed}}
-	{{#form-field title="Business Name"}}
+	{{#form-field label="Business Name"}}
 		{{input type="text" value=employment.employer.name placeholder="Business Name" required=true}}
 	{{/form-field}}
-	{{#form-field title="Business Address"}}
+	{{#form-field label="Business Address"}}
 		{{address-input address=employoment.employer.address value=employment.employer.address.address placeholder="Business Address" required=true}}
 	{{/form-field}}
-	{{#form-field title="Business Type"}}
+	{{#form-field label="Business Type"}}
 		{{select-list content=businessTypes optionValuePath="value" optionLabelPath="label" value=employment.employer.type required=true title="Please indicate the legal classification of your business" action=(action (mut employment.employer.type))}}
 	{{/form-field}}
-	{{#form-field title="Are income taxes paid up to date?"}}
+	{{#form-field label="Are income taxes paid up to date?"}}
 		{{on-off-switch checked=incomeTaxesPaid title="Please indicate whether you have paid the most recent year of income taxes"}}
 	{{/form-field}}
-	{{#form-field title="How long?"}}
+	{{#form-field label="How long?"}}
 		<label>{{input type="number" value=employment.tenureYears required=true placeholder="Years" min="0" step="1" title="Please indicate how many years you have owned this company"}} years</label>
 		<label>{{input type="number" value=employment.tenureMonths placeholder="mths" min="0" max="12" step="1"}} months
 		</label>
 	{{/form-field}}
 {{else}}
-	{{#form-field title="Payment Frequency"}}
+	{{#form-field label="Payment Frequency"}}
 		{{select-list content=paymentFrequencies optionValuePath="value" optionLabelPath="label" value=employment.paymentFrequency title="Please select the payment frequency for this position" action=(action (mut employment.paymentFrequency))}}
 	{{/form-field}}
-	{{#form-field title="Employer Address"}}
+	{{#form-field label="Employer Address"}}
 		{{address-input address=employoment.employer.address value=employment.employer.address.address placeholder="Employer's Address" required=true}}
 	{{/form-field}}
-	{{#form-field title="Employer Phone Number"}}
+	{{#form-field label="Employer Phone Number"}}
 		{{input type="tel" value=employment.employer.phone placeholder="Employer's Phone" required=true title="Please indicate this employer's primary phone number"}}
 	{{/form-field}}
 
-	{{#form-field title="Position Duration"}}
+	{{#form-field label="Position Duration"}}
 		{{#liquid-if durationEnabled}}
 			{{input type="date" value=employment.startDate required=true}}
 			<span>to</span>
@@ -61,13 +61,13 @@
 	{{/form-field}}
 
 	{{#liquid-if employment.isHourly}}
-		{{#form-field title="Hours Per Week"}}
+		{{#form-field label="Hours Per Week"}}
 			{{input type="range" min=0 step=0.5 max=60 value=employment.weeklyHours required=true title="Please indicate how many hours per week were worked in this position"}}
 			{{#liquid-if employment.weeklyHours}}
 				<span>worked <strong>{{employment.weeklyHours}}</strong> hours per week</span>
 			{{/liquid-if}}
 		{{/form-field}}
-		{{#form-field title="Hourly Rate"}}
+		{{#form-field label="Hourly Rate"}}
 			{{currency-input min=0 step="any" value=employment.hourlyRate required=true}}
 			{{#liquid-if employment.hourlyRate}}
 				<span class="help"><strong>{{format-number employment.hourlyRate style="currency" currency="CAD"}}</strong> dollars per hour</span>
@@ -75,7 +75,7 @@
 		{{/form-field}}
 	{{/liquid-if}}
 
-	{{#form-field title="Annual Pay"}}
+	{{#form-field label="Annual Pay"}}
 		{{#liquid-if employment.isCommission}}
 			<span class="form-field-hint">Please give us the closest guess to your annual pay.</span>
 		{{/liquid-if}}
@@ -91,13 +91,13 @@
 	<div class="row distributed">
 		{{#form-section title="Last 2 Years' Line 150" icon="dollar"}}
 			{{#each noaValues as |year|}}
-				{{#form-field title=year.year}}
+				{{#form-field label=year.year}}
 					{{currency-input min="0" step="any" value=year.value required=true placeholder="Yearly Income" title="Please indicate the filed income for this yearly assesment"}}
 				{{/form-field}}
 			{{/each}}
 		{{/form-section}}
 		<span class="option-separator">or</span>
-		{{#form-field title="Approximate annual, taxable income"}}
+		{{#form-field label="Approximate annual, taxable income"}}
 			{{currency-input min="0" step="any" value=employment.income.value required=true}}
 		{{/form-field}}
 	</div>

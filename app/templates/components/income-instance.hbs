@@ -1,18 +1,18 @@
 {{#liquid-if isEditing}}
 	{{partial "partials/toggle-edit-button"}}
 	<div class="row">
-		{{#form-field title="Source" class="column"}}
+		{{#form-field label="Source" class="column"}}
 			{{select-list content=incomeSources value=income.source action=(action (mut income.source))}}
 		{{/form-field}}
 		{{#liquid-if isPension}}
-			{{#form-field title="Pension Source"}}
+			{{#form-field label="Pension Source"}}
 				{{select-list content=pensionTypes value=income.description action=(action (mut income.description))}}
 			{{/form-field}}
 		{{/liquid-if}}
 	</div>
 
 	<div class="row">
-		{{#form-field title="Income" class="column"}}
+		{{#form-field label="Income" class="column"}}
 			{{currency-input value=income.value}}
 			{{#if income.value}}
 				<span class="help">
@@ -25,12 +25,12 @@
 				</span>
 			{{/if}}
 		{{/form-field}}
-		{{#form-field title="Frequency" class="column"}}
+		{{#form-field label="Frequency" class="column"}}
 			{{select-list content=frequencies value=income.frequency action=(action (mut income.frequency))}}
 		{{/form-field}}
 	</div>
 	<div class="row">
-		{{#form-field title="Description"}}
+		{{#form-field label="Description"}}
 			{{input type="text" required=income.isOther placeholder="Describe this income source" value=income.description size=descriptionSize title="Please indicate the nature of this income source"}}
 		{{/form-field}}
 	</div>

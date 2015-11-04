@@ -2,7 +2,7 @@
 	<div class="form-steps-container">
 		<ol class="form-steps">
 			<li class="form-step">
-				{{#form-field title="Do you have any credit cards with outstanding balances?"}}
+				{{#form-field label="Do you have any credit cards with outstanding balances?"}}
 					{{on-off-switch checked=hasCreditCard id="do-you-have-any-credit-cards-with-outstanding-balances?"}}
 				{{/form-field}}
 				{{#liquid-if hasCreditCard}}
@@ -10,7 +10,7 @@
 				{{/liquid-if}}
 			</li>
 			<li class="form-step">
-				{{#form-field title="Do you have any personal loans or lines of credit?"}}
+				{{#form-field label="Do you have any personal loans or lines of credit?"}}
 					{{on-off-switch checked=hasLoans id="do-you-have-any-loans?"}}
 				{{/form-field}}
 				{{#liquid-if hasLoans}}
@@ -18,7 +18,7 @@
 				{{/liquid-if}}
 			</li>
 			<li class="form-step">
-				{{#form-field title="Are you currently paying child support or maintenance payments?"}}
+				{{#form-field label="Are you currently paying child support or maintenance payments?"}}
 					{{on-off-switch checked=hasChildSupport id="are-you-currently-paying-child-support-or-maintenance-payments?"}}
 				{{/form-field}}
 				{{#liquid-if model.hasDependents}}
@@ -29,7 +29,7 @@
 				{{/liquid-if}}
 			</li>
 			<li class="form-step">
-				{{#form-field title="Do you have any other monthly debt payments?"}}
+				{{#form-field label="Do you have any other monthly debt payments?"}}
 					{{on-off-switch checked=hasOtherLiabilities id="do-you-have-any-other-monthly-debt-payments?"}}
 				{{/form-field}}
 				{{#liquid-if hasOtherLiabilities}}
