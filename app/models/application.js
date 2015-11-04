@@ -44,17 +44,15 @@ export default DS.Model.extend({
 	isReferral: Ember.computed.equal("source", "agent"),
 	isOther: Ember.computed.equal("source", "other"),
 	referredByClient: Ember.computed.equal("source", "past-client"),
+	hasReferralSource: Ember.computed.or("referredByClient", "isReferral"),
 	referredBy: DS.attr("string"),
 	downPayment: DS.attr("number"),
 	downPaymentSource: DS.attr("string"),
 	downPaymentExplanation: DS.attr("string"),
 	isOtherDownPaymentSource: Ember.computed.equal("downPaymentSource", "other"),
 	referredByChanged: function() {
-		if (!Ember.isBlank(this.get("referredBy"))) {
+		if (!Ember.isBlank(this.get("referredBy")) && this.get("hasReferralSource") && Ember.isBlank(this.get("comment"))) {
 			this.set("comment", "Referred by " + this.get("referredBy") + ".\n\n");
-		}
-		else {
-			this.set("comment", "");
 		}
 	}.observes("referredBy"),
 	comment: DS.attr("string"),
