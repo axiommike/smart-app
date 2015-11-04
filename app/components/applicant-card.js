@@ -1,9 +1,11 @@
 import Ember from "ember";
 import EditableMixin from "../mixins/editable";
+import autosave from "ember-autosave";
 
 export default Ember.Component.extend(EditableMixin, {
 	tagName: "applicant-card",
 	applicant: null,
+	applicantProxy: autosave("applicant"),
 	isPrimaryApplicant: Ember.computed.alias("applicant.isPrimary"),
 	classNameBindings: ["isPrimaryApplicant:primary-applicant:co-applicant", ":applicant-card"],
 	includeLiabilities: false,
