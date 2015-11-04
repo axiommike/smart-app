@@ -22,7 +22,7 @@ $buttonColours ?= {
 	error: #cc0d00
 }
 
-$buttonTransition ?= 0.1s easing("in-quad") background, border
+$buttonTransition ?= 0.1s easing("in-quad")
 
 $buttonSizes ?= {
 	small: 0.8
@@ -30,18 +30,32 @@ $buttonSizes ?= {
 	large: 1.4
 	extra-large: 1.8
 }
+
 getButton(colour)
 	@extend $button
 	background color-fallback(colour)
 	color luminosity(colour) > 0.5 ? black : white
-	&[disabled]
-		@extend $disabled
 	&:hover, &:focus
 		background color-fallback(luminosity(colour) > 0.5 ? colour + 30 : colour - 30)
+
+getInvertedButton(colour)
+	@extend $button
+	background transparent
+	color colour
+	border 0.1em solid currentColor
+	&:hover, &:focus
+		background inherit
+		color color-fallback(luminosity(colour) > 0.5 ? colour + 40 : colour - 40)
+$disabled
+	opacity 0.5
+	cursor not-allowed
+	user-select none
+	user-drag none
+
 $button
 	cursor pointer
 	if $buttonTransition
-		transition $buttonTransition
+		transition $buttonTransition box-shadow, $buttonTransition background, $buttonTransition transform, $buttonTransition color
 	display inline-block
 	border $buttonBorder
 	margin-right $buttonMargin
@@ -53,19 +67,16 @@ $button
 	outline none
 	text-transform uppercase
 	border-radius $buttonBorderRadius
-	transition box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)
-$disabled
-	opacity 0.5
-	cursor not-allowed
-	user-select none
-	user-drag none
+	&[disabled]
+		@extend $disabled
 
 $plainButton
 	border 0
 	background transparent
 	margin 0
 	padding 0
-	transition 0.1s easing("in-quad") transform
+	if $buttonTransition
+		transition $buttonTransition transform
 	&:hover
 		background inherit
 	&:focus
@@ -83,3 +94,5 @@ $plainButton
 	for type, colour in $buttonColours
 		&-{type}
 			getButton(colour)
+			&-inverted
+				getInvertedButton(colour)

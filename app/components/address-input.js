@@ -56,6 +56,9 @@ export default Ember.TextField.extend({
 				address[friendlyKey] = addressComponents[i][format];
 			}
 		}
+		if (place["url"]) {
+			address.url = place.url;
+		}
 		if (this.get("address")) {
 			console.log("about to set the properties of address to:");
 			console.dir(address);

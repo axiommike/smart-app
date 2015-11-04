@@ -9,5 +9,6 @@ export default DS.Model.extend(TimeableMixin, {
 	province: DS.attr("string"),
 	country: DS.attr("string"),
 	city: DS.attr("string"),
-	region: DS.attr("string")
+	region: DS.attr("string"),
+	url: DS.attr("string")
 });

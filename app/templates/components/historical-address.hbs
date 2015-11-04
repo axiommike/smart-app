@@ -16,6 +16,9 @@
 				<li class="address-province">{{address.province}}</li>
 				<li class="address-country">{{address.country}}</li>
 			</ul>
+			{{#if address.url}}
+				<a href="{{address.url}}" title="View {{address.address}} on Google Maps" target="{{address.address}}">{{accessible-icon icon="share" title="View this location on Google Maps"}}</a>
+			{{/if}}
 		</div>
 	{{/if}}
 {{/form-field}}
