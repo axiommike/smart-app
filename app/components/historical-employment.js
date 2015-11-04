@@ -1,4 +1,5 @@
 import Ember from "ember";
+import autosave from "ember-autosave";
 import EditableMixin from "../mixins/editable";
 
 export default Ember.Component.extend(EditableMixin, {
@@ -7,6 +8,7 @@ export default Ember.Component.extend(EditableMixin, {
 	attributeBindings: ["data-tenure"],
 	"data-tenure": Ember.computed.alias("employment.tenureTotalYears"),
 	employment: null,
+	employmentProxy: autosave("employment"),
 	durationEnabled: false,
 	needsNOA: Ember.computed.or("employment.isSelfEmployed", "employment.isCommission"),
 	noaYears: 2,

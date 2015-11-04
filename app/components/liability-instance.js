@@ -1,4 +1,5 @@
 import Ember from "ember";
+import autosave from "ember-autosave";
 import EditableMixin from "../mixins/editable";
 
 export default Ember.Component.extend(EditableMixin, {
@@ -35,6 +36,7 @@ export default Ember.Component.extend(EditableMixin, {
 	classNameBindings: [":liability-instance", "liability.type"],
 	showApplicant: false,
 	liability: null,
+	liabilityProxy: autosave("liability"),
 	paymentLabel: Ember.computed("liability.paymentFrequency", function() {
 		return Ember.String.capitalize(this.get("liability.paymentFrequency")) + " Payment";
 	}),

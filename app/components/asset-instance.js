@@ -1,4 +1,5 @@
 import Ember from "ember";
+import autosave from "ember-autosave";
 import EditableMixin from "../mixins/editable";
 
 export default Ember.Component.extend(EditableMixin, {
@@ -6,6 +7,7 @@ export default Ember.Component.extend(EditableMixin, {
 	classNameBindings: [":asset", "asset.type"],
 	onRemove: null,
 	asset: null,
+	assetProxy: autosave("asset"),
 	showApplicant: false,
 	assetTypes: [
 		{value: "item", label: "Personal Item"},

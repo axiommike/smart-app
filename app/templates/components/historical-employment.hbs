@@ -1,5 +1,5 @@
 {{#form-field label="Position"}}
-	{{input type="text" value=employment.occupation placeholder="Job Title" required=true title="Please indicate the job title for this employment record" size=employment.occupation.length}}
+	{{input type="text" value=employmentProxy.occupation placeholder="Job Title" required=true title="Please indicate the job title for this employment record" size=employment.occupation.length}}
 {{/form-field}}
 
 {{#liquid-unless employment.isSelfEmployed}}
@@ -9,15 +9,15 @@
 {{/liquid-unless}}
 
 {{#form-field label="I currently work here"}}
-	{{on-off-switch checked=employment.isCurrent title="Is the job current?"}}
+	{{on-off-switch checked=employmentProxy.isCurrent title="Is the job current?"}}
 {{/form-field}}
 {{#form-field label="Type"}}
-	{{select-list content=employmentTypes optionValuePath="value" optionLabelPath="label" value=employment.type title="Please choose the type of employment" action=(action (mut employment.type))}}
+	{{select-list content=employmentTypes optionValuePath="value" optionLabelPath="label" value=employmentProxy.type title="Please choose the type of employment" action=(action (mut employmentProxy.type))}}
 {{/form-field}}
 
 {{#liquid-if employment.isSelfEmployed}}
 	{{#form-field label="Business Name"}}
-		{{input type="text" value=employment.employer.name placeholder="Business Name" required=true}}
+		{{input type="text" value=employmentProxy.employer.name placeholder="Business Name" required=true}}
 	{{/form-field}}
 	{{#form-field label="Business Address"}}
 		{{address-input address=employoment.employer.address value=employment.employer.address.address placeholder="Business Address" required=true}}
@@ -29,13 +29,13 @@
 		{{on-off-switch checked=incomeTaxesPaid title="Please indicate whether you have paid the most recent year of income taxes"}}
 	{{/form-field}}
 	{{#form-field label="How long?"}}
-		<label>{{input type="number" value=employment.tenureYears required=true placeholder="Years" min="0" step="1" title="Please indicate how many years you have owned this company"}} years</label>
-		<label>{{input type="number" value=employment.tenureMonths placeholder="mths" min="0" max="12" step="1"}} months
+		<label>{{input type="number" value=employmentProxy.tenureYears required=true placeholder="Years" min="0" step="1" title="Please indicate how many years you have owned this company"}} years</label>
+		<label>{{input type="number" value=employmentProxy.tenureMonths placeholder="mths" min="0" max="12" step="1"}} months
 		</label>
 	{{/form-field}}
 {{else}}
 	{{#form-field label="Payment Frequency"}}
-		{{select-list content=paymentFrequencies optionValuePath="value" optionLabelPath="label" value=employment.paymentFrequency title="Please select the payment frequency for this position" action=(action (mut employment.paymentFrequency))}}
+		{{select-list content=paymentFrequencies optionValuePath="value" optionLabelPath="label" value=employmentProxy.paymentFrequency title="Please select the payment frequency for this position" action=(action (mut employmentProxy.paymentFrequency))}}
 	{{/form-field}}
 	{{#form-field label="Employer Address"}}
 		{{address-input address=employoment.employer.address value=employment.employer.address.address placeholder="Employer's Address" required=true}}
@@ -46,13 +46,13 @@
 
 	{{#form-field label="Position Duration"}}
 		{{#liquid-if durationEnabled}}
-			{{input type="date" value=employment.startDate required=true}}
+			{{input type="date" value=employmentProxy.startDate required=true}}
 			<span>to</span>
-			{{input type="date" value=employment.endDate required=true}}
+			{{input type="date" value=employmentProxy.endDate required=true}}
 		{{else}}
-			{{input type="number" value=employment.tenureYears required=true placeholder="Years" min="0" step="1" title="Please indicate the amount of years this position was held"}}
+			{{input type="number" value=employmentProxy.tenureYears required=true placeholder="Years" min="0" step="1" title="Please indicate the amount of years this position was held"}}
 			<label for = "tenure-years">years</label>
-			{{input type="number" value=employment.tenureMonths placeholder="mths" min="0" max="12" step="1"}}
+			{{input type="number" value=employmentProxy.tenureMonths placeholder="mths" min="0" max="12" step="1"}}
 			<label for = "tenure-months">months</label>
 		{{/liquid-if}}
 		{{#liquid-if employment.tenureTotalYears}}
@@ -62,13 +62,13 @@
 
 	{{#liquid-if employment.isHourly}}
 		{{#form-field label="Hours Per Week"}}
-			{{input type="range" min=0 step=0.5 max=60 value=employment.weeklyHours required=true title="Please indicate how many hours per week were worked in this position"}}
+			{{input type="range" min=0 step=0.5 max=60 value=employmentProxy.weeklyHours required=true title="Please indicate how many hours per week were worked in this position"}}
 			{{#liquid-if employment.weeklyHours}}
 				<span>worked <strong>{{employment.weeklyHours}}</strong> hours per week</span>
 			{{/liquid-if}}
 		{{/form-field}}
 		{{#form-field label="Hourly Rate"}}
-			{{currency-input min=0 step="any" value=employment.hourlyRate required=true}}
+			{{currency-input min=0 step="any" value=employmentProxy.hourlyRate required=true}}
 			{{#liquid-if employment.hourlyRate}}
 				<span class="help"><strong>{{format-number employment.hourlyRate style="currency" currency="CAD"}}</strong> dollars per hour</span>
 			{{/liquid-if}}
