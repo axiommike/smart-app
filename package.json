@@ -23,6 +23,7 @@
     "broccoli-manifest": "0.0.7",
     "broccoli-merge-trees": "^0.2.4",
     "ember-accessible-icon": "2.0.0",
+    "ember-autosave": "1.0.0",
     "ember-cli": "1.13.8",
     "ember-cli-app-version": "0.5.0",
     "ember-cli-babel": "^5.1.3",

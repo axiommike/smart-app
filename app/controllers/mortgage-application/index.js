@@ -1,6 +1,9 @@
 import Ember from "ember";
+import autosave from "ember-autosave";
 
 export default Ember.Controller.extend({
+	application: autosave("model"),
+	applicant: autosave("model.applicant"),
 	sourceTypes: [
 		{value: "phone", label: "Phone"},
 		{value: "website", label: "Website"},

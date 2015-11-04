@@ -4,65 +4,64 @@
 		{{#validatable-form action="nextStep"}}
 			<div class="row">
 				{{#form-field label="First Name" class="column one-half" layoutDirection="vertical"}}
-					{{expandable-input value=model.applicant.firstName placeholder="First Name" required=true autofocus="autofocus" id="first-name" autocomplete="given-name" title="Please provide your first name"}}
+					{{expandable-input value=applicant.firstName placeholder="First Name" required=true autofocus="autofocus" id="first-name" autocomplete="given-name" title="Please provide your first name"}}
 				{{/form-field}}
 				{{#form-field label="Last Name" class="column one-half" layoutDirection="vertical"}}
-					{{expandable-input value=model.applicant.lastName placeholder="Last Name" required=true id="last-name" title="Please provide your last name" autocomplete="family-name"}}
+					{{expandable-input value=applicant.lastName placeholder="Last Name" required=true id="last-name" title="Please provide your last name" autocomplete="family-name"}}
 				{{/form-field}}
 			</div>
 			<div class="row">
 				{{#form-field label="Email" class="column one-half" layoutDirection="vertical"}}
-					{{expandable-input value=model.applicant.email required=true type="email" placeholder="Email" id="email" autocomplete="email" title="Please provide your e-mail address"}}
+					{{expandable-input value=applicant.email required=true type="email" placeholder="Email" id="email" autocomplete="email" title="Please provide your e-mail address"}}
 				{{/form-field}}
 				{{#form-field label="Phone" class="column one-half" layoutDirection="vertical"}}
-					{{input value=model.applicant.phone type="tel" required=true placeholder="Phone" id="phone" autocomplete="tel" title="Please provide your primary phone number"}}
+					{{input value=applicant.phone type="tel" required=true placeholder="Phone" id="phone" autocomplete="tel" title="Please provide your primary phone number"}}
 				{{/form-field}}
 			</div>
 			{{#form-field label="How'd you hear about me?"}}
-				{{select-list content=sourceTypes optionValuePath="value" optionLabelPath="label" value=model.source required=true prompt=" -- " title="Please select the way that you heard about me" action=(action (mut model.source))}}
+				{{select-list content=sourceTypes optionValuePath="value" optionLabelPath="label" value=application.source required=true prompt=" -- " title="Please select the way that you heard about me" action=(action (mut application.source))}}
 			{{/form-field}}
-			{{#liquid-if model.isReferral}}
+			{{#liquid-if application.isReferral}}
 				{{#form-field label="Who referred me?"}}
-					{{input type="text" value=model.referredBy required=true placeholder="Who referred me?" title="Please indicate who referred me to you"}}
+					{{input type="text" value=application.referredBy required=true placeholder="Who referred me?" title="Please indicate who referred me to you"}}
 				{{/form-field}}
 			{{/liquid-if}}
-			{{#liquid-if model.isOther}}
+			{{#liquid-if application.isOther}}
 				{{#form-field label="Referral Source"}}
-					{{input type="text" value=model.referredBy required=true placeholder="Other Referral Source" title="Please indicate what other source brought you here"}}
+					{{input type="text" value=application.referredBy required=true placeholder="Other Referral Source" title="Please indicate what other source brought you here"}}
 				{{/form-field}}
 			{{/liquid-if}}
-			{{#liquid-if model.referredByClient}}
+			{{#liquid-if application.referredByClient}}
 				{{#form-field label="Which client referred me?"}}
-					{{input type="text" value=model.referredBy required=true placeholder="Past Client Name" title="Please indicate what other source brought you here"}}
+					{{input type="text" value=application.referredBy required=true placeholder="Past Client Name" title="Please indicate what other source brought you here"}}
 				{{/form-field}}
 			{{/liquid-if}}
 			{{#form-field label="What Can I do for you?"}}
-				{{select-list content=goals optionValuePath="value" optionLabelPath="label" value=model.type id="what-can-i-do-for-you?" required=true prompt=" -- " title="Please indicate how I can help you" action=(action (mut model.type))}}
+				{{select-list content=goals optionValuePath="value" optionLabelPath="label" value=application.type id="what-can-i-do-for-you?" required=true prompt=" -- " title="Please indicate how I can help you" action=(action (mut application.type))}}
 			{{/form-field}}
-			{{#liquid-if model.isPurchase}}
+			{{#liquid-if application.isPurchase}}
 				{{#form-field label="How much do you have?"}}
-					{{currency-input value=model.downPayment required=true title="Please indicate the amount which you can provide in CAD as a downpayment"}}
-					{{#liquid-if model.downPayment}}
-						<span class="help">A downpayment of <strong>{{format-number model.downPayment style="currency" currency="CAD"}}</strong></span>
+					{{currency-input value=application.downPayment required=true title="Please indicate the amount which you can provide in CAD as a downpayment"}}
+					{{#liquid-if application.downPayment}}
+						<span class="help">A downpayment of <strong>{{format-number application.downPayment style="currency" currency="CAD"}}</strong></span>
 					{{/liquid-if}}
 				{{/form-field}}
-				{{#liquid-if model.downPayment}}
+				{{#liquid-if application.downPayment}}
 					{{#form-field label="Where is your downpayment coming from?"}}
-						{{select-list content=downPaymentSources optionValuePath="value" optionLabelPath="label" value=model.downPaymentSource action=(action (mut model.downPaymentSource))}}
+						{{select-list content=downPaymentSources optionValuePath="value" optionLabelPath="label" value=application.downPaymentSource action=(action (mut application.downPaymentSource))}}
 					{{/form-field}}
-					{{#liquid-if model.isOtherDownPaymentSource}}
+					{{#liquid-if application.isOtherDownPaymentSource}}
 						{{#form-field label="Please describe your other 'other' downpayment source"}}
-							{{input type="text" value=model.downPaymentExplanation title="Please provide a downpayment source" required=true placeholder="Source"}}
+							{{input type="text" value=application.downPaymentExplanation title="Please provide a downpayment source" required=true placeholder="Source"}}
 						{{/form-field}}
 					{{/liquid-if}}
 				{{/liquid-if}}
 			{{/liquid-if}}
 			{{#form-field label="Additional Comments" layoutDirection="vertical"}}
-				{{textarea value=model.comment class="row" placeholder="Is there anything else I can do for you?" rows=model.commentRows id="anything-else-i-can-do?" title="Anything else you would like to add?"}}
+				{{textarea value=application.comment class="row" placeholder="Is there anything else I can do for you?" rows=application.commentRows id="anything-else-i-can-do?" title="Anything else you would like to add?"}}
 			{{/form-field}}
 			<footer class="form-actions">
-				<button class="button-info-inverted" {{action "sendIncomplete"}} type="submit">Contact Me Now
-					{{accessible-icon icon="mail4" title="Contact me now"}}</button>
+				<button class="button-info-inverted" {{action "sendIncomplete"}} type="submit">Contact Me Now</button>
 				<button type="submit" title="Continue to Full Application">Complete Full Application</button>
 			</footer>
 		{{/validatable-form}}
