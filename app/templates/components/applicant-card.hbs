@@ -3,7 +3,7 @@
 		<h1 class="applicant-card-title">
 			<span class="applicant-card-full-name">{{applicant.fullName}}</span>
 			{{#if applicant.isPrimary}}
-				<span class="applicant-card-role">Primary Applicant</span>
+				<sup class="applicant-card-role">Primary Applicant</sup>
 			{{/if}}
 		</h1>
 	{{/liquid-if}}
@@ -32,7 +32,7 @@
 
 <article class="applicant-card-content">
 	{{#liquid-if isEditing}}
-		{{#form-section title="basic-information" icon="information"}}
+		{{#form-section title="basic-information" icon="info"}}
 			<div class = "row">
 				{{#form-field title="First Name" class="column one-half" layoutDirection="vertical"}}
 					{{expandable-input value=applicant.firstName placeholder="First Name" required=true autofocus="autofocus" title="Please provide the applicant's first name" autocomplete="given-name"}}
@@ -63,7 +63,7 @@
 				{{/form-field}}
 			{{/unless}}
 		{{/form-section}}
-		{{#form-section title="Location" icon="pin"}}
+		{{#form-section title="Location" icon="pushpin"}}
 			{{#unless applicant.isPrimary}}
 				{{#if isLinked}}
 					<button {{action "unlinkAddresses"}}>Unlink Addresses</button>
@@ -77,7 +77,7 @@
 			{{#form-section title="Employment" icon="briefcase"}}
 				{{employment-table employment=applicant.employment previousEmployment=applicant.previousEmployment currentEmployment=applicant.currentEmployment onAddEmployment="addEmployment" onRemoveEmployment="removeEmployment"}}
 			{{/form-section}}
-			{{#form-section title="Extra Income Sources" icon="coin"}}
+			{{#form-section title="Extra Income Sources" icon="coin-dollar"}}
 				{{income-table income=applicant.income excluded=applicant.employmentIncome onAdd="addIncome" onRemove="removeIncome"}}
 			{{/form-section}}
 		{{/if}}
@@ -130,7 +130,7 @@
 			{{/if}}
 			{{#if applicant.currentAddress}}
 				<dt>Current Address</dt>
-				<dd>{{accessible-icon icon="pin"}} {{applicant.currentAddress.address}}</dd>
+				<dd>{{accessible-icon icon="pushpin"}} {{applicant.currentAddress.address}}</dd>
 			{{/if}}
 		</dl>
 	{{/liquid-if}}

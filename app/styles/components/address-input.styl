@@ -6,9 +6,8 @@ $addressInputMinWidth ?= 16em
 	max-width $addressInputMaxWidth
 	transition 0.4s all linear
 	&:before
-		content $icon-pin
+		background url($icon-pin)
 		margin 0 0.4em
-		@extend $icomoon
 	&.autocompleted
 		border-color green
 		border-bottom-width 2px

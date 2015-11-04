@@ -62,14 +62,14 @@ getAlert(colour, icon, position)
 	>:first-child
 		if position is left
 			&:before
-				content: lookup("$icon-" + icon)
-				@extend $icomoon, $float-left
+				background url(lookup("$icon-" + icon))
+				@extend $float-left
 				line-height 1.7
 				margin-right $alertIconMargin
 		if position is right
 			&:after
-				content: lookup("$icon-" + icon)
-				@extend $icomoon, $float-right
+				background url(lookup("$icon-" + icon))
+				@extend $float-right
 				margin-left $alertIconMargin
 				line-height 1.7
 for alertType, type in alertTypes

@@ -36,14 +36,13 @@ $applicantCardMaxWidth ?= 40em
 			transform scale(0.9)
 			&:before
 				transition transform 0.4s ease, opacity 0.4s ease
-				content $icon-link
+				background url($icon-link)
 				position absolute
 				font-size 3em
 				top 50%
 				left -1.4em
 				transform rotate(45deg)
 				opacity 0.6
-				@extend $icomoon
 		&.primary-applicant
 			.applicant-card-role
 				position absolute

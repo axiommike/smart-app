@@ -94,8 +94,7 @@ $material-box
 			position relative
 			display initial
 			&:before
-				content $icon-mail5
-				@extend $icomoon
+				background url($icon-mail5)
 				position absolute
 				font-size 6.4em
 				right 50%
@@ -168,8 +167,8 @@ $material-box
 	opacity 0.9
 	transition opacity $transitionTime $transitionFunction
 	&:after
-		content $icon-pencil
-		@extend $icomoon, $small-margin-left, $absolute
+		background url($icon-pencil)
+		@extend $small-margin-left, $absolute
 		right -1.2em
 		top 0.3em
 		opacity 0
