@@ -3,13 +3,13 @@
 		{{#form-section title="Address and Location" class="column"}}
 			{{historical-address address=property.address required=true customLabelPrefix=addressType}}
 			{{#form-field label="Estimated Property Value"}}
-				{{currency-input value=property.value placeholder="Property Value" min="0" step="any"}}
+				{{currency-input value=propertyProxy.value placeholder="Property Value" min="0" step="any"}}
 				{{#liquid-if property.value}}
 					<span class="help"><strong>{{format-number property.value style="currency" currency="CAD"}}</strong> in estimated value</span>
 				{{/liquid-if}}
 			{{/form-field}}
 			{{#form-field label="Property Taxes"}}
-				{{currency-input value=property.propertyTaxes placeholder="Property Taxes" min="0" step="any"}}
+				{{currency-input value=propertyProxy.propertyTaxes placeholder="Property Taxes" min="0" step="any"}}
 				{{#if property.propertyTaxes}}
 					<span class="help">
 					<math>

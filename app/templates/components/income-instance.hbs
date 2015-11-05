@@ -2,18 +2,18 @@
 	{{partial "partials/toggle-edit-button"}}
 	<div class="row">
 		{{#form-field label="Source" class="column"}}
-			{{select-list content=incomeSources value=income.source action=(action (mut income.source))}}
+			{{select-list content=incomeSources value=incomeProxy.source action=(action (mut income.source))}}
 		{{/form-field}}
 		{{#liquid-if isPension}}
 			{{#form-field label="Pension Source"}}
-				{{select-list content=pensionTypes value=income.description action=(action (mut income.description))}}
+				{{select-list content=pensionTypes value=incomeProxy.description action=(action (mut incomeProxy.description))}}
 			{{/form-field}}
 		{{/liquid-if}}
 	</div>
 
 	<div class="row">
 		{{#form-field label="Income" class="column"}}
-			{{currency-input value=income.value}}
+			{{currency-input value=incomeProxy.value}}
 			{{#if income.value}}
 				<span class="help">
 					or
@@ -26,12 +26,12 @@
 			{{/if}}
 		{{/form-field}}
 		{{#form-field label="Frequency" class="column"}}
-			{{select-list content=frequencies value=income.frequency action=(action (mut income.frequency))}}
+			{{select-list content=frequencies value=incomeProxy.frequency action=(action (mut incomeProxy.frequency))}}
 		{{/form-field}}
 	</div>
 	<div class="row">
 		{{#form-field label="Description"}}
-			{{input type="text" required=income.isOther placeholder="Describe this income source" value=income.description size=descriptionSize title="Please indicate the nature of this income source"}}
+			{{input type="text" required=income.isOther placeholder="Describe this income source" value=incomeProxy.description size=descriptionSize title="Please indicate the nature of this income source"}}
 		{{/form-field}}
 	</div>
 	{{#if onRemove}}

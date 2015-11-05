@@ -1,28 +1,28 @@
 <datalist id="vehicle-makes">
 	{{#each vehicles as |vehicleMake|}}
-		<option {{bind-attr value=vehicleMake.value}}>{{vehicleMake.title}}</option>
+		<option value={{vehicleMake.value}}>{{vehicleMake.title}}</option>
 	{{/each}}
 </datalist>
 <datalist id="vehicle-models">
 	{{#each models.firstObject.models as |model|}}
-		<option {{bind-attr value=model.value}}>{{model.title}}</option>
+		<option value={{model.value}}>{{model.title}}</option>
 	{{/each}}
 </datalist>
 
 {{#form-field label="Vehicle Year"}}
-	{{year-select value=vehicle.year required=true title="Plese provide the year the vehicle was manufactured"}}
+	{{year-select value=vehicleProxy.year required=true title="Plese provide the year the vehicle was manufactured"}}
 {{/form-field}}
 {{#form-field label="Vehicle Make"}}
-	{{autocomplete-input type="text" value=vehicle.make title="Please enter a valid vehicle make" required=true placeholder="Vehicle Make" datalist="vehicle-makes"}}
+	{{autocomplete-input type="text" value=vehicleProxy.make title="Please enter a valid vehicle make" required=true placeholder="Vehicle Make" datalist="vehicle-makes"}}
 {{/form-field}}
 {{#form-field label="Vehicle Model"}}
-	{{autocomplete-input type="text" value=vehicle.model placeholder="Vehicle Model Name" datalist="vehicle-models"}}
+	{{autocomplete-input type="text" value=vehicleProxy.model placeholder="Vehicle Model Name" datalist="vehicle-models"}}
 {{/form-field}}
 
 {{asset-instance asset=vehicle.asset}}
 
 {{#form-field label="Is there financing on this vehicle?"}}
-	{{on-off-switch checked=isLoaned title="Please indicate whether this vehicle is currently being loaned"}}
+	{{on-off-switch checked=vehicleProxy.isLoaned title="Please indicate whether this vehicle is currently being loaned"}}
 {{/form-field}}
 {{#liquid-if isLoaned}}
 	{{liability-instance liability=vehicle.loan typeEditingDisabled=true}}

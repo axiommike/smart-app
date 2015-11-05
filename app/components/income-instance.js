@@ -1,4 +1,5 @@
 import Ember from "ember";
+import autosave from "ember-autosave";
 import EditableMixin from "../mixins/editable";
 
 export default Ember.Component.extend(EditableMixin, {
@@ -25,6 +26,7 @@ export default Ember.Component.extend(EditableMixin, {
 	showApplicant: false,
 	pensionType: null,
 	income: null,
+	incomeProxy: autosave("income"),
 	onRemove: null,
 	flatList: false,
 	descriptionSize: Ember.computed("income.description.length", function() {
