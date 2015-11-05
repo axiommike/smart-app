@@ -3,6 +3,7 @@ import ajax from "ic-ajax";
 import ENV from "../../config/environment";
 
 export default Ember.Route.extend({
+	titleToken: "Thank You",
 	serializeApplicant: function (applicant) {
 		let applicantJSON = applicant.toJSON(),
 			promises = [];

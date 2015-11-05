@@ -1,8 +1,8 @@
 {{#form-field label=label}}
 	{{#if address.isCurrent}}
-		{{address-input address=address value=addressProxy.address placeholder=typeName title="Please indicate where you are currently living" required=required}}
+		{{address-input address=address value=address.address placeholder=typeName title="Please indicate where you are currently living" required=required}}
 	{{else}}
-		{{address-input address=address value=addressProxy.address placeholder=typeName title="Please provide an address" required=required}}
+		{{address-input address=address value=address.address placeholder=typeName title="Please provide an address" required=required}}
 	{{/if}}
 	{{#if address.address}}
 		<div class="address-details-container">
@@ -23,11 +23,11 @@
 	{{/if}}
 {{/form-field}}
 {{#form-field label="How Long?"}}
-	{{input type="number" value=addressProxy.tenureYears placeholder="Years" min="0" step="1" required=true title="Please indicate the amount of time in which this address was resided"}}
+	{{input type="number" value=address.tenureYears placeholder="Years" min="0" step="1" required=true title="Please indicate the amount of time in which this address was resided"}}
 	<label for = "tenure-years">years</label>
-	{{input type="number" value=addressProxy.tenureMonths placeholder="mths" min="0" max="12" step="1"}}
+	{{input type="number" value=address.tenureMonths placeholder="mths" min="0" max="12" step="1"}}
 	<label for = "tenure-months">months</label>
-	{{#liquid-if addressProxy.tenureTotalYears}}
+	{{#liquid-if address.tenureTotalYears}}
 		<span class="help">Lived here for {{address.tenureTotalYears}} year(s)</span>
 	{{/liquid-if}}
 {{/form-field}}

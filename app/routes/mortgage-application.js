@@ -3,6 +3,9 @@ import ajax from "ic-ajax";
 import ENV from "../config/environment";
 
 export default Ember.Route.extend({
+	titleToken: Ember.computed("currentModel.id", function() {
+		return `Mortgage Application ${this.get("currentModel.id")}`;
+	}),
 	addEmployment: function(applicant, isCurrent) {
 		isCurrent = isCurrent ? true : false;
 		let createdEmployment = this.store.createRecord("employment", {isCurrent: isCurrent}),
