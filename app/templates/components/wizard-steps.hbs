@@ -1,18 +1,18 @@
-{{#if showBreadcrumbs}}
-	<ul class="wizard-steps-breadcrumbs">
-		{{#each steps as |step|}}
-			{{wizard-step step=step.step name=step.name icon=step.icon}}
-		{{else}}
-			No steps found!
-		{{/each}}
-	</ul>
-{{/if}}
-
 {{#if totalSteps}}
 	<progress value="{{realStepNumber}}" max="{{totalSteps}}" class="wizard-steps-progress">
 		<span class="info">Step {{currentStepNumber}} of {{totalSteps}}</span>
 	</progress>
-	{{wizard-step step=realStepNumber stepName=currentStepName stepIcon=currentStepIcon totalSteps=totalSteps}}
+	{{#wizard-step step=realStepNumber stepName=currentStepName stepIcon=currentStepIcon totalSteps=totalSteps}}
+		{{#if showBreadcrumbs}}
+			<ul class="wizard-steps-breadcrumbs">
+				{{#each steps as |step|}}
+					<li class="wizard-steps-breadcrumb">
+						{{#link-to step.url title=step.title class="wizard-steps-breadcrumb-link"}}{{step.title}}{{/link-to}}
+					</li>
+				{{/each}}
+			</ul>
+		{{/if}}
+	{{/wizard-step}}
 {{/if}}
 
 {{yield}}

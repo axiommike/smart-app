@@ -2,13 +2,31 @@ import Ember from "ember";
 import ajax from "ic-ajax";
 
 export default Ember.Controller.extend({
-	steps:       [
-		"Basic Information",
-		"Applicants",
-		"Assets",
-		"Liabilities",
-		"Summary",
-		"Thank You"
+	steps: [
+		{
+			title: "Basic Information",
+			url: "mortgage-application.index"
+		},
+		{
+			title: "Applicants",
+			url: "mortgage-application.applicants"
+		},
+		{
+			title: "Assets",
+			url: "mortgage-application.assets"
+		},
+		{
+			title: "Liabilities",
+			url: "mortgage-application.liabilities"
+		},
+		{
+			title: "Summary",
+			url: "mortgage-application.summary"
+		},
+		{
+			title: "Finished",
+			url: "mortgage-application.thank-you"
+		}
 	],
 	now: new Date(),
 	isDefault: Ember.computed.equal("model.brokerage", 2),

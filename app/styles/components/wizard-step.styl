@@ -11,6 +11,26 @@ Created on 15/04/2015 by PhpStorm
 	&-step
 		&s
 			display block
+			&-breadcrumb
+				&s
+					// display inline-block
+					margin-top 0.5em
+				+media-query($breakpointMainOpposite)
+					display inline-block
+					& + &
+						margin-left 1em
+				&-link
+					font-size 0.8em
+					border-bottom 0.1em solid transparent
+					padding-bottom 0.15em
+					transition 0.3s ease opacity, 0.3s ease border-color
+					opacity 0.8
+					&:hover, &.active
+						border-color currentColor
+						opacity 1
+					color inherit
+					font-weight bold
+					text-transform uppercase
 			&-progress
 				display inherit
 				width 100%
@@ -22,11 +42,13 @@ Created on 15/04/2015 by PhpStorm
 					background transparent
 				&::-webkit-progress-value
 					background white
-		padding 4em
+		padding 2em 4em
 		&-current-step
 			font-weight bold
 		&-name
 			font-weight bold
+		&-meta
+			display inline-block
 		&-title
 			display block
 			font-size 2em

@@ -1,5 +1,5 @@
 <header role="banner" data-current-step="{{currentStep}}">
-	{{wizard-steps steps=steps currentStepNumber=currentStep}}
+	{{wizard-steps steps=steps currentStepNumber=currentStep showBreadcrumbs=true}}
 	{{#if model.agent}}
 		<aside class="agent-callout" role="complementary">
 			{{#if model.agent.image}}

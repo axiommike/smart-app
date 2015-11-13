@@ -16,6 +16,6 @@ export default Ember.Component.extend({
 	}),
 	validStep: Ember.computed.lte("currentStepNumber", "totalSteps"),
 	currentStepName: Ember.computed("currentStepNumber", "steps", function() {
-		return this.get("steps")[this.get("currentStepNumber")];
+		return this.get("steps")[this.get("currentStepNumber")].title;
 	})
 });
