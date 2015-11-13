@@ -10,7 +10,7 @@
 
 <ul class="properties">
 	{{#each properties as |property|}}
-		<li {{bind-attr class=":property-asset property.isRental:rental"}}>
+		<li class="property-asset {{if property.isRental "rental"}}">
 			{{#property-asset property=property showLabelPrefix=false addressType=addressType}}
 				<footer class="property-asset-actions">
 					<button {{action "removeProperty" property}} class="remove-button">Remove Property</button>

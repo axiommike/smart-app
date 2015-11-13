@@ -7,7 +7,7 @@ export default Ember.Component.extend(EditableMixin, {
 	applicant: null,
 	applicantProxy: autosave("applicant"),
 	isPrimaryApplicant: Ember.computed.alias("applicant.isPrimary"),
-	classNameBindings: ["isPrimaryApplicant:primary-applicant:co-applicant", ":applicant-card"],
+	classNameBindings: ["isPrimaryApplicant:primary-applicant:co-applicant", ":applicant-card", "onRemoveApplicant:removable"],
 	includeLiabilities: false,
 	includeAssets: false,
 	includeIncome: false,

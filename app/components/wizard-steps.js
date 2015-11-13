@@ -14,7 +14,6 @@ export default Ember.Component.extend({
 	currentStepIcon: Ember.computed("steps", "currentStepNumber", function() {
 		return this.get("validStep") ? this.get("steps")[this.get("currentStepNumber")].icon : null;
 	}),
-	min: 0,
 	validStep: Ember.computed.lte("currentStepNumber", "totalSteps"),
 	currentStepName: Ember.computed("currentStepNumber", "steps", function() {
 		return this.get("steps")[this.get("currentStepNumber")];

@@ -7,7 +7,7 @@
 	onAddLiability="addLiability" onRemoveLiability="removeLiability"
 	onAddAsset="addAsset" onRemoveAsset="removeAsset"
 	onAddIncome="addIncome" onRemoveIncome="removeIncome"}}
-	<footer {{bind-attr class=":disclaimer consentProvided:accepted"}}>
+	<footer class="disclaimer {{if consentProvided "accepted"}}">
 		<span class="info">Disclaimer</span>
 		{{#form-field label="I hereby declare that the information declared in this form are valid as of today, and I consent to having my records checked by the Canadian Credit Bureau"}}
 			{{input type="checkbox" checked=consentProvided required=true title="Please consent to the validity of the information you have provided in order to submit your application"}}
@@ -15,7 +15,7 @@
 	</footer>
 
 	<footer class="form-actions">
-		<button type="submit" {{bind-attr disabled=consentRequired}} class="button">Submit Application</button>
+		<button type="submit" disabled={{consentRequired}} class="button">Submit Application</button>
 	</footer>
 {{/validatable-form}}
 {{outlet}}

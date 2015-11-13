@@ -9,7 +9,7 @@
 {{/if}}
 
 {{#if totalSteps}}
-	<progress {{bind-attr value=realStepNumber min=min max=totalSteps}} class="wizard-steps-progress">
+	<progress value="{{realStepNumber}}" max="{{totalSteps}}" class="wizard-steps-progress">
 		<span class="info">Step {{currentStepNumber}} of {{totalSteps}}</span>
 	</progress>
 	{{wizard-step step=realStepNumber stepName=currentStepName stepIcon=currentStepIcon totalSteps=totalSteps}}

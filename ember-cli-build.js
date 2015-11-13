@@ -34,7 +34,9 @@ module.exports = function (defaults) {
 				"assets/fonts/icomoon/ie7/ie7.js",
 				"assets/fonts/icomoon/liga.js",
 				"assets/fonts/icomoon/demo-files/demo.css",
-				"assets/fonts/icomoon/demo-files/demo.js"
+				"assets/fonts/icomoon/demo.html",
+				"assets/fonts/icomoon/demo-files/demo.js",
+				"assets/fonts/icomoon/PNG"
 			]
 		}
 	});

@@ -27,7 +27,7 @@ module.exports = function (environment) {
 			enabled: true,
 			appcacheFile: "/manifest.appcache",
 			excludePaths: ["assets/components"],
-			fallback: ["/ index.html"],
+			fallback: ["/ /index.html"],
 			includePaths: ["/"],
 			network: ["api/"],
 			showCreateDate: true

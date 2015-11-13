@@ -124,7 +124,7 @@
 				</a>
 				{{#if onRemove}}
 					<div class="column actions">
-						<button {{bind-attr class="isEditing:remove-button:button-plain-warning"}} {{action "remove"}}>
+						<button class="{{if isEditing "remove-button" "button-plain-warning"}}" {{action "remove"}}>
 							{{#liquid-if isEditing}}
 								Remove {{#if asset.type}}
 								{{asset.type}}

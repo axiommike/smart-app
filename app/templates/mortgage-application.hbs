@@ -48,13 +48,13 @@
 
 <datalist id="lenders">
 	{{#each lenders as |lender|}}
-		<option {{bind-attr value=lender}}></option>
+		<option value="{{lender}}"></option>
 	{{/each}}
 </datalist>
 
 <datalist id="banks">
 	{{#each banks as |bank|}}
-		<option {{bind-attr value=bank}}></option>
+		<option value="{{bank}}"></option>
 	{{/each}}
 </datalist>
 

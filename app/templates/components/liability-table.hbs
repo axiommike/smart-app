@@ -4,7 +4,7 @@
 
 <ul class="liabilities">
 	{{#each filteredLiabilities as |liability|}}
-		<li {{bind-attr class=":liability liability.type"}}>
+		<li class="liability {{liability.type}}">
 			{{liability-instance liability=liability typeEditingDisabled=type isEditable=isEditable onRemove="removeLiability" showApplicant=showApplicant}}
 		</li>
 	{{else}}

@@ -4,7 +4,7 @@
 
 <ul class="vehicles">
 	{{#each vehicles as |vehicle|}}
-		<li {{bind-attr class=":vehicle :vehicle-asset vehicle.make:has-make"}}>
+		<li class="vehicle vehicle-asset {{if vehicle.make "has-make"}}">
 			{{vehicle-instance vehicle=vehicle}}
 			<button {{action "removeVehicle" vehicle}} class="remove-button">Remove Vehicle</button>
 		</li>

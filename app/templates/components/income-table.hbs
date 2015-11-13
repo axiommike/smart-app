@@ -7,9 +7,9 @@
 {{/unless}}
 </header>
 
-<ul {{bind-attr class=":income :income-table flatList:flat-list"}}>
+<ul class="income income-table {{if flatList "flat-list"}}">
 	{{#each filteredIncome as |extraIncome|}}
-		<li {{bind-attr class=":income extraIncome.source:extraIncome.source"}}>
+		<li class="income {{if extraIncome.source extraIncome.source}}">
 			{{income-instance income=extraIncome flatList=flatList isEditable=isEditable onRemove="removeIncome" showApplicant=showApplicant}}
 		</li>
 	{{else}}

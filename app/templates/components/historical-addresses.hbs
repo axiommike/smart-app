@@ -16,7 +16,7 @@
 			{{/each}}
 		</ul>
 		<footer class="address-history-total">
-			<p>Total address history: <span {{bind-attr class="additionalPreviousAddressesRequired:error:success"}}>{{previousAddressTimespan}} years</span></p>
+			<p>Total address history: <span class="{{if previousAddressesRequired "error" "success"}}">{{previousAddressTimespan}} years</span></p>
 		</footer>
 	{{/form-section}}
 {{/liquid-unless}}
