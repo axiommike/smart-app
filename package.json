@@ -48,7 +48,7 @@
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
     "ember-form-fields": "0.1.0",
-    "ember-intl": "git://github.com/CrshOverride/ember-intl.git#4ab898cdaadf5148a55ebd51c5f6a6252e47d764",
+    "ember-intl": "2.0.0-rc.5",
     "ember-localstorage-adapter": "0.5.5",
     "ember-metrics": "0.5.1",
     "ember-select-list": "0.9.4",
