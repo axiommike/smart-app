@@ -2,7 +2,8 @@ import Ember from "ember";
 
 export default Ember.Component.extend({
 	tagName: "header",
-	classNameBindings: [":wizard-step"],
+	classNameBindings: [":wizard-step", "hasBreadcrumbs"],
+	hasBreadcrumbs: false,
 	attributeBindings: ["role"],
 	role: "status",
 	title: Ember.computed("step", function() {

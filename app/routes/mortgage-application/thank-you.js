@@ -187,6 +187,9 @@ export default Ember.Route.extend({
 	},
 	beforeModel: function () {
 		let mortgageController = this.controllerFor("mortgage-application");
-		mortgageController.set("currentStep", 5);
+		mortgageController.setProperties({
+			currentStep: 5,
+			showBreadcrumbs: true
+		});
 	}
 });

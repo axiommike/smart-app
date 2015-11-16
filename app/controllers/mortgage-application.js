@@ -29,6 +29,7 @@ export default Ember.Controller.extend({
 		}
 	],
 	now: new Date(),
+	showBreadcrumbs: true,
 	isDefault: Ember.computed.equal("model.brokerage", 2),
 	agent: null,
 	cid: null, /* client ID -- named cid because of legacy reasons */

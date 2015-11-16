@@ -4,7 +4,10 @@ export default Ember.Route.extend({
 	titleToken: "Applicants",
 	beforeModel: function() {
 		let mortgageController = this.controllerFor("mortgage-application");
-		mortgageController.set("currentStep", 1);
+		mortgageController.setProperties({
+			currentStep: 1,
+			showBreadcrumbs: true
+		});
 	},
 	setupController: function (controller, model) {
 		// Call _super for default behaviour

@@ -2,8 +2,8 @@
 	<progress value="{{realStepNumber}}" max="{{totalSteps}}" class="wizard-steps-progress">
 		<span class="info">Step {{currentStepNumber}} of {{totalSteps}}</span>
 	</progress>
-	{{#wizard-step step=realStepNumber stepName=currentStepName stepIcon=currentStepIcon totalSteps=totalSteps}}
-		{{#if showBreadcrumbs}}
+	{{#wizard-step step=realStepNumber stepName=currentStepName stepIcon=currentStepIcon totalSteps=totalSteps hasBreadcrumbs=showBreadcrumbs}}
+		{{#liquid-if showBreadcrumbs}}
 			<ul class="wizard-steps-breadcrumbs">
 				{{#each steps as |step|}}
 					<li class="wizard-steps-breadcrumb">
@@ -11,7 +11,7 @@
 					</li>
 				{{/each}}
 			</ul>
-		{{/if}}
+		{{/liquid-if}}
 	{{/wizard-step}}
 {{/if}}
 
