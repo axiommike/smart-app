@@ -1,6 +1,5 @@
 {{historical-address address=currentAddress required=true}}
 {{#liquid-unless currentAddressLongEnough}}
-	<button {{action "addAddress"}} class="add-button">Add Previous Address</button>
 	{{#form-section title="Previous Addresses"}}
 		{{#liquid-if previousAddressesRequired}}
 			<span class="input-error">Please provide up to 3 years of address information.</span>
@@ -18,6 +17,7 @@
 		<footer class="address-history-total">
 			<p>Total address history: <span class="{{if previousAddressesRequired "error" "success"}}">{{previousAddressTimespan}} years</span></p>
 		</footer>
+		<button {{action "addAddress"}} class="add-button">Add Previous Address</button>
 	{{/form-section}}
 {{/liquid-unless}}
 

@@ -1,8 +1,8 @@
 {{#form-field label=label}}
 	{{#if address.isCurrent}}
-		{{address-input address=address value=address.address placeholder=typeName title="Please indicate where you are currently living" required=required}}
+		{{address-input address=address value=address.address placeholder=label title="Please indicate where you are currently living" required=required}}
 	{{else}}
-		{{address-input address=address value=address.address placeholder=typeName title="Please provide an address" required=required}}
+		{{address-input address=address value=address.address placeholder=label title="Please provide an address" required=required}}
 	{{/if}}
 	{{#if address.address}}
 		<div class="address-details-container">
