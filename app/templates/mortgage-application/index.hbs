@@ -1,4 +1,5 @@
-<h1 class="announcement">Thanks for coming in</h1>
+<h1 class="announcement">Let's Get Started</h1>
+<p class="help">To begin, we will need to gather a little information.  Any details you provide are used solely for the purpose of mortgage qualification and remain strictly confidential.   This is a secure form and will help us identify the best possible mortgage products available to you.  There is not cost or obligation in submitting this form.</p>
 <article>
 	<section class="quick-application box">
 		{{#validatable-form action="nextStep"}}
@@ -18,7 +19,7 @@
 					{{input value=applicant.phone type="tel" required=true placeholder="Phone" id="phone" autocomplete="tel" title="Please provide your primary phone number"}}
 				{{/form-field}}
 			</div>
-			{{#form-field label="How'd you hear about me?"}}
+			{{#form-field label="How did you hear about me?"}}
 				{{select-list content=sourceTypes optionValuePath="value" optionLabelPath="label" value=application.source required=true prompt=" -- " title="Please select the way that you heard about me" action=(action (mut application.source))}}
 			{{/form-field}}
 			{{#liquid-if model.isReferral}}
@@ -27,7 +28,7 @@
 				{{/form-field}}
 			{{/liquid-if}}
 			{{#liquid-if model.isOther}}
-				{{#form-field label="Referral Source"}}
+				{{#form-field label="Ok, I give up.  How did you hear about me?"}}
 					{{input type="text" value=application.referredBy required=true placeholder="Other Referral Source" title="Please indicate what other source brought you here"}}
 				{{/form-field}}
 			{{/liquid-if}}
@@ -36,7 +37,12 @@
 					{{input type="text" value=application.referredBy required=true placeholder="Past Client Name" title="Please indicate what other source brought you here"}}
 				{{/form-field}}
 			{{/liquid-if}}
-			{{#form-field label="What Can I do for you?"}}
+			{{#liquid-if model.referredByFriend}}
+				{{#form-field label="Which friend?  I would like to thank them!"}}
+					{{input type="text" value=application.referredBy required=true placeholder="Friend's Name" title="You didn't tell me your friend's name yet..."}}
+				{{/form-field}}
+			{{/liquid-if}}
+			{{#form-field label="What can I do for you?"}}
 				{{select-list content=goals optionValuePath="value" optionLabelPath="label" value=application.type id="what-can-i-do-for-you?" required=true prompt=" -- " title="Please indicate how I can help you" action=(action (mut application.type))}}
 			{{/form-field}}
 			{{#liquid-if model.isPurchase}}

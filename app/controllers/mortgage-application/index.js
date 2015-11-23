@@ -5,21 +5,18 @@ export default Ember.Controller.extend({
 	application: autosave("model"),
 	applicant: autosave("model.applicant"),
 	sourceTypes: [
-		{value: "phone", label: "Phone"},
-		{value: "website", label: "Website"},
-		{value: "email", label: "Email"},
-		{value: "radio", label: "Radio"},
-		{value: "billboard", label: "Billboard"},
-		{value: "word-of-mouth", label: "Word of Mouth"},
+		{value: "friend", label: "Friend"},
 		{value: "agent", label: "Realtor"},
-		{value: "past-client", label: "Past Client"},
+		{value: "past-client", label: "I'm a past client"},
+		{value: "search", label: "Online search"},
+		{value: "website", label: "Advertising"},
 		{value: "other", label: "Other"}
 	],
 	goals: [
-		{value: "purchase", label: "I want to purchase"},
-		{value: "refinance", label: "I want to refinance"},
-		{value: "renewal", label: "I want to renew my mortgage"},
-		{value: "rental", label: "I want to purchase a rental"},
+		{value: "purchase", label: "I would like to purchase a property"},
+		{value: "refinance", label: "I would like to refinance my mortgage"},
+		{value: "renewal", label: "I would like to renew my mortgage"},
+		{value: "rental", label: "I would like to buy a rental property"},
 		{value: "advice", label: "I need some advice"}
 	],
 	downPaymentSources: [

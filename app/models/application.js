@@ -44,6 +44,7 @@ export default DS.Model.extend({
 	isReferral: Ember.computed.equal("source", "agent"),
 	isOther: Ember.computed.equal("source", "other"),
 	referredByClient: Ember.computed.equal("source", "past-client"),
+	referredByFriend: Ember.computed.equal("source", "friend"),
 	hasReferralSource: Ember.computed.or("referredByClient", "isReferral"),
 	referredBy: DS.attr("string"),
 	downPayment: DS.attr("number"),
