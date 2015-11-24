@@ -1,5 +1,5 @@
 <h1 class="announcement">Let's Get Started</h1>
-<p class="help">To begin, we will need to gather a little information.  Any details you provide are used solely for the purpose of mortgage qualification and remain strictly confidential.   This is a secure form and will help us identify the best possible mortgage products available to you.  There is not cost or obligation in submitting this form.</p>
+<p class="intro-help">To begin, we will need to gather a little information.  Any details you provide are used solely for the purpose of mortgage qualification and remain strictly confidential.   This is a secure form and will help us identify the best possible mortgage products available to you.  There is not cost or obligation in submitting this form.</p>
 <article>
 	<section class="quick-application box">
 		{{#validatable-form action="nextStep"}}
@@ -23,18 +23,13 @@
 				{{select-list content=sourceTypes optionValuePath="value" optionLabelPath="label" value=application.source required=true prompt=" -- " title="Please select the way that you heard about me" action=(action (mut application.source))}}
 			{{/form-field}}
 			{{#liquid-if model.isReferral}}
-				{{#form-field label="Who referred me?"}}
-					{{input type="text" value=application.referredBy required=true placeholder="Who referred me?" title="Please indicate who referred me to you"}}
+				{{#form-field label="Which realtor?  I would like to thank them!"}}
+					{{input type="text" value=application.referredBy required=true placeholder="Which realtor?" title="Please indicate which realtor referred me to you"}}
 				{{/form-field}}
 			{{/liquid-if}}
 			{{#liquid-if model.isOther}}
 				{{#form-field label="Ok, I give up.  How did you hear about me?"}}
 					{{input type="text" value=application.referredBy required=true placeholder="Other Referral Source" title="Please indicate what other source brought you here"}}
-				{{/form-field}}
-			{{/liquid-if}}
-			{{#liquid-if model.referredByClient}}
-				{{#form-field label="Which client referred me?"}}
-					{{input type="text" value=application.referredBy required=true placeholder="Past Client Name" title="Please indicate what other source brought you here"}}
 				{{/form-field}}
 			{{/liquid-if}}
 			{{#liquid-if model.referredByFriend}}

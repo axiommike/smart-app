@@ -8,6 +8,10 @@
 	{{/form-field}}
 {{/liquid-unless}}
 
+{{#form-field label="Employment Type"}}
+	{{select-list content=employmentTypes optionValuePath="value" optionLabelPath="label" value=employmentProxy.type title="Please choose the type of employment" action=(action (mut employmentProxy.type))}}
+{{/form-field}}
+
 {{#liquid-if employment.isSelfEmployed}}
 	{{#form-field label="Business Name"}}
 		{{input type="text" value=employmentProxy.employer.name placeholder="Business Name" required=true}}
@@ -83,22 +87,18 @@
 	{{on-off-switch checked=employmentProxy.isCurrent title="Is the job current?"}}
 {{/form-field}}
 
-{{#form-field label="Employment Type"}}
-	{{select-list content=employmentTypes optionValuePath="value" optionLabelPath="label" value=employmentProxy.type title="Please choose the type of employment" action=(action (mut employmentProxy.type))}}
-{{/form-field}}
-
-
-
 {{#liquid-if needsNOA}}
 	<div class="row distributed">
-		{{#form-section title="Last 2 Years' Line 150" icon="dollar"}}
-			{{#each noaValues as |year|}}
-				{{#form-field label=year.year}}
-					{{currency-input min="0" step="any" value=year.value required=true placeholder="Yearly Income" title="Please indicate the filed income for this yearly assesment"}}
-				{{/form-field}}
-			{{/each}}
-		{{/form-section}}
-		<span class="option-separator">or</span>
+		{{#liquid-unless hasIncome}}
+			{{#form-section title="Last 2 Years' Line 150" icon="dollar"}}
+				{{#each noaValues as |year|}}
+					{{#form-field label=year.year}}
+						{{currency-input min="0" step="any" value=year.value required=true placeholder="0" title="Please indicate the filed income for this yearly assesment"}}
+					{{/form-field}}
+				{{/each}}
+			{{/form-section}}
+			<span class="option-separator">or</span>
+		{{/liquid-unless}}
 		{{#form-field label="Approximate annual, taxable income"}}
 			{{currency-input min="0" step="any" value=employment.income.value required=true}}
 		{{/form-field}}
