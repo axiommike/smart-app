@@ -38,6 +38,9 @@ export default Ember.Component.extend({
 		addEmployment: function() {
 			this.sendAction("onAddEmployment");
 		},
+		addAdditionalEmployment() {
+			this.sendAction("onAddEmployment", true);
+		},
 		removeEmployment: function(employment) {
 			this.sendAction("onRemoveEmployment", employment);
 		}
