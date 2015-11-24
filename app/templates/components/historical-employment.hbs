@@ -73,7 +73,7 @@
 			{{select-list content=paymentFrequencies optionValuePath="value" optionLabelPath="label" value=employmentProxy.paymentFrequency title="Please select the payment frequency for this position" action=(action (mut employmentProxy.paymentFrequency))}}
 		{{/form-field}}
 	{{/liquid-unless}}
-	{{#liquid-unless employment.isRetired}}
+	{{#liquid-unless notPaid}}
 		{{#form-field label="Annual Pay"}}
 			{{#liquid-if employment.isCommission}}
 				<span class="form-field-hint">Please give us the closest guess to your annual pay.</span>
@@ -84,11 +84,12 @@
 			{{/liquid-if}}
 		{{/form-field}}
 	{{/liquid-unless}}
+	{{#liquid-unless notWorking}}
+		{{#form-field label="I currently work here"}}
+			{{on-off-switch checked=employmentProxy.isCurrent title="Is the job current?"}}
+		{{/form-field}}
+	{{/liquid-unless}}
 {{/liquid-if}}
-
-{{#form-field label="I currently work here"}}
-	{{on-off-switch checked=employmentProxy.isCurrent title="Is the job current?"}}
-{{/form-field}}
 
 {{#liquid-if needsNOA}}
 	<div class="row distributed">

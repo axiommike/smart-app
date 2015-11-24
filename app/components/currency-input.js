@@ -2,7 +2,7 @@ import Ember from "ember";
 
 export default Ember.TextField.extend({
 	type: "number",
-	placeholder: "$.$",
+	placeholder: "$",
 	step: "any",
 	min: 0,
 	title: "Please provide a valid value in CAD",

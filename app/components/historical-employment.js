@@ -22,7 +22,8 @@ export default Ember.Component.extend(EditableMixin, {
 		}
 		return noas;
 	}),
-	notWorking: Ember.computed.or("employment.isRetired", "employment.isOnPension"),
+	notWorking: Ember.computed.or("employment.isRetired", "employment.isOnPension", "employment.isStudent"),
+	notPaid: Ember.computed.or("employment.isRetired", "employment.isStudent"),
 	employmentTypes: [
 		{label: "Full-Time", value: "full-time"},
 		{label: "Part-Time", value: "part-time"},

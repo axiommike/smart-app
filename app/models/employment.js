@@ -50,6 +50,7 @@ export default DS.Model.extend(TimeableMixin, {
 	isCommission: Ember.computed("paymentFrequency", function() {
 		return this.get("paymentFrequency") === "commission" || this.get("paymentFrequency") === "commission-salary" || this.get("paymentFrequency") === "commission-hourly";
 	}),
+	isStudent: Ember.computed.equal("type", "student"),
 	tenureMonths: DS.attr("number", {defaultValue: 0}),
 	hourlyRate: DS.attr("number", {defaultValue: 0}),
 	weeklyHours: DS.attr("number", {defaultValue: 0}),
