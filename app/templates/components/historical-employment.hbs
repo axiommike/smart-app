@@ -13,6 +13,11 @@
 {{/form-field}}
 
 {{#liquid-if employment.isSelfEmployed}}
+	{{#form-field label="How long?"}}
+		<label>{{input type="number" value=employmentProxy.tenureYears required=true placeholder="Years" min="0" step="1" title="Please indicate how many years you have owned this company"}} years</label>
+		<label>{{input type="number" value=employmentProxy.tenureMonths placeholder="mths" min="0" max="12" step="1"}} months
+		</label>
+	{{/form-field}}
 	{{#form-field label="Business Name"}}
 		{{input type="text" value=employmentProxy.employer.name placeholder="Business Name" required=true}}
 	{{/form-field}}
@@ -24,11 +29,6 @@
 	{{/form-field}}
 	{{#form-field label="Are income taxes paid up to date?"}}
 		{{on-off-switch checked=incomeTaxesPaid title="Please indicate whether you have paid the most recent year of income taxes"}}
-	{{/form-field}}
-	{{#form-field label="How long?"}}
-		<label>{{input type="number" value=employmentProxy.tenureYears required=true placeholder="Years" min="0" step="1" title="Please indicate how many years you have owned this company"}} years</label>
-		<label>{{input type="number" value=employmentProxy.tenureMonths placeholder="mths" min="0" max="12" step="1"}} months
-		</label>
 	{{/form-field}}
 {{else}}
 	{{#form-field label="Employer Address"}}
