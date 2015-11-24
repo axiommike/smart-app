@@ -42,6 +42,8 @@ export default DS.Model.extend(TimeableMixin, {
 	}.observes("hourlyRate", "weeklyHours"),
 	paymentFrequency: DS.attr("string", {defaultValue: "hourly"}),
 	isSelfEmployed: Ember.computed.equal("type", "self-employed"),
+	isRetired: Ember.computed.equal("type", "retired"),
+	isOnPension: Ember.computed.equal("type", "pension"),
 	isCurrent: DS.attr("boolean", {defaultValue: false}),
 	isHourly: Ember.computed.equal("paymentFrequency", "hourly"),
 	isSalaried: Ember.computed.equal("paymentFrequency", "salary"),

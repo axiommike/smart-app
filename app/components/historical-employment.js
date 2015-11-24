@@ -4,7 +4,7 @@ import EditableMixin from "../mixins/editable";
 
 export default Ember.Component.extend(EditableMixin, {
 	tagName: "historical-employment",
-	classNameBindings: ["employment.isCurrent", ":historical-employment", "needsNOA", "hasIncome"],
+	classNameBindings: ["employment.isCurrent", ":historical-employment", "needsNOA", "hasIncome", "notWorking"],
 	attributeBindings: ["data-tenure"],
 	"data-tenure": Ember.computed.alias("employment.tenureTotalYears"),
 	employment: null,
@@ -22,6 +22,7 @@ export default Ember.Component.extend(EditableMixin, {
 		}
 		return noas;
 	}),
+	notWorking: Ember.computed.or("employment.isRetired", "employment.isOnPension"),
 	employmentTypes: [
 		{label: "Full-Time", value: "full-time"},
 		{label: "Part-Time", value: "part-time"},

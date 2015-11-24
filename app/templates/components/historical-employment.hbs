@@ -1,12 +1,14 @@
-{{#form-field label="Position"}}
-	{{input type="text" value=employmentProxy.occupation placeholder="Job Title" required=true title="Please indicate the job title for this employment record" size=employment.occupation.length}}
-{{/form-field}}
-
-{{#liquid-unless employment.isSelfEmployed}}
-	{{#form-field label="Employer"}}
-		{{input type="text" value=employment.employer.name title="Please provide the employer for this position" required=true placeholder="Employer Name" size=employment.employer.name.length}}
+{{#unless notWorking}}
+	{{#form-field label="Position"}}
+		{{input type="text" value=employmentProxy.occupation placeholder="Job Title" required=true title="Please indicate the job title for this employment record" size=employment.occupation.length}}
 	{{/form-field}}
-{{/liquid-unless}}
+
+	{{#liquid-unless employment.isSelfEmployed}}
+		{{#form-field label="Employer"}}
+			{{input type="text" value=employment.employer.name title="Please provide the employer for this position" required=true placeholder="Employer Name" size=employment.employer.name.length}}
+		{{/form-field}}
+	{{/liquid-unless}}
+{{/unless}}
 
 {{#form-field label="Employment Type"}}
 	{{select-list content=employmentTypes optionValuePath="value" optionLabelPath="label" value=employmentProxy.type title="Please choose the type of employment" action=(action (mut employmentProxy.type))}}
@@ -31,13 +33,6 @@
 		{{on-off-switch checked=incomeTaxesPaid title="Please indicate whether you have paid the most recent year of income taxes"}}
 	{{/form-field}}
 {{else}}
-	{{#form-field label="Employer Address"}}
-		{{address-input address=employoment.employer.address value=employment.employer.address.address placeholder="Employer's Address" required=true}}
-	{{/form-field}}
-	{{#form-field label="Employer Phone Number"}}
-		{{input type="tel" value=employment.employer.phone placeholder="Employer's Phone" required=true title="Please indicate this employer's primary phone number"}}
-	{{/form-field}}
-
 	{{#form-field label="How Long?"}}
 		{{#liquid-if durationEnabled}}
 			{{input type="date" value=employmentProxy.startDate required=true}}
@@ -53,34 +48,42 @@
 			<span class="help">position was held for {{employment.tenureTotalYears}} years</span>
 		{{/liquid-if}}
 	{{/form-field}}
-
-	{{#liquid-if employment.isHourly}}
-		{{#form-field label="Hours Per Week"}}
-			{{input type="range" min=0 step=0.5 max=60 value=employmentProxy.weeklyHours required=true title="Please indicate how many hours per week were worked in this position"}}
-			{{#liquid-if employment.weeklyHours}}
-				<span>worked <strong>{{employment.weeklyHours}}</strong> hours per week</span>
+	{{#liquid-unless notWorking}}
+		{{#form-field label="Employer Address"}}
+			{{address-input address=employoment.employer.address value=employment.employer.address.address placeholder="Employer's Address" required=true}}
+		{{/form-field}}
+		{{#form-field label="Employer Phone Number"}}
+			{{input type="tel" value=employment.employer.phone placeholder="Employer's Phone" required=true title="Please indicate this employer's primary phone number"}}
+		{{/form-field}}
+		{{#liquid-if employment.isHourly}}
+			{{#form-field label="Hours Per Week"}}
+				{{input type="range" min=0 step=0.5 max=60 value=employmentProxy.weeklyHours required=true title="Please indicate how many hours per week were worked in this position"}}
+				{{#liquid-if employment.weeklyHours}}
+					<span>worked <strong>{{employment.weeklyHours}}</strong> hours per week</span>
+				{{/liquid-if}}
+			{{/form-field}}
+			{{#form-field label="Hourly Rate"}}
+				{{currency-input min=0 step="any" value=employmentProxy.hourlyRate required=true}}
+				{{#liquid-if employment.hourlyRate}}
+					<span class="help"><strong>{{format-number employment.hourlyRate style="currency" currency="CAD"}}</strong> dollars per hour</span>
+				{{/liquid-if}}
+			{{/form-field}}
+		{{/liquid-if}}
+		{{#form-field label="Compensation"}}
+			{{select-list content=paymentFrequencies optionValuePath="value" optionLabelPath="label" value=employmentProxy.paymentFrequency title="Please select the payment frequency for this position" action=(action (mut employmentProxy.paymentFrequency))}}
+		{{/form-field}}
+	{{/liquid-unless}}
+	{{#liquid-unless employment.isRetired}}
+		{{#form-field label="Annual Pay"}}
+			{{#liquid-if employment.isCommission}}
+				<span class="form-field-hint">Please give us the closest guess to your annual pay.</span>
+			{{/liquid-if}}
+			{{currency-input min="0" step="any" value=employment.income.value required=true}}
+			{{#liquid-if employment.income.value}}
+				<span class="help"><strong>{{format-number employment.income.value style="currency" currency="CAD"}}</strong> annually</span>
 			{{/liquid-if}}
 		{{/form-field}}
-		{{#form-field label="Hourly Rate"}}
-			{{currency-input min=0 step="any" value=employmentProxy.hourlyRate required=true}}
-			{{#liquid-if employment.hourlyRate}}
-				<span class="help"><strong>{{format-number employment.hourlyRate style="currency" currency="CAD"}}</strong> dollars per hour</span>
-			{{/liquid-if}}
-		{{/form-field}}
-	{{/liquid-if}}
-
-	{{#form-field label="Annual Pay"}}
-		{{#liquid-if employment.isCommission}}
-			<span class="form-field-hint">Please give us the closest guess to your annual pay.</span>
-		{{/liquid-if}}
-		{{currency-input min="0" step="any" value=employment.income.value required=true}}
-		{{#liquid-if employment.income.value}}
-			<span class="help"><strong>{{format-number employment.income.value style="currency" currency="CAD"}}</strong> annually</span>
-		{{/liquid-if}}
-	{{/form-field}}
-	{{#form-field label="Compensation"}}
-		{{select-list content=paymentFrequencies optionValuePath="value" optionLabelPath="label" value=employmentProxy.paymentFrequency title="Please select the payment frequency for this position" action=(action (mut employmentProxy.paymentFrequency))}}
-	{{/form-field}}
+	{{/liquid-unless}}
 {{/liquid-if}}
 
 {{#form-field label="I currently work here"}}
