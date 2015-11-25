@@ -10,7 +10,7 @@
 	{{/liquid-unless}}
 {{/unless}}
 
-{{#if employment.applicant.isPrimary}}
+{{#if studentNotAllowed}}
 	{{#form-field label="Employment Type"}}
 		{{select-list content=employmentTypes optionValuePath="value" optionLabelPath="label" value=employmentProxy.type title="Please choose the type of employment" action=(action (mut employmentProxy.type))}}
 	{{/form-field}}

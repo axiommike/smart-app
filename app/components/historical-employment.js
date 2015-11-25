@@ -32,11 +32,16 @@ export default Ember.Component.extend(EditableMixin, {
 		{label: "Retired", value: "retired"},
 		{label: "Other", value: "other"} /* Seasonal, etc. */
 	],
-	coApplicantEmploymentTypes: Ember.computed("employmentTypes", function() {
-		let result = this.get("employmentTypes");
-		result.splice(-1, 0, {label: "Student", value: "student"});
-		return result;
-	}),
+	coApplicantEmploymentTypes: [
+		{label: "Full-Time", value: "full-time"},
+		{label: "Part-Time", value: "part-time"},
+		{label: "Self-Employed", value: "self-employed"},
+		{label: "Pension", value: "pension"},
+		{label: "Retired", value: "retired"},
+		{label: "Student", value: "student"},
+		{label: "Other", value: "other"} /* Seasonal, etc. */
+	],
+	studentNotAllowed: Ember.computed.and("employment.applicant.isPrimary", "employment.isCurrent"),
 	businessTypes: [
 		{label: "Incorporated", value: "incorporated"},
 		{label: "Partnership", value: "partnership"},
