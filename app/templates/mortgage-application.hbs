@@ -72,7 +72,9 @@
 			<small>Copyright <strong><a href="http://{{model.brokerage.website}}" class="brokerage-link" target="_blank">{{model.brokerage.name}}</a></strong> {{format-date now day="numeric" month="long" year="numeric"}}</small>
 		{{/if}}
 	{{/if}}
-	<aside class="tips" role="complementary">
-		<small class="tip">Having trouble viewing this application?  <a href="https://secure-mortgage-online.ca/wizard?agent={{model.agent.id}}&brokerage={{model.brokerage.id}}" target="_blank">Try our legacy application</a></small>
-	</aside>
+	{{#unless hideLegacy}}
+		<aside class="tips">
+			<small class="tip">Having trouble viewing this application?  <a href="https://secure-mortgage-online.ca/wizard?agent={{model.agent.id}}&brokerage={{model.brokerage.id}}" target="_blank">Try our legacy application</a></small>
+		</aside>
+	{{/unless}}
 </footer>

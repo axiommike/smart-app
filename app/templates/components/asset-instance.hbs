@@ -5,7 +5,7 @@
 			{{select-list content=assetTypes optionValuePath="value" optionLabelPath="label" value=assetProxy.type required=true title="Please choose a type for this asset" action=(action (mut assetProxy.type))}}
 		{{/form-field}}
 		{{#form-field label="Asset Value"}}
-			{{currency-input value=assetProxy.value placeholder="Asset Value" min="0" step="any" required=true title="Please indicate the value of this asset"}}
+			{{currency-input value=assetProxy.value min="0" step="any" required=true title="Please indicate the value of this asset"}}
 		{{/form-field}}
 	{{/unless}}
 
@@ -14,7 +14,7 @@
 			{{input type="text" value=assetProxy.description placeholder="Item Description" title="Optionally include a description of this item"}}
 		{{/form-field}}
 		{{#form-field label="Item Value"}}
-			{{currency-input value=assetProxy.value placeholder="Item Value" min="0" step="any" required=true title="Please indicate the value of this personal item"}}
+			{{currency-input value=assetProxy.value min="0" step="any" required=true title="Please indicate the value of this personal item"}}
 		{{/form-field}}
 	{{/if}}
 
@@ -24,7 +24,7 @@
 			<dd>Property</dd>
 		</dl>
 		{{#form-field label="Estimated Propery Value"}}
-			{{currency-input value=assetProxy.value placeholder="Estimated Property Value" required=true min="0" step="any" title="Please indicate the estimated property value"}}
+			{{currency-input value=assetProxy.value required=true min="0" step="any" title="Please indicate the estimated property value"}}
 		{{/form-field}}
 	{{/if}}
 
@@ -33,7 +33,7 @@
 			{{select-list content=savingsTypes optionValuePath="value" optionLabelPath="label" value=assetProxy.description title="Please indicate an account type fot this savings account" required=true action=(action (mut asset.description))}}
 		{{/form-field}}
 		{{#form-field label="Account Balance"}}
-			{{currency-input value=assetProxy.value placeholder="Balance" min="0" step="any" title="Please indicate the banking institution of this account" required=true}}
+			{{currency-input value=assetProxy.value min="0" step="any" title="Please indicate the banking institution of this account" required=true}}
 			{{#liquid-if asset.value}}
 				<span class="help"><strong>{{format-number asset.value style="currency" currency="CAD"}}</strong> invested</span>
 			{{/liquid-if}}
@@ -48,7 +48,7 @@
 
 	{{#if asset.isInvestment}}
 		{{#form-field label="Asset/Bond Investment Value"}}
-			{{currency-input value=assetProxy.value placeholder="Amount Invested" min="0" step="any" required=true title="Please indicate the amount you invested"}}
+			{{currency-input value=assetProxy.value min="0" step="any" required=true title="Please indicate the amount you invested"}}
 			{{#liquid-if asset.value}}
 				<span class="help"><strong>{{format-number asset.value style="currency" currency="CAD"}}</strong> invested</span>
 			{{/liquid-if}}
@@ -57,7 +57,7 @@
 
 	{{#if asset.isGIC}}
 		{{#form-field label="GIC Account Balance"}}
-			{{currency-input value=assetProxy.value placeholder="Balance" min="0" step="any" required=true title="Please indicate the amount you have invested this GIC account"}}
+			{{currency-input value=assetProxy.value min="0" step="any" required=true title="Please indicate the amount you have invested this GIC account"}}
 			{{#liquid-if asset.value}}
 				<span class="help"><strong>{{format-number asset.value style="currency" currency="CAD"}}</strong> invested</span>
 			{{/liquid-if}}
@@ -66,7 +66,7 @@
 
 	{{#if asset.isRRSP}}
 		{{#form-field label="RRSP Account Balance"}}
-			{{currency-input value=assetProxy.value placeholder="Balance" min="0" step="any" required=true title="Please indicate the amount you have invested this RRSP account"}}
+			{{currency-input value=assetProxy.value min="0" step="any" required=true title="Please indicate the amount you have invested this RRSP account"}}
 			{{#liquid-if asset.value}}
 				<span class="help"><strong>{{format-number asset.value style="currency" currency="CAD"}}</strong> invested</span>
 			{{/liquid-if}}
@@ -75,7 +75,7 @@
 
 	{{#if asset.isVehicle}}
 		{{#form-field label="Estimated Vehicle Value"}}
-			{{currency-input value=assetProxy.value placeholder="Balance" min="0" step="any" required=true title="Please provide an estimation of your vehicle's value"}}
+			{{currency-input value=assetProxy.value min="0" step="any" required=true title="Please provide an estimation of your vehicle's value"}}
 			{{#liquid-if asset.value}}
 				<span class="help"><strong>{{format-number asset.value style="currency" currency="CAD"}}</strong> in approximate value</span>
 			{{/liquid-if}}
@@ -87,7 +87,7 @@
 			{{input type="text" value=assetProxy.description placeholder="Asset Description" required=true}}
 		{{/form-field}}
 		{{#form-field label="Asset Value"}}
-			{{currency-input value=assetProxy.value placeholder="Asset Value" min="0" step="any"}}
+			{{currency-input value=assetProxy.value min="0" step="any"}}
 			{{#liquid-if asset.value}}
 				<span class="help"><strong>{{format-number asset.value style="currency" currency="CAD"}}</strong> in value</span>
 			{{/liquid-if}}

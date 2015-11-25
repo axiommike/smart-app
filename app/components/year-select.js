@@ -1,6 +1,6 @@
 import Ember from "ember";
 
-export default Ember.Select.extend({
+export default Ember.Component.extend({
 	start: 1950,
 	end: new Date().getFullYear(),
 	years: Ember.computed("start", "end", function() {
@@ -10,5 +10,8 @@ export default Ember.Select.extend({
 		}
 		return result;
 	}),
-	content: Ember.computed.alias("years")
+	value: null,
+	required: false,
+	prompt: null,
+	title: null
 });

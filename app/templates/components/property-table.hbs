@@ -1,9 +1,11 @@
 <header class="table-header">
 	<h4>
-	{{#if caption}}
-		{{caption}},
-	{{/if}}
-		 <sup><strong>{{format-number totalValue style="currency" currency="CAD"}}</strong> total real estate value</sup>
+		{{#if caption}}
+			{{caption}}
+		{{/if}}
+		{{#liquid-if totalValue}}
+			<sup class="total"><strong>{{format-number totalValue style="currency" currency="CAD"}}</strong> total real estate value</sup>
+		{{/liquid-if}}
 	</h4>
 	<button {{action "addProperty"}} title="Add a Property" class="add-button">Add Property</button>
 </header>

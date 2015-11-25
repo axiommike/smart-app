@@ -22,10 +22,6 @@ export default Ember.Controller.extend({
 		{
 			title: "Summary",
 			url: "mortgage-application.summary"
-		},
-		{
-			title: "Finished",
-			url: "mortgage-application.thank-you"
 		}
 	],
 	now: new Date(),

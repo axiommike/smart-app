@@ -15,5 +15,17 @@ export default Ember.Component.extend(EditableMixin, {
 			});
 		}
 	}),
-	isLoaned: Ember.computed.alias("vehicle.isFinanced")
+	isLoaned: Ember.computed.alias("vehicle.isFinanced"),
+	infoChanged: function() {
+		if (this.get("vehicle.year") && !Ember.isBlank(this.get("vehicle.make"))) {
+			let model = !Ember.isBlank(this.get("vehicle.model")) ? `${this.get("vehicle.model")} ` : "",
+				vehicleDescription = `${this.get("vehicle.make")} ${model}- ${this.get("vehicle.year")}`;
+			if (this.get("vehicle.asset")) {
+				this.set("vehicle.asset.description", vehicleDescription);
+			}
+			if (this.get("vehicle.loan")) {
+				this.set("vehicle.loan.description", vehicleDescription);
+			}
+		}
+	}.observes("vehicle.make", "vehicle.year", "vehicle.model")
 });

@@ -38,6 +38,7 @@
 				{{/form-field}}
 			{{/liquid-if}}
 			{{#form-field label="What can I do for you?"}}
+				<span>I would like to: </span>
 				{{select-list content=goals optionValuePath="value" optionLabelPath="label" value=application.type id="what-can-i-do-for-you?" required=true prompt=" -- " title="Please indicate how I can help you" action=(action (mut application.type))}}
 			{{/form-field}}
 			{{#liquid-if model.isPurchase}}

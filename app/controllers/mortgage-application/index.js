@@ -13,11 +13,11 @@ export default Ember.Controller.extend({
 		{value: "other", label: "Other"}
 	],
 	goals: [
-		{value: "purchase", label: "I would like to purchase a property"},
-		{value: "refinance", label: "I would like to refinance my mortgage"},
-		{value: "renewal", label: "I would like to renew my mortgage"},
-		{value: "rental", label: "I would like to buy a rental property"},
-		{value: "advice", label: "I need some advice"}
+		{value: "purchase", label: "Purchase a property"},
+		{value: "refinance", label: "Refinance my mortgage"},
+		{value: "renewal", label: "Renew my mortgage"},
+		{value: "rental", label: "Buy a rental property"},
+		{value: "advice", label: "Get some advice"}
 	],
 	downPaymentSources: [
 		{value: "property sale", label: "Sale of Existing Property"},

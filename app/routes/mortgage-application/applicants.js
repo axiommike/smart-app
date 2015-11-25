@@ -6,7 +6,8 @@ export default Ember.Route.extend({
 		let mortgageController = this.controllerFor("mortgage-application");
 		mortgageController.setProperties({
 			currentStep: 1,
-			showBreadcrumbs: true
+			showBreadcrumbs: true,
+			hideLegacy: false
 		});
 	},
 	setupController: function (controller, model) {

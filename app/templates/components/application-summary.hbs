@@ -24,9 +24,11 @@
 				</section>
 			</div>
 		</section>
-		{{#form-field label="Got anything else to add?  Don't be shy!  Now is your chance."}}
-			{{textarea value=application.comment}}
-		{{/form-field}}
+		<section class="box">
+			{{#form-field label="Got anything else to add?  Don't be shy!  Now is your chance." layoutDirection="vertical"}}
+				{{textarea value=application.comment}}
+			{{/form-field}}
+		</section>
 	</article>
 {{/if}}
 
