@@ -30,9 +30,13 @@ export default Ember.Component.extend(EditableMixin, {
 		{label: "Self-Employed", value: "self-employed"},
 		{label: "Pension", value: "pension"},
 		{label: "Retired", value: "retired"},
-		{label: "Student", value: "student"},
 		{label: "Other", value: "other"} /* Seasonal, etc. */
 	],
+	coApplicantEmploymentTypes: Ember.computed("employmentTypes", function() {
+		let result = this.get("employmentTypes");
+		result.splice(-1, 0, {label: "Student", value: "student"});
+		return result;
+	}),
 	businessTypes: [
 		{label: "Incorporated", value: "incorporated"},
 		{label: "Partnership", value: "partnership"},

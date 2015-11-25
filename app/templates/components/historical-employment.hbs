@@ -10,9 +10,17 @@
 	{{/liquid-unless}}
 {{/unless}}
 
-{{#form-field label="Employment Type"}}
-	{{select-list content=employmentTypes optionValuePath="value" optionLabelPath="label" value=employmentProxy.type title="Please choose the type of employment" action=(action (mut employmentProxy.type))}}
-{{/form-field}}
+{{#if employment.applicant.isPrimary}}
+	{{#form-field label="Employment Type"}}
+		{{select-list content=employmentTypes optionValuePath="value" optionLabelPath="label" value=employmentProxy.type title="Please choose the type of employment" action=(action (mut employmentProxy.type))}}
+	{{/form-field}}
+{{else}}
+	{{#form-field label="Employment Type"}}
+		{{select-list content=coApplicantEmploymentTypes optionValuePath="value" optionLabelPath="label" value=employmentProxy.type title="Please choose the type of employment" action=(action (mut employmentProxy.type))}}
+	{{/form-field}}
+{{/if}}
+
+
 
 {{#liquid-if employment.isSelfEmployed}}
 	{{#form-field label="How long?"}}
