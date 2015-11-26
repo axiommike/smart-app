@@ -100,21 +100,19 @@
 {{/liquid-if}}
 
 {{#liquid-if needsNOA}}
-	<div class="row distributed">
-		{{#liquid-unless hasIncome}}
-			{{#form-section title="Last 2 Years' Line 150" icon="dollar"}}
-				{{#each noaValues as |year|}}
-					{{#form-field label=year.year}}
-						{{currency-input min="0" step="any" value=year.value required=true placeholder="0" title="Please indicate the filed income for this yearly assesment"}}
-					{{/form-field}}
-				{{/each}}
-			{{/form-section}}
-			<span class="option-separator">or</span>
-		{{/liquid-unless}}
-		{{#form-field label="Approximate annual, taxable income"}}
-			{{currency-input min="0" step="any" value=employment.income.value required=true}}
-		{{/form-field}}
-	</div>
+	{{#liquid-unless hasIncome}}
+		{{#form-section title="Last 2 Years' Line 150" icon="dollar"}}
+			{{#each noaValues as |year|}}
+				{{#form-field label=year.year}}
+					{{currency-input min="0" step="any" value=year.value required=true placeholder="0" title="Please indicate the filed income for this yearly assesment"}}
+				{{/form-field}}
+			{{/each}}
+		{{/form-section}}
+		<span class="option-separator">or</span>
+	{{/liquid-unless}}
+	{{#form-field label="Approximate annual, taxable income"}}
+		{{currency-input min="0" step="any" value=employment.income.value required=true}}
+	{{/form-field}}
 {{/liquid-if}}
 
 {{yield}}

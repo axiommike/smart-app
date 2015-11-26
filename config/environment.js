@@ -29,7 +29,7 @@ module.exports = function (environment) {
 			excludePaths: ["assets/components"],
 			fallback: ["/ /index.html"],
 			includePaths: ["/"],
-			network: ["api/"],
+			network: ["*"],
 			showCreateDate: true
 		},
 		rollbar: {
