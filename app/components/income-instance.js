@@ -7,7 +7,6 @@ export default Ember.Component.extend(EditableMixin, {
 	classNameBindings: [":income-instance"],
 	incomeSources: [
 		"Investment",
-		"employment",
 		"Child Support Alimony",
 		"Property Rental",
 		"Pension",
