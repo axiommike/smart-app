@@ -1,12 +1,21 @@
 <header class="applicant-card-header">
-	{{#liquid-if applicant.hasName}}
-		<h1 class="applicant-card-title">
-			<span class="applicant-card-full-name">{{applicant.fullName}}</span>
-			{{#if applicant.isPrimary}}
-				<sup class="applicant-card-role">Primary Applicant</sup>
-			{{/if}}
-		</h1>
-	{{/liquid-if}}
+	<h1 class="applicant-card-title">
+		<span class="applicant-card-full-name">
+			{{#liquid-if applicant.hasName}}
+				{{applicant.fullName}}
+			{{else}}
+				{{#if applicant.isPrimary}}
+					Primary Applicant
+				{{else}}
+					New Co-Applicant
+				{{/if}}
+			{{/liquid-if}}
+		</span>
+		{{#if applicant.isPrimary}}
+			<sup class="applicant-card-role">Primary Applicant</sup>
+		{{/if}}
+	</h1>
+
 	{{#liquid-if applicant.hasValidEmail}}
 		{{gravatar-image email=applicant.email alt=applicant.fullName size=250 defaultImage="identicon" class="applicant-card-image" secure=false title=applicant.fullName}}
 	{{/liquid-if}}

@@ -37,15 +37,6 @@
 					{{select-list content=paymentFrequencies value=liabilityProxy.paymentFrequency action=(action (mut liability.paymentFrequency))}}
 				{{/form-field}}
 			</div>
-		{{else}}
-			{{#unless liability.isChildSupport}}
-				{{#form-field label="Outstanding Balance"}}
-					{{currency-input min="0" step="any" value=liabilityProxy.outstandingBalance}}
-				{{/form-field}}
-				{{#liquid-if liability.outstandingBalance}}
-					<span class="help"><strong>{{format-number liability.outstandingBalance style="currency" currency="CAD"}}</strong> remaining</span>
-				{{/liquid-if}}
-			{{/unless}}
 		{{/if}}
 		{{#if liability.isLineOfCredit}}
 			{{#form-field label="Bank/Financial Institution"}}
@@ -56,26 +47,34 @@
 			{{/form-field}}
 		{{/if}}
 
-		{{#unless liability.isCreditCard}}
-			{{#form-field label=paymentLabel}}
-				{{currency-input min="0" step="any" value=liabilityProxy.payment required=true title="Please indicate the monthly payment for this liability"}}
-				{{#liquid-if liability.payment}}
-					<span class="help">Paying <strong>{{format-number liability.payment style="currency" currency="CAD"}}</strong> monthly</span>
-				{{/liquid-if}}
-			{{/form-field}}
-		{{else}}
-			{{#form-field label="Monthly Payment"}}
-				{{currency-input min="0" step="any" value=liabilityProxy.payment required=true title="Please indicate the monthly amount you are being charged for this credit card"}}
-				{{#liquid-if liability.payment}}
-					<span class="help">Paying <strong>{{format-number liability.payment style="currency" currency="CAD"}}</strong> monthly</span>
-				{{/liquid-if}}
-			{{/form-field}}
+		{{#if liability.isCreditCard}}
 			{{#form-field label="Credit Card Type"}}
 				{{select-list content=creditCardTypes optionValuePath="value" optionLabelPath="label" value=liabilityProxy.creditCardType required=true title="Please select a credit card type" action=(action (mut liabilityProxy.creditCardType))}}
 			{{/form-field}}
 			{{#form-field label="Bank/Financial Institution"}}
 				{{autocomplete-input value=liabilityProxy.lender datalist="lenders" placeholder="Bank Name" required=true title="Please provide the bank you use for your credit card"}}
 			{{/form-field}}
+			{{#form-field label="Monthly Payment"}}
+				{{currency-input min="0" step="any" value=liabilityProxy.payment required=true title="Please indicate the monthly amount you are being charged for this credit card"}}
+				{{#liquid-if liability.payment}}
+					<span class="help">Paying <strong>{{format-number liability.payment style="currency" currency="CAD"}}</strong> monthly</span>
+				{{/liquid-if}}
+			{{/form-field}}
+		{{else}}
+			{{#form-field label=paymentLabel}}
+				{{currency-input min="0" step="any" value=liabilityProxy.payment required=true title="Please indicate the monthly payment for this liability"}}
+				{{#liquid-if liability.payment}}
+					<span class="help">Paying <strong>{{format-number liability.payment style="currency" currency="CAD"}}</strong> monthly</span>
+				{{/liquid-if}}
+			{{/form-field}}
+		{{/if}}
+		{{#unless liability.isChildSupport}}
+			{{#form-field label="Outstanding Balance"}}
+				{{currency-input min="0" step="any" value=liabilityProxy.outstandingBalance}}
+			{{/form-field}}
+			{{#liquid-if liability.outstandingBalance}}
+				<span class="help"><strong>{{format-number liability.outstandingBalance style="currency" currency="CAD"}}</strong> remaining</span>
+			{{/liquid-if}}
 		{{/unless}}
 		{{#if onRemove}}
 			<button class="remove-button" {{action "remove"}}>

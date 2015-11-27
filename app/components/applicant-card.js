@@ -29,12 +29,12 @@ export default Ember.Component.extend(EditableMixin, {
 		"Spouse",
 		"Common-Law",
 		"Related Family Member",
-		"Other",
 		"Parent",
 		"Sibling",
 		"Child",
 		"Grandchild",
-		"Grandparent"
+		"Grandparent",
+		"Other"
 	],
 	maritalStatusOptions: [
 		"Single",

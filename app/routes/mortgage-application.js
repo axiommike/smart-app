@@ -256,7 +256,7 @@ export default Ember.Route.extend({
 			console.log(`Triggered add employment master`);
 		},
 		addApplicantMaster: function() {
-			this.addApplicant(this.get("currentModel.coApplicants"), "New Co-Applicant");
+			this.addApplicant(this.get("currentModel.coApplicants"), null);
 		},
 		addAddressMaster: function(applicant) {
 			let addedAddress = this.store.createRecord("address");
