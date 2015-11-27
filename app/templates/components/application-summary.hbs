@@ -1,5 +1,8 @@
 {{#if application}}
 	<button {{action "addApplicant"}} class="add-button add-applicant">Add Co-Applicant</button>
+	<p class="intro-help">
+		Below is a snap shot of The Big picture.  Please ensure this information is as accurate as possible.  You can edit any of the information by clicking on the item, or delete any item by clicking the <kbd>X</kbd>.
+	</p>
 	<article class="application-summary">
 		<section class="applicant-summary-personal-info">
 			{{#each application.applicants as |applicant|}}

@@ -1,5 +1,5 @@
 <header class="application-review">
-	<h1 class="announcement">Here's what we got so far:</h1>
+	<h1 class="announcement">Almost done!  Here is what we have so far:</h1>
 </header>
 {{#validatable-form action="nextStep"}}
 	{{application-summary application=model
@@ -9,7 +9,7 @@
 	onAddIncome="addIncome" onRemoveIncome="removeIncome"}}
 	<footer class="disclaimer {{if consentProvided "accepted"}}">
 		<span class="info">Disclaimer</span>
-		{{#form-field label="I hereby declare that the information declared in this form are valid as of today, and I consent to having my records checked by the Canadian Credit Bureau"}}
+		{{#form-field label="I hereby authorize Axiom Mortgage Solutions to obtain a credit report and make any necessary inquiries regarding my mortgage application.  I acknowledge this information may be shared with financial institutions for the purpose of facilitating mortgage financing."}}
 			{{input type="checkbox" checked=consentProvided required=true title="Please consent to the validity of the information you have provided in order to submit your application"}}
 		{{/form-field}}
 	</footer>
