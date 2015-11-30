@@ -26,7 +26,7 @@ module.exports = function (environment) {
 		manifest: {
 			enabled: true,
 			appcacheFile: "/manifest.appcache",
-			excludePaths: ["assets/components"],
+			excludePaths: ["assets/components", "assets/fonts"],
 			fallback: ["/ /index.html"],
 			includePaths: ["/"],
 			network: ["*"],
