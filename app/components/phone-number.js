@@ -21,7 +21,7 @@ export default Ember.Component.extend({
 			return firstNumber;
 		}
 	}),
-	areaCode: Ember.computed("plainNumber", "isTollFree", "countryCode", function() {
+	areaCode: Ember.computed("plainNumber", "countryCode", function() {
 		if (this.get("plainNumber.length") > 3) {
 			let startingPoint = this.get("countryCode") ? this.get("countryCode.length") : 0;
 			return this.get("plainNumber").substr(startingPoint, 3);
@@ -29,7 +29,7 @@ export default Ember.Component.extend({
 	}),
 	centralOfficeCode: Ember.computed("plainNumber", "areaCode", function() { /* The first 3 numbers - excluding area code */
 		if (this.get("plainNumber.length") > 6) {
-			let startingPoint = this.get("areaCode.length");
+			let startingPoint = this.get("areaCode.length") + (this.get("countryCode.length"));
 			return this.get("plainNumber").substr(startingPoint, 3);
 		}
 	}),

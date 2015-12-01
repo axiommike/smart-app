@@ -16,6 +16,13 @@ $applicantCardMaxWidth ?= 40em
 	margin 1em
 	&s
 		display flex
+		.applicant
+			&:nth-child(2) .applicant-card-header
+				background #F44336
+			&:nth-child(3) .applicant-card-header
+				background #4CAF50
+			&:nth-child(4) .applicant-card-header
+				background #673AB7
 		+media-query($breakpointMain)
 			display block
 	+media-query($breakpointMain)
@@ -24,6 +31,7 @@ $applicantCardMaxWidth ?= 40em
 		&s &, &s &-card, &-summary &-card
 			display block
 	&-card
+		min-width $applicantCardMinWidth
 		position relative
 		&-relationship
 			transition transform 0.4s ease, opacity 0.4s ease
@@ -62,7 +70,7 @@ $applicantCardMaxWidth ?= 40em
 			padding 1.2em
 			& + .applicant-card-details
 				margin-top 1em
-			background rgb(43, 226, 226)
+			background #2196F3
 			color white
 		&-role
 			color inherit
@@ -77,6 +85,7 @@ $applicantCardMaxWidth ?= 40em
 			vertical-align top
 			display inline-block
 		&-title
+			position relative
 			text-align center
 			line-height 3
 			font-size 2.2em
@@ -84,9 +93,11 @@ $applicantCardMaxWidth ?= 40em
 			display block
 			margin 0 auto
 			border-radius 50%
-		&-actions
-			1px solid rgba(160,160,160,0.2)
-			padding 1.2em
+		&-action
+			display inline-block
+			&s
+				display flex
+				justify-content space-between
 		&-finances
 			text-align center
 			color white

@@ -41,9 +41,11 @@
 			</aside>
 		{{/unless}}
 	{{/if}}
-	{{#liquid-if currentStep}}
-		<button {{action "sendIncomplete"}} class="header-action">Submit As-Is</button>
-	{{/liquid-if}}
+	{{#if currentStep}}
+		{{#unless hideLegacy}}
+			<button {{action "sendIncomplete"}} class="header-action">Submit As-Is</button>
+		{{/unless}}
+	{{/if}}
 </header>
 
 <datalist id="lenders">

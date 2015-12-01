@@ -17,6 +17,16 @@
 				{{/form-field}}
 				{{#form-field label="Phone" class="column one-half" layoutDirection="vertical"}}
 					{{input value=applicant.phone type="tel" required=true placeholder="Phone" id="phone" autocomplete="tel" title="Please provide your primary phone number"}}
+					{{#liquid-if applicant.hasPhone}}
+						<span class="help">
+							{{#if model.agent}}
+								I'll call you at <strong>{{phone-number number=applicant.phone}}</strong> once I get the rest of your information.
+							{{else}}
+								We'll call you at <strong>{{phone-number number=applicant.phone}}</strong> once we get the rest of your information.
+							{{/if}}
+						</span>
+					{{/liquid-if}}
+
 				{{/form-field}}
 			</div>
 			{{#form-field label="How did you hear about me?"}}

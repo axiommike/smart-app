@@ -13,12 +13,11 @@ Created on 15/04/2015 by PhpStorm
 			display block
 			&-breadcrumb
 				&s
-					// display inline-block
+					white-space nowrap
 					margin-top 0.5em
-				+media-query($breakpointMainOpposite)
-					display inline-block
-					& + &
-						margin-left 1em
+				display inline-block
+				& + &
+					margin-left 1em
 				&-link
 					font-size 0.8em
 					border-bottom 0.1em solid transparent

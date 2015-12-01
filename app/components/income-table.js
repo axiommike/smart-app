@@ -3,6 +3,7 @@ import EditableMixin from "../mixins/editable";
 
 export default Ember.Component.extend(EditableMixin, {
 	tagName: "income-table",
+	classNameBindings: [":income-table-container", "empty", "flatList"],
 	flatList: false,
 	/**
 	 * @property {Ember.ArrayProxy} excluded any income to exclude
@@ -17,6 +18,7 @@ export default Ember.Component.extend(EditableMixin, {
 	}),
 	showApplicant: false,
 	filteredIncome: Ember.computed.setDiff("income", "excluded"),
+	empty: Ember.computed.empty("filteredIncome"),
 	onRemove: null,
 	onAdd: null,
 	actions: {

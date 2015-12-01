@@ -6,9 +6,11 @@
 		{{#liquid-if showBreadcrumbs}}
 			<ul class="wizard-steps-breadcrumbs">
 				{{#each steps as |step|}}
-					<li class="wizard-steps-breadcrumb">
-						{{#link-to step.url title=step.title class="wizard-steps-breadcrumb-link"}}{{step.title}}{{/link-to}}
-					</li>
+					{{#unless step.hidden}}
+						<li class="wizard-steps-breadcrumb">
+							{{#link-to step.url title=step.title class="wizard-steps-breadcrumb-link"}}{{step.title}}{{/link-to}}
+						</li>
+					{{/unless}}
 				{{/each}}
 			</ul>
 		{{/liquid-if}}

@@ -7,13 +7,16 @@ export default Ember.Mixin.create({
 	middleName: DS.attr("string"),
 	lastName: DS.attr("string"),
 	names: Ember.computed.collect("firstName", "lastName", "middleName"),
-	hasName: Ember.computed.notEmpty("names"),
+	hasName: Ember.computed("firstName", function() {
+		return !Ember.isBlank(this.get("firstName"));
+	}),
 	fullName: Ember.computed("names", function() {
 		return Ember.makeArray(this.get("names")).slice().concat().join(" ");
 	}),
 	email: DS.attr("string"),
 	hasValidEmail: Ember.computed.match("email", /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i),
 	phone: DS.attr("string"),
+	hasPhone: Ember.computed.notEmpty("phone"),
 	workPhone: DS.attr("string"),
 	homePhone: DS.attr("string"),
 	preferredContactMethod: DS.attr("string"),

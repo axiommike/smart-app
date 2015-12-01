@@ -1,8 +1,5 @@
 {{#if application}}
 	<button {{action "addApplicant"}} class="add-button add-applicant">Add Co-Applicant</button>
-	<p class="intro-help">
-		Below is a snap shot of The Big picture.  Please ensure this information is as accurate as possible.  You can edit any of the information by clicking on the item, or delete any item by clicking the <kbd>X</kbd>.
-	</p>
 	<article class="application-summary">
 		<section class="applicant-summary-personal-info">
 			{{#each application.applicants as |applicant|}}
@@ -11,6 +8,9 @@
 				<span class="error">Looks like you have no applicants... maybe you should <a {{action "addApplicant"}}>add one</a>.</span>
 			{{/each}}
 		</section>
+		<p class="intro-help">
+			Below is a snap shot of The Big picture.  Please ensure this information is as accurate as possible.  You can edit any of the information by clicking on the item, or delete any item by clicking the <kbd>X</kbd>.
+		</p>
 		<section class="application-summary-joint box">
 			<section class="applicant-summary-joint-income">
 				<h2 class="applicant-summary-title"><sup class="applicant-summary-title-type">Joint</sup> Income</h2>

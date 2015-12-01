@@ -22,10 +22,11 @@ header
 		&[data-current-step="4"]
 			background #00A7C5
 		color white
-		@extend $flex
-		align-items center
-		flex-wrap wrap
-		justify-content space-between
+		+media-query($breakpointMainOpposite)
+			display flex
+			align-items center
+			flex-wrap wrap
+			justify-content space-between
 		+media-query($breakpointMain)
 			position relative
 			.wizard-step
@@ -66,10 +67,22 @@ main
 		@extend $normal-padding, $border-box, $normal-margin
 
 .thank-you
-	padding 4em
+	padding 4em 1em
+	&-steps
+		h1
+			@extend $text-align-center
+		text-align initial
+		background #E0E0E0
+		padding 1em 32%
+		+media-query($breakpointMain)
+			padding 1em 20%
 	@extend $text-align-center
 	&-header, &-details
 		margin-bottom 4em
+	&-header
+		&-text
+			font-size 1.4em
+			margin-top 1em
 
 .application
 	&-summary

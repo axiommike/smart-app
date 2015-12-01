@@ -116,6 +116,10 @@ $material-box
 .brokerage
 	&-callout
 		padding 1em
+		+media-query($breakpointMain)
+			position absolute
+			top 0
+			right 0
 		&-phone
 			display block
 		&-image
@@ -123,6 +127,8 @@ $material-box
 			-moz-filter grayscale(1) invert()
 			filter grayscale(1) invert()
 			max-width 15em
+			+media-query($breakpointMain)
+				max-width 5em
 			margin-bottom 0.4em
 			border-radius initial
 			float none
@@ -168,6 +174,8 @@ $material-box
 	cursor pointer
 	opacity 0.9
 	transition opacity $transitionTime $transitionFunction
+	+media-query($breakpointMainOpposite)
+		max-width 3em
 	&:after
 		background url($icon-pencil)
 		@extend $small-margin-left, $absolute

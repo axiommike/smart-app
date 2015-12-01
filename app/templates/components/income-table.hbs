@@ -1,11 +1,11 @@
-<header class="table-header">
-	<button class="add-button" {{action "addIncome"}}>Add Extra Income</button>
 {{#unless flatList}}
-	{{#liquid-if totalIncome}}
-		<sup><strong>{{format-number totalIncome style="currency" currency="CAD"}}</strong> total</sup>
-	{{/liquid-if}}
+	<header class="table-header">
+
+		{{#liquid-if totalIncome}}
+			<sup><strong>{{format-number totalIncome style="currency" currency="CAD"}}</strong> total</sup>
+		{{/liquid-if}}
+	</header>
 {{/unless}}
-</header>
 
 <ul class="income income-table {{if flatList "flat-list"}}">
 	{{#each filteredIncome as |extraIncome|}}
@@ -24,5 +24,9 @@
 		</footer>
 	{{/liquid-if}}
 {{/if}}
+
+<footer class="table-footer">
+	<button class="add-button" {{action "addIncome"}}>Add Extra Income</button>
+</footer>
 
 {{yield}}
