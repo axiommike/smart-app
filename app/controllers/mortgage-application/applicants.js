@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
 	actions: {
 		addApplicant: function() {
 			this.send("addApplicantMaster");
+			return this.get("model").save();
 		},
 		addEmployment: function(applicant) {
 			console.log(`add employment triggered`);
@@ -39,6 +40,7 @@ export default Ember.Controller.extend({
 		},
 		removeApplicant: function(applicant) {
 			this.send("removeApplicantMaster", applicant);
+			return this.get("model").save();
 		},
 		nextStep: function() {
 			if (this.get("model.applicant.properties.length")) {

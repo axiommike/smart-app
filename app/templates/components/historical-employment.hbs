@@ -24,9 +24,8 @@
 
 {{#liquid-if employment.isSelfEmployed}}
 	{{#form-field label="How long?"}}
-		<label>{{input type="number" value=employmentProxy.tenureYears required=true placeholder="Years" min="0" step="1" title="Please indicate how many years you have owned this company"}} years</label>
-		<label>{{input type="number" value=employmentProxy.tenureMonths placeholder="mths" min="0" max="12" step="1"}} months
-		</label>
+		<label>{{input type="number" value=employmentProxy.tenureYears required=true placeholder="Years" min="0" max="100" step="1" title="Please indicate how many years you have owned this company"}} years</label>
+		<label>{{input type="number" value=employmentProxy.tenureMonths placeholder="mths" min="0" max="12" step="1"}} months</label>
 	{{/form-field}}
 	{{#form-field label="Business Name"}}
 		{{input type="text" value=employmentProxy.employer.name placeholder="Business Name" required=true}}
@@ -42,16 +41,8 @@
 	{{/form-field}}
 {{else}}
 	{{#form-field label="How Long?"}}
-		{{#liquid-if durationEnabled}}
-			{{input type="date" value=employmentProxy.startDate required=true}}
-			<span>to</span>
-			{{input type="date" value=employmentProxy.endDate required=true}}
-		{{else}}
-			{{input type="number" value=employmentProxy.tenureYears required=true placeholder="Years" min="0" step="1" title="Please indicate the amount of years this position was held"}}
-			<label for = "tenure-years">years</label>
-			{{input type="number" value=employmentProxy.tenureMonths placeholder="mths" min="0" max="12" step="1"}}
-			<label for = "tenure-months">months</label>
-		{{/liquid-if}}
+		<label>{{input type="number" value=employmentProxy.tenureYears required=true placeholder="Years" min="0" max="100" step="1" title="Please indicate the amount of years this position was held"}} years</label>
+		<label>{{input type="number" value=employmentProxy.tenureMonths placeholder="mths" min="0" max="12" step="1"}} months</label>
 		{{#liquid-if employment.tenureTotalYears}}
 			<span class="help">position was held for {{employment.tenureTotalYears}} years</span>
 		{{/liquid-if}}
