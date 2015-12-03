@@ -74,12 +74,15 @@ export default Ember.TextField.extend({
 				types: ["geocode"]
 			}
 		);
-		this.set("autocomplete", autocomplete);
-		google.maps.event.addListener(autocomplete, "place_changed", () => {
+		let listener = google.maps.event.addListener(autocomplete, "place_changed", () => {
 			this.placeSelected();
+		});
+		this.setProperties({
+			autocomplete: autocomplete,
+			listener: listener
 		});
 	},
 	willDestroy() {
-		google.maps.event.removeListener(this.get("autocomplete"));
+		google.maps.event.removeListener(this.get("listener"));
 	}
 });

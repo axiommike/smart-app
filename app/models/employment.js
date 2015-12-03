@@ -24,7 +24,9 @@ export default DS.Model.extend(TimeableMixin, {
 			description += ` at ${this.get("employer.name")}`;
 		}
 		this.get("income").then((resolvedIncome) => {
-			resolvedIncome.set("description", description);
+			if (resolvedIncome) {
+				resolvedIncome.set("description", description);
+			}
 		});
 	}.observes("employer.name", "occupation", "type"),
 	occupation: DS.attr("string"),
