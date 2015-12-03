@@ -10,10 +10,8 @@ export default Ember.Component.extend({
 	title: Ember.computed("number", function() {
 		return `Call ${this.get("number")}`;
 	}),
-	hasNumber: Ember.computed("number", function() {
-		let number = this.get("number");
-		return (!Ember.isBlank(number) && (number.length > 9));
-	}),
+	hasNumber: Ember.computed.notEmpty("number"),
+	hasFullNumber: Ember.computed.gt("plainNumber", 8),
 	isTollFree: Ember.computed.match("plainNumber", /^(\+?1)?(8(00|44|55|66|77|88))/),
 	countryCode: Ember.computed("plainNumber", function() {
 		let firstNumber = this.get("plainNumber").substr(0, 1);
@@ -21,23 +19,27 @@ export default Ember.Component.extend({
 			return firstNumber;
 		}
 	}),
+	hasCountryCode: Ember.computed.notEmpty("countryCode"),
 	areaCode: Ember.computed("plainNumber", "countryCode", function() {
 		if (this.get("plainNumber.length") > 3) {
 			let startingPoint = this.get("countryCode") ? this.get("countryCode.length") : 0;
 			return this.get("plainNumber").substr(startingPoint, 3);
 		}
 	}),
+	hasAreaCode: Ember.computed.gte("areaCode", 3),
 	centralOfficeCode: Ember.computed("plainNumber", "areaCode", function() { /* The first 3 numbers - excluding area code */
-		if (this.get("plainNumber.length") > 6) {
-			let startingPoint = this.get("areaCode.length") + (this.get("countryCode.length"));
+		if (this.get("plainNumber.length") >= 6) {
+			let startingPoint = this.get("areaCode.length") + (this.get("hasCountryCode") ? this.get("countryCode.length") : 0);
 			return this.get("plainNumber").substr(startingPoint, 3);
 		}
 	}),
+	hasCentralOfficeCode: Ember.computed.gte("centralOfficeCode", 3),
 	serviceCode: Ember.computed("plainNumber", function() { /* the last 4 numbers */
-		if (this.get("plainNumber.length") > 8) {
+		if (this.get("plainNumber.length") > 7) {
 			return this.get("plainNumber").slice(-4);
 		}
 	}),
+	hasServiceCode: Ember.computed.gte("serviceCode", 4),
 	extension: Ember.computed("plainNumber", function() {
 		// todo: match against extension
 	}),
