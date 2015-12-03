@@ -64,7 +64,7 @@
 			{{#form-field label=paymentLabel}}
 				{{currency-input min="0" step="any" value=liabilityProxy.payment required=true title="Please indicate the monthly payment for this liability"}}
 				{{#liquid-if liability.payment}}
-					<span class="help">Paying <strong>{{format-number liability.payment style="currency" currency="CAD"}}</strong> monthly</span>
+					<span class="help">Paying <strong>{{format-number liability.payment style="currency" currency="CAD"}}</strong> {{liability.paymentFrequency}}</span>
 				{{/liquid-if}}
 			{{/form-field}}
 		{{/if}}

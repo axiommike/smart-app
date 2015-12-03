@@ -78,5 +78,8 @@ export default Ember.TextField.extend({
 		google.maps.event.addListener(autocomplete, "place_changed", () => {
 			this.placeSelected();
 		});
+	},
+	willDestroy() {
+		google.maps.event.removeListener(this.get("autocomplete"));
 	}
 });
