@@ -104,7 +104,6 @@
 					var nodeName;
 					nodeName = node.nodeName;
 					if (nodeName === "unit") {
-						console.dir(node);
 						return new stylus.nodes.String(intToWord(node.val));
 					}
 					else {
