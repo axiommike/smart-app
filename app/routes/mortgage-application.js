@@ -6,6 +6,7 @@ export default Ember.Route.extend({
 	titleToken: Ember.computed("currentModel.id", function() {
 		return `Mortgage Application ${this.get("currentModel.id")}`;
 	}),
+	metrics: Ember.inject.service(),
 	addEmployment: function(applicant, isCurrent) {
 		isCurrent = isCurrent ? true : false;
 		let createdEmployment = this.store.createRecord("employment", {isCurrent: isCurrent}),
@@ -23,6 +24,7 @@ export default Ember.Route.extend({
 		createdEmploymentCompany.save();
 		createdEmployment.save();
 		applicant.save();
+		this.get("metrics").trackEvent("Add Employment");
 		return createdEmployment;
 	},
 	addProperty: function(applicant, isCurrent) {
@@ -50,6 +52,7 @@ export default Ember.Route.extend({
 			console.log(`Saved new current property of id ${currentSavedProperty.get("id")}`);
 		});
 		applicant.save();
+		this.get("metrics").trackEvent("Add Property");
 		return addedProperty;
 	},
 	addApplicant: function(allApplicants, name) {
@@ -57,7 +60,7 @@ export default Ember.Route.extend({
 		this.addProperty(addedApplicant, true);
 		this.addEmployment(addedApplicant, true);
 		allApplicants.pushObject(addedApplicant);
-		addedApplicant.save();
+		return addedApplicant.save().then(() => this.get("metrics").trackEvent("Add Applicant"));
 	},
 	queryParams: {
 		agent: {
@@ -262,10 +265,12 @@ export default Ember.Route.extend({
 			let addedAddress = this.store.createRecord("address");
 			addedAddress.save().then((savedAddress) => {
 				applicant.get("previousAddresses").pushObject(savedAddress);
+				this.get("metrics").trackEvent("Add Previous Address");
 			});
 		},
 		removeAddressMaster: function(address) {
 			address.destroyRecord();
+			this.get("metrics").trackEvent("Remove Address");
 		},
 		removeApplicantMaster: function(coApplicant) {
 			let incomeDeleted = coApplicant.get("income").then((incomeRecords) => {

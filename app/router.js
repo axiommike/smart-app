@@ -10,10 +10,8 @@ var Router = Ember.Router.extend({
 	},
 	_trackPage() {
 		Ember.run.scheduleOnce("afterRender", this, () => {
-			const page = document.location.href;
-			const title = Ember.getWithDefault(this, "routeName", "unknown");
-
-			console.log(`Sending analytics data for page ${page} with title ${title}`);
+			const page = document.location.pathname;
+			const title = Ember.getWithDefault(this, "currentRouteName", "unknown");
 			Ember.get(this, "metrics").trackPage({page, title});
 		});
 	}

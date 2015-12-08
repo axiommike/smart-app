@@ -17,11 +17,12 @@ module.exports = function (environment) {
 		},
 		contentSecurityPolicy: {
 			"default-src": "'none'",
-			"script-src": "'self' 'unsafe-eval' *.googleapis.com maps.gstatic.com *.google-analytics.com",
+			"script-src": "'self' 'unsafe-eval' *.googleapis.com maps.gstatic.com *.google-analytics.com about:blank",
 			"font-src": "'self' fonts.gstatic.com",
 			"connect-src": "'self' maps.gstatic.com *.myaxiom.ca localhost:81 *.myaxiom.ca/* *.google-analytics.com",
-			"img-src": "'self' *.googleapis.com maps.gstatic.com csi.gstatic.com *.gravatar.com *.myaxiom.ca",
-			"style-src": "'self' 'unsafe-inline' fonts.googleapis.com maps.gstatic.com"
+			"img-src": "'self' data: *.googleapis.com maps.gstatic.com csi.gstatic.com *.gravatar.com *.myaxiom.ca *.google-analytics-com",
+			"style-src": "'self' 'unsafe-inline' fonts.googleapis.com maps.gstatic.com",
+			"media-src": "'self'"
 		},
 		manifest: {
 			enabled: true,
@@ -38,6 +39,7 @@ module.exports = function (environment) {
 		metricsAdapters: [
 			{
 				name: "GoogleAnalytics",
+				environments: ["development", "production"],
 				config: {
 					id: "UA-67882355-1"
 				}

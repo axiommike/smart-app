@@ -50,7 +50,7 @@
     "ember-form-fields": "0.1.0",
     "ember-intl": "2.0.0-rc.5",
     "ember-localstorage-adapter": "0.5.5",
-    "ember-metrics": "0.5.1",
+    "ember-metrics": "0.5.3",
     "ember-select-list": "0.9.4",
     "kouto-swiss": "^0.11.13",
     "liquid-fire": "0.21.3"
