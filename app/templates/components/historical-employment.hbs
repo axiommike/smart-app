@@ -22,7 +22,7 @@
 
 
 
-{{#if employment.isSelfEmployed}}
+{{#liquid-if employment.isSelfEmployed}}
 	{{#form-field label="How long?"}}
 		<label>{{input type="number" value=employmentProxy.tenureYears required=true placeholder="Years" min="0" max="100" step="1" title="Please indicate how many years you have owned this company"}} years</label>
 		<label>{{input type="number" value=employmentProxy.tenureMonths placeholder="mths" min="0" max="12" step="1"}} months</label>
@@ -47,7 +47,7 @@
 			<span class="help">position was held for {{employment.tenureTotalYears}} years</span>
 		{{/if}}
 	{{/form-field}}
-	{{#unless notWorking}}
+	{{#if working}}
 		{{#form-field label="Employer Address"}}
 			{{address-input address=employoment.employer.address value=employment.employer.address.address placeholder="Employer's Address" required=true}}
 		{{/form-field}}
@@ -71,8 +71,9 @@
 		{{#form-field label="Compensation"}}
 			{{select-list content=paymentFrequencies optionValuePath="value" optionLabelPath="label" value=employmentProxy.paymentFrequency title="Please select the payment frequency for this position" action=(action (mut employmentProxy.paymentFrequency))}}
 		{{/form-field}}
-	{{/unless}}
-	{{#unless notPaid}}
+	{{/if}}
+
+	{{#if paid}}
 		{{#form-field label="Annual Pay"}}
 			{{#if employment.isCommission}}
 				<span class="form-field-hint">Please give us the closest guess to your annual pay.</span>
@@ -82,13 +83,14 @@
 				<span class="help"><strong>{{format-number employment.income.value style="currency" currency="CAD"}}</strong> annually</span>
 			{{/if}}
 		{{/form-field}}
-	{{/unless}}
-	{{#unless notWorking}}
+	{{/if}}
+
+	{{#if working}}
 		{{#form-field label="I currently work here"}}
 			{{on-off-switch checked=employmentProxy.isCurrent title="Is the job current?"}}
 		{{/form-field}}
-	{{/unless}}
-{{/if}}
+	{{/if}}
+{{/liquid-if}}
 
 {{#liquid-if needsNOA}}
 	{{#liquid-unless hasIncome}}
