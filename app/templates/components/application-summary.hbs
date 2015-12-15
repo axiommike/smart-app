@@ -2,11 +2,20 @@
 	<button {{action "addApplicant"}} class="add-button add-applicant">Add Co-Applicant</button>
 	<article class="application-summary">
 		<section class="applicant-summary-personal-info">
-			{{#each application.applicants as |applicant|}}
-				{{applicant-card applicant=applicant isEditable=true onRemoveApplicant="removeApplicant"}}
-			{{else}}
-				<span class="error">Looks like you have no applicants... maybe you should <a {{action "addApplicant"}}>add one</a>.</span>
-			{{/each}}
+			<ul class="applicants">
+				{{#each application.applicants as |applicant|}}
+					<li class="applicant {{if applicant.isPrimary "primary" "co-applicant"}}">
+						{{applicant-card applicant=applicant isEditable=true
+						onRemoveApplicant="removeApplicant"
+						onCopyAddresses="copyAddresses"
+						onUnlinkAddresses="unlinkAddresses"
+						onAddAddress="addAddress"
+						onRemoveAddress="removeAddress"}}
+					</li>
+				{{else}}
+					<li><span class="error">Looks like you have no applicants... maybe you should <a {{action "addApplicant"}}>add one</a>.</span></li>
+				{{/each}}
+			</ul>
 		</section>
 		<p class="intro-help">
 			Below is a snap shot of The Big picture.  Please ensure this information is as accurate as possible.  You can edit any of the information by clicking on the item, or delete any item by clicking the <kbd>X</kbd>.

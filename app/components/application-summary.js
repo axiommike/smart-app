@@ -33,6 +33,15 @@ export default Ember.Component.extend({
 		removeAsset: function(asset) {
 			this.sendAction("onRemoveAsset", asset);
 		},
+		addAddress: function(applicant) {
+			this.sendAction("onAddAddress", applicant);
+		},
+		copyAddresses: function(applicant) {
+			this.sendAction("onCopyAddresses", applicant);
+		},
+		unlinkAddresses: function(applicant, address) {
+			this.sendAction("onUnlinkAddresses", applicant, address);
+		},
 		addLiability: function() {
 			this.sendAction("onAddLiability");
 		},

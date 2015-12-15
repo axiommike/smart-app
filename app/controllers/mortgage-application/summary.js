@@ -31,6 +31,22 @@ export default Ember.Controller.extend({
 			this.send("removeLiabilityMaster", liability);
 			this.get("model.applicant").save();
 		},
+		addAddress: function(applicant) {
+			this.send("addAddressMaster", applicant);
+		},
+		removeAddress: function(address) {
+			this.send("removeAddressMaster", address);
+		},
+		copyAddresses: function(applicant) {
+			let primaryApplicantAddresses = this.get("model.applicant.previousAddresses");
+			applicant.get("previousAddresses").pushObjects(primaryApplicantAddresses);
+			applicant.set("currentAddress", this.get("model.applicant.currentAddress"));
+		},
+		unlinkAddresses: function(applicant, previousCurrentAddress) {
+			let primaryApplicantAddresses = this.get("model.applicant.previousAddresses");
+			applicant.get("previousAddresses").removeObjects(primaryApplicantAddresses);
+			applicant.set("currentAddress", previousCurrentAddress);
+		},
 		nextStep: function() {
 			this.get("model").save().then((application) => {
 				this.transitionToRoute("mortgage-application.thank-you");
