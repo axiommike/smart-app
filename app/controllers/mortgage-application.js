@@ -33,6 +33,7 @@ export default Ember.Controller.extend({
 	showBreadcrumbs: true,
 	isDefault: Ember.computed.equal("model.brokerage", 2),
 	agent: null,
+	hasAgent: Ember.computed.bool("agent"),
 	cid: null, /* client ID -- named cid because of legacy reasons */
 	queryParams: ["agent", "cid", "brokerage"],
 	currentStep: 0,

@@ -2,8 +2,9 @@ import Ember from "ember";
 
 export default Ember.Component.extend({
 	tagName: "wizard-steps",
-	classNameBindings: [":wizard-steps", "hasSteps"],
+	classNameBindings: [":wizard-steps", "hasSteps", "isFloating"],
 	attributeBindings: ["realStepNumber"],
+	isFloating: false,
 	steps: Ember.A(),
 	totalSteps: Ember.computed.alias("steps.length"),
 	showBreadCrumbs: false,

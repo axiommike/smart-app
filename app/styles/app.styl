@@ -72,9 +72,6 @@ $material-box
 		animation-delay 0.3s
 		&-link
 			color inherit
-		&-name
-			+media-query($breakpointMain)
-				font-size 1.7em
 		&-image
 			float right
 			border-radius 0.2em
@@ -82,13 +79,15 @@ $material-box
 			+media-query($breakpointMain)
 				float none
 		flex 1
-		padding 3em
-		+media-query($breakpointMain)
-			padding $padding
+		padding 1.5em
 		@extend $border-box
 		text-align right
 		&-name
-			font-size 2.2em
+			font-size 2em
+		+media-query($breakpointMain)
+			padding $padding
+			&-name
+				font-size 1.4em
 		&-email
 			background transparent
 			transition background 0.3s ease, transform 0.3s ease, filter 0.3s ease
@@ -96,6 +95,8 @@ $material-box
 			position relative
 			display initial
 			&:before
+				content ""
+				transition inherit
 				background url($icon-mail5)
 				position absolute
 				font-size 6.4em

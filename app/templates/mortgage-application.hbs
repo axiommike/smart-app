@@ -1,6 +1,6 @@
 <header role="banner" data-current-step="{{currentStep}}">
-	{{wizard-steps steps=steps currentStepNumber=currentStep showBreadcrumbs=showBreadcrumbs}}
-	{{#if model.agent}}
+	{{wizard-steps steps=steps currentStepNumber=currentStep showBreadcrumbs=showBreadcrumbs isFloating=hasAgent}}
+	{{#if hasAgent}}
 		<aside class="agent-callout" role="complementary">
 			{{#if model.agent.image}}
 				{{#if model.agent.email}}
