@@ -38,6 +38,12 @@ module.exports = function (defaults) {
 				"assets/fonts/icomoon/demo-files/demo.js",
 				"assets/fonts/icomoon/PNG"
 			]
+		},
+		"ember-cli-preloader": {
+			paths: {
+				html: "app/preloader/preloader.html",
+				css: "app/preloader/preloader.css"
+			}
 		}
 	});
 
