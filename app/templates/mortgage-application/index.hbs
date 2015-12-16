@@ -1,11 +1,14 @@
 <h1 class="announcement">Let's Get Started</h1>
-<p class="intro-help">To begin, we will need to gather a little information.  Any details you provide are used solely for the purpose of mortgage qualification and remain strictly confidential.   This is a secure form and will help us identify the best possible mortgage products available to you.  There is not cost or obligation in submitting this form.</p>
+<p class="intro-help">To begin, we will need to gather a little information.  Any details you provide are used solely for the purpose of mortgage qualification and remain strictly confidential.   This is a secure form and will help us identify the best possible mortgage products available to you.  There is no cost or obligation in submitting this form.</p>
 <article>
 	<section class="quick-application box">
 		{{#validatable-form action="nextStep"}}
 			<div class="row">
 				{{#form-field label="First Name" class="column one-half" layoutDirection="vertical"}}
 					{{expandable-input value=applicant.firstName placeholder="First Name" required=true autofocus="autofocus" id="first-name" autocomplete="given-name" title="Please provide your first name"}}
+					{{#liquid-if applicant.hasName}}
+						<span class="help">Hi <strong>{{applicant.firstName}}</strong>.  Thanks for coming in!</span>
+					{{/liquid-if}}
 				{{/form-field}}
 				{{#form-field label="Last Name" class="column one-half" layoutDirection="vertical"}}
 					{{expandable-input value=applicant.lastName placeholder="Last Name" required=true id="last-name" title="Please provide your last name" autocomplete="family-name"}}
@@ -71,6 +74,9 @@
 			{{/liquid-if}}
 			{{#form-field label="Additional Comments" layoutDirection="vertical"}}
 				{{textarea value=application.comment class="row" placeholder="Is there anything else I can do for you?" rows=application.commentRows id="anything-else-i-can-do?" title="Anything else you would like to add?"}}
+				{{#liquid-if application.hasComment}}
+					<span class="help"><strong>Cool</strong>.  Thanks for the heads-up!</span>
+				{{/liquid-if}}
 			{{/form-field}}
 			<footer class="form-actions">
 				<button class="button-info-inverted" {{action "sendIncomplete"}} type="submit" title="Send me your message, and I'll get back to you as soon as I can">Contact Me Now</button>

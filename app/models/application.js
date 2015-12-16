@@ -52,6 +52,7 @@ export default DS.Model.extend({
 	downPaymentExplanation: DS.attr("string"),
 	isOtherDownPaymentSource: Ember.computed.equal("downPaymentSource", "other"),
 	comment: DS.attr("string"),
+	hasComment: Ember.computed.notEmpty("comment"),
 	commentRows: Ember.computed("comment", function() {
 		return this.get("comment") ? Math.floor(this.get("comment.length") * 0.015) + 1 : 1;
 	}),
