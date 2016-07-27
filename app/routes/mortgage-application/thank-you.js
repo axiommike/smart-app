@@ -162,13 +162,10 @@ export default Ember.Route.extend({
 			}));
 		}
 		return Ember.RSVP.all(applicantPromises).then(() => {
-			console.dir(nestedJSON);
-			console.dir(nestedJSON.applicant.properties);
-			console.dir(JSON.stringify(nestedJSON));
 			return ajax({
-				type: "PUT",
+				type: "POST",
 				dataType: "JSON",
-				url: `${ENV.apiURL}/v1/`,
+				url: `${ENV.apiURL}/smart-app`,
 				data: JSON.stringify(nestedJSON)
 			}).then((completedApplication) => {
 				console.dir(completedApplication);

@@ -19,8 +19,8 @@ module.exports = function (environment) {
 			"default-src": "'none'",
 			"script-src": "'self' 'unsafe-eval' *.googleapis.com maps.gstatic.com *.google-analytics.com about:blank",
 			"font-src": "'self' fonts.gstatic.com",
-			"connect-src": "'self' maps.gstatic.com *.myaxiom.ca localhost:81 *.myaxiom.ca/* *.google-analytics.com",
-			"img-src": "'self' data: *.googleapis.com maps.gstatic.com csi.gstatic.com *.gravatar.com *.myaxiom.ca *.google-analytics-com",
+			"connect-src": "'self' maps.gstatic.com *.axiomdev.ca localhost:81 *.axiomdev.ca/* *.google-analytics.com",
+			"img-src": "'self' data: *",
 			"style-src": "'self' 'unsafe-inline' fonts.googleapis.com maps.gstatic.com",
 			"media-src": "'self'"
 		},
@@ -56,7 +56,7 @@ module.exports = function (environment) {
 		// ENV.APP.LOG_TRANSITIONS = true;
 		// ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
 		// ENV.APP.LOG_VIEW_LOOKUPS = true;
-		ENV.apiURL = "http://dev.myaxiom.ca/api"
+		ENV.apiURL = "http://api.axiomdev.ca"
 	}
 
 	if (environment === "test") {
@@ -69,11 +69,11 @@ module.exports = function (environment) {
 		ENV.APP.LOG_VIEW_LOOKUPS = false;
 
 		ENV.APP.rootElement = "#ember-testing";
-		ENV.apiURL = "http://dev.myaxiom.ca/api"
+		ENV.apiURL = "http://api.axiomdev.ca"
 	}
 
 	if (environment === "production") {
-		ENV.apiURL = "https://myaxiom.ca/api"
+		ENV.apiURL = "https://api.axiomdev.ca"
 	}
 
 	return ENV;

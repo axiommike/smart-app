@@ -50,7 +50,6 @@ export default Ember.Controller.extend({
 			var model = this.get("model"), applicant = model.get("applicant");
 			model.save().then((savedApplication) => {
 				applicant.save().then((savedApplicant) => {
-					console.dir(savedApplicant);
 					this.transitionToRoute("mortgage-application.thank-you", savedApplication);
 				});
 			});
@@ -59,7 +58,6 @@ export default Ember.Controller.extend({
 			var model = this.get("model"), applicant = model.get("applicant");
 			model.save().then((savedApplication) => {
 				applicant.save().then((savedApplicant) => {
-					console.dir(savedApplicant);
 					this.transitionToRoute("mortgage-application.applicants", savedApplication);
 				});
 			});

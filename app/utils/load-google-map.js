@@ -10,7 +10,7 @@ window.mapsLoaded = false;
  * @return {Ember.RSVP.Promise}
  */
 export default function loadGoogleMap(resolveWith) {
-	var src = "https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places";
+	var src = "https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places&key=AIzaSyBRU3FJcBn-_0IP_evLge9gZy8mVumZrXs";
 	if (!window.mapsLoaded) {
 		window.mapsLoaded = true;
 		// promise making sure the script is loaded

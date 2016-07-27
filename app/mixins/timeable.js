@@ -14,7 +14,6 @@ export default Ember.Mixin.create({
 		return Math.floor(this.get("tenure") * 365);
 	}),
 	tenureChanged: function() {
-		console.log("Tenure changed");
 		let years = parseInt(this.get("tenureYears")), months = parseInt(this.get("tenureMonths"));
 		if (years && months) {
 			this.set("tenure", Math.round(months + (years * 12)));
