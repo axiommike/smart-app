@@ -171,7 +171,7 @@ export default Ember.Route.extend({
 				console.dir(completedApplication);
 				resolvedModel.setProperties({
 					isIncomplete: false,
-					applicationID: completedApplication.application._bean_data.appid
+					applicationID: completedApplication.id
 				});
 				resolvedModel.set("isIncomplete", false);
 				return resolvedModel.save();
