@@ -49,6 +49,7 @@
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
     "ember-form-fields": "0.1.0",
+    "ember-inputmask": "0.2.2",
     "ember-intl": "2.0.0-rc.5",
     "ember-localstorage-adapter": "0.5.5",
     "ember-metrics": "0.5.3",

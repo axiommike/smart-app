@@ -52,7 +52,7 @@
 			{{address-input address=employoment.employer.address value=employment.employer.address.address placeholder="Employer's Address" required=true}}
 		{{/form-field}}
 		{{#form-field label="Employer Phone Number"}}
-			{{input type="tel" value=employment.employer.phone placeholder="Employer's Phone" required=true title="Please indicate this employer's primary phone number"}}
+			{{input-mask mask="999-999-9999" value=employment.employer.phone placeholder="Employer's Phone" required=true title="Please indicate this employer's primary phone number"}}
 		{{/form-field}}
 		{{#if employment.isHourly}}
 			{{#form-field label="Hours Per Week"}}

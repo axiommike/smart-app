@@ -19,13 +19,13 @@
 					{{expandable-input value=applicant.email required=true type="email" placeholder="Email" id="email" autocomplete="email" title="Please provide your e-mail address"}}
 				{{/form-field}}
 				{{#form-field label="Phone" class="column one-half" layoutDirection="vertical"}}
-					{{input value=applicant.phone type="tel" required=true placeholder="Phone" id="phone" autocomplete="tel" title="Please provide your primary phone number"}}
+					{{input-mask mask="999-999-9999" value=applicant.phone required=true placeholder="Phone" id="phone" autocomplete="tel" title="Please provide your primary phone number"}}
 					{{#liquid-if applicant.hasPhone}}
 						<span class="help">
 							{{#if model.agent}}
-								I'll call you at <strong>{{phone-number number=applicant.phone}}</strong> once I get the rest of your information.
+								I'll call you at <strong>{{applicant.phone}}</strong> once I get the rest of your information.
 							{{else}}
-								We'll call you at <strong>{{phone-number number=applicant.phone}}</strong> once we get the rest of your information.
+								We'll call you at <strong>{{applicant.phone}}</strong> once we get the rest of your information.
 							{{/if}}
 						</span>
 					{{/liquid-if}}
