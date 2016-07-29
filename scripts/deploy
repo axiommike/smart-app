@@ -1,0 +1,9 @@
+#/bin/sh
+
+cd ..
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/smartapp
+git pull origin master
+npm install
+bower install
+ember build
