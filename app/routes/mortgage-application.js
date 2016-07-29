@@ -178,7 +178,7 @@ export default Ember.Route.extend({
 			});
 		}).catch(() => {
 			let createdBrokerage = this.store.createRecord("brokerage", {
-				id:        "2",
+				id:        "1",
 				name:      "Axiom Mortgage Solutions",
 				isDefault: true
 			});
