@@ -82,7 +82,7 @@ export default Ember.Route.extend({
 			emptyApplication = this.store.createRecord("application"),
 			params = this.paramsFor("apply");
 		if (!params.agent && !params.brokerage) {
-			params.brokerage = 2;
+			params.brokerage = 1;
 		}
 		return primaryApplicantPromise.then((primaryApplicant) => {
 			emptyApplication.set("applicant", primaryApplicant);
