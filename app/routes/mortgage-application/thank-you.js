@@ -161,6 +161,9 @@ export default Ember.Route.extend({
 				return nestedJSON.applicant = serializedApplicant;
 			}));
 		}
+
+		nestedJSON.agent = transition.queryParams.agent;
+		nestedJSON.brokerage = transition.queryParams.brokerage;
 		return Ember.RSVP.all(applicantPromises).then(() => {
 			return ajax({
 				type: "POST",
