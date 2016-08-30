@@ -19,12 +19,14 @@
 			{{/if}}
 			<h1 class="agent-callout-name">
 				{{#if model.agent.website}}
-					<a href="{{model.agent.website}}" class="agent-callout-link" target="_blank" title="Visit {{model.agent.fullName}} online">
-						{{model.agent.fullName}}
+					<a href="{{model.agent.website}}" class="agent-callout-link" target="_blank" title="Visit {{model.agent.full_name}} online">
+						{{model.agent.full_name}}
 					</a>
 				{{/if}}
 			</h1>
-			<span class="agent-callout-phone">{{phone-number number=model.agent.phone}}</span>
+			<span class="agent-callout-phone">{{phone-number number=model.agent.home_phone}}</span><br />
+			<span class="agent-callout-phone">{{phone-number number=model.agent.cell_phone}}</span><br />
+			<span class="agent-callout-phone">{{phone-number number=model.agent.work_phone}}</span><br />
 		</aside>
 	{{else}}
 		{{#unless model.brokerage.isDefault}}

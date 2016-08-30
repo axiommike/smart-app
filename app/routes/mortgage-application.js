@@ -205,7 +205,7 @@ export default Ember.Route.extend({
 					type: "GET",
 					dataType: "JSON"
 				}).then((agent) => {
-					let agentResponse = agent.agent,
+					let agentResponse = agent,
 						addedAgent = this.store.createRecord("agent", agentResponse);
 					resolvedModel.set("agent", addedAgent);
 					return addedAgent.save().then(() => {
