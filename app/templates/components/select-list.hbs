@@ -1,0 +1,8 @@
+<select onchange={{action "selectOne" value="target.value"}}>
+    <option value="" selected>{{prompt}}</option>
+    {{#each content as |model|}}
+        <option value={{get model optionValuePath}}>
+            {{get model optionLabelPath}}
+        </option>
+    {{/each}}
+</select>

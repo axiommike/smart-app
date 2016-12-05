@@ -3040,7 +3040,7 @@ body {
 }
 .applicant-card-actions {
 rgba(160,160,160,0.2)
-  padding: 1.2em;
+padding: 1.2em;
 }
 .applicant-card-finances {
   text-align: center;
@@ -3695,8 +3695,8 @@ button-error:focus {
 @media only screen and (max-width: 767px) {
   .row,
   .row-padded,
-.row,
-.row-padded {
+  .row,
+  .row-padded {
     display: block;
   }
   .row .column,

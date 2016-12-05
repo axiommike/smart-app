@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>SmartApp</title>
-		<meta name="description" content="SmartApp Mortgage Application">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>SmartApp</title>
+        <meta name="description" content="SmartApp Mortgage Application">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		{{content-for "head"}}
+        {{content-for "head"}}
 
-		<link rel="stylesheet" href="assets/vendor.css">
-		<link rel="stylesheet" href="assets/smart-app.css">
+        <link rel="stylesheet" href="{{rootURL}}assets/vendor.css">
+        <link rel="stylesheet" href="{{rootURL}}assets/smart-app.css">
 
-		{{content-for "head-footer"}}
-	</head>
-	<body>
-		<noscript>
-			<div role="alert">
-				<header>
-					<h1 class="announcement">Please Enable Javascript</h1>
-				</header>
-				<p>It looks like you've either disabled javascript in your current browser, or you're using an addon which blocks scripts from loading.</p>
+        {{content-for "head-footer"}}
+    </head>
+    <body>
+        <noscript>
+            <div role="alert">
+                <header>
+                    <h1 class="announcement">Please Enable Javascript</h1>
+                </header>
+                <p>It looks like you've either disabled javascript in your current browser, or you're using an addon which blocks scripts from loading.</p>
 
-				<p>SmartApp relies heavily on client-side javascript, and as such, will not load without javascript.</p>
+                <p>SmartApp relies heavily on client-side javascript, and as such, will not load without javascript.</p>
 
-				<p>Please try reloading with javascript enabled, or
-					<a href="http://browsehappy.com/?locale=en" target="_browsehappy">try with another browser</a>.</p>
-			</div>
-		</noscript>
-		{{content-for "body"}}
+                <p>Please try reloading with javascript enabled, or
+                    <a href="http://browsehappy.com/?locale=en" target="_browsehappy">try with another browser</a>.</p>
+            </div>
+        </noscript>
+        {{content-for "body"}}
 
-		<script src="assets/vendor.js"></script>
-		<script src="assets/intl/intl.min.js"></script>
-		<script src="assets/intl/locales/en-ca.js"></script>
-		<script src="assets/smart-app.js"></script>
+        <script src="{{rootURL}}assets/vendor.js"></script>
+        <script src="{{rootURL}}assets/smart-app.js"></script>
 
-		{{content-for "body-footer"}}
-	</body>
+        {{content-for "body-footer"}}
+    </body>
 </html>

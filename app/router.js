@@ -1,38 +1,13 @@
-import Ember from "ember";
-import config from "./config/environment";
+import Ember from 'ember';
+import config from './config/environment';
 
-var Router = Ember.Router.extend({
-	location: config.locationType,
-	metrics: Ember.inject.service(),
-	didTransition() {
-		this._super(...arguments);
-		this._trackPage();
-	},
-	_trackPage() {
-		Ember.run.scheduleOnce("afterRender", this, () => {
-			const page = document.location.pathname;
-			const title = Ember.getWithDefault(this, "currentRouteName", "unknown");
-			Ember.get(this, "metrics").trackPage({page, title});
-		});
-	}
+const Router = Ember.Router.extend({
+  location: config.locationType,
+  rootURL: config.rootURL
 });
 
-Router.map(function () {
-	this.route("apply");
-	// simple redirect to apply
-	this.route("wizard");
-	this.route("default");
-	this.route("agent");
-	this.route("apply", {path: "/apply/*catchall"});
-	this.route("apply", {path: "/mortgage-application"});
-	this.route("mortgage-application", {path: "/mortgage-application/:application_id"}, function () {
-		this.route("basic-information");
-		this.route("applicants");
-		this.route("summary");
-		this.route("assets");
-		this.route("thank-you");
-		this.route("liabilities");
-	});
+Router.map(function() {
+  this.route('thank-you');
 });
 
 export default Router;

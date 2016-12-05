@@ -1,69 +1,17 @@
-import DS from "ember-data";
-import Ember from "ember";
-import PersonableMixin from "../mixins/personable";
+import DS from 'ember-data';
 
-export default DS.Model.extend(PersonableMixin, {
-	dependents: DS.attr("number", {defaultValue: 0}),
-	birthDate: DS.attr("date"),
-	sin: DS.attr("number"),
-	employment: DS.hasMany("employment", {async: true}),
-	currentEmployment: Ember.computed.filterBy("employment", "isCurrent", true),
-	previousEmployment: Ember.computed.setDiff("employment", "currentEmployment"),
-	liabilities: DS.hasMany("liability", {async: true}),
-	vehicleLoans: Ember.computed.alias("vehicles.@each.loan"),
-	childSupportLiabilities: Ember.computed.filterBy("liabilities", "type", "child-support"),
-	creditCardLiabilities: Ember.computed.filterBy("liabilities", "type", "credit-card"),
-	lineOfCreditLiabilities: Ember.computed.filterBy("liabilities", "type", "line-of-credit"),
-	loanLiabilities: Ember.computed.filterBy("liabilities", "type", "loan"),
-	otherLiabilities: Ember.computed.filterBy("liabilities", "type", "other"),
-	allAssets: Ember.computed.uniq("assets", "vehicles.@each.asset", "properties.@each.asset"),
-	assets: DS.hasMany("asset", {async: true}),
-	vehicles: DS.hasMany("vehicle", {async: true}),
-	vehicleAssets: Ember.computed.alias("vehicles.@each.asset"),
-	personalItemAssets: Ember.computed.filterBy("assets", "type", "item"),
-	savingsAssets: Ember.computed.filterBy("assets", "type", "savings"),
-	investmentAssets: Ember.computed.filterBy("assets", "type", "investment"),
-	gicAssets: Ember.computed.filterBy("assets", "type", "gic"),
-	rrspAssets: Ember.computed.filterBy("assets", "type", "rrsp"),
-	otherAssets: Ember.computed.filterBy("assets", "type", "other"),
-	income: DS.hasMany("income", {async: true}),
-	employmentIncome: Ember.computed.filterBy("income", "source", "employment"),
-	currentYearlyIncome: Ember.computed.setDiff("income", "previousEmployment.@each.income"),
-	extraIncome: Ember.computed.setDiff("income", "employmentIncome"),
-	totalIncome: Ember.computed("currentYearlyIncome.@each.value", function() {
-		return this.get("currentYearlyIncome").reduce(function(previousValue, income) {
-			return parseInt(previousValue) + parseInt(income.get("yearlyValue"));
-		}, 0);
-	}),
-	currentAddress: Ember.computed.alias("currentProperty.address"),
-	previousAddresses: DS.hasMany("address", {async: true}),
-	addresses: Ember.computed("currentAddress", "previousAddresses", function() {
-		return Ember.makeArray(this.get("previousAddresses").slice().concat(this.get("currentAddress")));
-	}),
-	totalAddressHistory: Ember.computed("address.@each.tenureTotalYears", function() {
-		let addresses = this.get("addresses");
-		return addresses.reduce(function(previousValue, address) {
-			return parseInt(previousValue) + (address ? address.get("tenureTotalYears") : 0);
-		}, 0);
-	}),
-	maritalStatus: DS.attr("string"), /* Married, single, divorced */
-	totalAssets: function() {
-		let assets = this.get("assets");
-		return assets.reduce(function(previousValue, asset) {
-			return parseInt(previousValue) + (asset ? parseInt(asset.get("value")) : 0);
-		}, 0);
-	}.property("assets.@each.value"),
-	totalLiabilities: function() { /* Total Yearly liabilities */
-		let liabilities = this.get("liabilities");
-		return liabilities.reduce(function(previousValue, liability) {
-			return parseInt(previousValue) + (liability ? parseInt(liability.get("payment")) : 0);
-		}, 0);
-	}.property("liabilities.@each.payment"),
-	mortgages: Ember.computed.alias("properties.@each.mortgage"),
-	properties: DS.hasMany("property", {async: true}),
-	isPrimary: DS.attr("boolean"),
-	relationship: DS.attr("string"), /* Spouse, parent, child (commonlaw), other */
-	currentProperties: Ember.computed.filterBy("properties", "isCurrent", true),
-	currentProperty: Ember.computed.alias("currentProperties.firstObject"),
-	otherProperties: Ember.computed.filterBy("properties", "isCurrent", false)
+export default DS.Model.extend({
+    first_name: DS.attr('string'),
+    last_name: DS.attr('string'),
+    email: DS.attr('string'),
+    phone: DS.attr('string'),
+    referral_source: DS.attr('string'),
+    referred_friend: DS.attr('string'),
+    referred_agent: DS.attr('string'),
+    referred_other: DS.attr('string'),
+    type: DS.attr('string'),
+    down_payment: DS.attr('string'),
+    down_payment_source: DS.attr('string'),
+    down_payment_explanation: DS.attr('string'),
+    comment: DS.attr('string')
 });

@@ -1,8 +1,11 @@
-import Ember from "ember";
+import Ember from 'ember';
 
 export default Ember.Route.extend({
-	beforeModel: function() {
-		let params = this.paramsFor("index");
-		this.transitionTo("apply", {queryParams: params});
-	}
+    intl: Ember.inject.service(),
+    beforeModel() {
+        return this.get('intl').setLocale('en-us');
+    },
+    model: function() {
+        return this.store.createRecord('applicant');
+    }
 });
