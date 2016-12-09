@@ -19,7 +19,7 @@ export default Ember.Route.extend({
         if (applicant) {
             return applicant;
         }
-        
+
         return this.store.createRecord('applicant', {});
     }
 });

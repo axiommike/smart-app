@@ -5,5 +5,5 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/smartapp
 git pull origin master
 npm install
-bower install
+bower install --allow-root
 ember build
