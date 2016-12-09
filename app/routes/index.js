@@ -12,15 +12,13 @@ export default Ember.Route.extend({
         return this.get('intl').setLocale('en-us');
     },
     model(params) {
-        let applicant = null;
         if (params.token) {
             let applicant = this.store.find('applicant', params.token);
+            if (applicant) {
+                return applicant;
+            }
         }
-
-        if (applicant) {
-            return applicant;
-        }
-
+        
         return this.store.createRecord('applicant', {});
     }
 });
