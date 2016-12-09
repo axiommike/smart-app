@@ -16,7 +16,7 @@ module.exports = function(environment) {
     };
 
     if (environment === 'development') {
-        ENV.apiURL = 'http://api.axiom.local';
+        ENV.apiURL = 'http://api.axiomdev.ca';
     }
 
     if (environment === 'test') {

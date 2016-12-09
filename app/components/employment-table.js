@@ -13,7 +13,7 @@ export default Ember.Component.extend({
         }, 0);
     }),
     didReceiveAttrs() {
-        if (this.get('employments').length == 0) {
+        if (this.get('employments').length === 0) {
             this.set('currentEmployment', this.get('store').createRecord('employment', {
                 person_id: this.get('person_id')
             }));

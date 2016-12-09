@@ -13,9 +13,13 @@ export default Ember.Route.extend({
     },
     model(params) {
         if (params.token) {
-            return this.store.find('applicant', params.token);
-        } else {
-            return this.store.createRecord('applicant', {});
+            let applicant = this.store.find('applicant', params.token);
         }
+
+        if (applicant) {
+            return applicant;
+        }
+        
+        return this.store.createRecord('applicant', {});
     }
 });

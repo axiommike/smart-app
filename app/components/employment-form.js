@@ -63,7 +63,7 @@ export default Ember.Component.extend({
                     this.set("showLine150", false);
                     this.set("showPosition", true);
                     this.set("showBusinessType", false);
-                    break
+                    break;
             }
         },
         changePaymentFrequency(value) {
