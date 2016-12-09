@@ -12,6 +12,7 @@ export default Ember.Route.extend({
         return this.get('intl').setLocale('en-us');
     },
     model(params) {
+        let applicant = null;
         if (params.token) {
             let applicant = this.store.find('applicant', params.token);
         }
