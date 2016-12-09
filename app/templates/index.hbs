@@ -1,4 +1,4 @@
-{{header-step step=1 totalSteps=6 stepName="Basic Information" agent=agent brokerage=brokerage}}
+{{header-step step=1 totalSteps=6 previousStep=0 stepName="Basic Information" agent=model.agent brokerage=model.agent.brokerage}}
 
 <main role="main">
     <h1 class="announcement">Let's Get Started</h1>
@@ -6,6 +6,13 @@
     <article>
         <section class="quick-application box">
             {{#validatable-form action="nextStep"}}
+                {{#unless token}}
+                    <div class="row">
+                        {{#form-field label="Agent" class="column one-half" layoutDirection="vertical"}}
+                            {{select-list content=agents optionValuePath="id" optionLabelPath="full_name" required=true prompt=" -- " title="Please select an agent" change="changeAgent"}}
+                        {{/form-field}}
+                    </div>
+                {{/unless}}
                 <div class="row">
                     {{#form-field label="First Name" class="column one-half" layoutDirection="vertical"}}
                         {{input value=model.first_name placeholder="First Name" required=true autofocus="autofocus" autocomplete="given-name" title="Please provide your first name"}}
@@ -22,13 +29,13 @@
                         {{input value=model.email required=true type="email" placeholder="Email" id="email" autocomplete="email" title="Please provide your e-mail address"}}
                     {{/form-field}}
                     {{#form-field label="Phone" class="column one-half" layoutDirection="vertical"}}
-                        {{input-mask mask="999-999-9999" value=model.phone required=true placeholder="Phone" autocomplete="tel" title="Please provide your primary phone number"}}
-                        {{#liquid-if model.hasPhone}}
+                        {{input-mask mask="999-999-9999" value=model.home_phone required=true placeholder="Phone" autocomplete="tel" title="Please provide your primary phone number"}}
+                        {{#liquid-if model.home_phone}}
                             <span class="help">
                                 {{#if model.agent}}
-                                    I'll call you at <strong>{{model.phone}}</strong> once I get the rest of your information.
+                                    I'll call you at <strong>{{model.home_phone}}</strong> once I get the rest of your information.
                                 {{else}}
-                                    We'll call you at <strong>{{model.phone}}</strong> once we get the rest of your information.
+                                    We'll call you at <strong>{{model.home_phone}}</strong> once we get the rest of your information.
                                 {{/if}}
                             </span>
                         {{/liquid-if}}
@@ -90,17 +97,4 @@
     </article>
 </main>
 
-<footer role="contentinfo">
-    {{#if brokerage}}
-        {{brokerage-address brokerage=brokerage}}
-    {{else}}
-        {{#if agent.brokerage}}
-            {{brokerage-address brokerage=agent.brokerage}}
-        {{else}}
-            <small>Copyright <strong><a href="http://{{brokerage.website}}" class="brokerage-link" target="_blank">{{brokerage.name}}</a></strong> {{format-date now day="numeric" month="long" year="numeric"}}</small>
-        {{/if}}
-    {{/if}}
-    <aside class="tips">
-        <small class="tip">Having trouble viewing this application?  <a href="https://secure-mortgage-online.ca/legacy/wizard?agent={{agent.id}}&brokerage={{brokerage.id}}" target="_blank">Try our legacy application</a></small>
-    </aside>
-</footer>
+{{footer-section brokerage=model.agent.brokerage}}

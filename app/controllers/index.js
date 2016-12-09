@@ -42,37 +42,38 @@ export default Ember.Controller.extend({
         }
         return terms;
     }),
-    //
-    agent: {
-        image: "http://www.gravatar.com/avatar/7bc6308a529bf5c678392d89fd93239a?s=100&d=identicon",
-        email: "eric@ericmaicon.com.br",
-        website: "http://ericmaicon.com.br",
-        full_name: "Eric Maicon",
-        home_phone: "999-999-9999",
-        cell_phone: "999-999-9999",
-        work_phone: "999-999-9999"
+    agents: null,
+    init() {
+        this.store.findAll('agent').then((agents) => {
+            this.set('agents', agents);
+        });
     },
-    brokerage: {
-        website: "http://ericmaicon.com.br",
-        image: "http://assets.myaxiom.ca/brokerage_logos/2.png",
-        name: "Axiom Mortgage",
-        phone: "999-999-9999",
-        address: {
-            address: "Sheerwood park",
-            city: "Sheerwood park",
-            province: "AL",
-            postalCode: "AAA-AAA"
-        }
-    },
-    //
     actions: {
         sendIncomplete: function () {
-            this.get('model').save().then(function () {
-                self.transitionTo('thank-you');
+            this.get('model').save().then((applicant) => {
+                this.transitionToRoute('thank-you', {queryParams: {id : applicant.get('id'), is_incomplete: true}});
+            });
+        },
+        nextStep: function () {
+            let applicant = this.get('model');
+            let mortgage = this.store.createRecord('mortgage', {
+                'applicants': [applicant]
+            });
+            if (applicant.get('agent_id')) {
+                mortgage.set('agent_id', applicant.get('agent_id'));
+            } else {
+                let agent = applicant.get('agent');
+                let brokerage = agent.get('brokerage');
+                mortgage.set('agent_id', agent.get('id'));
+                mortgage.set('agent_id', brokerage.get('id'));
+            }
+
+            mortgage.save().then((mortgage) => {
+                this.transitionToRoute('applicants', {queryParams: {id : mortgage.get('id')}});
             });
         },
         changeSource: function (value) {
-            this.set("applicant.referral_source", value);
+            this.set("model.referral_source", value);
             switch (value) {
                 case "agent":
                     this.set("isFriend", false);
@@ -97,7 +98,7 @@ export default Ember.Controller.extend({
             }
         },
         changeGoals: function (value) {
-            this.set("applicant.type", value);
+            this.set("model.type", value);
             switch (value) {
                 case "purchase":
                     this.set("isPurchase", true);
@@ -108,7 +109,7 @@ export default Ember.Controller.extend({
             }
         },
         changeDownPaymentSource: function (value) {
-            this.set("applicant.down_payment_source", value);
+            this.set("model.down_payment_source", value);
             switch (value) {
                 case "other":
                     this.set("isOtherDownPaymentSource", true);
@@ -117,7 +118,9 @@ export default Ember.Controller.extend({
                     this.set("isOtherDownPaymentSource", false);
                     break;
             }
-            console.log(this.isOtherDownPaymentSource);
+        },
+        changeAgent: function (value) {
+            this.set("model.agent_id", value);
         }
     },
     isFriend: false,

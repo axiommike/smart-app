@@ -1,0 +1,23 @@
+<ul class="income income-table">
+    {{#each incomes as |extraIncome|}}
+        <li class="income {{if extraIncome.source extraIncome.source}}">
+            {{income-form income=extraIncome removeIncome="removeIncome"}}
+        </li>
+    {{else}}
+        <li>Add <a {{action "addIncome"}}><strong>investment</strong>, <strong>child support</strong>, <strong>rental</strong>, <strong>pension</strong>, or other sources of income</a></li>
+    {{/each}}
+</ul>
+
+{{#if flatList}}
+    {{#liquid-if totalIncome}}
+        <footer class="table-total">
+            <sup><strong>{{format-number 0 style="currency" currency="CAD"}}</strong> total</sup>
+        </footer>
+    {{/liquid-if}}
+{{/if}}
+
+<footer class="table-footer">
+    <button class="add-button" {{action "addIncome"}}>Add Extra Income</button>
+</footer>
+
+{{yield}}

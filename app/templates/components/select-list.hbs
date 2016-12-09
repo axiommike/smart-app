@@ -1,5 +1,7 @@
-<select onchange={{action "selectOne" value="target.value"}}>
-    <option value="" selected>{{prompt}}</option>
+<select onchange={{action "selectOne" value="target.value"}} required={{required}}>
+    {{#if prompt}}
+        <option value="" selected>{{prompt}}</option>
+    {{/if}}
     {{#each content as |model|}}
         <option value={{get model optionValuePath}}>
             {{get model optionLabelPath}}

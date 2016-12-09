@@ -1,20 +1,22 @@
+{{header-step step=6 totalSteps=6 stepName="Finished" agent=agent brokerage=brokerage}}
+
 <article class="thank-you">
     <header class="thank-you-header">
-        <h1>Thanks, <strong>{{model.applicant.firstName}}</strong>!</h1>
+        <h1>Thanks, {{#if is_incomplete}}<strong>{{model.first_name}}</strong>{{else}}<strong>{{model.dear}}</strong>{{/if}}!</h1>
         <p class="thank-you-header-text">Your application has been submitted, and now the magic happens!</p>
     </header>
 
     <article class="thank-you-details">
-        <p>For reference, your application <code>id</code> number is: <strong>{{model.applicationID}}</strong></p>
+        <p>For reference, your application <code>id</code> number is: <strong>{{model.id}}</strong></p>
     </article>
-    {{#liquid-if model.isIncomplete}}
+    {{#liquid-if is_incomplete}}
         <button {{action "completeFullApp"}}>Actually, I'd like to complete full app</button>
     {{else}}
         <article class="thank-you-steps">
             <h1>So what now?</h1>
             {{#if model.agent}}
-                <p>Your application has been sent to <strong>{{model.agent.fullName}}</strong>, who will contact you shortly to discuss your application.</p>
-                <p>From there, {{model.agent.firstName}} will confirm some of your basic information, answer any questions, and discuss the rate, term, and mortgage that best suits your needs.  Our hope is to make your mortgage experience as simple as possible, and we will do our best to guide you every step of the way!</p>
+                <p>Your application has been sent to <strong>{{model.agent.full_name}}</strong>, who will contact you shortly to discuss your application.</p>
+                <p>From there, {{model.agent.first_name}} will confirm some of your basic information, answer any questions, and discuss the rate, term, and mortgage that best suits your needs.  Our hope is to make your mortgage experience as simple as possible, and we will do our best to guide you every step of the way!</p>
             {{else}}
                 <p>Your application has been sent to <strong>{{model.brokerage.name}}</strong>, where we will find a mortgage broker to discuss your application with you.</p>
                 <p>From there, we will confirm some of your basic information, answer any questions, and discuss the rate, term, and mortgage that best suits your needs.  Our hope is to make your mortgage experience as simple as possible, and we will do our best to guide you every step of the way!</p>

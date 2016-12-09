@@ -5,6 +5,7 @@ export default Ember.Component.extend({
     optionLabelPath: null,
     content: null,
     prompt: null,
+    required: null,
     actions: {
         selectOne(value) {
             this.sendAction('change', value);

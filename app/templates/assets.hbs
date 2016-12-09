@@ -1,0 +1,84 @@
+{{header-step step=3 totalSteps=6 previousStep=1 stepName="Assets" showBreadcrumbs=true showSubmitButton=true agent=model.agent brokerage=model.agent.brokerage}}
+
+{{#validatable-form action="nextStep"}}
+    <div class="form-steps-container">
+        <ol class="form-steps">
+            <li class="form-step">
+                {{#form-field label="Do you own your current residence?"}}
+                    {{on-off-switch checked=ownsCurrentResidence id="do-you-own-your-current-residence?"}}
+                {{/form-field}}
+                {{#liquid-if ownsCurrentResidence}}
+                    {{property-asset property=model.applicant.currentProperty}}
+                {{/liquid-if}}
+            </li>
+            <li class="form-step">
+                {{#form-field label="Do you own any other real estate?"}}
+                    {{on-off-switch checked=ownsOtherRealEstate id="do-you-own-any-other-real-estate?"}}
+                {{/form-field}}
+                {{#liquid-if ownsOtherRealEstate}}
+                    {{property-table properties=model.applicant.otherProperties onAdd="addProperty" title="List of all other Properties" addressType="Other"}}
+                {{/liquid-if}}
+            </li>
+            <li class="form-step">
+                {{#form-field label="Do you have any savings or chequing accounts?"}}
+                    {{on-off-switch checked=hasSavings title="Please indicate whether you have invested in any government funds or locked-in investments" id="do-you-have-any-savings-or-chequing-accounts?"}}
+                {{/form-field}}
+                {{#liquid-if hasSavings}}
+                    {{asset-table assets=model.applicant.assets type="savings" onAdd="addAsset" onRemove="removeAsset" title="Table of all GIC, long-term, and term-based bank account assets" caption="Term Deposit Account Assets"}}
+                {{/liquid-if}}
+            </li>
+            <li class="form-step">
+                {{#form-field label="Do you have any personal items of significant value (over $2000 CAD)?"}}
+                    {{on-off-switch checked=hasPersonalItems title="Please indicate whether you have any belongings worth of significant value" id="do-you-have-any-personal-items-of-significant-value?-(boats,-toys,-skidoos,-man-toys)"}}
+                {{/form-field}}
+                {{#liquid-if hasPersonalItems}}
+                    {{asset-table assets=model.applicant.assets type="item" onAdd="addAsset" onRemove="removeAsset" title="Table of all personal assets" caption="All Personal Item Assets"}}
+                {{/liquid-if}}
+            </li>
+            <li class="form-step">
+                {{#form-field label="Do you have any GIC or Term Deposit investments?"}}
+                    {{on-off-switch checked=hasGICs title="Please indicate whether you have any GIC or Term Deposit investments" id="do-you-have-any-gic-or-term-deposit-investments?"}}
+                {{/form-field}}
+                {{#liquid-if hasGICs}}
+                    {{asset-table assets=model.applicant.assets type="gic" onAdd="addAsset" onRemove="removeAsset" title="Table of all GIC and Term Deposit Accounts" caption="GIC and Term Deposit Accounts"}}
+                {{/liquid-if}}
+            </li>
+            <li class="form-step">
+                {{#form-field label="Do you have any RRSP savings accounts?"}}
+                    {{on-off-switch checked=hasRRSPs title="Please indicate whether you have any RRSP funds or accounts" id="do-you-have-any-rrsp-savings-accounts?"}}
+                {{/form-field}}
+                {{#liquid-if hasRRSPs}}
+                    {{asset-table assets=model.applicant.assets type="rrsp" onAdd="addAsset" onRemove="removeAsset" title="Table of all RRSP Accounts" caption="All RRSP Accounts"}}
+                {{/liquid-if}}
+            </li>
+            <li class="form-step">
+                {{#form-field label="Do you have any stocks or bond investments?"}}
+                    {{on-off-switch checked=hasInvestments title="Please indicate whether you have any stocks or bond investments" id="do-you-have-any-stocks-or-bond-investments?"}}
+                {{/form-field}}
+                {{#liquid-if hasInvestments}}
+                    {{asset-table assets=model.assets type="investment" onAdd="addAsset" onRemove="removeAsset" caption="All Stock and Bond Investments"}}
+                {{/liquid-if}}
+            </li>
+            <li class="form-step">
+                {{#form-field label="Do you have any vehicles?"}}
+                    {{on-off-switch checked=hasVehicles title="Please indicate whether you have any vehicles (rental, loan, or own)" id="do-you-have-any-vehicles?"}}
+                {{/form-field}}
+                {{#liquid-if hasVehicles}}
+                    {{vehicle-table vehicles=model.vehicles onAdd="addVehicle" onRemove="removeVehicle"}}
+                {{/liquid-if}}
+            </li>
+            <li class="form-step">
+                {{#form-field label="Do you own any other assets?"}}
+                    {{on-off-switch checked=ownsOtherAssets id="do-you-own-any-other-assets?"}}
+                {{/form-field}}
+                {{#liquid-if ownsOtherAssets}}
+                    {{asset-table assets=model.assets type="other" onAdd="addAsset" onRemove="removeAsset"}}
+                {{/liquid-if}}
+            </li>
+        </ol>
+    </div>
+    <footer class="form-actions">
+        <button type="submit">Continue to Liabilities</button>
+    </footer>
+{{/validatable-form}}
+{{outlet}}

@@ -1,0 +1,44 @@
+<div class="row">
+    {{#form-field label="Source" class="column"}}
+        {{select-list content=incomeSources optionValuePath="value" optionLabelPath="label" required=true change="changeIncomeSource"}}
+    {{/form-field}}
+    {{#liquid-if isPension}}
+        {{#form-field label="Pension Source"}}
+            {{select-list content=pensionTypes optionValuePath="value" optionLabelPath="label" change="changePensionSource"}}
+        {{/form-field}}
+    {{/liquid-if}}
+</div>
+
+<div class="row">
+    {{#form-field label="Income" class="column"}}
+        {{currency-input value=income.value}}
+        {{#if income.value}}
+            <span class="help">
+                or
+                {{#if income.isYearly}}
+                    <strong>{{format-number income.monthly_value style="currency" currency="CAD"}}</strong> per month
+                {{else}}
+                    <strong>{{format-number income.yearly_value style="currency" currency="CAD"}}</strong> per year
+                {{/if}}
+            </span>
+        {{/if}}
+    {{/form-field}}
+    {{#form-field label="Frequency" class="column"}}
+        {{select-list content=frequencies optionValuePath="value" optionLabelPath="label" required=true change="changeFrequencies"}}
+    {{/form-field}}
+</div>
+<div class="row">
+    {{#form-field label="Description"}}
+        {{input type="text" required=income.isOther placeholder="Describe this income source" value=income.description title="Please indicate the nature of this income source"}}
+    {{/form-field}}
+</div>
+<button class="remove-button" {{action "remove"}}>
+    Remove
+    {{#if income.type}}
+        {{income.type}}
+    {{else}}
+        Income Source
+    {{/if}}
+</button>
+
+{{yield}}

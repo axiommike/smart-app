@@ -1,0 +1,48 @@
+{{header-step step=4 totalSteps=6 previousStep=1 stepName="Liabilities" showBreadcrumbs=true showSubmitButton=true agent=model.agent brokerage=model.agent.brokerage}}
+
+{{#validatable-form action="nextStep"}}
+    <div class="form-steps-container">
+        <ol class="form-steps">
+            <li class="form-step">
+                {{#form-field label="Do you have any credit cards with outstanding balances?"}}
+                    {{on-off-switch checked=hasCreditCard id="do-you-have-any-credit-cards-with-outstanding-balances?"}}
+                {{/form-field}}
+                {{#liquid-if hasCreditCard}}
+                    {{liability-table type="credit-card" liabilities=model.applicant.liabilities onAdd="addLiability" onRemove="removeLiability"}}
+                {{/liquid-if}}
+            </li>
+            <li class="form-step">
+                {{#form-field label="Do you have any personal loans or lines of credit?"}}
+                    {{on-off-switch checked=hasLoans id="do-you-have-any-loans?"}}
+                {{/form-field}}
+                {{#liquid-if hasLoans}}
+                    {{liability-table type="loan" liabilities=model.applicant.liabilities onAdd="addLiability" onRemove="removeLiability"}}
+                {{/liquid-if}}
+            </li>
+            <li class="form-step">
+                {{#form-field label="Are you currently paying child support or maintenance payments?"}}
+                    {{on-off-switch checked=hasChildSupport id="are-you-currently-paying-child-support-or-maintenance-payments?"}}
+                {{/form-field}}
+                {{#liquid-if model.hasDependents}}
+                    <span class="info">You have indicated that you have <strong>{{model.dependentCount}}</strong> dependents.  Are you paying child support for any of them?</span>
+                {{/liquid-if}}
+                {{#liquid-if hasChildSupport}}
+                    {{liability-table type="child-support" liabilities=model.applicant.liabilities onAdd="addLiability" onRemove="removeLiability"}}
+                {{/liquid-if}}
+            </li>
+            <li class="form-step">
+                {{#form-field label="Do you have any other monthly debt payments?"}}
+                    {{on-off-switch checked=hasOtherLiabilities id="do-you-have-any-other-monthly-debt-payments?"}}
+                {{/form-field}}
+                {{#liquid-if hasOtherLiabilities}}
+                    {{liability-table liabilities=model.applicant.liabilities onAdd="addLiability" onRemove="removeLiability" type="other"}}
+                {{/liquid-if}}
+            </li>
+        </ol>
+    </div>
+    <footer class="form-actions">
+        <button type="submit">Review Application</button>
+    </footer>
+{{/validatable-form}}
+{{outlet}}
+

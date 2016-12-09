@@ -1,0 +1,59 @@
+{{header-step step=5 totalSteps=6 previousStep=1 stepName="Summary" showBreadcrumbs=true showSubmitButton=true agent=model.agent brokerage=model.agent.brokerage}}
+
+<header class="application-review">
+    <h1 class="announcement">Almost done!  Here is what we have so far:</h1>
+</header>
+{{#validatable-form action="nextStep"}}
+    {{#if application}}
+        <button {{action "addApplicant"}} class="add-button add-applicant">Add Co-Applicant</button>
+        <article class="application-summary">
+            <section class="applicant-summary-personal-info">
+                <ul class="applicants">
+                    {{#each model.applicants as |applicant|}}
+                        <li class="applicant {{if applicant.isPrimary "primary" "co-applicant"}}">
+                            {{applicant-card applicant=applicant isEditable=false}}
+                        </li>
+                    {{else}}
+                        <li><span class="error">Looks like you have no applicants... maybe you should <a {{action "addApplicant"}}>add one</a>.</span></li>
+                    {{/each}}
+                </ul>
+            </section>
+            <p class="intro-help">
+                Below is a snap shot of The Big picture.  Please ensure this information is as accurate as possible.  You can edit any of the information by clicking on the item, or delete any item by clicking the <kbd>X</kbd>.
+            </p>
+            <section class="application-summary-joint box">
+                <section class="applicant-summary-joint-income">
+                    <h2 class="applicant-summary-title"><sup class="applicant-summary-title-type">Joint</sup> Income</h2>
+                    {{income-table flatList=true income=application.income onAdd="addIncome" onRemove="removeIncome" isEditable=true showApplicant=hasCoApplicants}}
+                </section>
+                <div class="row">
+                    <section class="applicant-summary-joint-assets column">
+                        <h2 class="applicant-summary-title"><sup class="applicant-summary-title-type">Joint</sup> Assets</h2>
+                        {{asset-table assets=application.assets isEditable=true onAdd="addAsset" onRemove="removeAsset" showApplicant=hasCoApplicants}}
+                    </section>
+                    <section class="applicant-summary-joint-liabilities column">
+                        <h2 class="applicant-summary-title"><sup class="applicant-summary-title-type">Joint</sup> Liabilities</h2>
+                        {{liability-table liabilities=application.liabilities isEditable=true onAdd="addLiability" onRemove="removeLiability" showApplicant=hasCoApplicants}}
+                    </section>
+                </div>
+            </section>
+            <section class="box">
+                {{#form-field label="Got anything else to add?  Don't be shy!  Now is your chance." layoutDirection="vertical"}}
+                    {{textarea value=application.comment}}
+                {{/form-field}}
+            </section>
+        </article>
+    {{/if}}
+
+    <footer class="disclaimer {{if consentProvided "accepted"}}">
+        <span class="info">Disclaimer</span>
+        {{#form-field label="I hereby authorize Axiom Mortgage Solutions to obtain a credit report and make any necessary inquiries regarding my mortgage application.  I acknowledge this information may be shared with financial institutions for the purpose of facilitating mortgage financing."}}
+            {{input type="checkbox" checked=consentProvided required=true title="Please consent to the validity of the information you have provided in order to submit your application"}}
+        {{/form-field}}
+    </footer>
+
+    <footer class="form-actions">
+        <button type="submit" disabled={{consentRequired}} class="button">Submit Application</button>
+    </footer>
+{{/validatable-form}}
+{{outlet}}
