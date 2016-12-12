@@ -45,7 +45,7 @@
                         {{expandable-input value=applicant.email required=true type="email" placeholder="Email" title="Please enter a valid e-mail"}}
                     {{/form-field}}
                     {{#form-field label="Phone" class="column" layoutDirection="vertical"}}
-                        {{input-mask mask="999-999-9999" value=applicant.phone required=true placeholder="Phone" autocomplete="tel" title="Please provide the applicant's phone number"}}
+                        {{input-mask mask="999-999-9999" value=applicant.home_phone required=true placeholder="Phone" autocomplete="tel" title="Please provide the applicant's phone number"}}
                     {{/form-field}}
                     {{#form-field label="Birth Date" layoutDirection="vertical"}}
                         {{input type="date" value=applicant.birth_date required=true title="Please provide the date of birth of the applicant" autocomplete="bdate" max=youngestApplicantAge}}
@@ -53,7 +53,7 @@
                 </div>
             {{/form-section}}
             {{#form-field label="Marital Status"}}
-                {{select-list content=maritalStatusOptions optionValuePath="value" optionLabelPath="label" required=true prompt=" -- " title="Please indicate the applicant's marital status (single, married, etc.)" change="changeMaritalStatus"}}
+                {{select-list content=maritalStatusOptions value=applicant.marital_status optionValuePath="value" optionLabelPath="label" required=true prompt=" -- " title="Please indicate the applicant's marital status (single, married, etc.)" change="changeMaritalStatus"}}
             {{/form-field}}
             {{#unless is_primary}}
                 {{#form-field label="Relationship"}}
@@ -69,7 +69,7 @@
                     <button {{action "copyAddresses"}}>Same as primary applicant</button>
                 {{/if}}
             {{/unless}}
-            {{historical-addresses addresses=applicant.addresses person_id=applicant.id}}
+            {{address-table addresses=applicant.addresses person_id=applicant.id}}
         {{/form-section}}
         {{#form-section title="Employment" icon="briefcase"}}
             {{employment-table employments=applicant.employments}}

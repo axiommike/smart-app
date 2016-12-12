@@ -39,6 +39,10 @@ export default Ember.Component.extend({
         removeApplicant() {
             let value = this.get('applicant');
             this.sendAction("removeApplicant", value);
+        },
+        copyAddresses() {
+            let value = this.get('applicant');
+            this.sendAction("copyAddresses", value);
         }
     }
 });

@@ -1,0 +1,43 @@
+<div class="row">
+    {{#form-section title="Address and Location" class="column"}}
+        {{address-form address=property.address required=true customLabelPrefix=addressType}}
+        {{#form-field label="Estimated Property Value"}}
+            {{currency-input value=propertyProxy.value placeholder="Property Value" min="0" step="any"}}
+            {{#liquid-if property.value}}
+                <span class="help"><strong>{{format-number property.value style="currency" currency="CAD"}}</strong> in estimated value</span>
+            {{/liquid-if}}
+        {{/form-field}}
+        {{#form-field label="Property Taxes"}}
+            {{currency-input value=propertyProxy.propertyTaxes placeholder="Property Taxes" min="0" step="any"}}
+            {{#if property.propertyTaxes}}
+                <span class="help">
+                <math>
+                    <mrow>
+                        <mn>{{format-number property.propertyTaxes style="currency" currency="CAD"}}</mn>
+                        <mo>*</mo>
+                        <mn>12</mn>
+                        <mo>=</mo>
+                        <mn><strong>{{format-number property.propertyTaxesAnnual style="currency" currency="CAD"}}</strong></mn>
+                    </mrow>
+                </math>
+                per year
+            </span>
+            {{/if}}
+        {{/form-field}}
+    {{/form-section}}
+    {{#form-section title="Mortgage" class="column"}}
+        {{#form-field label="Does this property have a mortgage?"}}
+            {{on-off-switch checked=hasMortgage}}
+        {{/form-field}}
+        {{#liquid-if hasMortgage}}
+            {{liability-instance liability=property.mortgage typeEditingDisabled=true}}
+        {{/liquid-if}}
+        {{#form-field label="Does this property have a secured line of credit?"}}
+            {{on-off-switch checked=hasLineOfCredit}}
+        {{/form-field}}
+        {{#liquid-if hasLineOfCredit}}
+            {{liability-instance liability=property.lineOfCredit typeEditingDisabled=true}}
+        {{/liquid-if}}
+    {{/form-section}}
+</div>
+{{yield}}

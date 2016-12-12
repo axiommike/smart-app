@@ -1,0 +1,39 @@
+{{#form-field label=label}}
+    {{#if address.is_current}}
+        {{address-input value=address.address placeholder="Please indicate where you are currently living" title="Please indicate where you are currently living" required=required change="changeSource"}}
+    {{else}}
+        {{address-input value=address.address placeholder="Please provide an address" title="Please provide an address" required=required change="changeAddress"}}
+    {{/if}}
+    {{#liquid-if address.address}}
+        <div class="address-details-container">
+            <header class="address-header">
+                {{accessible-icon icon="pushpin" title=address.address}}
+            </header>
+            <ul class="address-details">
+                <li class="address-city">{{address.city}}</li>
+                <li class="address-postal-code">{{address.postal_code}}</li>
+                <li class="address-province">{{address.province}}</li>
+                <li class="address-country">{{address.country}}</li>
+            </ul>
+            {{#liquid-if address.url}}
+                <a href="{{address.url}}" title="View {{address.address}} on Google Maps" target="{{address.address}}">
+                    {{accessible-icon icon="share" title="View this location on Google Maps"}}
+                </a>
+            {{/liquid-if}}
+        </div>
+    {{/liquid-if}}
+{{/form-field}}
+{{#form-field label="How Long?"}}
+    {{input type="number" value=address.tenure_year placeholder="Years" min="0" step="1" required=true title="Please indicate the amount of time in which this address was resided"}}
+    <label for = "tenure-years">years</label>
+    {{input type="number" value=address.tenure_month placeholder="mths" min="0" max="12" step="1"}}
+    <label for = "tenure-months">months</label>
+    {{#liquid-if address.tenure_year}}
+        <span class="help">Lived here for {{address.tenure_year}} year(s)</span>
+    {{/liquid-if}}
+{{/form-field}}
+{{yield}}
+
+{{#if removable}}
+    <button title="Remove this address" {{action "remove"}} class="remove-button">Remove</button>
+{{/if}}

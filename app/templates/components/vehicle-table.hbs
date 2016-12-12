@@ -1,0 +1,15 @@
+<header class="table-header">
+    <button class="add-button" {{action "addVehicle"}}>Add Vehicle</button>
+</header>
+
+<ul class="vehicles">
+    {{#each vehicles as |vehicle|}}
+        <li class="vehicle vehicle-asset {{if vehicle.make "has-make"}}">
+            {{vehicle-instance vehicle=vehicle}}
+            <button {{action "removeVehicle" vehicle}} class="remove-button">Remove Vehicle</button>
+        </li>
+    {{else}}
+        <li>No vehicles found.  <a {{action "addVehicle"}}>Add one?</a></li>
+    {{/each}}
+</ul>
+{{yield}}

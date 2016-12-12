@@ -10,7 +10,7 @@
         {{input type="text" value=employment.employer title="Please provide the employer for this position" required=true placeholder="Name" size=employment.employer.length}}
     {{/form-field}}
     {{#form-field label="Address"}}
-        {{address-input address=employoment.address value=employment.address placeholder="Address" required=true}}
+        {{address-input address=employoment.address value=employment.address placeholder="Address" required=true changeAddress="changeAddress"}}
     {{/form-field}}
     {{#liquid-if showBusinessType}}
         {{#form-field label="Business Type"}}

@@ -2,21 +2,11 @@ import Ember from "ember";
 
 export default Ember.Component.extend({
     store: Ember.inject.service(),
-    addresses: [],
-    currentAddress: null,
-    person_id: null,
-    didReceiveAttrs() {
-        if (this.addresses.length >= 1) {
-            this.set('currentAddress', this.addresses[0]);
-        } else {
-            this.set('currentAddress', this.get('store').createRecord('address', {
-                person_id: this.get('person_id')
-            }));
-        }
-    },
+    address: null,
+    removable: false,
     actions: {
         changeAddress: function (params) {
-            let address = this.get('currentAddress');
+            let address = this.get('address');
             address.set('url', params.url);
             for (let i=0; i< params.address_components.length; i++) {
                 let obj = params.address_components[i];
@@ -35,6 +25,10 @@ export default Ember.Component.extend({
                         break;
                 }
             }
+        },
+        remove() {
+            let value = this.get('address');
+            this.sendAction('removeAddress', value);
         }
     }
 });

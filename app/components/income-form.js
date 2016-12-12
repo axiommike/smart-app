@@ -23,6 +23,21 @@ export default Ember.Component.extend({
         remove() {
             let value = this.get('income');
             this.sendAction('removeIncome', value);
+        },
+        changeIncomeSource(value) {
+            this.set("income.income_source", value);
+            switch(value) {
+                case "pension":
+                    this.set("isPension", true);
+                    break;
+                default:
+                    this.set("isPension", false);
+                    break;
+            }
+        },
+        changePensionSource(value) {
+            this.set("income.pension_source", value);
         }
-    }
+    },
+    isPension: false
 });

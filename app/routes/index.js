@@ -18,7 +18,7 @@ export default Ember.Route.extend({
                 return applicant;
             }
         }
-        
+
         return this.store.createRecord('applicant', {});
     }
 });

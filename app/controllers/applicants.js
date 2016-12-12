@@ -8,6 +8,12 @@ export default Ember.Controller.extend({
         removeApplicant(model) {
             this.get('model').get('applicants').removeObject(model);
         },
+        copyAddresses(model) {
+            let applicants = this.get('model').get('applicants');
+            for (let applicant in applicants) {
+                console.log(applicant);
+            }
+        },
         nextStep: function () {
             let mortgage = this.get('model');
             mortgage.save().then((mortgage) => {

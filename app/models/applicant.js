@@ -16,6 +16,7 @@ export default DS.Model.extend({
     comment: DS.attr('string'),
     agent_id: DS.attr('string'),
     relationship: DS.attr('string'),
+    birth_date: DS.attr('string'),
     marital_status: DS.attr('string'),
     agent: DS.belongsTo('agent'),
     addresses: DS.hasMany('address', {async: true}),

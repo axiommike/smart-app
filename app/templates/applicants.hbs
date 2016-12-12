@@ -10,7 +10,9 @@
                 {{applicant-card applicant=applicant
                                  is_editable=true
                                  is_editing=true
-                                 is_primary=(eq index 0)}}
+                                 is_primary=(eq index 0)
+                                 removeApplicant="removeApplicant"
+                                 copyAddresses="copyAddresses"}}
             </li>
         {{else}}
             <li>No Co-Applicants selected.  <button {{action "addApplicant"}} class="add-button">Add one</button></li>

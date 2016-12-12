@@ -1,0 +1,12 @@
+{{#form-section title="Current Address"}}
+    {{address-form address=currentAddress removable=false}}
+{{/form-section}}
+
+{{#form-section title="Previous Addresses"}}
+    {{#each addresses as |address|}}
+        {{address-form address=address removable=true removeAddress="removeAddress"}}
+    {{else}}
+        No previous address provided.
+    {{/each}}
+{{/form-section}}
+<button {{action "addAddress"}}>Add Additional Address</button>

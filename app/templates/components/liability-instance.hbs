@@ -1,0 +1,134 @@
+{{#if liability}}
+	{{#liquid-if isEditing}}
+		{{partial "partials/toggle-edit-button"}}
+		{{#unless typeEditingDisabled}}
+			{{#form-field label="Type"}}
+				{{select-list content=liabilityTypes required=true title="Please select a liability type from the list" optionValuePath="value" optionLabelPath="label" value=liabilityProxy.type action=(action (mut liabilityProxy.type))}}
+			{{/form-field}}
+		{{/unless}}
+		{{#if liability.isOther}}
+			{{#form-field label="Liability Description"}}
+				{{input type="text" value=liabilityProxy.description placeholder="Describe this liability" title="Optionally describe the nature of this liability"}}
+			{{/form-field}}
+		{{/if}}
+		{{#if liability.isLoan}}
+			{{#form-field label="Loan Type"}}
+				{{select-list required=true title="Please choose a loan type" content=loanTypes value=liabilityProxy.description action=(action (mut liabilityProxy.description))}}
+			{{/form-field}}
+			{{#form-field label="Lender"}}
+				{{autocomplete-input value=liabilityProxy.lender datalist="lenders" placeholder="Lender/Bank" required=true}}
+			{{/form-field}}
+		{{/if}}
+		{{#if liability.isMortgage}}
+			{{#form-field label="Maturity Date"}}
+				{{input type="date" value=liabilityProxy.maturityDate required=true}}
+			{{/form-field}}
+			{{#form-field label="Lender"}}
+				{{autocomplete-input value=liabilityProxy.lender required=true placeholder="Lender" datalist="lenders" title="Please provide the lender for this mortgage"}}
+			{{/form-field}}
+			<div class="row">
+				{{#form-field label="Approximate Mortgage Balance" class="column"}}
+					{{currency-input min="0" step="any" value=liabilityProxy.outstandingBalance required=true title="Please indicate the remaining balance of the mortgage"}}
+					{{#liquid-if liability.outstandingBalance}}
+						<span class="help"><strong>{{format-number liability.outstandingBalance style="currency" currency="CAD"}}</strong> remaining</span>
+					{{/liquid-if}}
+				{{/form-field}}
+				{{#form-field label="Payment Frequency" class="column"}}
+					{{select-list content=paymentFrequencies value=liabilityProxy.paymentFrequency action=(action (mut liability.paymentFrequency))}}
+				{{/form-field}}
+			</div>
+		{{/if}}
+		{{#if liability.isLineOfCredit}}
+			{{#form-field label="Bank/Financial Institution"}}
+				{{autocomplete-input value=liabilityProxy.lender datalist="lenders" placeholder="Bank Name" required=true title="Please provide the bank or financial institution of your personal line of credit"}}
+			{{/form-field}}
+			{{#form-field label="Available Limit"}}
+				{{currency-input value=liabilityProxy.limit required=true title="Please provide the maximum amount that can be alotted to you by this line of credit"}}
+			{{/form-field}}
+		{{/if}}
+
+		{{#if liability.isCreditCard}}
+			{{#form-field label="Credit Card Type"}}
+				{{select-list content=creditCardTypes optionValuePath="value" optionLabelPath="label" value=liabilityProxy.creditCardType required=true title="Please select a credit card type" action=(action (mut liabilityProxy.creditCardType))}}
+			{{/form-field}}
+			{{#form-field label="Bank/Financial Institution"}}
+				{{autocomplete-input value=liabilityProxy.lender datalist="lenders" placeholder="Bank Name" required=true title="Please provide the bank you use for your credit card"}}
+			{{/form-field}}
+			{{#form-field label="Monthly Payment"}}
+				{{currency-input min="0" step="any" value=liabilityProxy.payment required=true title="Please indicate the monthly amount you are being charged for this credit card"}}
+				{{#liquid-if liability.payment}}
+					<span class="help">Paying <strong>{{format-number liability.payment style="currency" currency="CAD"}}</strong> monthly</span>
+				{{/liquid-if}}
+			{{/form-field}}
+		{{else}}
+			{{#form-field label=paymentLabel}}
+				{{currency-input min="0" step="any" value=liabilityProxy.payment required=true title="Please indicate the monthly payment for this liability"}}
+				{{#liquid-if liability.payment}}
+					<span class="help">Paying <strong>{{format-number liability.payment style="currency" currency="CAD"}}</strong> {{liability.paymentFrequency}}</span>
+				{{/liquid-if}}
+			{{/form-field}}
+		{{/if}}
+		{{#unless liability.isChildSupport}}
+			{{#form-field label="Outstanding Balance"}}
+				{{currency-input min="0" step="any" value=liabilityProxy.outstandingBalance}}
+			{{/form-field}}
+			{{#liquid-if liability.outstandingBalance}}
+				<span class="help"><strong>{{format-number liability.outstandingBalance style="currency" currency="CAD"}}</strong> remaining</span>
+			{{/liquid-if}}
+		{{/unless}}
+		{{#if onRemove}}
+			<button class="remove-button" {{action "remove"}}>
+				Remove
+				{{#if liability.type}}
+					{{liability.type}}
+				{{else}}
+					Liability
+				{{/if}}
+			</button>
+		{{/if}}
+	{{else}}
+		<div class="row">
+			<div class="column">
+				<div class="row">
+					<a class="editable-link" {{action "toggleEditing"}}>
+						{{#if liability.description}}
+							<span class="liability-description">{{liability.description}}</span>
+						{{else}}
+							<em class="liability-type">
+								{{#if liability.type}}
+									{{liability.type}}
+								{{else}}
+									Other Liability
+								{{/if}}
+							</em>
+						{{/if}}
+					</a>
+					{{#if onRemove}}
+						<div class="column actions">
+							<button class="{{if isEditing "remove-button" "button-plain-warning"}}" {{action "remove"}}>
+								{{#liquid-if isEditing}}
+									Remove {{type}} Liability
+								{{else}}
+									{{accessible-icon icon="cross" title="Remove Extra Income"}}
+								{{/liquid-if}}
+							</button>
+						</div>
+					{{/if}}
+				</div>
+			</div>
+			{{#liquid-if showApplicant}}
+				{{#if liability.applicant}}
+					<div class="column liability-applicant-container">
+						<span class="liability-applicant">{{liability.applicant.fullName}}</span>
+					</div>
+				{{/if}}
+			{{/liquid-if}}
+			<div class="column liability-value table-subtotal">
+				<span class="liability-payment">{{format-number liability.payment style="currency" currency="CAD"}}</span>
+			</div>
+		</div>
+	{{/liquid-if}}
+{{else}}
+	Aww.  no liability found.
+{{/if}}
+{{yield}}

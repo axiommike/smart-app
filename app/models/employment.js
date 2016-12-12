@@ -7,5 +7,9 @@ export default DS.Model.extend({
     type: DS.attr('string'),
     tenure_year: DS.attr('string'),
     tenure_month: DS.attr('string'),
-    address: DS.attr('string')
+    address: DS.attr('string'),
+    city: DS.attr('string'),
+    country: DS.attr('string'),
+    province: DS.attr('string'),
+    postal_code: DS.attr('string')
 });

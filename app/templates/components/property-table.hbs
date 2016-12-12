@@ -1,0 +1,29 @@
+<header class="table-header">
+    <h4>
+        {{#if caption}}
+            {{caption}}
+        {{/if}}
+        {{#liquid-if totalValue}}
+            <sup class="total"><strong>{{format-number totalValue style="currency" currency="CAD"}}</strong> total real estate value</sup>
+        {{/liquid-if}}
+    </h4>
+    <button {{action "addProperty"}} title="Add a Property" class="add-button">Add Property</button>
+</header>
+
+<ul class="properties">
+    {{#each properties as |property|}}
+        <li class="property-asset {{if property.isRental "rental"}}">
+            {{#property-asset property=property showLabelPrefix=false addressType=addressType}}
+                <footer class="property-asset-actions">
+                    <button {{action "removeProperty" property}} class="remove-button">Remove Property</button>
+                </footer>
+            {{/property-asset}}
+        </li>
+    {{else}}
+        <li>
+            No properties found.
+            <a {{action "addProperty"}} title="Add a property">Add One?</a>
+        </li>
+    {{/each}}
+</ul>
+{{yield}}

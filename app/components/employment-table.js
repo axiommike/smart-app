@@ -13,11 +13,14 @@ export default Ember.Component.extend({
         }, 0);
     }),
     didReceiveAttrs() {
-        if (this.get('employments').length === 0) {
-            this.set('currentEmployment', this.get('store').createRecord('employment', {
-                person_id: this.get('person_id')
-            }));
-        }
+        //if (this.get('employments').length === 0) {
+        //    this.set('currentEmployment', this.get('store').createRecord('employment', {
+        //        person_id: this.get('person_id')
+        //    }));
+        //}
+        this.set('currentEmployment', this.get('store').createRecord('employment', {
+            person_id: this.get('person_id')
+        }));
     },
     actions: {
         addEmployment() {

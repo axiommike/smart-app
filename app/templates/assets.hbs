@@ -16,7 +16,7 @@
                     {{on-off-switch checked=ownsOtherRealEstate id="do-you-own-any-other-real-estate?"}}
                 {{/form-field}}
                 {{#liquid-if ownsOtherRealEstate}}
-                    {{property-table properties=model.applicant.otherProperties onAdd="addProperty" title="List of all other Properties" addressType="Other"}}
+                    {{property-table properties=model.otherProperties onAdd="addProperty" title="List of all other Properties" addressType="Other"}}
                 {{/liquid-if}}
             </li>
             <li class="form-step">
@@ -24,7 +24,7 @@
                     {{on-off-switch checked=hasSavings title="Please indicate whether you have invested in any government funds or locked-in investments" id="do-you-have-any-savings-or-chequing-accounts?"}}
                 {{/form-field}}
                 {{#liquid-if hasSavings}}
-                    {{asset-table assets=model.applicant.assets type="savings" onAdd="addAsset" onRemove="removeAsset" title="Table of all GIC, long-term, and term-based bank account assets" caption="Term Deposit Account Assets"}}
+                    {{asset-table assets=model.assets type="savings" onAdd="addAsset" onRemove="removeAsset" title="Table of all GIC, long-term, and term-based bank account assets" caption="Term Deposit Account Assets"}}
                 {{/liquid-if}}
             </li>
             <li class="form-step">
@@ -32,7 +32,7 @@
                     {{on-off-switch checked=hasPersonalItems title="Please indicate whether you have any belongings worth of significant value" id="do-you-have-any-personal-items-of-significant-value?-(boats,-toys,-skidoos,-man-toys)"}}
                 {{/form-field}}
                 {{#liquid-if hasPersonalItems}}
-                    {{asset-table assets=model.applicant.assets type="item" onAdd="addAsset" onRemove="removeAsset" title="Table of all personal assets" caption="All Personal Item Assets"}}
+                    {{asset-table assets=model.assets type="item" onAdd="addAsset" onRemove="removeAsset" title="Table of all personal assets" caption="All Personal Item Assets"}}
                 {{/liquid-if}}
             </li>
             <li class="form-step">

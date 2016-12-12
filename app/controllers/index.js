@@ -68,6 +68,11 @@ export default Ember.Controller.extend({
                 mortgage.set('agent_id', brokerage.get('id'));
             }
 
+            mortgage.set('down_payment', applicant.get('down_payment'));
+            mortgage.set('down_payment', applicant.get('down_payment'));
+            mortgage.set('down_payment_source', applicant.get('down_payment_source'));
+            mortgage.set('comment', applicant.get('comment'));
+
             mortgage.save().then((mortgage) => {
                 this.transitionToRoute('applicants', {queryParams: {id : mortgage.get('id')}});
             });
