@@ -1,15 +1,15 @@
 import Ember from "ember";
+const { Component, computed, inject: {service} } = Ember;
 
-export default Ember.Component.extend({
-    store: Ember.inject.service(),
+export default Component.extend({
+    store: service(),
     employments: [],
     currentEmployment: null,
     person_id: null,
     minHistory: 3,
-    totalEmploymentTimespan: Ember.computed("employments.@each.tenure_year", function() {
-        let allEmployment = this.get("employments");
-        return allEmployment.reduce(function(previousValue, employment) {
-            return previousValue + employment.get("tenure_year");
+    totalEmploymentTimespan: computed("employments.@each.tenure_year", function() {
+        return this.get("employments").reduce((previousValue, employment) => {
+            return parseInt(previousValue) + parseInt(employment.get("tenure_year") || 0);
         }, 0);
     }),
     didReceiveAttrs() {
