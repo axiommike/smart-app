@@ -1,9 +1,12 @@
 import Ember from 'ember';
+const { computed, Controller } = Ember;
 
-export default Ember.Controller.extend({
-    actions: {
-        completeFullApp: function () {
-            window.history.back();
-        }
+export default Controller.extend({
+  queryParams: ['is_incomplete'],
+  isIncomplete: computed.oneWay('is_incomplete'),
+  actions: {
+    completeFullApp: function () {
+      window.history.back();
     }
+  }
 });

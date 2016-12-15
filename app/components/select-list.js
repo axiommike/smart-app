@@ -15,7 +15,7 @@ export default Ember.Component.extend({
     didRender() {
         var value = this.get('value');
         if (value) {
-            this.$().find('option[value="' + value + '"]').attr('selected', 'selected')
+            this.$().find('option[value="' + value + '"]').attr('selected', 'selected');
         }
     }
 });

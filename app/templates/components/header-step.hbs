@@ -8,25 +8,27 @@
                 <span class="wizard-step-name">{{stepName}}</span>
             </h1>
 
-            <span class="wizard-step-meta">
-                Step
-                <span class="wizard-step-current-step">
-                    {{step}}
+            {{#unless (or isIncomplete (eq step 1))}}
+                <span class="wizard-step-meta">
+                    Step
+                    <span class="wizard-step-current-step">
+                        {{step}}
+                    </span>
+                    <span class="total-steps">
+                        of {{totalSteps}}
+                    </span>
                 </span>
-                <span class="total-steps">
-                    of {{totalSteps}}
-                </span>
-            </span>
 
-            <ul class="wizard-steps-breadcrumbs">
-                {{#each steps as |step|}}
-                    {{#unless step.hidden}}
-                        <li class="wizard-steps-breadcrumb">
-                            {{#link-to step.url title=step.title class="wizard-steps-breadcrumb-link"}}{{step.title}}{{/link-to}}
-                        </li>
-                    {{/unless}}
-                {{/each}}
-            </ul>
+                <ul class="wizard-steps-breadcrumbs">
+                    {{#each steps as |step|}}
+                        {{#unless step.hidden}}
+                            <li class="wizard-steps-breadcrumb">
+                                {{#link-to step.url title=step.title class="wizard-steps-breadcrumb-link"}}{{step.title}}{{/link-to}}
+                            </li>
+                        {{/unless}}
+                    {{/each}}
+                </ul>
+            {{/unless}}
         </header>
     </div>
 
