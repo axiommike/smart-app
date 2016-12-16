@@ -14,12 +14,9 @@ export default Route.extend({
   },
   model(params) {
     if (params.token) {
-      let applicant = this.store.find('applicant', params.token);
-      if (applicant) {
-        return applicant;
-      }
+      return this.store.find('applicant', params.token);
     }
 
-    return this.store.createRecord('applicant', {});
+    return this.store.createRecord('applicant');
   }
 });
