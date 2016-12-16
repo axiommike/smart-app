@@ -1,8 +1,9 @@
-import Ember from "ember";
+import Ember from 'ember';
+const { Checkbox } = Ember;
 
-export default Ember.Checkbox.extend({
-    classNameBindings: [":on-off-switch", "checked"],
-    attributeBindings: ["onMessage", "offMessage"],
-    onMessage: "Yes",
-    offMessage: "No"
+export default Checkbox.extend({
+  classNameBindings: [':on-off-switch', 'checked'],
+  attributeBindings: ['onMessage', 'offMessage'],
+  onMessage: 'Yes',
+  offMessage: 'No'
 });

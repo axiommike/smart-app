@@ -1,13 +1,15 @@
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo } from 'ember-data/relationships';
 
-export default DS.Model.extend({
-    image: DS.attr('string'),
-    email: DS.attr('string'),
-    website: DS.attr('string'),
-    full_name: DS.attr('string'),
-    home_phone: DS.attr('string'),
-    cell_phone: DS.attr('string'),
-    work_phone: DS.attr('string'),
-    brokerage_id: DS.attr('string'),
-    brokerage: DS.belongsTo('brokerage')
+export default Model.extend({
+  image: attr('string'),
+  email: attr('string'),
+  website: attr('string'),
+  full_name: attr('string'),
+  home_phone: attr('string'),
+  cell_phone: attr('string'),
+  work_phone: attr('string'),
+  brokerage_id: attr('string'),
+  brokerage: belongsTo('brokerage')
 });

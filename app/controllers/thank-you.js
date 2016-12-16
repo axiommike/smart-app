@@ -5,7 +5,7 @@ export default Controller.extend({
   queryParams: ['is_incomplete'],
   isIncomplete: computed.oneWay('is_incomplete'),
   actions: {
-    completeFullApp: function () {
+    completeFullApp() {
       window.history.back();
     }
   }

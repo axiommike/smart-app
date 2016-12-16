@@ -1,6 +1,6 @@
-import DS from 'ember-data';
-import ENV from "../config/environment";
+import ENV from '../config/environment';
+import RESTAdapter from 'ember-data/adapters/rest';
 
-export default DS.RESTAdapter.extend({
-    host: `${ENV.apiURL}`
+export default RESTAdapter.extend({
+  host: `${ENV.apiURL}`
 });

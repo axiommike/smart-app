@@ -1,9 +1,10 @@
-import Ember from "ember";
+import Ember from 'ember';
+const { computed, TextField } = Ember;
 
-export default Ember.TextField.extend({
-    type: "text",
-    defaultSize: 20,
-    size: Ember.computed("value", function() {
-        return this.get("value.length") > 0 ? this.get("value.length") + 1 : this.get("defaultSize");
-    })
+export default TextField.extend({
+  type: 'text',
+  defaultSize: 20,
+  size: computed('value', function() {
+    return this.get('value.length') > 0 ? this.get('value.length') + 1 : this.get('defaultSize');
+  })
 });

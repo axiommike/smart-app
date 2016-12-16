@@ -1,25 +1,27 @@
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { belongsTo, hasMany } from 'ember-data/relationships';
 
-export default DS.Model.extend({
-    first_name: DS.attr('string'),
-    last_name: DS.attr('string'),
-    email: DS.attr('string'),
-    home_phone: DS.attr('string'),
-    referral_source: DS.attr('string'),
-    referred_friend: DS.attr('string'),
-    referred_agent: DS.attr('string'),
-    referred_other: DS.attr('string'),
-    type: DS.attr('string'),
-    down_payment: DS.attr('string'),
-    down_payment_source: DS.attr('string'),
-    down_payment_explanation: DS.attr('string'),
-    comment: DS.attr('string'),
-    agent_id: DS.attr('string'),
-    relationship: DS.attr('string'),
-    birth_date: DS.attr('string'),
-    marital_status: DS.attr('string'),
-    agent: DS.belongsTo('agent'),
-    addresses: DS.hasMany('address', {async: true}),
-    employments: DS.hasMany('employment', {async: true}),
-    incomes: DS.hasMany('income', {async: true})
+export default Model.extend({
+  first_name: attr('string'),
+  last_name: attr('string'),
+  email: attr('string'),
+  home_phone: attr('string'),
+  referral_source: attr('string'),
+  referred_friend: attr('string'),
+  referred_agent: attr('string'),
+  referred_other: attr('string'),
+  type: attr('string'),
+  down_payment: attr('string'),
+  down_payment_source: attr('string'),
+  down_payment_explanation: attr('string'),
+  comment: attr('string'),
+  agent_id: attr('string'),
+  relationship: attr('string'),
+  birth_date: attr('string'),
+  marital_status: attr('string'),
+  agent: belongsTo('agent'),
+  addresses: hasMany('address', { async: true }),
+  employments: hasMany('employment', { async: true }),
+  incomes: hasMany('income', { async: true })
 });

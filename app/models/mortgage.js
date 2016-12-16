@@ -1,16 +1,18 @@
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { hasMany } from 'ember-data/relationships';
 
-export default DS.Model.extend({
-    brokerage_id: DS.attr('string'),
-    agent_id: DS.attr('string'),
-    dear: DS.attr('string'),
-    comment: DS.attr('string'),
-    down_payment: DS.attr('string'),
-    down_payment_source: DS.attr('string'),
-    down_payment_explanation: DS.attr('string'),
-    applicants: DS.hasMany('applicant', {async: true}),
-    otherProperties: DS.hasMany('property', {async: true}),
-    assets: DS.hasMany('asset', {async: true}),
-    vehicles: DS.hasMany('vehicle', {async: true}),
-    liabilities: DS.hasMany('liability', {async: true})
+export default Model.extend({
+  brokerage_id: attr('string'),
+  agent_id: attr('string'),
+  dear: attr('string'),
+  comment: attr('string'),
+  down_payment: attr('string'),
+  down_payment_source: attr('string'),
+  down_payment_explanation: attr('string'),
+  applicants: hasMany('applicant', { async: true }),
+  otherProperties: hasMany('property', { async: true }),
+  assets: hasMany('asset', { async: true }),
+  vehicles: hasMany('vehicle', { async: true }),
+  liabilities: hasMany('liability', { async: true })
 });
