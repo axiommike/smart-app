@@ -1,20 +1,21 @@
 <header class="table-header">
-	<button title="Add a Liability" {{action "addLiability"}} class="add-button">Add {{typeName}}</button>
+  <button title="Add a Liability" {{action "addLiability"}} class="add-button">Add {{typeName}}</button>
 </header>
 
 <ul class="liabilities">
-	{{#each liabilities as |liability|}}
-		<li class="liability {{liability.type}}">
-			{{liability-instance liability=liability typeEditingDisabled=type isEditable=isEditable onRemove="removeLiability" showApplicant=showApplicant}}
-		</li>
-	{{else}}
-		<li>No liabilities found.  <a {{action "addLiability" title="Add a liability"}}>Add one</a></li>
-	{{/each}}
+  {{#each liabilities as |liability|}}
+    <li class="liability {{liability.type}}">
+      {{liability-instance liability=liability typeEditingDisabled=type isEditable=isEditable onRemove="removeLiability"
+                           showApplicant=showApplicant}}
+    </li>
+  {{else}}
+    <li>No liabilities found. <a {{action "addLiability" title="Add a liability"}}>Add one</a></li>
+  {{/each}}
 </ul>
 
 {{#liquid-if totalLiabilities}}
-	<footer class="table-total">
-		<sup><strong>{{format-number totalLiabilities style="currency" currency="CAD"}}</strong> total</sup>
-	</footer>
+  <footer class="table-total">
+    <sup><strong>{{format-number totalLiabilities style="currency" currency="CAD"}}</strong> total</sup>
+  </footer>
 {{/liquid-if}}
 {{yield}}

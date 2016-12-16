@@ -1,102 +1,107 @@
 <header role="banner" data-current-step="{{previousStep}}">
-    <div class="ember-view wizard-steps is-floating">
-        <progress value="{{step}}" max="{{totalSteps}}" class="wizard-steps-progress">
-            <span class="info">Step {{step}} of {{totalSteps}}</span>
-        </progress>
-        <header role="status" class="ember-view wizard-step {{if showBreadcrumbs " has-breadcrumbs" ""}}">
-            <h1 class="wizard-step-title">
-                <span class="wizard-step-name">{{stepName}}</span>
-            </h1>
+  <div class="ember-view wizard-steps is-floating">
+    <progress value="{{step}}" max="{{totalSteps}}" class="wizard-steps-progress">
+      <span class="info">Step {{step}} of {{totalSteps}}</span>
+    </progress>
+    <header role="status" class="ember-view wizard-step {{if showBreadcrumbs " has-breadcrumbs" ""}}">
+      <h1 class="wizard-step-title">
+        <span class="wizard-step-name">{{stepName}}</span>
+      </h1>
 
-            {{#unless (or isIncomplete (eq step 1))}}
-                <span class="wizard-step-meta">
+      {{#unless (or isIncomplete (eq step 1))}}
+        <span class="wizard-step-meta">
                     Step
                     <span class="wizard-step-current-step">
-                        {{step}}
+                      {{step}}
                     </span>
                     <span class="total-steps">
                         of {{totalSteps}}
                     </span>
                 </span>
 
-                <ul class="wizard-steps-breadcrumbs">
-                    {{#each steps as |step|}}
-                        {{#unless step.hidden}}
-                            <li class="wizard-steps-breadcrumb">
-                                {{#link-to step.url title=step.title class="wizard-steps-breadcrumb-link"}}{{step.title}}{{/link-to}}
-                            </li>
-                        {{/unless}}
-                    {{/each}}
-                </ul>
+        <ul class="wizard-steps-breadcrumbs">
+          {{#each steps as |step|}}
+            {{#unless step.hidden}}
+              <li class="wizard-steps-breadcrumb">
+                {{#link-to step.url title=step.title class="wizard-steps-breadcrumb-link"}}{{step.title}}{{/link-to}}
+              </li>
             {{/unless}}
-        </header>
-    </div>
+          {{/each}}
+        </ul>
+      {{/unless}}
+    </header>
+  </div>
 
-    {{#if agent}}
-        <aside class="agent-callout" role="complementary">
-            {{#if agent.image}}
-                {{#if agent.email}}
-                    <a href="mailto:{{agent.email}}" alt="Email me now" class="agent-callout-email ember-view email has-email">
-                        <img src="data: image/jpeg;base64,{{agent.image}}" alt="{{agent.fullName}}" class="agent-callout-image ember-view gravatar-image"/>
-                    </a>
-                {{else}}
-                    <img src="{{agent.image}}" alt="{{agent.fullName}}" class="agent-callout-image ember-view gravatar-image"/>
-                {{/if}}
-            {{else}}
-                {{#if agent.email}}
-                    <a href="mailto:{{agent.email}}" alt="Email me now" class="agent-callout-email ember-view email has-email">
-                        {{gravatar-image email=agent.email alt=agent.full_name size=100 defaultImage="identicon" class="agent-callout-image ember-view gravatar-image" secure=false title=agent.fullName}}
-                    </a>
-                {{/if}}
-            {{/if}}
-            <h1 class="agent-callout-name">
-                {{#if agent.website}}
-                    <a href="{{agent.website}}" class="agent-callout-link" target="_blank" title="Visit {{agent.full_name}} online">
-                        {{agent.full_name}}
-                    </a>
-                {{/if}}
-            </h1>
-            <span class="agent-callout-phone">
+  {{#if agent}}
+    <aside class="agent-callout" role="complementary">
+      {{#if agent.image}}
+        {{#if agent.email}}
+          <a href="mailto:{{agent.email}}" alt="Email me now" class="agent-callout-email ember-view email has-email">
+            <img src="data: image/jpeg;base64,{{agent.image}}" alt="{{agent.fullName}}"
+                 class="agent-callout-image ember-view gravatar-image"/>
+          </a>
+        {{else}}
+          <img src="{{agent.image}}" alt="{{agent.fullName}}" class="agent-callout-image ember-view gravatar-image"/>
+        {{/if}}
+      {{else}}
+        {{#if agent.email}}
+          <a href="mailto:{{agent.email}}" alt="Email me now" class="agent-callout-email ember-view email has-email">
+            {{gravatar-image email=agent.email alt=agent.full_name size=100 defaultImage="identicon"
+                             class="agent-callout-image ember-view gravatar-image" secure=false title=agent.fullName}}
+          </a>
+        {{/if}}
+      {{/if}}
+      <h1 class="agent-callout-name">
+        {{#if agent.website}}
+          <a href="{{agent.website}}" class="agent-callout-link" target="_blank"
+             title="Visit {{agent.full_name}} online">
+            {{agent.full_name}}
+          </a>
+        {{/if}}
+      </h1>
+      <span class="agent-callout-phone">
                 <a href="tel:{{agent.home_phone}}" class="ember-view phone-number has-number">
-                    {{agent.home_phone}}
+                  {{agent.home_phone}}
                 </a>
-            </span><br />
-            <span class="agent-callout-phone">
+            </span><br/>
+      <span class="agent-callout-phone">
                 <a href="tel:{{agent.cell_phone}}" class="ember-view phone-number has-number">
-                    {{agent.cell_phone}}
+                  {{agent.cell_phone}}
                 </a>
-            </span><br />
-            <span class="agent-callout-phone">
+            </span><br/>
+      <span class="agent-callout-phone">
                 <a href="tel:{{agent.work_phone}}" class="ember-view phone-number has-number">
-                    {{agent.work_phone}}
+                  {{agent.work_phone}}
                 </a>
-            </span><br />
-        </aside>
-    {{/if}}
+            </span><br/>
+    </aside>
+  {{/if}}
 
-    {{#if brokerage}}
-        <aside class="brokerage-callout" role="complementary">
-            {{#if brokerage.website}}
-                <a href="http://{{brokerage.website}}" class="brokerage-callout-link" target="_blank">
-                    <img src="data: image/jpeg;base64,{{brokerage.image}}" alt="{{brokerage.name}}" title="{{brokerage.name}}" class="brokerage-callout-image"/>
-                    <span class="brokerage-callout-phone">
+  {{#if brokerage}}
+    <aside class="brokerage-callout" role="complementary">
+      {{#if brokerage.website}}
+        <a href="http://{{brokerage.website}}" class="brokerage-callout-link" target="_blank">
+          <img src="data: image/jpeg;base64,{{brokerage.image}}" alt="{{brokerage.name}}" title="{{brokerage.name}}"
+               class="brokerage-callout-image"/>
+          <span class="brokerage-callout-phone">
                         <a href="tel:{{brokerage.phone}}" class="ember-view phone-number has-number">
-                            {{brokerage.phone}}
+                          {{brokerage.phone}}
                         </a>
                     </span>
-                </a>
-            {{else}}
-                <img src="data: image/jpeg;base64,{{brokerage.image}}" alt = "{{brokerage.name}}" title="{{brokerage.name}}" class="brokerage-callout-image"/>
-                <span class="brokerage-callout-phone">
+        </a>
+      {{else}}
+        <img src="data: image/jpeg;base64,{{brokerage.image}}" alt="{{brokerage.name}}" title="{{brokerage.name}}"
+             class="brokerage-callout-image"/>
+        <span class="brokerage-callout-phone">
                     <a href="tel:{{brokerage.phone}}" class="ember-view phone-number has-number">
-                        {{brokerage.phone}}
+                      {{brokerage.phone}}
                     </a>
                 </span>
-            {{/if}}
-        </aside>
-    {{/if}}
+      {{/if}}
+    </aside>
+  {{/if}}
 
-    {{#if showSubmitButton}}
-        <button {{action "sendIncomplete"}} class="header-action">Submit As-Is</button>
-    {{/if}}
+  {{#if showSubmitButton}}
+    <button {{action "sendIncomplete"}} class="header-action">Submit As-Is</button>
+  {{/if}}
 </header>

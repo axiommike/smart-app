@@ -1,15 +1,15 @@
 {{#form-section title="Current Employment"}}
-    {{employment-form employment=currentEmployment}}
+  {{employment-form employment=currentEmployment}}
 {{/form-section}}
 
 {{#form-section title="Previous Employment"}}
-    <span class="input-error">Please provide the last <strong>{{minHistory}}</strong> years of employment history
+  <span class="input-error">Please provide the last <strong>{{minHistory}}</strong> years of employment history
         .</span>
-    <span>Total employment history: <strong>{{totalEmploymentTimespan}} years</strong></span>
-    {{#each employments as |employment|}}
-        {{employment-form employment=employment removable=true removeEmployment="removeEmployment"}}
-    {{else}}
-        No previous employment provided.
-    {{/each}}
+  <span>Total employment history: <strong>{{totalEmploymentTimespan}} years</strong></span>
+  {{#each employments as |employment|}}
+    {{employment-form employment=employment removable=true removeEmployment="removeEmployment"}}
+  {{else}}
+    No previous employment provided.
+  {{/each}}
 {{/form-section}}
 <button {{action "addEmployment"}}>Add Additional Employment</button>
