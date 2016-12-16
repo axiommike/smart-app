@@ -1,16 +1,22 @@
 {{#if brokerage.address}}
-    <details>
-        <summary><small>Copyright {{format-date now day="numeric" month="long" year="numeric"}} <strong><a href="http://{{brokerage.website}}" class="brokerage-link" target="_blank">{{brokerage.name}}</a></strong></small></summary>
-        <address>
-            <small><a href="https://maps.google.ca?q={{brokerage.address.address}} {{brokerage.address.city}}" target="{{brokerage.address.address}}_gmaps">{{brokerage.address.address}} {{accessible-icon icon="location" title="View on Google Maps"}}</a></small>
-            <small>{{brokerage.address.city}}, {{brokerage.address.province}}</small>
-            <small>{{brokerage.address.postal_code}}</small>
-            <small>
-                <a href="tel:{{brokerage.phone}}" class="ember-view phone-number has-number">
-                    {{brokerage.phone}}
-                </a>
-            </small>
-        </address>
-        {{yield}}
-    </details>
+  <details>
+    <summary>
+      <small>Copyright {{format-date now day="numeric" month="long" year="numeric"}} <strong><a
+        href="http://{{brokerage.website}}" class="brokerage-link" target="_blank">{{brokerage.name}}</a></strong>
+      </small>
+    </summary>
+    <address>
+      <small><a href="https://maps.google.ca?q={{brokerage.address.address}} {{brokerage.address.city}}"
+                target="{{brokerage.address.address}}_gmaps">{{brokerage.address.address}} {{accessible-icon
+        icon="location" title="View on Google Maps"}}</a></small>
+      <small>{{brokerage.address.city}}, {{brokerage.address.province}}</small>
+      <small>{{brokerage.address.postal_code}}</small>
+      <small>
+        <a href="tel:{{brokerage.phone}}" class="ember-view phone-number has-number">
+          {{brokerage.phone}}
+        </a>
+      </small>
+    </address>
+    {{yield}}
+  </details>
 {{/if}}

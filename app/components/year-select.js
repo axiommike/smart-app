@@ -1,17 +1,18 @@
-import Ember from "ember";
+import Ember from 'ember';
+const { Component, computed } = Ember;
 
-export default Ember.Component.extend({
-    start: 1950,
-    end: new Date().getFullYear(),
-    years: Ember.computed("start", "end", function() {
-        let result = [];
-        for (let i = this.get("start"); i <= this.get("end"); i++) {
-            result.push(i);
-        }
-        return result;
-    }),
-    value: null,
-    required: false,
-    prompt: null,
-    title: null
+export default Component.extend({
+  start: 1950,
+  end: new Date().getFullYear(),
+  prompt: null,
+  required: false,
+  title: null,
+  value: null,
+  years: computed('start', 'end', function() {
+    let result = [];
+    for (let i = this.get('start'); i <= this.get('end'); i++) {
+      result.push(i);
+    }
+    return result;
+  })
 });

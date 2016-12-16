@@ -1,5 +1,6 @@
-import Ember from "ember";
+import Ember from 'ember';
+const { Component } = Ember;
 
-export default Ember.Component.extend({
-    brokerage: null
+export default Component.extend({
+  brokerage: null
 });

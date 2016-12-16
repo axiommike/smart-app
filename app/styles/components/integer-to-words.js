@@ -8,110 +8,108 @@
 	@note Created on 2015-01-02 by PhpStorm
 */
 
-
 /*
 	Convert an integer to an English string equivalent
 	@param {Integer} number the integer to be converted
 	@return {String} the English number equivalent
 */
 
-(function () {
-	var intToWord;
+(function() {
+  let intToWord;
 
-	intToWord = function (number) {
+  intToWord = function(number) {
 
-		var englishIntegers = [
-			"",
-			"one",
-			"two",
-			"three",
-			"four",
-			"five",
-			"six",
-			"seven",
-			"eight",
-			"nine",
-			"ten",
-			"eleven",
-			"twelve",
-			"thirteen",
-			"fourteen",
-			"fifteen",
-			"sixteen",
-			"seventeen",
-			"eighteen",
-			"nineteen"
-		];
+    let englishIntegers = [
+      '',
+      'one',
+      'two',
+      'three',
+      'four',
+      'five',
+      'six',
+      'seven',
+      'eight',
+      'nine',
+      'ten',
+      'eleven',
+      'twelve',
+      'thirteen',
+      'fourteen',
+      'fifteen',
+      'sixteen',
+      'seventeen',
+      'eighteen',
+      'nineteen'
+    ];
 
-		var englishTens = [
-			"",
-			"",
-			"twenty",
-			"thirty",
-			"forty",
-			"fifty",
-			"sixty",
-			"seventy",
-			"eighty",
-			"ninety"
-		];
+    let englishTens = [
+      '',
+      '',
+      'twenty',
+      'thirty',
+      'forty',
+      'fifty',
+      'sixty',
+      'seventy',
+      'eighty',
+      'ninety'
+    ];
 
-		var englishThousands = [
-			"thousand",
-			"million",
-			""
-		];
+    let englishThousands = [
+      'thousand',
+      'million',
+      ''
+    ];
 
-		number = number.toString();
+    number = number.toString();
 
-		if (number.length > 9) {
+    if (number.length > 9) {
 
-			return ""; // Number is larger than what function can deal with
+      return ''; // Number is larger than what function can deal with
 
-		}
+    }
 
-		number = ("000000000" + number).substr(-9); // // Make number into a predictiable nine character string
+    number = (`000000000${  number}`).substr(-9); // // Make number into a predictiable nine character string
 
-		number = number.match(/.{3}/g); // Split string into chuncks of three numbers then reverse order of returned array
+    number = number.match(/.{3}/g); // Split string into chuncks of three numbers then reverse order of returned array
 
-		var words = "";
+    let words = '';
 
-		for (var i = 0; i < englishThousands.length; i++) {
+    for (let i = 0; i < englishThousands.length; i++) {
 
-			var n = number[i];
+      let n = number[i];
 
-			var str = "";
+      let str = '';
 
-			str += (words != "") ? " " + englishThousands[i] + "-" : "";
+      str += (words != '') ? ` ${  englishThousands[i]  }-` : '';
 
-			str += (n[0] != 0) ? (englishIntegers[Number(n[0])] + "-hundred") : "";
+      str += (n[0] != 0) ? (`${englishIntegers[Number(n[0])]  }-hundred`) : '';
 
-			n = n.substr(1);
+      n = n.substr(1);
 
-			str += (n != 0) ? ((str != "") ? "-" : "" ) + (englishIntegers[Number(n)] || englishTens[n[0]] + " " + englishIntegers[n[1]]) : "";
+      str += (n != 0) ? ((str != '') ? '-' : '') + (englishIntegers[Number(n)] || `${englishTens[n[0]]  } ${  englishIntegers[n[1]]}`) : '';
 
-			words += str;
+      words += str;
 
-		}
+    }
 
-		return words;
-	};
+    return words;
+  };
 
-	if (typeof module !== "undefined" && module !== null) {
-		module.exports = function () {
-			return function (stylus) {
-				return stylus.define("int-to-word", function (node) {
-					var nodeName;
-					nodeName = node.nodeName;
-					if (nodeName === "unit") {
-						return new stylus.nodes.String(intToWord(node.val));
-					}
-					else {
-						throw new Error("int-to-word only accepts integers but got " + nodeName);
-					}
-				});
-			};
-		};
-	}
+  if (typeof module !== 'undefined' && module !== null) {
+    module.exports = function() {
+      return function(stylus) {
+        return stylus.define('int-to-word', function(node) {
+          let nodeName;
+          nodeName = node.nodeName;
+          if (nodeName === 'unit') {
+            return new stylus.nodes.String(intToWord(node.val));
+          }          else {
+            throw new Error(`int-to-word only accepts integers but got ${  nodeName}`);
+          }
+        });
+      };
+    };
+  }
 
 }).call(this);

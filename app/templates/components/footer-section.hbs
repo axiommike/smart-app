@@ -1,12 +1,14 @@
 <footer role="contentinfo">
-    {{#if brokerage}}
-        {{brokerage-address brokerage=brokerage}}
-    {{else}}
-        {{#if agent.brokerage}}
-            {{brokerage-address brokerage=agent.brokerage}}
-        {{/if}}
+  {{#if brokerage}}
+    {{brokerage-address brokerage=brokerage}}
+  {{else}}
+    {{#if agent.brokerage}}
+      {{brokerage-address brokerage=agent.brokerage}}
     {{/if}}
-    <aside class="tips">
-        <small class="tip">Having trouble viewing this application?  <a href="https://secure-mortgage-online.ca/legacy/wizard?agent={{agent.id}}&brokerage={{brokerage.id}}" target="_blank">Try our legacy application</a></small>
-    </aside>
+  {{/if}}
+  <aside class="tips">
+    <small class="tip">Having trouble viewing this application? <a
+      href="https://secure-mortgage-online.ca/legacy/wizard?agent={{agent.id}}&brokerage={{brokerage.id}}"
+      target="_blank">Try our legacy application</a></small>
+  </aside>
 </footer>

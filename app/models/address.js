@@ -1,14 +1,15 @@
-import DS from 'ember-data';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
 
-export default DS.Model.extend({
-    address: DS.attr('string'),
-    city: DS.attr('string'),
-    country: DS.attr('string'),
-    province: DS.attr('string'),
-    postal_code: DS.attr('string'),
-    is_current: DS.attr('string'),
-    person_id: DS.attr('string'),
-    url: DS.attr('string'),
-    tenure_year: DS.attr('string'),
-    tenure_month: DS.attr('string')
+export default Model.extend({
+  address: attr('string'),
+  city: attr('string'),
+  country: attr('string'),
+  province: attr('string'),
+  postal_code: attr('string'),
+  is_current: attr('string'),
+  person_id: attr('string'),
+  url: attr('string'),
+  tenure_year: attr('string'),
+  tenure_month: attr('string')
 });

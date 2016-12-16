@@ -1,11 +1,12 @@
-import Ember from "ember";
+import Ember from 'ember';
+const { computed, Mixin } = Ember;
 
-export default Ember.Mixin.create({
-    isEditing: Ember.computed.not("isEditable"),
-    isEditable: false,
-    actions: {
-        toggleEditing: function() {
-            this.toggleProperty("isEditing");
-        }
+export default Mixin.create({
+  isEditing: computed.not('isEditable'),
+  isEditable: false,
+  actions: {
+    toggleEditing() {
+      this.toggleProperty('isEditing');
     }
+  }
 });

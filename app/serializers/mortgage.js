@@ -1,22 +1,22 @@
 import RESTSerializer from 'ember-data/serializers/rest';
-import DS from 'ember-data';
+import EmbeddedRecordsMixin from 'ember-data/serializers/embedded-records-mixin';
 
-export default RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
-    attrs: {
-        applicants: {
-            embedded: 'always'
-        },
-        otherProperties: {
-            embedded: 'always'
-        },
-        assets: {
-            embedded: 'always'
-        },
-        vehicles: {
-            embedded: 'always'
-        },
-        liabilities: {
-            embedded: 'always'
-        }
+export default RESTSerializer.extend(EmbeddedRecordsMixin, {
+  attrs: {
+    applicants: {
+      embedded: 'always'
+    },
+    otherProperties: {
+      embedded: 'always'
+    },
+    assets: {
+      embedded: 'always'
+    },
+    vehicles: {
+      embedded: 'always'
+    },
+    liabilities: {
+      embedded: 'always'
     }
+  }
 });
