@@ -1,16 +1,29 @@
 {{#form-field label="Employment Type"}}
-  {{select-list content=employmentTypes optionValuePath="value" optionLabelPath="label"
-                title="Please choose the type of employment" change="changeType"}}
+  {{select-list
+    change="changeType"
+    content=employmentTypes
+    optionValuePath="value"
+    optionLabelPath="label"
+    title="Please choose the type of employment"}}
 {{/form-field}}
 
 {{#liquid-if showPosition}}
   {{#form-field label="Position"}}
-    {{input type="text" value=employment.occupation placeholder="Job Title" required=true
-            title="Please indicate the job title for this employment record" size=employment.occupation.length}}
+    {{input
+      placeholder="Job Title"
+      required=true
+      title="Please indicate the job title for this employment record"
+      type="text"
+      value=employment.occupation}}
   {{/form-field}}
   {{#form-field label="Employer/Business"}}
-    {{input type="text" value=employment.employer title="Please provide the employer for this position" required=true
-            placeholder="Name" size=employment.employer.length}}
+    {{input
+      placeholder="Name"
+      required=true
+      title="Please provide the employer for this position"
+      type="text"
+      value=employment.employer
+      }}
   {{/form-field}}
   {{#form-field label="Address"}}
     {{address-input
@@ -22,34 +35,67 @@
   {{/form-field}}
   {{#liquid-if showBusinessType}}
     {{#form-field label="Business Type"}}
-      {{select-list content=businessTypes optionValuePath="value" optionLabelPath="label" required=true
-                    title="Please indicate the legal classification of your business" change="changeBusinessType"}}
+      {{select-list
+        change="changeBusinessType"
+        content=businessTypes
+        optionValuePath="value"
+        optionLabelPath="label"
+        required=true
+        title="Please indicate the legal classification of your business"}}
     {{/form-field}}
   {{/liquid-if}}
   {{#liquid-unless showBusinessType}}
     {{#form-field label="Phone Number"}}
-      {{input-mask mask="999-999-9999" value=employment.phone placeholder="Phone Number" required=true
-                   title="Please indicate this employer's primary phone number"}}
+      {{input-mask
+        mask="999-999-9999"
+        placeholder="Phone Number"
+        required=true
+        title="Please indicate this employer's primary phone number"
+        value=employment.phone}}
     {{/form-field}}
   {{/liquid-unless}}
 {{/liquid-if}}
 
 {{#form-field label="How long?"}}
-  <label>{{input type="number" value=employment.tenure_year required=true placeholder="Years" min="0" max="100" step="1"
-                 title="Please indicate how many years you have owned this company"}} years</label>
-  <label>{{input type="number" value=employment.tenure_month placeholder="mths" min="0" max="12" step="1"}}
+  <label>
+    {{input
+      max="100"
+      min="0"
+      placeholder="Years"
+      required=true
+      step="1"
+      title="Please indicate how many years you have owned this company"
+      type="number"
+      value=employment.tenure_year}} years</label>
+  <label>{{input
+    max="12"
+    min="0"
+    placeholder="mths"
+    step="1"
+    type="number"
+    value=employment.tenure_month}}
     months</label>
 {{/form-field}}
 
 {{#liquid-if showCompensation}}
   {{#form-field label="Compensation"}}
-    {{select-list content=paymentFrequencies optionValuePath="value" optionLabelPath="label"
-                  title="Please select the payment frequency for this position" change="changePaymentFrequency"}}
+    {{select-list
+      change="changePaymentFrequency"
+      content=paymentFrequencies
+      optionValuePath="value"
+      optionLabelPath="label"
+      title="Please select the payment frequency for this position"}}
   {{/form-field}}
   {{#if isHourly}}
     {{#form-field label="Hours Per Week"}}
-      {{input type="range" min=0 step=0.5 max=60 value=employmentProxy.weeklyHours required=true
-              title="Please indicate how many hours per week were worked in this position"}}
+      {{input
+        type="range"
+        max=60
+        min=0
+        required=true
+        step=0.5
+        title="Please indicate how many hours per week were worked in this position"
+        value=employmentProxy.weeklyHours}}
       {{#if employment.weeklyHours}}
         <span>worked <strong>{{employment.weeklyHours}}</strong> hours per week</span>
       {{/if}}
@@ -57,7 +103,11 @@
     {{#form-field label="Hourly Rate"}}
       {{currency-input min=0 step="any" value=employmentProxy.hourlyRate required=true}}
       {{#if employment.hourlyRate}}
-        <span class="help"><strong>{{format-number employment.hourlyRate style="currency" currency="CAD"}}</strong> dollars per hour</span>
+        <span class="help">
+          <strong>
+            {{format-number employment.hourlyRate style="currency" currency="CAD"}}
+          </strong> dollars per hour
+        </span>
       {{/if}}
     {{/form-field}}
   {{/if}}
@@ -80,14 +130,23 @@
   {{#form-section title="Last 2 Years' Line 150" icon="dollar"}}
     {{#each noaValues as |year|}}
       {{#form-field label=year.year}}
-        {{currency-input min="0" step="any" value=year.value required=true placeholder="0"
-                         title="Please indicate the filed income for this yearly assesment"}}
+        {{currency-input
+          min="0"
+          placeholder="0"
+          required=true
+          step="any"
+          title="Please indicate the filed income for this yearly assesment"
+          value=year.value}}
       {{/form-field}}
     {{/each}}
   {{/form-section}}
   <span class="option-separator">or</span>
   {{#form-field label="Approximate annual, taxable income"}}
-    {{currency-input min="0" step="any" value=employment.income_value required=true}}
+    {{currency-input
+      min="0"
+      required=true
+      step="any"
+      value=employment.income_value}}
   {{/form-field}}
 {{/liquid-if}}
 {{yield}}
