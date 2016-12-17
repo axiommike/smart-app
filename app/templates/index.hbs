@@ -80,10 +80,13 @@
         {{/form-field}}
         {{#liquid-if isPurchase}}
           {{#form-field label="How much do you have?"}}
-            {{currency-input value=model.down_payment required=true
-                             title="Please indicate the amount which you can provide in CAD as a downpayment"}}
+            {{currency-input
+              required=true
+              title="Please indicate the amount which you can provide in CAD as a downpayment"
+              unmaskedValue=unmaskedDownPayment
+              value=model.down_payment}}
             {{#liquid-if model.down_payment}}
-              <span class="help">A downpayment of <strong>{{format-number model.downPayment style="currency"
+              <span class="help">A downpayment of <strong>{{format-number unmaskedDownPayment style="currency"
                                                                           currency="CAD"}}</strong></span>
             {{/liquid-if}}
           {{/form-field}}
