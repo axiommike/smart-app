@@ -12,21 +12,26 @@
 
 <div class="row">
   {{#form-field label="Income" class="column"}}
-    {{currency-input value=income.value}}
+    {{currency-input unmaskedValue=income.value}}
     {{#if income.value}}
       <span class="help">
                 or
-        {{#if income.isYearly}}
-          <strong>{{format-number income.monthly_value style="currency" currency="CAD"}}</strong> per month
+      <strong>{{format-number income.value style="currency" currency="CAD"}}</strong>
+        {{#if (eq income.frequency 'monthly')}}
+          per month
         {{else}}
-          <strong>{{format-number income.yearly_value style="currency" currency="CAD"}}</strong> per year
+          per year
         {{/if}}
-            </span>
+      </span>
     {{/if}}
   {{/form-field}}
   {{#form-field label="Frequency" class="column"}}
-    {{select-list content=frequencies optionValuePath="value" optionLabelPath="label" required=true
-                  change="changeFrequencies"}}
+    {{select-list
+      change="changeFrequencies"
+      content=frequencies
+      optionValuePath="value"
+      optionLabelPath="label"
+      required=true}}
   {{/form-field}}
 </div>
 <div class="row">
