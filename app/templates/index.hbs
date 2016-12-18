@@ -1,5 +1,9 @@
-{{header-step step=1 totalSteps=6 previousStep=0 stepName="Basic Information" agent=model.agent
-              brokerage=model.agent.brokerage}}
+{{header-step
+  model=model
+  previousStep=0
+  step=1
+  stepName="Basic Information"
+  totalSteps=6}}
 
 <main role="main">
   <h1 class="announcement">Let's Get Started</h1>
@@ -111,7 +115,7 @@
           {{/liquid-if}}
         {{/form-field}}
         <footer class="form-actions">
-          <button class="button-info-inverted" {{action "sendIncomplete"}} type="submit"
+          <button class="button-info-inverted" {{action "sendIncomplete" model}} type="submit"
                   title="Send me your message, and I'll get back to you as soon as I can">Contact Me Now
           </button>
           <button type="submit" title="Continue to Full Application">Complete Full Application</button>

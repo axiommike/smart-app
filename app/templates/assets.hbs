@@ -1,5 +1,11 @@
-{{header-step step=3 totalSteps=6 previousStep=1 stepName="Assets" showBreadcrumbs=true showSubmitButton=true
-              agent=model.agent brokerage=model.agent.brokerage}}
+{{header-step
+  model=model
+  previousStep=1
+  showBreadcrumbs=true
+  showSubmitButton=true
+  step=3
+  stepName="Assets"
+  totalSteps=6}}
 
 {{#validatable-form action="nextStep"}}
   <div class="form-steps-container">
@@ -17,20 +23,28 @@
           {{on-off-switch checked=ownsOtherRealEstate id="do-you-own-any-other-real-estate?"}}
         {{/form-field}}
         {{#liquid-if ownsOtherRealEstate}}
-          {{property-table properties=model.otherProperties onAdd="addProperty" title="List of all other Properties"
-                           addressType="Other"}}
+          {{property-table
+            properties=model.otherProperties
+            onAdd="addProperty"
+            title="List of all other Properties"
+            addressType="Other"}}
         {{/liquid-if}}
       </li>
       <li class="form-step">
         {{#form-field label="Do you have any savings or chequing accounts?"}}
-          {{on-off-switch checked=hasSavings
-                          title="Please indicate whether you have invested in any government funds or locked-in investments"
-                          id="do-you-have-any-savings-or-chequing-accounts?"}}
+          {{on-off-switch
+            checked=hasSavings
+            title="Please indicate whether you have invested in any government funds or locked-in investments"
+            id="do-you-have-any-savings-or-chequing-accounts?"}}
         {{/form-field}}
         {{#liquid-if hasSavings}}
-          {{asset-table assets=model.assets type="savings" onAdd="addAsset" onRemove="removeAsset"
-                        title="Table of all GIC, long-term, and term-based bank account assets"
-                        caption="Term Deposit Account Assets"}}
+          {{asset-table
+            assets=model.assets
+            type="savings"
+            onAdd="addAsset"
+            onRemove="removeAsset"
+            title="Table of all GIC, long-term, and term-based bank account assets"
+            caption="Term Deposit Account Assets"}}
         {{/liquid-if}}
       </li>
       <li class="form-step">

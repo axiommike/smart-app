@@ -6,16 +6,16 @@ export default RESTSerializer.extend(EmbeddedRecordsMixin, {
     applicants: {
       embedded: 'always'
     },
-    otherProperties: {
-      embedded: 'always'
-    },
     assets: {
       embedded: 'always'
     },
-    vehicles: {
+    liabilities: {
       embedded: 'always'
     },
-    liabilities: {
+    otherProperties: {
+      embedded: 'always'
+    },
+    vehicles: {
       embedded: 'always'
     }
   }

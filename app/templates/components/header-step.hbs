@@ -60,20 +60,20 @@
         {{/if}}
       </h1>
       <span class="agent-callout-phone">
-                <a href="tel:{{agent.home_phone}}" class="ember-view phone-number has-number">
-                  {{agent.home_phone}}
-                </a>
-            </span><br/>
+        <a href="tel:{{agent.home_phone}}" class="ember-view phone-number has-number">
+          {{agent.home_phone}}
+        </a>
+      </span><br/>
       <span class="agent-callout-phone">
-                <a href="tel:{{agent.cell_phone}}" class="ember-view phone-number has-number">
-                  {{agent.cell_phone}}
-                </a>
-            </span><br/>
+        <a href="tel:{{agent.cell_phone}}" class="ember-view phone-number has-number">
+          {{agent.cell_phone}}
+        </a>
+      </span><br/>
       <span class="agent-callout-phone">
-                <a href="tel:{{agent.work_phone}}" class="ember-view phone-number has-number">
-                  {{agent.work_phone}}
-                </a>
-            </span><br/>
+        <a href="tel:{{agent.work_phone}}" class="ember-view phone-number has-number">
+          {{agent.work_phone}}
+        </a>
+      </span><br/>
     </aside>
   {{/if}}
 
@@ -84,24 +84,24 @@
           <img src="data: image/jpeg;base64,{{brokerage.image}}" alt="{{brokerage.name}}" title="{{brokerage.name}}"
                class="brokerage-callout-image"/>
           <span class="brokerage-callout-phone">
-                        <a href="tel:{{brokerage.phone}}" class="ember-view phone-number has-number">
-                          {{brokerage.phone}}
-                        </a>
-                    </span>
+            <a href="tel:{{brokerage.phone}}" class="ember-view phone-number has-number">
+              {{brokerage.phone}}
+            </a>
+          </span>
         </a>
       {{else}}
         <img src="data: image/jpeg;base64,{{brokerage.image}}" alt="{{brokerage.name}}" title="{{brokerage.name}}"
              class="brokerage-callout-image"/>
         <span class="brokerage-callout-phone">
-                    <a href="tel:{{brokerage.phone}}" class="ember-view phone-number has-number">
-                      {{brokerage.phone}}
-                    </a>
-                </span>
+          <a href="tel:{{brokerage.phone}}" class="ember-view phone-number has-number">
+            {{brokerage.phone}}
+          </a>
+        </span>
       {{/if}}
     </aside>
   {{/if}}
 
   {{#if showSubmitButton}}
-    <button {{action "sendIncomplete"}} class="header-action">Submit As-Is</button>
+    <button {{action (route-action "sendIncomplete" model)}} class="header-action">Submit As-Is</button>
   {{/if}}
 </header>

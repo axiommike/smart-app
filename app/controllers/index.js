@@ -2,37 +2,43 @@ import Ember from 'ember';
 const { computed, Controller } = Ember;
 
 export default Controller.extend({
+  agents: null,
+  isFriend: false,
+  isReferral: false,
+  isOther: false,
+  isPurchase: false,
+  isOtherDownPaymentSource: false,
+  mortgageYears: 40,
   sourceTypes: [
-        { value: 'friend', label: 'Friend' },
-        { value: 'agent', label: 'Realtor' },
-        { value: 'past-client', label: "I'm a past client" },
-        { value: 'search', label: 'Online search' },
-        { value: 'website', label: 'Advertising' },
-        { value: 'other', label: 'Other' }
+    { value: 'friend', label: 'Friend' },
+    { value: 'agent', label: 'Realtor' },
+    { value: 'past-client', label: "I'm a past client" },
+    { value: 'search', label: 'Online search' },
+    { value: 'website', label: 'Advertising' },
+    { value: 'other', label: 'Other' }
   ],
   goals: [
-        { value: 'purchase', label: 'Purchase a property' },
-        { value: 'refinance', label: 'Refinance my mortgage' },
-        { value: 'renewal', label: 'Renew my mortgage' },
-        { value: 'rental', label: 'Buy a rental property' },
-        { value: 'advice', label: 'Get some advice' }
+    { value: 'purchase', label: 'Purchase a property' },
+    { value: 'refinance', label: 'Refinance my mortgage' },
+    { value: 'renewal', label: 'Renew my mortgage' },
+    { value: 'rental', label: 'Buy a rental property' },
+    { value: 'advice', label: 'Get some advice' }
   ],
   downPaymentSources: [
-        { value: 'property sale', label: 'Sale of Existing Property' },
-        { value: 'cash savings', label: 'Personal Cash / Savings' },
-        { value: 'rrsp', label: 'RRSP' },
-        { value: 'gift', label: 'Gift' },
-        { value: 'grant', label: 'Grant' },
-        { value: 'inheritance', label: 'Inheritance' },
-        { value: 'borrowed', label: 'Borrowed from Friend / Family' },
-        { value: 'liquid assets', label: 'Borrowed Against Liquid Assets' },
-        { value: 'sweat equity', label: 'Sweat Equity' },
-        { value: 'existing equity', label: 'Existing Equity' },
-        { value: 'secondary financing', label: 'Secondary Financing' },
-        { value: 'investment', label: 'Investments' },
-        { value: 'other', label: 'Other...' }
+    { value: 'property sale', label: 'Sale of Existing Property' },
+    { value: 'cash savings', label: 'Personal Cash / Savings' },
+    { value: 'rrsp', label: 'RRSP' },
+    { value: 'gift', label: 'Gift' },
+    { value: 'grant', label: 'Grant' },
+    { value: 'inheritance', label: 'Inheritance' },
+    { value: 'borrowed', label: 'Borrowed from Friend / Family' },
+    { value: 'liquid assets', label: 'Borrowed Against Liquid Assets' },
+    { value: 'sweat equity', label: 'Sweat Equity' },
+    { value: 'existing equity', label: 'Existing Equity' },
+    { value: 'secondary financing', label: 'Secondary Financing' },
+    { value: 'investment', label: 'Investments' },
+    { value: 'other', label: 'Other...' }
   ],
-  mortgageYears: 40,
   mortgageTerms: computed('mortgageYears', function() {
     let terms = [];
     for (let i = 1; i <= 40; i++) {
@@ -43,18 +49,13 @@ export default Controller.extend({
     }
     return terms;
   }),
-  agents: null,
+
   init() {
     this.store.findAll('agent').then((agents) => {
       this.set('agents', agents);
     });
   },
   actions: {
-    sendIncomplete() {
-      this.get('model').save().then((applicant) => {
-        this.transitionToRoute('thank-you', { queryParams: { id: applicant.get('id'), is_incomplete: true } });
-      });
-    },
     nextStep() {
       let applicant = this.get('model');
       let mortgage = this.store.createRecord('mortgage', {
@@ -128,10 +129,5 @@ export default Controller.extend({
     changeAgent(value) {
       this.set('model.agent_id', value);
     }
-  },
-  isFriend: false,
-  isReferral: false,
-  isOther: false,
-  isPurchase: false,
-  isOtherDownPaymentSource: false
+  }
 });

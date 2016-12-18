@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { Component } = Ember;
+const { Component, computed } = Ember;
 
 export default Component.extend({
   step: null,
@@ -7,8 +7,6 @@ export default Component.extend({
   stepName: null,
   showSubmitButton: false,
   showBreadcrumbs: false,
-  agent: null,
-  brokerage: null,
   previousStep: null,
   steps: [
     {
@@ -36,5 +34,7 @@ export default Component.extend({
       url: 'summary',
       title: 'Summary'
     }
-  ]
+  ],
+  agent: computed.alias('model.agent'),
+  brokerage: computed.alias('model.agent.brokerage')
 });
