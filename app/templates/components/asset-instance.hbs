@@ -1,23 +1,32 @@
 {{#liquid-if isEditing}}
-  {{#unless asset.type}}
+  {{#unless asset.assetType}}
     {{#form-field label="Type"}}
-      {{select-list content=assetTypes optionValuePath="value" optionLabelPath="label" value=assetProxy.type
-                    required=true title="Please choose a type for this asset" action=(action (mut assetProxy.type))}}
+      {{select-list
+        action=(action (mut asset.assetType))
+        content=assetTypes
+        optionValuePath="selectValue"
+        optionLabelPath="selectLabel"
+        required=true
+        title="Please choose a type for this asset"
+        value=asset.assetType}}
     {{/form-field}}
     {{#form-field label="Asset Value"}}
-      {{currency-input value=assetProxy.value min="0" step="any" required=true
-                       title="Please indicate the value of this asset"}}
+      {{currency-input
+        min="0"
+        required=true
+        step="any"
+        title="Please indicate the value of this asset"
+        value=asset.value}}
     {{/form-field}}
   {{/unless}}
 
   {{#if asset.isPersonalItem}}
     {{#form-field label="Item Description"}}
-      {{input type="text" value=assetProxy.description placeholder="Item Description"
-              title="Optionally include a description of this item"}}
-    {{/form-field}}
-    {{#form-field label="Item Value"}}
-      {{currency-input value=assetProxy.value min="0" step="any" required=true
-                       title="Please indicate the value of this personal item"}}
+      {{input
+        placeholder="Item Description"
+        title="Optionally include a description of this item"
+        type="text"
+        value=asset.description}}
     {{/form-field}}
   {{/if}}
 
@@ -26,95 +35,76 @@
       <dt>Type</dt>
       <dd>Property</dd>
     </dl>
-    {{#form-field label="Estimated Propery Value"}}
-      {{currency-input value=assetProxy.value required=true min="0" step="any"
-                       title="Please indicate the estimated property value"}}
-    {{/form-field}}
   {{/if}}
 
   {{#if asset.isSavings}}
     {{#form-field label="Account Type"}}
-      {{select-list content=savingsTypes optionValuePath="value" optionLabelPath="label" value=assetProxy.description
-                    title="Please indicate an account type fot this savings account" required=true
-                    action=(action (mut asset.description))}}
-    {{/form-field}}
-    {{#form-field label="Account Balance"}}
-      {{currency-input value=assetProxy.value min="0" step="any"
-                       title="Please indicate the banking institution of this account" required=true}}
-      {{#liquid-if asset.value}}
-        <span class="help"><strong>{{format-number asset.value style="currency"
-                                                   currency="CAD"}}</strong> invested</span>
-      {{/liquid-if}}
-    {{/form-field}}
-  {{/if}}
-
-  {{#if hasBank}}
-    {{#form-field label="Institution Name"}}
-      {{autocomplete-input value=assetProxy.bank placeholder="Bank Name" required=true datalist="banks"
-                           title="Please indicate the institution name for this account"}}
-    {{/form-field}}
-  {{/if}}
-
-  {{#if asset.isInvestment}}
-    {{#form-field label="Asset/Bond Investment Value"}}
-      {{currency-input value=assetProxy.value min="0" step="any" required=true
-                       title="Please indicate the amount you invested"}}
-      {{#liquid-if asset.value}}
-        <span class="help"><strong>{{format-number asset.value style="currency"
-                                                   currency="CAD"}}</strong> invested</span>
-      {{/liquid-if}}
-    {{/form-field}}
-  {{/if}}
-
-  {{#if asset.isGIC}}
-    {{#form-field label="GIC Account Balance"}}
-      {{currency-input value=assetProxy.value min="0" step="any" required=true
-                       title="Please indicate the amount you have invested this GIC account"}}
-      {{#liquid-if asset.value}}
-        <span class="help"><strong>{{format-number asset.value style="currency"
-                                                   currency="CAD"}}</strong> invested</span>
-      {{/liquid-if}}
-    {{/form-field}}
-  {{/if}}
-
-  {{#if asset.isRRSP}}
-    {{#form-field label="RRSP Account Balance"}}
-      {{currency-input value=assetProxy.value min="0" step="any" required=true
-                       title="Please indicate the amount you have invested this RRSP account"}}
-      {{#liquid-if asset.value}}
-        <span class="help"><strong>{{format-number asset.value style="currency"
-                                                   currency="CAD"}}</strong> invested</span>
-      {{/liquid-if}}
-    {{/form-field}}
-  {{/if}}
-
-  {{#if asset.isVehicle}}
-    {{#form-field label="Estimated Vehicle Value"}}
-      {{currency-input value=assetProxy.value min="0" step="any" required=true
-                       title="Please provide an estimation of your vehicle's value"}}
-      {{#liquid-if asset.value}}
-        <span class="help"><strong>{{format-number asset.value style="currency" currency="CAD"}}</strong> in approximate value</span>
-      {{/liquid-if}}
+      {{select-list
+        action=(action (mut asset.description))
+        content=savingsTypes
+        optionValuePath="selectValue"
+        optionLabelPath="selectLabel"
+        value=asset.description
+        required=true
+        title="Please indicate an account type fot this savings account"}}
     {{/form-field}}
   {{/if}}
 
   {{#if asset.isOther}}
     {{#form-field label="Description"}}
-      {{input type="text" value=assetProxy.description placeholder="Asset Description" required=true}}
-    {{/form-field}}
-    {{#form-field label="Asset Value"}}
-      {{currency-input value=assetProxy.value min="0" step="any"}}
-      {{#liquid-if asset.value}}
-        <span class="help"><strong>{{format-number asset.value style="currency"
-                                                   currency="CAD"}}</strong> in value</span>
-      {{/liquid-if}}
+      {{input
+        placeholder="Asset Description"
+        required=true
+        type="text"
+        value=asset.description}}
     {{/form-field}}
   {{/if}}
+
+  {{#form-field label=assetInfo.currencyLabel}}
+    {{currency-input
+      min="0"
+      required=true
+      step="any"
+      title=assetInfo.currencyTitle
+      value=asset.value}}
+
+    {{#if showAmount}}
+      {{#liquid-if asset.value}}
+        <span class="help">
+          <strong>
+            {{format-number
+              asset.value
+              currency="CAD"
+              style="currency"}}
+          </strong>
+          {{#if hasBank}}
+            invested
+          {{else if asset.isVehicle}}
+            in approximate value
+          {{else}}
+            in value
+          {{/if}}
+
+        </span>
+      {{/liquid-if}}
+
+      {{#form-field label="Institution Name"}}
+        {{autocomplete-input
+          datalist="banks"
+          placeholder="Bank Name"
+          required=true
+          title="Please indicate the institution name for this account"
+          value=asset.bank}}
+      {{/form-field}}
+    {{/if}}
+  {{/form-field}}
+
+
   {{#if onRemove}}
     <button class="remove-button" {{action "remove"}}>
       Remove
-      {{#if asset.type}}
-        {{asset.type}}
+      {{#if asset.assetType}}
+        {{asset.assetType}}
       {{else}}
         Asset
       {{/if}}
@@ -130,8 +120,8 @@
               <em class="asset-description">{{asset.description}}</em>
             {{else}}
               <em class="asset-type-type">
-                {{#if asset.type}}
-                  {{asset.type}}
+                {{#if asset.assetType}}
+                  {{asset.assetType}}
                 {{else}}
                   Other Asset
                 {{/if}}
@@ -143,8 +133,8 @@
           <div class="column actions">
             <button class="{{if isEditing "remove-button" "button-plain-warning"}}" {{action "remove"}}>
               {{#liquid-if isEditing}}
-                Remove {{#if asset.type}}
-                {{asset.type}}
+                Remove {{#if asset.assetType}}
+                {{asset.assetType}}
               {{else}}
                 Asset
               {{/if}}
@@ -168,6 +158,3 @@
     </div>
   </div>
 {{/liquid-if}}
-
-
-{{yield}}
