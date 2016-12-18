@@ -7,7 +7,7 @@
 
 <article class="thank-you">
   <header class="thank-you-header">
-    <h1>Thanks, {{#if is_incomplete}}<strong>{{model.first_name}}</strong>{{else}}<strong>{{model.dear}}</strong>{{/if}}
+    <h1>Thanks, {{#if isIncomplete}}<strong>{{model.first_name}}</strong>{{else}}<strong>{{model.dear}}</strong>{{/if}}
       !</h1>
     <p class="thank-you-header-text">Your application has been submitted, and now the magic happens!</p>
   </header>
@@ -15,7 +15,7 @@
   <article class="thank-you-details">
     <p>For reference, your application <code>id</code> number is: <strong>{{model.id}}</strong></p>
   </article>
-  {{#liquid-if is_incomplete}}
+  {{#liquid-if isIncomplete}}
     <button {{action "completeFullApp"}}>Actually, I'd like to complete full app</button>
   {{else}}
     <article class="thank-you-steps">
